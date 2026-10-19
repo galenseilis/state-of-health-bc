@@ -10,6 +10,8 @@ project:
     - ROADMAP.md
   resources:
     - data/published/
+    - data/reference/who_standard_population.csv
+
 
 bibliography: references.bib
 
