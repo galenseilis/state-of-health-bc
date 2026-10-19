@@ -30,7 +30,14 @@ REQUIRED_FIELDS = (
     "download",
 )
 
-FORMS = {"microdata", "indicator_table", "dashboard", "report_figure", "api", "catalogue"}
+FORMS = {
+    "microdata",
+    "indicator_table",
+    "dashboard",
+    "report_figure",
+    "api",
+    "catalogue",
+}
 ORIGINS = {"bc", "canada", "international"}
 TEMPORAL = {"trending", "seasonal", "shock_prone", "stable"}
 ACCESS = {"public", "registration", "request"}
@@ -43,6 +50,32 @@ class CatalogueError(ValueError):
 
 @dataclass
 class Source:
+    """A single data source in the catalogue.
+
+    Attributes:
+        key: Stable identifier for the source.
+        title: Human-readable title of the source.
+        publisher: Publishing organisation.
+        url: Landing page URL.
+        form: Form of the source (microdata, indicator_table, dashboard, etc).
+        domains: Domains the source covers.
+        resolution: Geographic/administrative resolutions available.
+        geography: Geographic coverage description.
+        coverage: Temporal coverage description.
+        frequency: Update frequency.
+        refresh: Refresh cadence.
+        licence: Licensing terms.
+        access: Access model (public, registration, request).
+        origin: Origin geography (bc, canada, international).
+        temporal_behaviour: Temporal behaviour classification.
+        download: Download configuration dictionary.
+        indicators: Indicators this source provides.
+        quality_notes: Quality-related notes.
+        citation: Citation string if provided.
+        form_of_access: Description of how access is obtained.
+        reaches_bc_via: Mechanism by which external sources reach BC.
+    """
+
     key: str
     title: str
     publisher: str
@@ -67,16 +100,41 @@ class Source:
 
     @property
     def automated(self) -> bool:
+        """Return True if this source can be fetched automatically."""
         return self.download.get("kind") in {"direct", "api_json"}
 
 
 def _require(source: dict[str, Any], field_name: str, index: int) -> Any:
+    """Require a field exists in a source dict.
+
+    Args:
+        source: Source dictionary from YAML.
+        field_name: Name of required field.
+        index: Index of source in the catalogue.
+
+    Returns:
+        The field value.
+
+    Raises:
+        CatalogueError: If the field is missing.
+    """
     if field_name not in source:
         raise CatalogueError(f"source #{index}: missing required field '{field_name}'")
     return source[field_name]
 
 
 def _validate_enum(value: str, allowed: set[str], field_name: str, key: str) -> None:
+    """Validate that a string value is in the allowed set.
+
+    Args:
+        value: Value to validate.
+        allowed: Set of allowed values.
+        field_name: Name of field being validated.
+        key: Source key.
+
+    Raises:
+        CatalogueError: If value is not in allowed set.
+    """
     if value not in allowed:
         raise CatalogueError(
             f"source '{key}': field '{field_name}' has value '{value}'; "
@@ -85,6 +143,19 @@ def _validate_enum(value: str, allowed: set[str], field_name: str, key: str) -> 
 
 
 def load(path: Path | None = None) -> list[Source]:
+    """Load the data source catalogue from a YAML file.
+
+    Args:
+        path: Optional path to the catalogue YAML. Defaults to the project
+            catalogue at data/catalogue/sources.yml.
+
+    Returns:
+        list[Source]: List of catalogue sources.
+
+    Raises:
+        CatalogueError: If the catalogue is missing, malformed, or contains
+            invalid values.
+    """
     path = path or CATALOGUE_PATH
     if not path.exists():
         raise CatalogueError(f"catalogue not found: {path}")

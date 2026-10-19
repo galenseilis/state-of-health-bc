@@ -19,10 +19,23 @@ TIMEOUT = 30
 
 
 def _now() -> str:
+    """Return current UTC time in ISO 8601 format (no microseconds).
+
+    Returns:
+        str: Current UTC timestamp.
+    """
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
 def _sha256(path: Path) -> str:
+    """Compute SHA-256 checksum of a file.
+
+    Args:
+        path: Path to file to hash.
+
+    Returns:
+        str: Hex digest of SHA-256.
+    """
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1 << 20), b""):
@@ -31,12 +44,22 @@ def _sha256(path: Path) -> str:
 
 
 def read_manifest() -> dict[str, Any]:
+    """Read the fetch manifest from disk.
+
+    Returns:
+        dict[str, Any]: Manifest dictionary (empty if file does not exist).
+    """
     if MANIFEST_PATH.exists():
         return json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     return {"schema_version": 1, "sources": {}}
 
 
 def write_manifest(manifest: dict[str, Any]) -> None:
+    """Write the fetch manifest to disk.
+
+    Args:
+        manifest: Manifest dictionary to write.
+    """
     MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST_PATH.write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -44,7 +67,14 @@ def write_manifest(manifest: dict[str, Any]) -> None:
 
 
 def check_url(url: str) -> dict[str, Any]:
-    """Return reachability information for a URL (follows redirects)."""
+    """Return reachability information for a URL (follows redirects).
+
+    Args:
+        url: URL to check.
+
+    Returns:
+        dict[str, Any]: Result including status, final_url, reachable.
+    """
     try:
         response = requests.get(
             url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT}, stream=True
@@ -57,10 +87,18 @@ def check_url(url: str) -> dict[str, Any]:
             "reachable": reachable,
         }
     except requests.RequestException as exc:
-        return {"url": url, "status": None, "final_url": None, "reachable": False, "error": str(exc)}
+        return {
+            "url": url,
+            "status": None,
+            "final_url": None,
+            "reachable": False,
+            "error": str(exc),
+        }
 
 
-def check_source(source: Source, include_download: bool = False) -> list[dict[str, Any]]:
+def check_source(
+    source: Source, include_download: bool = False
+) -> list[dict[str, Any]]:
     results = [check_url(source.url)]
     if include_download and source.automated:
         results.append(check_url(source.download["url"]))
@@ -70,7 +108,14 @@ def check_source(source: Source, include_download: bool = False) -> list[dict[st
 
 
 def fetch_source(source: Source) -> dict[str, Any]:
-    """Fetch one automated source into data/raw/<key>/."""
+    """Fetch one automated source into data/raw/<key>/.
+
+    Args:
+        source: Source to fetch.
+
+    Returns:
+        dict[str, Any]: Result summary including path, hash, size, and timestamps.
+    """
     if not source.automated:
         return {"key": source.key, "status": "manual", "detail": source.form_of_access}
 
@@ -87,7 +132,9 @@ def fetch_source(source: Source) -> dict[str, Any]:
 
     if kind == "api_json":
         payload = response.json()
-        target.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        target.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
     else:
         target.write_bytes(response.content)
 
@@ -104,7 +151,21 @@ def fetch_source(source: Source) -> dict[str, Any]:
     }
 
 
-def run_fetch(keys: list[str] | None = None, everything: bool = False) -> list[dict[str, Any]]:
+def run_fetch(
+    keys: list[str] | None = None, everything: bool = False
+) -> list[dict[str, Any]]:
+    """Fetch multiple sources based on keys or all automated sources.
+
+    Args:
+        keys: List of source keys to fetch.
+        everything: If True, fetch all automated sources.
+
+    Returns:
+        list[dict[str, Any]]: List of fetch results.
+
+    Raises:
+        SystemExit: If unknown source keys are provided.
+    """
     sources = load()
     selected = [s for s in sources if everything or (keys and s.key in keys)]
     if keys:
