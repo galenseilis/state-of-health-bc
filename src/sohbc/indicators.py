@@ -52,7 +52,16 @@ INDICATORS: dict[str, dict[str, Any]] = {
     },
 }
 
-TIDY_FIELDS = ["ref_date", "geo", "age_group", "sex", "characteristic", "value", "uom", "status"]
+TIDY_FIELDS = [
+    "ref_date",
+    "geo",
+    "age_group",
+    "sex",
+    "characteristic",
+    "value",
+    "uom",
+    "status",
+]
 
 
 class IndicatorError(ValueError):
@@ -288,7 +297,10 @@ def age_standardise(
         total_weight = sum(weights[group] for group in groups)
         if total_weight == 0:
             continue
-        rate = sum(weights[group] * value for group, value in groups.items()) / total_weight
+        rate = (
+            sum(weights[group] * value for group, value in groups.items())
+            / total_weight
+        )
         results.append({"ref_date": ref_date, "value": round(rate, 4)})
     return results
 
@@ -348,5 +360,4 @@ def build(key: str) -> dict[str, Any]:
         "standardised": standardised_path,
         "trend": trend_path,
     }
-
 
