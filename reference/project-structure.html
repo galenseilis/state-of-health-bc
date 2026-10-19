@@ -277,6 +277,11 @@ div.csl-indent {
    
   <ul>
   <li><a href="#repository-layout" id="toc-repository-layout" class="nav-link active" data-scroll-target="#repository-layout">Repository layout</a></li>
+  <li><a href="#diagrams" id="toc-diagrams" class="nav-link" data-scroll-target="#diagrams">Diagrams</a>
+  <ul class="collapse">
+  <li><a href="#uml-class-diagram" id="toc-uml-class-diagram" class="nav-link" data-scroll-target="#uml-class-diagram">UML class diagram</a></li>
+  <li><a href="#static-call-graph" id="toc-static-call-graph" class="nav-link" data-scroll-target="#static-call-graph">Static call graph</a></li>
+  </ul></li>
   <li><a href="#running-the-data-pipeline" id="toc-running-the-data-pipeline" class="nav-link" data-scroll-target="#running-the-data-pipeline">Running the data pipeline</a></li>
   <li><a href="#the-four-diátaxis-sections" id="toc-the-four-diátaxis-sections" class="nav-link" data-scroll-target="#the-four-diátaxis-sections">The four Diátaxis sections</a></li>
   <li><a href="#site-configuration" id="toc-site-configuration" class="nav-link" data-scroll-target="#site-configuration">Site configuration</a></li>
@@ -317,6 +322,7 @@ div.csl-indent {
 ├── index.qmd              Site landing page
 ├── references.bib         Bibliography: sources cited in the docs
 ├── src/sohbc/             Acquisition and indicator tooling (Python)
+├── scripts/               Maintenance scripts (diagram generation)
 ├── tests/                 Tests for the sohbc tooling
 ├── data/
 │   ├── catalogue/         Data-source catalogue (sources.yml) — committed
@@ -327,21 +333,46 @@ div.csl-indent {
 ├── how-to/                Task-oriented: task recipes
 ├── reference/             Information-oriented: lookup pages
 ├── explanation/           Understanding-oriented: concepts &amp; context
-└── .github/workflows/     CI: renders site, deploys to gh-pages branch</code></pre>
+└── .github/workflows/     CI: tests, site render, gh-pages deploy</code></pre>
 <p>The analysis code and data pipeline grow with the milestones: the acquisition tooling (<code>src/sohbc/</code>) and the data-source catalogue land in M2; descriptive analysis (M3), dependence (M4), and causal work (M5) follow.</p>
+</section>
+<section id="diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="diagrams">Diagrams</h2>
+<p>Two generated views of the <code>sohbc</code> package live in <code>reference/diagrams/</code>. Regenerate them with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python scripts/make_diagrams.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(Requires <a href="https://graphviz.org">Graphviz</a>. The documentation workflow regenerates them on every deploy, so the published diagrams always match the source.)</p>
+<section id="uml-class-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="uml-class-diagram">UML class diagram</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="diagrams/uml.svg" class="img-fluid figure-img"></p>
+<figcaption>UML class diagram of the sohbc package</figcaption>
+</figure>
+</div>
+</section>
+<section id="static-call-graph" class="level3">
+<h3 class="anchored" data-anchor-id="static-call-graph">Static call graph</h3>
+<p>Derived statically from the source: nodes are functions, methods, and classes (classes shaded red); edges are uses — calls and references such as exception handling.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="diagrams/callgraph.svg" class="img-fluid figure-img"></p>
+<figcaption>Static call graph of the sohbc package</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="running-the-data-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="running-the-data-pipeline">Running the data pipeline</h2>
 <p>The <code>sohbc</code> tooling is a small Python package. After <code>uv sync</code>, run it through the project environment:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc validate   <span class="co"># check the catalogue schema</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc list       <span class="co"># list catalogued sources</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc check <span class="at">--all</span>  <span class="co"># verify source URLs</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch <span class="at">--all</span>  <span class="co"># fetch automated sources</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc indicators   <span class="co"># list defined indicators</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build        <span class="co"># build published indicator datasets</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc validate   <span class="co"># check the catalogue schema</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc list       <span class="co"># list catalogued sources</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc check <span class="at">--all</span>  <span class="co"># verify source URLs</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch <span class="at">--all</span>  <span class="co"># fetch automated sources</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc indicators   <span class="co"># list defined indicators</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build        <span class="co"># build published indicator datasets</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Fetched data lands in <code>data/raw/</code> (gitignored) with a checksum recorded in <code>data/manifest.json</code>, so a clean checkout reproduces the dataset from the committed catalogue; tidy indicator datasets are published (and committed) under <code>data/published/</code>. See <a href="../how-to/ingest-data.html">How to ingest a data source</a>.</p>
 <p>Run the tooling’s tests with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> unittest discover <span class="at">-s</span> tests <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> unittest discover <span class="at">-s</span> tests <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="the-four-diátaxis-sections" class="level2">
 <h2 class="anchored" data-anchor-id="the-four-diátaxis-sections">The four Diátaxis sections</h2>
