@@ -21,3 +21,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[dependency-groups]
+dev = [
+    "bandit>=1.9.4",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "_site"]
