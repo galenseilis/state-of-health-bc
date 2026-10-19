@@ -165,6 +165,10 @@ div.csl-indent {
  <span class="dropdown-text">Overview</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reference/api/index.html">
+ <span class="dropdown-text">API</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reference/glossary.html">
  <span class="dropdown-text">Glossary</span></a>
   </li>  
@@ -239,7 +243,10 @@ div.csl-indent {
   <ul>
   <li><a href="#why-define-health-first" id="toc-why-define-health-first" class="nav-link active" data-scroll-target="#why-define-health-first">Why define health first?</a></li>
   <li><a href="#what-the-definition-must-pin-down" id="toc-what-the-definition-must-pin-down" class="nav-link" data-scroll-target="#what-the-definition-must-pin-down">What the definition must pin down</a></li>
-  <li><a href="#the-hard-boundary-health-vs.-its-determinants" id="toc-the-hard-boundary-health-vs.-its-determinants" class="nav-link" data-scroll-target="#the-hard-boundary-health-vs.-its-determinants">The hard boundary: health vs.&nbsp;its determinants</a></li>
+  <li><a href="#the-hard-boundary-health-vs.-its-determinants" id="toc-the-hard-boundary-health-vs.-its-determinants" class="nav-link" data-scroll-target="#the-hard-boundary-health-vs.-its-determinants">The hard boundary: health vs.&nbsp;its determinants</a>
+  <ul class="collapse">
+  <li><a href="#multi-objective-and-stochastic-nature-of-recommendations" id="toc-multi-objective-and-stochastic-nature-of-recommendations" class="nav-link" data-scroll-target="#multi-objective-and-stochastic-nature-of-recommendations">Multi-objective and stochastic nature of recommendations</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/explanation/defining-health.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -291,9 +298,20 @@ div.csl-indent {
 <section id="the-hard-boundary-health-vs.-its-determinants" class="level2">
 <h2 class="anchored" data-anchor-id="the-hard-boundary-health-vs.-its-determinants">The hard boundary: health vs.&nbsp;its determinants</h2>
 <p>The most common failure mode in “state of health” projects is quietly mixing health outcomes with their determinants (income, environment, service access). This project keeps them in separate layers: determinants enter the analysis as <em>explanatory variables</em>, never as components of health itself. The causal structures in milestone M5 depend on that distinction being drawn early.</p>
+<section id="multi-objective-and-stochastic-nature-of-recommendations" class="level3">
+<h3 class="anchored" data-anchor-id="multi-objective-and-stochastic-nature-of-recommendations">Multi-objective and stochastic nature of recommendations</h3>
+<p>Improving the cumulative state of health is a <strong>multi-objective stochastic optimization</strong> problem. Different health domains compete for limited resources, and effects are uncertain. We must account for:</p>
+<ul>
+<li><strong>Multiple objectives:</strong> mortality, morbidity, functional status, mental health, subjective wellbeing, social wellbeing.</li>
+<li><strong>Uncertainty:</strong> parameter uncertainty, model uncertainty, and stochasticity in outcomes.</li>
+<li><strong>Time and dynamics:</strong> intertemporal trade-offs, discounting/weighting over cohorts and life course.</li>
+<li><strong>Constraints:</strong> resources, feasibility, equity (e.g.&nbsp;reducing disparities), and external validity.</li>
+</ul>
+<p>Therefore, recommendations should be framed as candidate policies with Pareto frontiers and uncertainty intervals, not single “optimal” points.</p>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
