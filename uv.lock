@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.14'",
@@ -1065,30 +1065,31 @@ wheels = [
 
 [[package]]
 name = "sohbc"
-version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "griffe" },
     { name = "pyyaml" },
-    { name = "quartodoc" },
     { name = "requests" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "bandit" },
+    { name = "griffe" },
+    { name = "quartodoc" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "griffe", specifier = ">=0.38.0,<0.47.0" },
     { name = "pyyaml", specifier = ">=6.0" },
-    { name = "quartodoc", specifier = ">=0.7.6,<0.9.0" },
     { name = "requests", specifier = ">=2.31" },
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "bandit", specifier = ">=1.9.4" }]
+dev = [
+    { name = "bandit", specifier = ">=1.9.4" },
+    { name = "griffe", specifier = ">=0.38.0,<0.47.0" },
+    { name = "quartodoc", specifier = ">=0.7.6,<0.9.0" },
+]
 
 [[package]]
 name = "sphobjinv"

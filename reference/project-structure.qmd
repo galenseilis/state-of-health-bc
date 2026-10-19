@@ -34,16 +34,16 @@ follow.
 
 ## Running the data pipeline
 
-The `sohbc` tooling is a small Python package. Run it straight from the
-checkout with `src/` on the path (or `pip install -e .`):
+The `sohbc` tooling is a small Python package. After `uv sync`, run it
+through the project environment:
 
 ```bash
-PYTHONPATH=src python3 -m sohbc validate   # check the catalogue schema
-PYTHONPATH=src python3 -m sohbc list       # list catalogued sources
-PYTHONPATH=src python3 -m sohbc check --all  # verify source URLs
-PYTHONPATH=src python3 -m sohbc fetch --all  # fetch automated sources
-PYTHONPATH=src python3 -m sohbc indicators   # list defined indicators
-PYTHONPATH=src python3 -m sohbc build        # build published indicator datasets
+uv run sohbc validate   # check the catalogue schema
+uv run sohbc list       # list catalogued sources
+uv run sohbc check --all  # verify source URLs
+uv run sohbc fetch --all  # fetch automated sources
+uv run sohbc indicators   # list defined indicators
+uv run sohbc build        # build published indicator datasets
 ```
 
 Fetched data lands in `data/raw/` (gitignored) with a checksum recorded
@@ -55,7 +55,7 @@ committed) under `data/published/`. See
 Run the tooling's tests with:
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests -v
+uv run python -m unittest discover -s tests -v
 ```
 
 ## The four Diátaxis sections

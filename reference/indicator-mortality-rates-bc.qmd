@@ -3,7 +3,7 @@ title: "Indicator: Mortality rates, British Columbia"
 ---
 
 *Status: first published indicator (milestone M3 in progress). Regenerate
-with `PYTHONPATH=src python3 -m sohbc build mortality_rates_bc`.*
+with `uv run sohbc build mortality_rates_bc`.*
 
 This is the project's first end-to-end
 [indicator](../reference/index.qmd): it is fetched from a catalogued
@@ -119,8 +119,8 @@ point is **${trend.change_point}**${trend.change_point === 2020 ? " — the onse
 ## Reproduce
 
 ```bash
-PYTHONPATH=src python3 -m sohbc fetch statcan_wds
-PYTHONPATH=src python3 -m sohbc build mortality_rates_bc
+uv run sohbc fetch statcan_wds
+uv run sohbc build mortality_rates_bc
 ```
 
 The tidy dataset is published at `data/published/mortality_rates_bc.csv`,

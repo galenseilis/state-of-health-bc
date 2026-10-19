@@ -12,9 +12,16 @@ title: "How to contribute"
    ```
 
 2. Install [Quarto](https://quarto.org/docs/get-started/) (version 1.4 or
-   later).
+   later) and [uv](https://docs.astral.sh/uv/).
 
-3. Preview the documentation site locally:
+3. Create the Python environment (installs the `sohbc` package and the
+   development tools):
+
+   ```bash
+   uv sync
+   ```
+
+4. Preview the documentation site locally:
 
    ```bash
    quarto preview
@@ -76,7 +83,7 @@ If it is unclear which case applies to your change, open an issue and ask
 before writing the code. Run the tooling tests before submitting:
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests -v
+uv run python -m unittest discover -s tests -v
 ```
 
 ## Submit changes
@@ -89,9 +96,9 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 
 2. Commit your work with a clear message describing the change.
 3. Open a pull request against `main`.
-4. The documentation workflow builds the site on every push to `main`;
-   failures in the workflow indicate a rendering error to fix before
-   merging.
+4. The CI workflow runs the test suite, and the documentation workflow
+   builds the site, on every push to `main`; failures in either indicate
+   a problem to fix before merging.
 
 ## Where work is planned
 

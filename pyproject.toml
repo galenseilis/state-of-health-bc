@@ -1,30 +1,39 @@
 [project]
 name = "sohbc"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Acquisition and analysis tooling for the State-of-Health BC project"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "GPL-3.0-or-later" }
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 dependencies = [
-  "griffe>=0.38.0,<0.47.0",
   "PyYAML>=6.0",
-  "quartodoc>=0.7.6,<0.9.0",
   "requests>=2.31",
 ]
 
 [project.scripts]
 sohbc = "sohbc.__main__:main"
 
+[project.urls]
+Homepage = "https://galenseilis.github.io/state-of-health-bc"
+Documentation = "https://galenseilis.github.io/state-of-health-bc"
+Repository = "https://github.com/galenseilis/state-of-health-bc"
+
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.dynamic]
+version = { attr = "sohbc.__version__" }
+
 [dependency-groups]
 dev = [
     "bandit>=1.9.4",
+    "griffe>=0.38.0,<0.47.0",
+    "quartodoc>=0.7.6,<0.9.0",
 ]
 
 [tool.bandit]

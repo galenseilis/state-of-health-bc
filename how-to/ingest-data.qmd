@@ -24,7 +24,7 @@ including:
 ## 2. Validate the catalogue
 
 ```bash
-PYTHONPATH=src python3 -m sohbc validate
+uv run sohbc validate
 ```
 
 Fix any schema error before continuing.
@@ -34,7 +34,7 @@ Fix any schema error before continuing.
 Never add a URL you have not confirmed resolves:
 
 ```bash
-PYTHONPATH=src python3 -m sohbc check <key> --include-download
+uv run sohbc check <key> --include-download
 ```
 
 ## 4. Retrieve the data
@@ -43,7 +43,7 @@ For a machine-fetchable source, set `download.kind` to `direct` (a file)
 or `api_json` (a JSON endpoint), give its `download.url`, then run:
 
 ```bash
-PYTHONPATH=src python3 -m sohbc fetch <key>
+uv run sohbc fetch <key>
 ```
 
 The file lands in `data/raw/<key>/` and an entry is written to

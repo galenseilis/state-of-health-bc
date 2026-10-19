@@ -54,6 +54,50 @@ acquisition pipeline (`src/sohbc/`), and a data-quality register — and the
 first end-to-end indicator (M3): provincial mortality rates, built and
 published by the pipeline. See the [roadmap](ROADMAP.md).
 
+## Installation and usage
+
+The acquisition tooling is an installable Python package (`sohbc`),
+usable as a command-line tool or as a library.
+
+```bash
+uv sync              # create .venv with the package and dev tools
+uv run sohbc --help  # run the CLI from the project environment
+```
+
+Or install it into any Python environment:
+
+```bash
+pip install .
+sohbc validate
+```
+
+Commands locate the project by searching upwards from the current
+directory for `data/catalogue/sources.yml`, so run them from inside the
+checkout — or point them at one with `SOHBC_ROOT=/path/to/checkout`.
+
+| Command | Purpose |
+|---------|---------|
+| `sohbc validate` | Check the catalogue schema |
+| `sohbc list` | List catalogued sources |
+| `sohbc plan` | Show automated vs manual retrieval |
+| `sohbc check <key>` | Verify source URLs are reachable |
+| `sohbc fetch <key>` | Fetch automated sources into `data/raw/` |
+| `sohbc build` | Build published indicator datasets |
+
+As a library:
+
+```python
+from sohbc import load
+
+sources = load()  # validated Source records
+```
+
+Run the tests with:
+
+```bash
+uv run python -m unittest discover -s tests -v
+```
+
 ## Documentation
 
 The docs are built with [Quarto](https://quarto.org) and follow the

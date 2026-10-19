@@ -2,14 +2,26 @@
 
 from __future__ import annotations
 
+import io
+import os
+import shutil
+import tempfile
 import unittest
+from contextlib import redirect_stdout
+from pathlib import Path
+from unittest import mock
 
+from sohbc import __version__, catalogue
 from sohbc.__main__ import main
 from sohbc.catalogue import (
+    CATALOGUE_PATH,
     DOWNLOAD_KINDS,
     FORMS,
     ORIGINS,
+    ROOT_ENV_VAR,
     TEMPORAL,
+    CatalogueError,
+    _discover_root,
     load,
 )
 
@@ -48,9 +60,84 @@ class CatalogueTests(unittest.TestCase):
                 self.assertTrue(s.form_of_access, s.key)
 
 
+class RootDiscoveryTests(unittest.TestCase):
+    repo_root = Path(__file__).resolve().parents[1]
+
+    def test_finds_checkout_from_a_subdirectory(self) -> None:
+        original = Path.cwd()
+        try:
+            os.chdir(self.repo_root / "data")
+            root = _discover_root()
+        finally:
+            os.chdir(original)
+        self.assertEqual(root, self.repo_root)
+
+    def test_env_var_overrides_discovery(self) -> None:
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            mock.patch.dict(os.environ, {ROOT_ENV_VAR: tmp}),
+        ):
+            self.assertEqual(_discover_root(), Path(tmp).resolve())
+
+    def test_env_var_catalogue_is_loaded(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "data" / "catalogue"
+            target.mkdir(parents=True)
+            shutil.copy(CATALOGUE_PATH, target / "sources.yml")
+            with mock.patch.dict(os.environ, {ROOT_ENV_VAR: tmp}):
+                sources = load()
+        self.assertGreaterEqual(len(sources), 1)
+
+    def test_missing_checkout_error_explains(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            outside = Path(tmp) / "elsewhere" / "sohbc" / "catalogue.py"
+            with (
+                mock.patch.dict(os.environ, {ROOT_ENV_VAR: ""}),
+                mock.patch.object(catalogue, "__file__", str(outside)),
+            ):
+                original = Path.cwd()
+                try:
+                    os.chdir(tmp)
+                    with self.assertRaises(CatalogueError) as ctx:
+                        load()
+                finally:
+                    os.chdir(original)
+        self.assertIn("no project checkout found", str(ctx.exception))
+
+    def test_invalid_env_root_error_explains(self) -> None:
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            mock.patch.dict(os.environ, {ROOT_ENV_VAR: tmp}),
+            self.assertRaises(CatalogueError) as ctx,
+        ):
+            load()
+        self.assertIn(ROOT_ENV_VAR, str(ctx.exception))
+
+
 class CliTests(unittest.TestCase):
     def test_validate_returns_zero(self) -> None:
         self.assertEqual(main(["validate"]), 0)
+
+    def test_version_flag(self) -> None:
+        buffer = io.StringIO()
+        with redirect_stdout(buffer), self.assertRaises(SystemExit) as ctx:
+            main(["--version"])
+        self.assertEqual(ctx.exception.code, 0)
+        self.assertIn(f"sohbc {__version__}", buffer.getvalue())
+
+
+class PackageTests(unittest.TestCase):
+    def test_public_api_is_importable(self) -> None:
+        import sohbc
+
+        for name in sohbc.__all__:
+            getattr(sohbc, name)
+        self.assertTrue(sohbc.__version__)
+
+    def test_library_load_matches_cli(self) -> None:
+        import sohbc
+
+        self.assertEqual(len(sohbc.load()), len(load()))
 
 
 if __name__ == "__main__":

@@ -72,7 +72,7 @@ effectively different.
 ## URL verification
 
 As part of M2, every catalogued URL was checked for reachability with
-`python3 -m sohbc check --all`. All catalogued landing pages and the
+`uv run sohbc check --all`. All catalogued landing pages and the
 automated download endpoints returned HTTP 200 at the time of checking
 (25 sources). The federal publisher's own portal was unreachable from the
 verification environment, so federal open data is reached through the

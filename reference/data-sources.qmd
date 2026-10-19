@@ -126,11 +126,10 @@ repository.**
 ## Reproducing the catalogue
 
 ```bash
-export PYTHONPATH=src
-python3 -m sohbc validate   # schema check
-python3 -m sohbc list       # list sources
-python3 -m sohbc check --all --include-download   # re-verify URLs
-python3 -m sohbc fetch --all
+uv run sohbc validate   # schema check
+uv run sohbc list       # list sources
+uv run sohbc check --all --include-download   # re-verify URLs
+uv run sohbc fetch --all
 ```
 
 See [How to ingest a data source](../how-to/ingest-data.qmd).

@@ -2,14 +2,63 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
-CATALOGUE_PATH = ROOT / "data" / "catalogue" / "sources.yml"
+ROOT_ENV_VAR = "SOHBC_ROOT"
+CATALOGUE_RELATIVE = Path("data") / "catalogue" / "sources.yml"
+
+
+def _discover_root() -> Path | None:
+    """Locate the project root that holds the data-source catalogue.
+
+    Discovery order: the ``SOHBC_ROOT`` environment variable, then the
+    working directory searched upwards, then this package's location
+    searched upwards (which covers editable installs). This lets an
+    installed copy of the package operate on a checkout, the way version
+    control tools find their project.
+
+    Returns:
+        Path | None: The project root, or None if no checkout was found.
+    """
+    override = os.environ.get(ROOT_ENV_VAR)
+    if override:
+        return Path(override).expanduser().resolve()
+    for start in (Path.cwd(), Path(__file__).resolve()):
+        for candidate in (start, *start.parents):
+            if (candidate / CATALOGUE_RELATIVE).is_file():
+                return candidate
+    return None
+
+
+PROJECT_ROOT = _discover_root()
+ROOT = PROJECT_ROOT if PROJECT_ROOT is not None else Path.cwd()
+CATALOGUE_PATH = ROOT / CATALOGUE_RELATIVE
+
+
+def _missing_hint(root: Path | None) -> str:
+    """Return a trailing hint for catalogue-not-found error messages.
+
+    Args:
+        root: The root that discovery returned, or None if nothing was found.
+
+    Returns:
+        str: Hint naming the environment variable or checkout requirement.
+    """
+    override = os.environ.get(ROOT_ENV_VAR)
+    if override:
+        return f" ({ROOT_ENV_VAR}={override} does not contain {CATALOGUE_RELATIVE})"
+    if root is None:
+        return (
+            " (no project checkout found; run from inside the repository "
+            f"or set {ROOT_ENV_VAR})"
+        )
+    return ""
+
 
 REQUIRED_FIELDS = (
     "key",
@@ -147,7 +196,9 @@ def load(path: Path | None = None) -> list[Source]:
 
     Args:
         path: Optional path to the catalogue YAML. Defaults to the project
-            catalogue at data/catalogue/sources.yml.
+            catalogue at data/catalogue/sources.yml, located through the
+            ``SOHBC_ROOT`` environment variable or by searching upwards
+            from the working directory and from this package's location.
 
     Returns:
         list[Source]: List of catalogue sources.
@@ -156,9 +207,14 @@ def load(path: Path | None = None) -> list[Source]:
         CatalogueError: If the catalogue is missing, malformed, or contains
             invalid values.
     """
-    path = path or CATALOGUE_PATH
+    if path is None:
+        root = _discover_root()
+        path = (root if root is not None else Path.cwd()) / CATALOGUE_RELATIVE
+        hint = _missing_hint(root) if not path.exists() else ""
+    else:
+        hint = ""
     if not path.exists():
-        raise CatalogueError(f"catalogue not found: {path}")
+        raise CatalogueError(f"catalogue not found: {path}{hint}")
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict) or "sources" not in data:
         raise CatalogueError("catalogue must be a mapping with a 'sources' list")
