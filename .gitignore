@@ -232,3 +232,6 @@ data/raw/
 data/interim/
 data/processed/
 data/manifest.json
+
+# Dynamic call graph: reproducible from a local run, not committed
+reference/diagrams/callgraph-dynamic.svg

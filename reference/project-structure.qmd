@@ -58,6 +58,20 @@ as exception handling.
 
 ![Static call graph of the sohbc package](diagrams/callgraph.svg)
 
+### Dynamic call graph
+
+Derived dynamically at run time: an offline exercise of the CLI
+(`validate`, `list`, `plan`, `indicators`, `build`) is traced under
+`cProfile` and rendered with [gprof2dot](https://github.com/jrfonseca/gprof2dot).
+Nodes are the functions actually executed, annotated with call counts
+and time; edges are calls observed during the run. This is a development
+tool only — its output is gitignored, since it depends on the code path
+exercised and the machine it ran on:
+
+```bash
+uv run python scripts/make_dynamic_callgraph.py
+```
+
 ## Running the data pipeline
 
 The `sohbc` tooling is a small Python package. After `uv sync`, run it
