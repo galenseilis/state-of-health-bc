@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
+
       - uses: quarto-dev/quarto-actions/setup@v2
 
       - uses: astral-sh/setup-uv@v10.3.0
@@ -28,6 +31,9 @@ jobs:
 
       - name: Build API docs
         run: uv run quartodoc build --config _quartodoc.yml
+
+      - name: Generate diagrams
+        run: uv run python scripts/make_diagrams.py
 
       - name: Render site
         run: quarto render

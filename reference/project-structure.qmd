@@ -14,6 +14,7 @@ state-of-health-bc/
 ├── index.qmd              Site landing page
 ├── references.bib         Bibliography: sources cited in the docs
 ├── src/sohbc/             Acquisition and indicator tooling (Python)
+├── scripts/               Maintenance scripts (diagram generation)
 ├── tests/                 Tests for the sohbc tooling
 ├── data/
 │   ├── catalogue/         Data-source catalogue (sources.yml) — committed
@@ -24,13 +25,38 @@ state-of-health-bc/
 ├── how-to/                Task-oriented: task recipes
 ├── reference/             Information-oriented: lookup pages
 ├── explanation/           Understanding-oriented: concepts & context
-└── .github/workflows/     CI: renders site, deploys to gh-pages branch
+└── .github/workflows/     CI: tests, site render, gh-pages deploy
 ```
 
 The analysis code and data pipeline grow with the milestones: the
 acquisition tooling (`src/sohbc/`) and the data-source catalogue land in
 M2; descriptive analysis (M3), dependence (M4), and causal work (M5)
 follow.
+
+## Diagrams
+
+Two generated views of the `sohbc` package live in `reference/diagrams/`.
+Regenerate them with:
+
+```bash
+uv run python scripts/make_diagrams.py
+```
+
+(Requires [Graphviz](https://graphviz.org). The documentation workflow
+regenerates them on every deploy, so the published diagrams always match
+the source.)
+
+### UML class diagram
+
+![UML class diagram of the sohbc package](diagrams/uml.svg)
+
+### Static call graph
+
+Derived statically from the source: nodes are functions, methods, and
+classes (classes shaded red); edges are uses — calls and references such
+as exception handling.
+
+![Static call graph of the sohbc package](diagrams/callgraph.svg)
 
 ## Running the data pipeline
 

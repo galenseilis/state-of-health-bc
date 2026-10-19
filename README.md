@@ -128,6 +128,7 @@ quarto preview
 ├── index.qmd              Documentation landing page
 ├── references.bib         Bibliography: sources cited in the docs
 ├── src/sohbc/             Acquisition tooling (Python)
+├── scripts/               Maintenance scripts (diagram generation)
 ├── data/catalogue/        Data-source catalogue (committed)
 ├── data/raw/              Fetched data (gitignored, reproducible)
 ├── tutorials/             Learning-oriented documentation

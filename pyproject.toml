@@ -33,6 +33,8 @@ version = { attr = "sohbc.__version__" }
 dev = [
     "bandit>=1.9.4",
     "griffe>=0.38.0,<0.47.0",
+    "pyan3>=2.9.0",
+    "pylint>=4.1.3",
     "quartodoc>=0.7.6,<0.9.0",
 ]
 
