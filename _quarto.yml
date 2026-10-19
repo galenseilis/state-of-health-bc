@@ -48,6 +48,8 @@ website:
         menu:
           - href: reference/index.qmd
             text: Overview
+          - href: reference/api/index.qmd
+            text: API
           - href: reference/glossary.qmd
             text: Glossary
           - href: reference/measurement-framework.qmd

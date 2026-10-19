@@ -1,0 +1,16 @@
+project:
+  name: sohbc
+  title: SoHBC API
+
+quartodoc:
+  style: "pkgdown"
+  dir: reference/api
+  package: sohbc
+  sections:
+    - title: "API Reference"
+      desc: "Python API for acquisition, indicators, and catalogue tooling"
+      contents:
+        - catalogue
+        - fetch
+        - indicators
+        - __main__
