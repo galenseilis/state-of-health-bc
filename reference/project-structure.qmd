@@ -13,10 +13,11 @@ state-of-health-bc/
 ├── _quarto.yml            Documentation site configuration
 ├── index.qmd              Site landing page
 ├── references.bib         Bibliography: sources cited in the docs
-├── src/sohbc/             Acquisition tooling (Python)
+├── src/sohbc/             Acquisition and indicator tooling (Python)
 ├── tests/                 Tests for the sohbc tooling
 ├── data/
 │   ├── catalogue/         Data-source catalogue (sources.yml) — committed
+│   ├── published/         Tidy indicator datasets — committed
 │   ├── raw/               Fetched data — gitignored, reproducible
 │   └── manifest.json      Fetch manifest with checksums — gitignored
 ├── tutorials/             Learning-oriented: guided lessons
@@ -41,11 +42,14 @@ PYTHONPATH=src python3 -m sohbc validate   # check the catalogue schema
 PYTHONPATH=src python3 -m sohbc list       # list catalogued sources
 PYTHONPATH=src python3 -m sohbc check --all  # verify source URLs
 PYTHONPATH=src python3 -m sohbc fetch --all  # fetch automated sources
+PYTHONPATH=src python3 -m sohbc indicators   # list defined indicators
+PYTHONPATH=src python3 -m sohbc build        # build published indicator datasets
 ```
 
 Fetched data lands in `data/raw/` (gitignored) with a checksum recorded
 in `data/manifest.json`, so a clean checkout reproduces the dataset from
-the committed catalogue. See
+the committed catalogue; tidy indicator datasets are published (and
+committed) under `data/published/`. See
 [How to ingest a data source](../how-to/ingest-data.qmd).
 
 Run the tooling's tests with:

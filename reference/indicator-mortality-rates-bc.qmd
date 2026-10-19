@@ -1,0 +1,119 @@
+---
+title: "Indicator: Mortality rates, British Columbia"
+---
+
+*Status: first published indicator (milestone M3 in progress). Regenerate
+with `PYTHONPATH=src python3 -m sohbc build mortality_rates_bc`.*
+
+This is the project's first end-to-end
+[indicator](../reference/index.qmd): it is fetched from a catalogued
+source, tidied by the pipeline, and published as a versioned dataset plus
+the views below. Each indicator page states its provenance and caveats
+(see the [roadmap](../ROADMAP.md), milestone M3).
+
+## Provenance
+
+| Field | Value |
+|-------|-------|
+| **Domain** | [Mortality](../reference/measurement-framework.qmd) |
+| **Definition** | Deaths and the crude mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia |
+| **Source** | Statistics Canada, table 13-10-0710-01, *Mortality rates, by age group* [@statcan_wds_table] |
+| **Access** | Statistics Canada Web Data Service (automated full-table download) |
+| **Form** | indicator table (published summary statistics) |
+| **Geography** | British Columbia, place of residence |
+| **Coverage** | 1991–present (annual); observation window shown on each figure |
+| **Frequency / refresh** | annual |
+| **Licence** | Statistics Canada Open Licence |
+| **Proxy note** | A proxy for the mortality domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
+
+## Trend
+
+```{ojs}
+//| echo: false
+rows = FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
+rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population")
+counts = rows.filter(d => d.characteristic === "Number of deaths")
+trend = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Crude mortality rate, British Columbia (per 1,000 population)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Deaths per 1,000 population"},
+  marks: [
+    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "orange", fillOpacity: 0.12}),
+    Plot.ruleX([trend.change_point], {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.lineY(rates, {x: "ref_date", y: "value"}),
+    Plot.dot(rates, {x: "ref_date", y: "value", tip: true})
+  ]
+})
+```
+
+The shaded band marks the COVID-19 period (2020–2024) and the dashed
+red line the detected change point. Both are regime annotations
+(milestone M3).
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Number of deaths, British Columbia",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Deaths"},
+  marks: [
+    Plot.lineY(counts, {x: "ref_date", y: "value"}),
+    Plot.dot(counts, {x: "ref_date", y: "value", tip: true})
+  ]
+})
+```
+
+## Trajectory and regimes
+
+A crude trend summary, recomputed on every build
+(`data/published/mortality_rates_bc_trend.json`):
+
+```{ojs}
+//| echo: false
+segments = trend.segments.length
+  ? trend.segments
+  : [{label: "whole series", start: trend.start, end: trend.end, ...trend.overall}]
+Inputs.table(segments, {
+  columns: ["label", "start", "end", "slope_per_year", "slope_per_decade"],
+  header: {label: "segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade"}
+})
+```
+
+```{ojs}
+//| echo: false
+md`Overall the crude rate changed by **${trend.overall.slope_per_decade.toFixed(2)}** per 1,000
+per decade across ${trend.start}–${trend.end}. The best single change
+point is **${trend.change_point}**${trend.change_point === 2020 ? " — the onset of the COVID-19 period" : ""}.`
+```
+
+
+## Caveats
+
+- **Crude, not standardised.** The rate is not age-adjusted, so it reflects
+  both real change and shifts in BC's age structure. Age-standardisation
+  (using the age-group breakdown already present in the raw table and a
+  cited standard population) is a planned refinement.
+- **Change point is exploratory.** The single change point and segment
+  slopes are a descriptive summary of a short series, not a formal
+  break-point test; the post-2020 segment is especially short and volatile.
+- **Observation window and regimes.** The series spans 1991–2024 and
+  crosses the COVID-19 period (2020–2024), marked on the figure.
+- **Resolution.** Published here at provincial resolution. Age-group and
+  sex breakdowns exist in the source table and can be added without
+  changing the pipeline.
+- **Revisions.** Statistics Canada may revise recent-year estimates; the
+  published files are regenerated from the source on each build.
+
+## Reproduce
+
+```bash
+PYTHONPATH=src python3 -m sohbc fetch statcan_wds
+PYTHONPATH=src python3 -m sohbc build mortality_rates_bc
+```
+
+The tidy dataset is published at `data/published/mortality_rates_bc.csv`.

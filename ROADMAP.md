@@ -173,7 +173,12 @@ cross-border patient-flow / supply-chain external drivers
   the covered window; nonstationary series carry their trend/regime
   interpretation, not a single summary value.
 
-**Status:** not started
+**Status:** in progress — the pipeline builds and publishes a first
+end-to-end indicator (provincial mortality rates, Statistics Canada
+13-10-0710-01) with regenerable charts, a trajectory summary (slope and a
+detected change point), and regime annotation on the figure. Outstanding:
+the wider indicator set, age-standardisation, formal break-point tests,
+sub-provincial (map) views, and the descriptive report
 **Depends on:** M2
 
 ---

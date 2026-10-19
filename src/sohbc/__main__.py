@@ -6,8 +6,9 @@ import argparse
 import sys
 
 from . import __version__
-from .catalogue import CatalogueError, load
+from .catalogue import ROOT, CatalogueError, load
 from .fetch import check_source, run_fetch
+from .indicators import INDICATORS, IndicatorError, build
 
 
 def _cmd_validate(_args: argparse.Namespace) -> int:
@@ -75,6 +76,31 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_indicators(_args: argparse.Namespace) -> int:
+    width = max(len(k) for k in INDICATORS) if INDICATORS else 0
+    for key, spec in INDICATORS.items():
+        print(f"{key.ljust(width)}  {spec['domain']:<12}  {spec['title']}")
+    print(f"\n{len(INDICATORS)} indicators")
+    return 0
+
+
+def _cmd_build(args: argparse.Namespace) -> int:
+    keys = args.keys or list(INDICATORS)
+    for key in keys:
+        try:
+            result = build(key)
+        except IndicatorError as exc:
+            print(f"FAIL  {key}: {exc}", file=sys.stderr)
+            return 1
+        print(
+            f"built {key:<22} {result['rows']:>5} rows -> "
+            f"{result['output'].relative_to(ROOT)}"
+        )
+        if result["trend"] is not None:
+            print(f"      trend -> {result['trend'].relative_to(ROOT)}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="sohbc", description="State-of-Health BC data tooling")
     parser.add_argument("--version", action="version", version=f"sohbc {__version__}")
@@ -95,6 +121,16 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--all", action="store_true", help="fetch every automated source")
     fetch.set_defaults(func=_cmd_fetch)
 
+    sub.add_parser("indicators", help="list defined indicators").set_defaults(
+        func=_cmd_indicators
+    )
+
+    build_parser = sub.add_parser(
+        "build", help="build published indicator datasets from raw sources"
+    )
+    build_parser.add_argument("keys", nargs="*", help="indicator keys (default: all)")
+    build_parser.set_defaults(func=_cmd_build)
+
     return parser
 
 
@@ -103,7 +139,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
-    except CatalogueError as exc:
+    except (CatalogueError, IndicatorError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

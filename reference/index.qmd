@@ -25,7 +25,12 @@ access, resolution, and quality notes (milestone M2, in progress).
 ### [Data quality](data-quality.qmd)
 
 Known gaps, revisions, suppressions, and definitional breaks in the
-catalogued data (milestone M2).
+catalogued sources.
+
+### [Indicator: Mortality rates, British Columbia](indicator-mortality-rates-bc.qmd)
+
+The project's first published indicator, with provenance, caveats, and a
+regenerable chart.
 
 ### [Project structure](project-structure.qmd)
 

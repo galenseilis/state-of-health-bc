@@ -8,6 +8,8 @@ project:
     - reference/
     - explanation/
     - ROADMAP.md
+  resources:
+    - data/published/
 
 bibliography: references.bib
 
@@ -52,6 +54,8 @@ website:
             text: Data sources
           - href: reference/data-quality.qmd
             text: Data quality
+          - href: reference/indicator-mortality-rates-bc.qmd
+            text: "Indicator: Mortality rates"
           - href: reference/project-structure.qmd
             text: Project structure
       - text: "Explanation"

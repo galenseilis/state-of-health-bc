@@ -70,6 +70,7 @@ served by at least one catalogued source:
 | [Health statistics](https://www.statcan.gc.ca/en/subjects-start/health) | Statistics Canada | indicator tables | Morbidity, Mental health, Wellbeing, Function | provincial, HA | annual |
 | [Data tables](https://www150.statcan.gc.ca/n1/en/type/data) | Statistics Canada | indicator tables | all domains | provincial, HA, international | quarterly |
 | [Population and demography](https://www.statcan.gc.ca/en/subjects-start/population_and_demography) | Statistics Canada | indicator tables | denominators, migration | provincial, international | quarterly |
+| [Web Data Service (WDS)](https://www.statcan.gc.ca/en/developers/wds) | Statistics Canada | API | automated full-table downloads (e.g. mortality) | provincial, international | continuous |
 | [Canadian Wildland Fire Information System](https://cwfis.cfs.nrcan.gc.ca/) | Natural Resources Canada | dashboard | external driver | provincial, international | continuous (seasonal) |
 
 ## Determinants and stratifiers

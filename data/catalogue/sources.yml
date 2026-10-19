@@ -450,6 +450,31 @@ sources:
     download:
       kind: manual
 
+  - key: statcan_wds
+    title: "Statistics Canada Web Data Service (WDS)"
+    publisher: "Statistics Canada"
+    url: "https://www.statcan.gc.ca/en/developers/wds"
+    citation: statcan
+    form: api
+    domains: [Mortality, Physical morbidity, Mental health, Functional status, Subjective wellbeing, Social wellbeing]
+    indicators: ["Any published Statistics Canada table, including full-table CSV downloads"]
+    resolution: [provincial, health_authority, international]
+    geography: "Canada (BC available in most tables)"
+    coverage: "varies by table"
+    frequency: quarterly
+    refresh: "continuous"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC rows within national tables"
+    temporal_behaviour: trending
+    quality_notes: "Machinery for automated ingestion, not a dataset itself. Each table catalogued as its own indicator with its own reference period and revision policy."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100710/en"
+      filename: "13100710-download.json"
+
   - key: bcstats_economy
     title: "Economy"
     publisher: "BC Stats, Government of British Columbia"

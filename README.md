@@ -46,10 +46,11 @@ Two principles frame the work:
 ## Status
 
 Early stage. The repository contains the project definition, the roadmap,
-the documentation site, the provisional definition of health (M1), and a
-first cut of the data landscape (M2): a data-source catalogue, a small
-Python acquisition pipeline (`src/sohbc/`), and a data-quality register.
-Descriptive analysis (M3) and later stages follow the [roadmap](ROADMAP.md).
+the documentation site, the provisional definition of health (M1), a
+first cut of the data landscape (M2) — a data-source catalogue, a Python
+acquisition pipeline (`src/sohbc/`), and a data-quality register — and the
+first end-to-end indicator (M3): provincial mortality rates, built and
+published by the pipeline. See the [roadmap](ROADMAP.md).
 
 ## Documentation
 

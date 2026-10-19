@@ -72,12 +72,21 @@ effectively different.
 ## URL verification
 
 As part of M2, every catalogued URL was checked for reachability with
-`python3 -m sohbc check --all`. All catalogued landing pages and the one
-automated download endpoint returned HTTP 200 at the time of checking
-(24 sources). The federal publisher's own portal was unreachable from the
+`python3 -m sohbc check --all`. All catalogued landing pages and the
+automated download endpoints returned HTTP 200 at the time of checking
+(25 sources). The federal publisher's own portal was unreachable from the
 verification environment, so federal open data is reached through the
 Open Government portal record instead; this is noted on that catalogue
 entry.
+
+## First published indicator
+
+The first end-to-end indicator — provincial
+[mortality rates](indicator-mortality-rates-bc.qmd) from Statistics
+Canada table 13-10-0710-01 — is built by the pipeline. Its known
+limitations (crude, not age-standardised; spans the COVID-19 period;
+subject to revision) are recorded on the indicator page and are examples
+of the kind of entry this register is meant to capture.
 
 ## Governance
 
