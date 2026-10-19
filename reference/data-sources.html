@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data sources – State-of-Health BC</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">State-of-Health BC</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="../tutorials/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tutorials/first-look.html">
+ <span class="dropdown-text">Your first look at BC health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/contribute.html">
+ <span class="dropdown-text">Contribute to the project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/add-indicator.html">
+ <span class="dropdown-text">Add an indicator</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/ingest-data.html">
+ <span class="dropdown-text">Ingest a data source</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reference" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Reference</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
+        <li>
+    <a class="dropdown-item" href="../reference/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/measurement-framework.html">
+ <span class="dropdown-text">Measurement framework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/data-sources.html">
+ <span class="dropdown-text">Data sources</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/data-quality.html">
+ <span class="dropdown-text">Data quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-mortality-rates-bc.html">
+ <span class="dropdown-text">Indicator: Mortality rates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/project-structure.html">
+ <span class="dropdown-text">Project structure</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="../explanation/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/definition-of-health.html">
+ <span class="dropdown-text">Definition of the state of health</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/defining-health.html">
+ <span class="dropdown-text">Defining health</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/nonstationarity.html">
+ <span class="dropdown-text">Health is not stationary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/why-bc.html">
+ <span class="dropdown-text">Why BC only?</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../ROADMAP.html"> 
+<span class="menu-text">Roadmap</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-read-an-entry" id="toc-how-to-read-an-entry" class="nav-link active" data-scroll-target="#how-to-read-an-entry">How to read an entry</a></li>
+  <li><a href="#coverage-of-the-measurement-framework" id="toc-coverage-of-the-measurement-framework" class="nav-link" data-scroll-target="#coverage-of-the-measurement-framework">Coverage of the measurement framework</a></li>
+  <li><a href="#british-columbia-sources" id="toc-british-columbia-sources" class="nav-link" data-scroll-target="#british-columbia-sources">British Columbia sources</a></li>
+  <li><a href="#national-canada-sources" id="toc-national-canada-sources" class="nav-link" data-scroll-target="#national-canada-sources">National (Canada) sources</a></li>
+  <li><a href="#determinants-and-stratifiers" id="toc-determinants-and-stratifiers" class="nav-link" data-scroll-target="#determinants-and-stratifiers">Determinants and stratifiers</a></li>
+  <li><a href="#international-and-external-driver-sources" id="toc-international-and-external-driver-sources" class="nav-link" data-scroll-target="#international-and-external-driver-sources">International and external-driver sources</a></li>
+  <li><a href="#microdata-access-routes" id="toc-microdata-access-routes" class="nav-link" data-scroll-target="#microdata-access-routes">Microdata access routes</a></li>
+  <li><a href="#governance-and-licences" id="toc-governance-and-licences" class="nav-link" data-scroll-target="#governance-and-licences">Governance and licences</a></li>
+  <li><a href="#reproducing-the-catalogue" id="toc-reproducing-the-catalogue" class="nav-link" data-scroll-target="#reproducing-the-catalogue">Reproducing the catalogue</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/reference/data-sources.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data sources</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Status: <strong>v0.1 (provisional, milestone M2 in progress)</strong>. This catalogue is maintained alongside the machine-readable source list at <code>data/catalogue/sources.yml</code>, which the acquisition pipeline reads. Every URL below was verified reachable at the time of writing (see the <a href="../reference/data-quality.html">data quality report</a>).</em></p>
+<p>This is the project’s inventory of the data that describe the state of health in BC. <strong>Data is construed broadly</strong>: microdata, indicator tables, dashboards, report figures, and catalogue/API discovery layers all qualify, provided licence and governance checks pass. The aim is the best use of all publicly available information that can be appropriately used — not “microdata or nothing” (<a href="../ROADMAP.html">roadmap</a>, milestone M2).</p>
+<section id="how-to-read-an-entry" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-read-an-entry">How to read an entry</h2>
+<p>Each source is catalogued with the following fields (see <code>data/catalogue/sources.yml</code>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>key</strong></td>
+<td>stable identifier used by the pipeline</td>
+</tr>
+<tr class="even">
+<td><strong>form</strong></td>
+<td><code>microdata</code>, <code>indicator_table</code>, <code>dashboard</code>, <code>report_figure</code>, <code>api</code>, or <code>catalogue</code> (a discovery layer)</td>
+</tr>
+<tr class="odd">
+<td><strong>domains</strong></td>
+<td>which <a href="../reference/measurement-framework.html">measurement-framework</a> domains it can serve</td>
+</tr>
+<tr class="even">
+<td><strong>resolution</strong></td>
+<td>individual, neighbourhood, HSDA, LHA, health authority, provincial, international</td>
+</tr>
+<tr class="odd">
+<td><strong>coverage</strong></td>
+<td>the published time span of the series</td>
+</tr>
+<tr class="even">
+<td><strong>frequency / refresh</strong></td>
+<td>how often observations are dated and how often the source is updated</td>
+</tr>
+<tr class="odd">
+<td><strong>licence / access</strong></td>
+<td>reuse terms and how you obtain it</td>
+</tr>
+<tr class="even">
+<td><strong>origin</strong></td>
+<td><code>bc</code>, <code>canada</code>, or <code>international</code></td>
+</tr>
+<tr class="odd">
+<td><strong>temporal behaviour</strong></td>
+<td>expected behaviour: <code>trending</code>, <code>seasonal</code>, <code>shock_prone</code>, or <code>stable</code></td>
+</tr>
+<tr class="even">
+<td><strong>quality notes</strong></td>
+<td>suppressions, revisions, definitional breaks</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coverage-of-the-measurement-framework" class="level2">
+<h2 class="anchored" data-anchor-id="coverage-of-the-measurement-framework">Coverage of the measurement framework</h2>
+<p>Every domain in the <a href="../reference/measurement-framework.html">measurement framework</a> is served by at least one catalogued source:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Catalogued sources</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mortality</td>
+<td>Vital Statistics; BCCDC substance-use dashboard; BC overdose response; CIHI; Statistics Canada; FNHA</td>
+</tr>
+<tr class="even">
+<td>Physical morbidity</td>
+<td>BCCDC data and reports; BCCDC chronic-disease dashboard; BC Cancer; CIHI; Statistics Canada; FNHA</td>
+</tr>
+<tr class="odd">
+<td>Mental health</td>
+<td>BCCDC substance-use dashboard; BCCDC data and reports; BC overdose response; CIHI; Statistics Canada; FNHA</td>
+</tr>
+<tr class="even">
+<td>Functional status</td>
+<td>CIHI; Statistics Canada</td>
+</tr>
+<tr class="odd">
+<td>Subjective wellbeing</td>
+<td>Statistics Canada; FNHA</td>
+</tr>
+<tr class="even">
+<td>Social wellbeing</td>
+<td>Statistics Canada; FNHA</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="british-columbia-sources" class="level2">
+<h2 class="anchored" data-anchor-id="british-columbia-sources">British Columbia sources</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Publisher</th>
+<th>Form</th>
+<th>Domains</th>
+<th>Resolution</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/vital-statistics">Vital Statistics</a></td>
+<td>BC Stats</td>
+<td>indicator table</td>
+<td>Mortality</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/population-estimates">Population Estimates</a></td>
+<td>BC Stats</td>
+<td>indicator table</td>
+<td>denominators</td>
+<td>provincial → LHA</td>
+<td>quarterly</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bccdc.ca/health-professionals/data-reports/substance-use-harm-reduction-dashboard">Unregulated Drug Poisoning Emergency Dashboard</a></td>
+<td>BCCDC</td>
+<td>dashboard</td>
+<td>Mortality, Mental health</td>
+<td>provincial, HA</td>
+<td>monthly</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.bccdc.ca/health-professionals/data-reports">Data and Reports</a></td>
+<td>BCCDC</td>
+<td>discovery</td>
+<td>Physical morbidity, Mental health</td>
+<td>provincial, HA, HSDA</td>
+<td>irregular</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bccdc.ca/health-professionals/data-reports/chronic-disease-dashboard">Chronic Disease Dashboard</a></td>
+<td>BCCDC</td>
+<td>dashboard</td>
+<td>Physical morbidity</td>
+<td>provincial, HA, HSDA</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://www2.gov.bc.ca/gov/content/overdose">Overdose response</a></td>
+<td>BC Ministry of Health</td>
+<td>dashboard</td>
+<td>Mortality, Mental health</td>
+<td>provincial, HA</td>
+<td>monthly</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bccancer.bc.ca/">BC Cancer</a></td>
+<td>BC Cancer (PHSA)</td>
+<td>indicator table</td>
+<td>Physical morbidity</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.fnha.ca/">First Nations Health Authority</a></td>
+<td>FNHA</td>
+<td>report figures</td>
+<td>all domains</td>
+<td>provincial, HA</td>
+<td>irregular</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www2.gov.bc.ca/gov/content/safety/wildfire-status">Wildfire status</a></td>
+<td>BC Wildfire Service</td>
+<td>dashboard</td>
+<td>external driver</td>
+<td>provincial, HA, HSDA</td>
+<td>continuous (seasonal)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="national-canada-sources" class="level2">
+<h2 class="anchored" data-anchor-id="national-canada-sources">National (Canada) sources</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Publisher</th>
+<th>Form</th>
+<th>Domains</th>
+<th>Resolution</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www.cihi.ca/en">CIHI</a></td>
+<td>CIHI</td>
+<td>indicator tables</td>
+<td>Physical morbidity, Mental health, Functional status</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.statcan.gc.ca/en/subjects-start/health">Health statistics</a></td>
+<td>Statistics Canada</td>
+<td>indicator tables</td>
+<td>Morbidity, Mental health, Wellbeing, Function</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www150.statcan.gc.ca/n1/en/type/data">Data tables</a></td>
+<td>Statistics Canada</td>
+<td>indicator tables</td>
+<td>all domains</td>
+<td>provincial, HA, international</td>
+<td>quarterly</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.statcan.gc.ca/en/subjects-start/population_and_demography">Population and demography</a></td>
+<td>Statistics Canada</td>
+<td>indicator tables</td>
+<td>denominators, migration</td>
+<td>provincial, international</td>
+<td>quarterly</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.statcan.gc.ca/en/developers/wds">Web Data Service (WDS)</a></td>
+<td>Statistics Canada</td>
+<td>API</td>
+<td>automated full-table downloads (e.g.&nbsp;mortality)</td>
+<td>provincial, international</td>
+<td>continuous</td>
+</tr>
+<tr class="even">
+<td><a href="https://cwfis.cfs.nrcan.gc.ca/">Canadian Wildland Fire Information System</a></td>
+<td>Natural Resources Canada</td>
+<td>dashboard</td>
+<td>external driver</td>
+<td>provincial, international</td>
+<td>continuous (seasonal)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="determinants-and-stratifiers" class="level2">
+<h2 class="anchored" data-anchor-id="determinants-and-stratifiers">Determinants and stratifiers</h2>
+<p>Used only to <strong>stratify</strong> health results, never as health outcomes (see the <a href="../reference/measurement-framework.html">measurement framework</a>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Publisher</th>
+<th>Provides</th>
+<th>Resolution</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www2.gov.bc.ca/gov/content/data/statistics/economy">Economy</a></td>
+<td>BC Stats</td>
+<td>income, employment, business counts</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community">People, Population and Community</a></td>
+<td>BC Stats</td>
+<td>income, housing, families, migration</td>
+<td>provincial → LHA</td>
+<td>annual</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12">K-12 Reporting</a></td>
+<td>Ministry of Education and Child Care</td>
+<td>enrolment, completion, student outcomes</td>
+<td>provincial, HA</td>
+<td>annual</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="international-and-external-driver-sources" class="level2">
+<h2 class="anchored" data-anchor-id="international-and-external-driver-sources">International and external-driver sources</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Publisher</th>
+<th>Form</th>
+<th>Role</th>
+<th>Resolution</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www.who.int/data">WHO data</a></td>
+<td>WHO</td>
+<td>indicator tables</td>
+<td>global reference, pandemic context</td>
+<td>international</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://data-explorer.oecd.org/">OECD Data Explorer</a></td>
+<td>OECD</td>
+<td>indicator tables</td>
+<td>economic and health-system context</td>
+<td>international</td>
+<td>annual</td>
+</tr>
+<tr class="odd">
+<td><a href="https://data.worldbank.org/">World Bank Open Data</a></td>
+<td>World Bank</td>
+<td>indicator tables</td>
+<td>macroeconomic context</td>
+<td>international</td>
+<td>annual</td>
+</tr>
+<tr class="even">
+<td><a href="https://open.canada.ca/en/open-data">Open Government</a></td>
+<td>Government of Canada</td>
+<td>discovery</td>
+<td>federal datasets reaching BC</td>
+<td>provincial, international</td>
+<td>continuous</td>
+</tr>
+</tbody>
+</table>
+<p>External drivers are catalogued with their <strong>origin</strong> and the mechanism by which they reach BC in <code>data/catalogue/sources.yml</code> (<code>reaches_bc_via</code>): for example, migration flows (<code>statcan_demography</code>), cross-border fire and smoke (<code>cwfis</code>), and global pandemic conditions (<code>who_data</code>).</p>
+</section>
+<section id="microdata-access-routes" class="level2">
+<h2 class="anchored" data-anchor-id="microdata-access-routes">Microdata access routes</h2>
+<p>Individual-level sources are catalogued as <strong>access routes</strong> — the approval process, not the data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Provider</th>
+<th>Scope</th>
+<th>Access</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www.popdata.bc.ca/">Population Data BC</a></td>
+<td>Population Data BC</td>
+<td>BC administrative health records</td>
+<td>application, ethics review, secure environment</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.statcan.gc.ca/en/microdata/data-centres">Microdata access</a></td>
+<td>Statistics Canada</td>
+<td>national survey microdata</td>
+<td>Research Data Centres / remote access / custom tabulations</td>
+</tr>
+</tbody>
+</table>
+<p>These are catalogued even though the data cannot be committed: they set the ceiling on what resolution is attainable and are the route to individual-level indicators. <strong>No individual-level data enters the repository.</strong></p>
+</section>
+<section id="governance-and-licences" class="level2">
+<h2 class="anchored" data-anchor-id="governance-and-licences">Governance and licences</h2>
+<ul>
+<li>Licences vary by source and are recorded per entry. Check the record before redistributing anything.</li>
+<li>No individual-level data is stored in the repository. Only aggregate/public sources are fetched, and fetched data are reproducible artefacts (<code>data/raw/</code>) that are never committed.</li>
+<li>First Nations data are governed by First Nations principles and specific agreements; reuse must respect <span class="citation" data-cites="fnigcOcap">(<a href="#ref-fnigcOcap" role="doc-biblioref">First Nations Information Governance Centre, n.d.</a>)</span>.</li>
+</ul>
+</section>
+<section id="reproducing-the-catalogue" class="level2">
+<h2 class="anchored" data-anchor-id="reproducing-the-catalogue">Reproducing the catalogue</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYTHONPATH</span><span class="op">=</span>src</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> sohbc validate   <span class="co"># schema check</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> sohbc list       <span class="co"># list sources</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> sohbc check <span class="at">--all</span> <span class="at">--include-download</span>   <span class="co"># re-verify URLs</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> sohbc fetch <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>See <a href="../how-to/ingest-data.html">How to ingest a data source</a>.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-fnigcOcap" class="csl-entry" role="listitem">
+First Nations Information Governance Centre. n.d. <em>The First Nations Principles of <span>OCAP®</span></em>. Accessed October 18, 2026. <a href="https://fnigc.ca/ocap-training/">https://fnigc.ca/ocap-training/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/galenseilis\.github\.io\/state-of-health-bc");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>State-of-Health BC — licensed GPL-3.0</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Independent project — not endorsed by any organisation</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/reference/data-sources.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

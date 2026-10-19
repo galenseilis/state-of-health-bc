@@ -1,0 +1,737 @@
+[
+  {
+    "objectID": "ROADMAP.html",
+    "href": "ROADMAP.html",
+    "title": "Roadmap",
+    "section": "",
+    "text": "This roadmap breaks the project into sequential milestones with explicit deliverables and acceptance criteria. Status values: not started, in progress, complete.\nCross-cutting concerns (reproducibility, data governance, documentation) apply to every milestone.\nA guiding assumption throughout: health is a dynamic, nonstationary quantity. Distributions drift, relationships between variables change over time, and shocks (epidemics, policy changes, demographic transition) create regime shifts. Every milestone therefore treats “the state of health” as a trajectory to be tracked — never a fixed snapshot — and results are always tied to the time window in which they hold.\n\n\n\nGoal: Establish the repository, documentation site, and contribution workflow so all later work has a place to live.\nDeliverables:\n\nRepository with licence (GPL-3.0), README, and this roadmap.\nQuarto documentation site organised with the Diátaxis framework (Procida, n.d.) (tutorials, how-to guides, reference, explanation).\nAutomated deployment of the documentation site to GitHub Pages from the gh-pages branch.\n\nAcceptance criteria:\n\nquarto render builds the site without errors.\nA push to main publishes the site automatically.\nNew contributors can find the project overview, roadmap, and the four Diátaxis entry points from the landing page.\n\nStatus: complete — content committed; enable GitHub Pages (source: gh-pages branch) in repository settings to publish Depends on: nothing\n\n\n\n\nGoal: Produce a provisional, versioned definition of health and of the “state of health” in BC that can be operationalised as measurable indicators, together with the measurement framework that turns it into candidate indicators. The definition is expected to evolve as the project learns what is measurable; revisions are recorded, never silent.\nDeliverables:\n\nA definition document covering: conceptual basis (WHO, ICF, capability-based views), the domains, what is deliberately excluded, and a stated revision process.\nProxy discipline: the definition distinguishes the construct (the state of health) from proxies (every indicator), so that no proxy is confused for the state of health, no proxy is taken to define its domain, and composite indices are treated as models rather than measurements.\nTemporal semantics in the definition: health is specified as a time-varying state (a trajectory with levels, slopes, and possible discontinuities), not a timeless attribute. The definition states what changes over what timescale, and that indicators are re-evaluated as the underlying population changes.\nAll resolutions: the definition commits to using all available levels of resolution (individual, neighbourhood/HSDA/LHA, health authority, provincial, external/non-BC), recording the resolution of every datum and result, and treating any fusion across resolutions as a model output with stated assumptions.\nA measurement framework: domains and candidate indicator families for each domain (mortality, physical morbidity, mental health, functional status, subjective wellbeing, social wellbeing), each with candidate sources and stated expected temporal behaviour (gradually trending, seasonally varying, shock-prone, or plausibly stable over the analysis window).\nGlossary of terms used consistently across the project.\n\nAcceptance criteria:\n\nThe definition document is published in the Explanation section of the docs and survives review by at least one domain reviewer.\nEvery proposed domain maps to at least one candidate indicator with a named, obtainable data source.\nThe definition explicitly answers: is the state of health a snapshot, a trajectory, or both — and how the project will detect when its own description of health has gone stale.\nThe definition distinguishes constructs from proxies, and states how results at different resolutions are recorded and combined.\nThe definition carries a version number and a revision process.\n\nStatus: in progress — v0.1 drafted (definition document, measurement framework, glossary); fusing across resolutions and domain additions still to be stress-tested once M2 lands Depends on: M0\n\n\n\n\nGoal: Inventory and characterise the data that describe the state of health in BC over time and space. “Data” is construed broadly: anything publicly available that can be appropriately used to advance the project’s goals — from survey and administrative microdata through published summary statistics.\nDeliverables:\n\nData source catalogue (in the Reference section): coverage period, geography, frequency, licence, access route, refresh cadence, quality notes. Each entry records its form — microdata, indicator table, dashboard, or report figure — since a published summary statistic is as admissible as a raw dataset.\nCatalogue entries for external drivers as well: sources outside BC that bear on BC’s health (interprovincial and international patient flows, migration, national/provincial economic conditions, supply chains, cross-border environmental conditions), each tagged with its geographic origin and the mechanism by which it reaches BC.\nAcquisition pipeline: scripts that fetch/ingest each source into a reproducible local layout.\nData quality report: known gaps, revisions, suppressions, and definitional breaks.\n\nAcceptance criteria:\n\nEvery indicator named in the M1 measurement framework has at least one catalogue entry.\nA clean checkout plus the documented commands reproduces the ingested dataset.\nThe catalogue is judged by “best use of all publicly available information that can be appropriately used” — not “microdata or nothing”: an indicator backed only by published summary statistics still qualifies when it passes licence and governance checks.\n\nStatus: in progress — catalogue of 24 sources (all URLs verified), including determinant/stratifier sources and microdata access routes; a Python acquisition pipeline and a data-quality register are drafted. Outstanding: microdata approvals, neighbourhood-level outcomes, and cross-border patient-flow / supply-chain external drivers Depends on: M1\n\n\n\n\nGoal: Describe the state of health in BC over time and space.\nDeliverables:\n\nReproducible analysis pipeline producing trend and map views for each indicator.\nTrajectory analysis as the default view: change over time (slopes, turning points, change-point detection) is reported alongside levels; cross-sectional snapshots are treated as slices of the trajectory, not the headline result.\nRegime-aware reporting: identified discontinuities (e.g. pandemic years, coding definition changes, health system reforms) are marked on every series, with within-regime and across-regime comparisons kept separate.\nA published “State of health in BC” descriptive report (trends, inequalities across health authorities/regions, demographic breakdowns), versioned with its observation window.\nIndicator reference pages with definitions, source, and caveats.\n\nAcceptance criteria:\n\nThe report regenerates end-to-end from raw data with one documented command.\nEach indicator page states its provenance and known limitations.\nEvery indicator’s page states whether the series is stationary over the covered window; nonstationary series carry their trend/regime interpretation, not a single summary value.\n\nStatus: in progress — the pipeline builds and publishes a first end-to-end indicator (provincial mortality rates, Statistics Canada 13-10-0710-01) with regenerable charts, a trajectory summary (slope and a detected change point), and regime annotation on the figure. Outstanding: the wider indicator set, age-standardisation, formal break-point tests, sub-provincial (map) views, and the descriptive report Depends on: M2\n\n\n\n\nGoal: Characterise which variables are statistically dependent with health outcomes in BC.\nDeliverables:\n\nAnalysis of association between candidate variables (social, economic, environmental, health-system, behavioural) and health indicators.\nStability analysis before pooling. For every headline association, estimates across subperiods/rolling windows; a single pooled estimate is reported only when the relationship is supported as stable over the analysis window — otherwise time-varying estimates are the result.\nDocumented methods: variable selection, handling of collinearity, spatial and temporal confounding, stationarity/stability checks, uncertainty reporting.\nResults published with effect sizes, caveats, and their estimation window — not just significance flags.\n\nAcceptance criteria:\n\nMethods are documented in the Reference Section; results are explained in plain language in the Explanation section.\nAnalyses are reproducible from the M2 pipeline.\nEvery reported association states the time window it was estimated on and whether the relationship was found stable within that window.\n\nStatus: not started Depends on: M3\n\n\n\n\nGoal: Characterise the causal structures that produce changes in the state of health.\nDeliverables:\n\nExplicit causal diagrams (DAGs) with stated assumptions for key questions.\nDynamic causal structures: time-indexed diagrams capturing lagged effects, feedback loops (e.g. health → economic participation → resources → health), and time-varying confounding; composition changes (mortality selection, migration) are represented where they matter.\nAnalyses using appropriate designs (longitudinal, quasi-experimental, natural experiments where available).\nAn assumptions register: what is assumed, why, and what would refute it — including explicit stationarity assumptions (which causal links are assumed stable over the analysis window, and what observed change would invalidate that assumption).\n\nAcceptance criteria:\n\nEach causal claim links to its DAG, data, and assumptions.\nSensitivity analyses quantify how strong unmeasured confounding would need to be to change conclusions.\nEach causal claim carries a stated validity window and the monitoring signal that would indicate drift invalidating it.\n\nStatus: not started Depends on: M4\n\n\n\n\nGoal: Recommend actions that would improve the state of health, with explicit evidence grading and uncertainty.\nDeliverables:\n\nRecommendation framework: evidence strength, expected magnitude, feasibility, equity impact, and uncertainty for each recommendation.\nValidity conditions: for each recommendation, the M4/M5 findings it rests on, the time window of those findings, and the drift indicators that trigger re-evaluation.\nA reviewed set of prioritised recommendations.\nA scheduled revision cycle: re-run the pipeline on refreshed data and re-confirm, revise, or withdraw each recommendation.\n\nAcceptance criteria:\n\nEvery recommendation traces back to M4/M5 results and its underlying data sources.\nRecommendations are published with their confidence level and the conditions under which they should be revisited.\nNo recommendation is presented as permanently valid; each carries a date and the next scheduled review.\n\nStatus: not started Depends on: M4, M5\n\n\n\n\nThese run alongside every milestone:\n\nReproducibility. Every published number regenerates from raw data via documented commands; environments are pinned.\nNonstationarity vigilance. Results are versioned with their observation window; the pipeline is re-run on refreshed data so drift in distributions or relationships is detected rather than assumed away; regime shifts (epidemics, policy changes, coding revisions) are marked as first-class events in every series.\nData governance and ethics. Respect licences, privacy obligations, and Indigenous data sovereignty principles (e.g. OCAP® (First Nations Information Governance Centre, n.d.) and First Nations data governance contexts in BC). No individual-level data in the repository.\nDocumentation. New capabilities land with matching documentation in the correct Diátaxis section.\nEngineering conventions. The top-level framework and interface are written in Python; Python may glue around other tools and languages (including R) where that has a distinct benefit; performance-critical new functionality is implemented in Rust, C, and/or C++ — preferring Rust for greenfield code, and allowing C/C++ to interface with existing low-level libraries. See How to contribute.\nCitations. Factual claims about the world are cited: sources are recorded in references.bib and cited inline with Pandoc citation syntax ([@key]), so each page renders its own reference list from the works it cites.\nScope control. The object of study is BC’s health — not exclusively BC-origin data. Explanatory data that bears on BC health but originates elsewhere (interprovincial and international patient flows, migration, supply chains, economic or environmental disturbances from outside the province) is in scope; what is “BC only” is the outcome being explained. Expansion of the object of study beyond BC is out of scope until the BC analysis is mature (see README)."
+  },
+  {
+    "objectID": "ROADMAP.html#m0-foundation",
+    "href": "ROADMAP.html#m0-foundation",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Establish the repository, documentation site, and contribution workflow so all later work has a place to live.\nDeliverables:\n\nRepository with licence (GPL-3.0), README, and this roadmap.\nQuarto documentation site organised with the Diátaxis framework (Procida, n.d.) (tutorials, how-to guides, reference, explanation).\nAutomated deployment of the documentation site to GitHub Pages from the gh-pages branch.\n\nAcceptance criteria:\n\nquarto render builds the site without errors.\nA push to main publishes the site automatically.\nNew contributors can find the project overview, roadmap, and the four Diátaxis entry points from the landing page.\n\nStatus: complete — content committed; enable GitHub Pages (source: gh-pages branch) in repository settings to publish Depends on: nothing"
+  },
+  {
+    "objectID": "ROADMAP.html#m1-defining-the-state-of-health",
+    "href": "ROADMAP.html#m1-defining-the-state-of-health",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Produce a provisional, versioned definition of health and of the “state of health” in BC that can be operationalised as measurable indicators, together with the measurement framework that turns it into candidate indicators. The definition is expected to evolve as the project learns what is measurable; revisions are recorded, never silent.\nDeliverables:\n\nA definition document covering: conceptual basis (WHO, ICF, capability-based views), the domains, what is deliberately excluded, and a stated revision process.\nProxy discipline: the definition distinguishes the construct (the state of health) from proxies (every indicator), so that no proxy is confused for the state of health, no proxy is taken to define its domain, and composite indices are treated as models rather than measurements.\nTemporal semantics in the definition: health is specified as a time-varying state (a trajectory with levels, slopes, and possible discontinuities), not a timeless attribute. The definition states what changes over what timescale, and that indicators are re-evaluated as the underlying population changes.\nAll resolutions: the definition commits to using all available levels of resolution (individual, neighbourhood/HSDA/LHA, health authority, provincial, external/non-BC), recording the resolution of every datum and result, and treating any fusion across resolutions as a model output with stated assumptions.\nA measurement framework: domains and candidate indicator families for each domain (mortality, physical morbidity, mental health, functional status, subjective wellbeing, social wellbeing), each with candidate sources and stated expected temporal behaviour (gradually trending, seasonally varying, shock-prone, or plausibly stable over the analysis window).\nGlossary of terms used consistently across the project.\n\nAcceptance criteria:\n\nThe definition document is published in the Explanation section of the docs and survives review by at least one domain reviewer.\nEvery proposed domain maps to at least one candidate indicator with a named, obtainable data source.\nThe definition explicitly answers: is the state of health a snapshot, a trajectory, or both — and how the project will detect when its own description of health has gone stale.\nThe definition distinguishes constructs from proxies, and states how results at different resolutions are recorded and combined.\nThe definition carries a version number and a revision process.\n\nStatus: in progress — v0.1 drafted (definition document, measurement framework, glossary); fusing across resolutions and domain additions still to be stress-tested once M2 lands Depends on: M0"
+  },
+  {
+    "objectID": "ROADMAP.html#m2-data-landscape",
+    "href": "ROADMAP.html#m2-data-landscape",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Inventory and characterise the data that describe the state of health in BC over time and space. “Data” is construed broadly: anything publicly available that can be appropriately used to advance the project’s goals — from survey and administrative microdata through published summary statistics.\nDeliverables:\n\nData source catalogue (in the Reference section): coverage period, geography, frequency, licence, access route, refresh cadence, quality notes. Each entry records its form — microdata, indicator table, dashboard, or report figure — since a published summary statistic is as admissible as a raw dataset.\nCatalogue entries for external drivers as well: sources outside BC that bear on BC’s health (interprovincial and international patient flows, migration, national/provincial economic conditions, supply chains, cross-border environmental conditions), each tagged with its geographic origin and the mechanism by which it reaches BC.\nAcquisition pipeline: scripts that fetch/ingest each source into a reproducible local layout.\nData quality report: known gaps, revisions, suppressions, and definitional breaks.\n\nAcceptance criteria:\n\nEvery indicator named in the M1 measurement framework has at least one catalogue entry.\nA clean checkout plus the documented commands reproduces the ingested dataset.\nThe catalogue is judged by “best use of all publicly available information that can be appropriately used” — not “microdata or nothing”: an indicator backed only by published summary statistics still qualifies when it passes licence and governance checks.\n\nStatus: in progress — catalogue of 24 sources (all URLs verified), including determinant/stratifier sources and microdata access routes; a Python acquisition pipeline and a data-quality register are drafted. Outstanding: microdata approvals, neighbourhood-level outcomes, and cross-border patient-flow / supply-chain external drivers Depends on: M1"
+  },
+  {
+    "objectID": "ROADMAP.html#m3-descriptive-atlas",
+    "href": "ROADMAP.html#m3-descriptive-atlas",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Describe the state of health in BC over time and space.\nDeliverables:\n\nReproducible analysis pipeline producing trend and map views for each indicator.\nTrajectory analysis as the default view: change over time (slopes, turning points, change-point detection) is reported alongside levels; cross-sectional snapshots are treated as slices of the trajectory, not the headline result.\nRegime-aware reporting: identified discontinuities (e.g. pandemic years, coding definition changes, health system reforms) are marked on every series, with within-regime and across-regime comparisons kept separate.\nA published “State of health in BC” descriptive report (trends, inequalities across health authorities/regions, demographic breakdowns), versioned with its observation window.\nIndicator reference pages with definitions, source, and caveats.\n\nAcceptance criteria:\n\nThe report regenerates end-to-end from raw data with one documented command.\nEach indicator page states its provenance and known limitations.\nEvery indicator’s page states whether the series is stationary over the covered window; nonstationary series carry their trend/regime interpretation, not a single summary value.\n\nStatus: in progress — the pipeline builds and publishes a first end-to-end indicator (provincial mortality rates, Statistics Canada 13-10-0710-01) with regenerable charts, a trajectory summary (slope and a detected change point), and regime annotation on the figure. Outstanding: the wider indicator set, age-standardisation, formal break-point tests, sub-provincial (map) views, and the descriptive report Depends on: M2"
+  },
+  {
+    "objectID": "ROADMAP.html#m4-statistical-dependence",
+    "href": "ROADMAP.html#m4-statistical-dependence",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Characterise which variables are statistically dependent with health outcomes in BC.\nDeliverables:\n\nAnalysis of association between candidate variables (social, economic, environmental, health-system, behavioural) and health indicators.\nStability analysis before pooling. For every headline association, estimates across subperiods/rolling windows; a single pooled estimate is reported only when the relationship is supported as stable over the analysis window — otherwise time-varying estimates are the result.\nDocumented methods: variable selection, handling of collinearity, spatial and temporal confounding, stationarity/stability checks, uncertainty reporting.\nResults published with effect sizes, caveats, and their estimation window — not just significance flags.\n\nAcceptance criteria:\n\nMethods are documented in the Reference Section; results are explained in plain language in the Explanation section.\nAnalyses are reproducible from the M2 pipeline.\nEvery reported association states the time window it was estimated on and whether the relationship was found stable within that window.\n\nStatus: not started Depends on: M3"
+  },
+  {
+    "objectID": "ROADMAP.html#m5-causal-structures",
+    "href": "ROADMAP.html#m5-causal-structures",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Characterise the causal structures that produce changes in the state of health.\nDeliverables:\n\nExplicit causal diagrams (DAGs) with stated assumptions for key questions.\nDynamic causal structures: time-indexed diagrams capturing lagged effects, feedback loops (e.g. health → economic participation → resources → health), and time-varying confounding; composition changes (mortality selection, migration) are represented where they matter.\nAnalyses using appropriate designs (longitudinal, quasi-experimental, natural experiments where available).\nAn assumptions register: what is assumed, why, and what would refute it — including explicit stationarity assumptions (which causal links are assumed stable over the analysis window, and what observed change would invalidate that assumption).\n\nAcceptance criteria:\n\nEach causal claim links to its DAG, data, and assumptions.\nSensitivity analyses quantify how strong unmeasured confounding would need to be to change conclusions.\nEach causal claim carries a stated validity window and the monitoring signal that would indicate drift invalidating it.\n\nStatus: not started Depends on: M4"
+  },
+  {
+    "objectID": "ROADMAP.html#m6-recommendations",
+    "href": "ROADMAP.html#m6-recommendations",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Goal: Recommend actions that would improve the state of health, with explicit evidence grading and uncertainty.\nDeliverables:\n\nRecommendation framework: evidence strength, expected magnitude, feasibility, equity impact, and uncertainty for each recommendation.\nValidity conditions: for each recommendation, the M4/M5 findings it rests on, the time window of those findings, and the drift indicators that trigger re-evaluation.\nA reviewed set of prioritised recommendations.\nA scheduled revision cycle: re-run the pipeline on refreshed data and re-confirm, revise, or withdraw each recommendation.\n\nAcceptance criteria:\n\nEvery recommendation traces back to M4/M5 results and its underlying data sources.\nRecommendations are published with their confidence level and the conditions under which they should be revisited.\nNo recommendation is presented as permanently valid; each carries a date and the next scheduled review.\n\nStatus: not started Depends on: M4, M5"
+  },
+  {
+    "objectID": "ROADMAP.html#cross-cutting-concerns",
+    "href": "ROADMAP.html#cross-cutting-concerns",
+    "title": "Roadmap",
+    "section": "",
+    "text": "These run alongside every milestone:\n\nReproducibility. Every published number regenerates from raw data via documented commands; environments are pinned.\nNonstationarity vigilance. Results are versioned with their observation window; the pipeline is re-run on refreshed data so drift in distributions or relationships is detected rather than assumed away; regime shifts (epidemics, policy changes, coding revisions) are marked as first-class events in every series.\nData governance and ethics. Respect licences, privacy obligations, and Indigenous data sovereignty principles (e.g. OCAP® (First Nations Information Governance Centre, n.d.) and First Nations data governance contexts in BC). No individual-level data in the repository.\nDocumentation. New capabilities land with matching documentation in the correct Diátaxis section.\nEngineering conventions. The top-level framework and interface are written in Python; Python may glue around other tools and languages (including R) where that has a distinct benefit; performance-critical new functionality is implemented in Rust, C, and/or C++ — preferring Rust for greenfield code, and allowing C/C++ to interface with existing low-level libraries. See How to contribute.\nCitations. Factual claims about the world are cited: sources are recorded in references.bib and cited inline with Pandoc citation syntax ([@key]), so each page renders its own reference list from the works it cites.\nScope control. The object of study is BC’s health — not exclusively BC-origin data. Explanatory data that bears on BC health but originates elsewhere (interprovincial and international patient flows, migration, supply chains, economic or environmental disturbances from outside the province) is in scope; what is “BC only” is the outcome being explained. Expansion of the object of study beyond BC is out of scope until the BC analysis is mature (see README)."
+  },
+  {
+    "objectID": "explanation/nonstationarity.html",
+    "href": "explanation/nonstationarity.html",
+    "title": "Health is not stationary",
+    "section": "",
+    "text": "This page frames an assumption that runs through the whole project: the state of health, and everything associated with it, changes over time. It is reflected in every milestone of the roadmap."
+  },
+  {
+    "objectID": "explanation/nonstationarity.html#what-nonstationarity-means-here",
+    "href": "explanation/nonstationarity.html#what-nonstationarity-means-here",
+    "title": "Health is not stationary",
+    "section": "What nonstationarity means here",
+    "text": "What nonstationarity means here\nA quantity is stationary if its statistical properties — average level, variability, relationships with other variables — stay the same over time; nonstationary means they drift: the average moves, the variability changes, or the relationships themselves change (Box et al. 2015; Hyndman and Athanasopoulos 2021).\nThe project assumes BC’s health is nonstationary in all three senses:\n\nThe outcome drifts. Life expectancy, disease burden, mental health, and functional status trend, oscillate, and jump. Secular improvements, epidemics (including the COVID-19 pandemic (World Health Organization 2023) and the toxic drug crisis in BC (BC Centre for Disease Control, n.d.)), demographic aging, and policy or health-system reforms all move the level — sometimes gradually, sometimes as abrupt regime shifts.\nRelationships drift. A variable associated with health in one decade need not be associated in the next. Income gradients, the effect of health-system capacity, and behavioural risk factors all operate in a changing context; a pooled estimate over many years may describe no actual period well.\nThe data-generating process drifts. Even when health itself is unchanged, the measurement changes: coding definitions, survey methods, coverage, and reporting practice evolve. Part of any apparent change in a series is change in how it was recorded."
+  },
+  {
+    "objectID": "explanation/nonstationarity.html#what-this-rules-out",
+    "href": "explanation/nonstationarity.html#what-this-rules-out",
+    "title": "Health is not stationary",
+    "section": "What this rules out",
+    "text": "What this rules out\nThe intuitive way to report “the state of health” is a snapshot: this is BC’s number, here is how it compares. A dynamic view rejects the snapshot as the headline:\n\nLevels without trajectories hide the direction. A stable-looking level can be the crossing point of rising and falling trends in subpopulations.\nSingle pooled estimates hide instability. A decade-long average association can be the blend of two periods with different — even opposite — relationships.\nUndated conclusions rot. A finding true for 2000–2019 may be false for 2020 onward, but reads identically unless its window is stated."
+  },
+  {
+    "objectID": "explanation/nonstationarity.html#what-follows-for-each-stage-of-the-project",
+    "href": "explanation/nonstationarity.html#what-follows-for-each-stage-of-the-project",
+    "title": "Health is not stationary",
+    "section": "What follows for each stage of the project",
+    "text": "What follows for each stage of the project\n\nDefinition (M1). Health is defined as a time-varying state with temporal semantics — a trajectory with levels, slopes, and possible discontinuities — not a timeless attribute.\nData (M2). Catalogues record coverage windows, refresh cadence, revisions, and definitional breaks; series are checked for structural breaks before use.\nDescription (M3). Trends, turning points, and change points are reported alongside levels; regimes (pre- and post-shock) are compared explicitly rather than blended.\nDependence (M4). Associations are estimated over stated windows and tested for stability before any pooled number is reported.\nCausation (M5). Causal structures are time-indexed: lagged effects, feedback loops, and time-varying confounding are represented, and each causal claim carries a validity window.\nRecommendations (M6). Every recommendation is dated, tied to the window of evidence behind it, and paired with the drift indicators that would trigger re-evaluation."
+  },
+  {
+    "objectID": "explanation/nonstationarity.html#the-practical-consequence-re-run-dont-just-publish-once",
+    "href": "explanation/nonstationarity.html#the-practical-consequence-re-run-dont-just-publish-once",
+    "title": "Health is not stationary",
+    "section": "The practical consequence: re-run, don’t just publish once",
+    "text": "The practical consequence: re-run, don’t just publish once\nIf health is nonstationary, publishing an analysis is not the end of the job. The pipeline must be re-runnable as new data arrive, and results versioned with their observation window — so that “what is the state of health in BC?” can be answered again, differently, when it has changed. This is a cross-cutting concern in the roadmap: vigilance about drift applies to every milestone, not once at the end."
+  },
+  {
+    "objectID": "explanation/defining-health.html",
+    "href": "explanation/defining-health.html",
+    "title": "Defining health",
+    "section": "",
+    "text": "Status: outline. The project’s provisional definition now lives at Definition of the state of health (milestone M1 in the roadmap); this page records the problem that definition has to solve."
+  },
+  {
+    "objectID": "explanation/defining-health.html#why-define-health-first",
+    "href": "explanation/defining-health.html#why-define-health-first",
+    "title": "Defining health",
+    "section": "Why define health first?",
+    "text": "Why define health first?\n“State of health” sounds like something you could just measure. It is not. Before any indicator can be collected, compared over time, or used in a causal model, the project must commit to what counts as health and what does not — otherwise every downstream number rests on a different unstated assumption.\nA definition is doing real work here. It determines:\n\nWhat gets measured. Longevity only? Mental health? Functional capacity? Subjective wellbeing? Each choice admits some indicators and excludes others.\nWhat comparisons mean. Two regions’ “health” are only comparable if both were measured against the same definition.\nWhat the causal analysis is of. A causal model of health outcomes is undefined until the outcome is defined."
+  },
+  {
+    "objectID": "explanation/defining-health.html#what-the-definition-must-pin-down",
+    "href": "explanation/defining-health.html#what-the-definition-must-pin-down",
+    "title": "Defining health",
+    "section": "What the definition must pin down",
+    "text": "What the definition must pin down\nThe definition document (M1) will commit to:\n\nConceptual basis — which established frameworks the definition builds on — e.g. the WHO definition of health as “a state of complete physical, mental and social well-being” (World Health Organization 1948), the ICF functioning model (World Health Organization 2001), capability approaches (Sen 1999) — and why.\nDomains — the set of dimensions counted as part of the state of health (candidate families: mortality, morbidity, mental health, functional status, and context kept strictly separate from health itself).\nBoundaries — what is explicitly excluded, and why (e.g. determinants of health are not health; health-system inputs are not health).\nUnit of analysis — population-level vs. individual-level, and the geographic granularity the project works at.\nTemporal semantics — health as a time-varying state: a trajectory with levels, slopes, and possible discontinuities, not a timeless attribute. Each domain declares its expected temporal behaviour (trending, seasonally varying, shock-prone, or plausibly stable), and the definition states how the project will detect when its description of health has gone stale (see Health is not stationary).\nOperationalisation — for each domain, the candidate indicator families that can represent it with obtainable data — noting that data explaining BC’s health need not originate in BC (see Why BC only?)."
+  },
+  {
+    "objectID": "explanation/defining-health.html#the-hard-boundary-health-vs.-its-determinants",
+    "href": "explanation/defining-health.html#the-hard-boundary-health-vs.-its-determinants",
+    "title": "Defining health",
+    "section": "The hard boundary: health vs. its determinants",
+    "text": "The hard boundary: health vs. its determinants\nThe most common failure mode in “state of health” projects is quietly mixing health outcomes with their determinants (income, environment, service access). This project keeps them in separate layers: determinants enter the analysis as explanatory variables, never as components of health itself. The causal structures in milestone M5 depend on that distinction being drawn early."
+  },
+  {
+    "objectID": "reference/measurement-framework.html",
+    "href": "reference/measurement-framework.html",
+    "title": "Measurement framework",
+    "section": "",
+    "text": "Status: v0.1 (provisional) — candidate indicator families only. The data landscape (milestone M2 in the roadmap) will confirm, replace, or drop these. Nothing here is a commitment to a specific indicator.\nThis page operationalises the definition of the state of health: each domain maps to candidate indicator families, with example indicators and likely sources. It is a lookup table, not an argument — the reasoning lives in the definition document.\nRead with the proxy caveat in mind. Every entry below is a proxy (definition), chosen for tractability, not identity with the construct."
+  },
+  {
+    "objectID": "reference/measurement-framework.html#domains-and-candidate-indicator-families",
+    "href": "reference/measurement-framework.html#domains-and-candidate-indicator-families",
+    "title": "Measurement framework",
+    "section": "Domains and candidate indicator families",
+    "text": "Domains and candidate indicator families\n\n\n\n\n\n\n\n\n\nDomain\nCandidate indicator families\nExample indicators\nLikely sources\n\n\n\n\nMortality\nOverall and premature mortality; cause-specific burden\nLife expectancy at birth; age-standardised mortality; infant mortality; potential years of life lost; toxic drug toxicity deaths\nBC Stats / Vital Statistics (Government of British Columbia, n.d.); BCCDC (BC Centre for Disease Control, n.d.-b); Statistics Canada (Statistics Canada, n.d.); CIHI (Canadian Institute for Health Information, n.d.)\n\n\nPhysical morbidity\nChronic disease prevalence; notifiable disease; cancer; injury\nDiabetes, hypertension, COPD prevalence; reportable communicable disease rates; cancer incidence; injury hospitalisations\nBCCDC (BC Centre for Disease Control, n.d.-a); Statistics Canada (Statistics Canada, n.d.); CIHI (Canadian Institute for Health Information, n.d.)\n\n\nMental health\nMental health status; substance-use harms; suicide\nDepression/anxiety prevalence; hospitalisations for mental health; overdose events; suicide mortality\nStatistics Canada (Statistics Canada, n.d.); BCCDC (BC Centre for Disease Control, n.d.-b); CIHI (Canadian Institute for Health Information, n.d.)\n\n\nFunctional status\nDisability and activity limitation; care needs\nActivity limitation rates; disability rates; home- and community-care use; long-term-care use\nStatistics Canada (Statistics Canada, n.d.); CIHI (Canadian Institute for Health Information, n.d.)\n\n\nSubjective wellbeing\nSelf-rated health; life satisfaction; positive wellbeing\nSelf-rated health (excellent–poor); life satisfaction; positive mental health\nStatistics Canada (Statistics Canada, n.d.)\n\n\nSocial wellbeing\nSocial connection and support; belonging\nLoneliness/social support measures; sense of community belonging\nStatistics Canada (Statistics Canada, n.d.)"
+  },
+  {
+    "objectID": "reference/measurement-framework.html#cross-cutting-dimensions",
+    "href": "reference/measurement-framework.html#cross-cutting-dimensions",
+    "title": "Measurement framework",
+    "section": "Cross-cutting dimensions",
+    "text": "Cross-cutting dimensions\nApply to every domain. Recorded as breakdowns, not as domains:\n\nAge and life-course stage\nSex and gender\nIndigenous identity\nGeography (health authority, HSDA, LHA, neighbourhood, province)\nSocioeconomic position — a determinant, used only to stratify"
+  },
+  {
+    "objectID": "reference/measurement-framework.html#resolution",
+    "href": "reference/measurement-framework.html#resolution",
+    "title": "Measurement framework",
+    "section": "Resolution",
+    "text": "Resolution\nEach candidate indicator will be catalogued at every resolution for which it exists — individual (where microdata access permits), neighbourhood, HSDA, health authority, provincial, and external/non-BC. Where resolutions must be combined, that is a modelling step with stated assumptions, not a data property (definition)."
+  },
+  {
+    "objectID": "reference/measurement-framework.html#how-entries-graduate",
+    "href": "reference/measurement-framework.html#how-entries-graduate",
+    "title": "Measurement framework",
+    "section": "How entries graduate",
+    "text": "How entries graduate\nA candidate family becomes a catalogued indicator (milestone M2) when: a source is found and verified; its form (microdata, summary statistics, dashboard, report) is recorded; licence and governance checks pass; and its proxy-to-construct gap is documented. See How to add an indicator."
+  },
+  {
+    "objectID": "reference/glossary.html",
+    "href": "reference/glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "Terms are listed alphabetically. This glossary grows with milestone M1 (definition) in the roadmap.\n\nCausal structure\n\nA representation (typically a directed acyclic graph, or DAG) of the assumed cause-and-effect relationships among variables, used to reason about what interventions would change health outcomes (Pearl 2009).\n\nConstruct\n\nThe thing a measurement is intended to represent — for example the state of health, or one of its domains. Constructs are real but not directly observable; measurements of them are proxies. See the definition of the state of health.\n\nData\n\nConstrued broadly: any publicly available information that can be appropriately used for the project’s goals — from microdata through published summary statistics, indicator tables, dashboards, and report figures.\n\nDefinition (provisional)\n\nThe project’s working definition of the state of health. It is versioned and expected to evolve as the project learns what is measurable; each revision records its trigger and its changes. See the definition document.\n\nDiátaxis\n\nThe documentation framework this site follows, organising docs into four modes: tutorials, how-to guides, reference, and explanation (Procida, n.d.).\n\nHealth authority\n\nOne of the regional organisations delivering health services in BC (e.g. Vancouver Coastal Health, Fraser Health) (Government of British Columbia, Ministry of Health, n.d.). A common geographic breakdown for BC health data.\n\nIndicator\n\nA defined, sourced, reproducible measurement used to represent some aspect of the state of health (e.g. life expectancy at birth). An indicator is a proxy, never the construct itself.\n\nMeasurement framework\n\nThe scheme of domains and candidate indicators that operationalises the project’s definition of the state of health. See the measurement framework.\n\nMultilevel model\n\nA statistical model in which data at more than one level of resolution (e.g. individuals within regions) are modelled jointly, allowing information to be shared across levels (Gelman and Hill 2007). One of the ways the project fuses pictures at different resolutions.\n\nNonstationarity\n\nThe property of a series or relationship whose statistical properties (level, variability, association with other variables) change over time (Box et al. 2015; Hyndman and Athanasopoulos 2021). The project assumes BC’s health is nonstationary in all three senses; see Health is not stationary.\n\nObservation window\n\nThe time period a reported result was estimated on. Every published figure in this project carries its observation window, because a result true for one window may not hold for another.\n\nProxy\n\nA measurement used in place of a construct that cannot be observed directly — every indicator in this project is a proxy. Proxies carry measurement error and construct error, and can drift over time; they are never identical with the state of health they track. See Proxies are not the state of health.\n\nRegime shift\n\nAn abrupt change in the level or behaviour of a series — e.g. an epidemic, health system reform, or coding definition change — after which the series is effectively a different one. Comparisons spanning a regime shift are treated separately from comparisons within a regime.\n\nResolution\n\nThe level at which a datum or result is observed — individual, neighbourhood, HSDA, health authority, provincial, or external/non-BC. This project uses all available resolutions and records the resolution of every result.\n\nState of health (SoH)\n\nThe condition of health in a population at a point in time and space — the central quantity this project describes and predicts. Defined provisionally in the definition document.\n\nStationarity\n\nThe opposite of nonstationarity: a series or relationship whose statistical properties hold steady over the analysis window. Pooled single estimates are only reported when stationarity is supported (Box et al. 2015; Hyndman and Athanasopoulos 2021); see Health is not stationary.\n\n\n\n\n\n\nReferences\n\nBox, George E. P., Gwilym M. Jenkins, Gregory C. Reinsel, and Greta M. Ljung. 2015. Time Series Analysis: Forecasting and Control. 5th ed. John Wiley & Sons.\n\n\nGelman, Andrew, and Jennifer Hill. 2007. Data Analysis Using Regression and Multilevel/Hierarchical Models. Cambridge University Press.\n\n\nGovernment of British Columbia, Ministry of Health. n.d. Health Authorities. Accessed October 18, 2026. https://www2.gov.bc.ca/gov/content/health/about-bc-s-health-care-system/partners/health-authorities.\n\n\nHyndman, Rob J., and George Athanasopoulos. 2021. Forecasting: Principles and Practice. 3rd ed. OTexts. https://otexts.com/fpp3/.\n\n\nPearl, Judea. 2009. Causality: Models, Reasoning, and Inference. 2nd ed. Cambridge University Press.\n\n\nProcida, Daniele. n.d. Diátaxis: A Systematic Approach to Technical Documentation. Accessed October 18, 2026. https://diataxis.fr."
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Reference material is information-oriented: descriptions of the machinery and facts you consult while working — organised for lookup, not reading order."
+  },
+  {
+    "objectID": "reference/index.html#available-reference",
+    "href": "reference/index.html#available-reference",
+    "title": "Reference",
+    "section": "Available reference",
+    "text": "Available reference\n\nGlossary\nDefinitions of the terms this project uses consistently.\n\n\nMeasurement framework\nDomains mapped to candidate indicator families and likely sources (provisional, milestone M1).\n\n\nData sources\nThe catalogue of catalogued data sources: form, coverage, licence, access, resolution, and quality notes (milestone M2, in progress).\n\n\nData quality\nKnown gaps, revisions, suppressions, and definitional breaks in the catalogued sources.\n\n\nIndicator: Mortality rates, British Columbia\nThe project’s first published indicator, with provenance, caveats, and a regenerable chart.\n\n\nProject structure\nWhat lives where in the repository and how the documentation site is organised.\n\n\nPlanned\n\nData source catalogue — every data source: coverage, licence, access route, refresh cadence, and source form (microdata, summary statistics, dashboard, or report). “Data” is construed broadly: the aim is the best use of all publicly available information that can be appropriately used (milestone M2).\nIndicator reference pages — one page per indicator: definition, unit, population, provenance, caveats (milestones M1–M3).\nMethods reference — statistical and causal methods used, with parameters (milestones M4–M5)."
+  },
+  {
+    "objectID": "reference/data-quality.html",
+    "href": "reference/data-quality.html",
+    "title": "Data quality",
+    "section": "",
+    "text": "Status: v0.1 (milestone M2 in progress). This is the project’s running register of known problems with the data sources. It is expected to grow as sources are ingested in earnest."
+  },
+  {
+    "objectID": "reference/data-quality.html#what-this-report-covers",
+    "href": "reference/data-quality.html#what-this-report-covers",
+    "title": "Data quality",
+    "section": "What this report covers",
+    "text": "What this report covers\nThe roadmap asks for a register of known gaps, revisions, suppressions, and definitional breaks. Anything that would mislead a reader who trusted a number at face value belongs here."
+  },
+  {
+    "objectID": "reference/data-quality.html#known-gaps",
+    "href": "reference/data-quality.html#known-gaps",
+    "title": "Data quality",
+    "section": "Known gaps",
+    "text": "Known gaps\n\nDeterminants and stratifiers. Income, education, and employment are used to stratify results (see the measurement framework); BC Stats, the BC Data Catalogue, Statistics Canada, and K-12 reporting are catalogued as their sources. They are determinants, not health outcomes, and are never reported as health on their own.\nMicrodata access. Individual-level sources are catalogued as access routes (Population Data BC; Statistics Canada Research Data Centres) but no approvals are in place yet, so the catalogue is aggregate-only in practice. Nothing individual-level may enter the repository regardless.\nNeighbourhood-level health indicators. Population denominators exist at LHA/neighbourhood resolution, but health outcomes are not yet catalogued below health-authority level.\nExternal drivers. Cross-border patient flows and supply-chain pressures are identified as relevant but have no catalogued source yet; the wildfire, demographic, and macro series are the current stand-ins.\nSocial wellbeing. Measures of social connection and belonging are sparse and carried on a small number of survey series only."
+  },
+  {
+    "objectID": "reference/data-quality.html#revisions-and-provisional-figures",
+    "href": "reference/data-quality.html#revisions-and-provisional-figures",
+    "title": "Data quality",
+    "section": "Revisions and provisional figures",
+    "text": "Revisions and provisional figures\n\nSubstance-use mortality is published provisionally and revised upward as investigations conclude (BC Centre for Disease Control, n.d.). Preliminary and final figures must never be pooled without noting the vintage.\nCancer statistics for the most recent years are typically incomplete because of registration lag (BC Cancer, Provincial Health Services Authority, n.d.).\nPopulation estimates at sub-provincial levels are revised as administrative sources update; rates computed on them inherit the revision.\nNational survey estimates carry sampling error and are occasionally revised after release (Statistics Canada, n.d.)."
+  },
+  {
+    "objectID": "reference/data-quality.html#suppression",
+    "href": "reference/data-quality.html#suppression",
+    "title": "Data quality",
+    "section": "Suppression",
+    "text": "Suppression\n\nSmall-area counts (e.g. vital statistics by small geography) are suppressed for privacy (BC Stats, Government of British Columbia, n.d.). Suppressed cells are missing, not zero; treating them as zero biases rates."
+  },
+  {
+    "objectID": "reference/data-quality.html#definitional-breaks-regime-shifts",
+    "href": "reference/data-quality.html#definitional-breaks-regime-shifts",
+    "title": "Data quality",
+    "section": "Definitional breaks (regime shifts)",
+    "text": "Definitional breaks (regime shifts)\nThese are candidates for the regime-aware reporting required by milestone M3; each marks a point where a series before and after is effectively different.\n\n\n\n\n\n\n\n\nBreak\nAffected sources\nImplication\n\n\n\n\nCause-of-death coding revisions (ICD revisions)\nVital Statistics; national mortality\nCause-specific mortality series are not directly comparable across the revision boundary\n\n\nDeclared public-health emergency (2016)\nBCCDC substance-use dashboard; overdose response\nSurveillance expanded at the emergency; counts before and after reflect different detection intensity\n\n\nCOVID-19 pandemic (2020–)\nmortality, morbidity, mental health\nBoth a real shock and a measurement shock (care disruption, coding changes)\n\n\nSurvey redesigns (e.g. Canadian Community Health Survey)\nStatistics Canada health series\nBreak in trend; pre- and post-redesign estimates differ\n\n\nIndicator-definition updates\nCIHI indicators\nRebased or redefined indicators reset their own series"
+  },
+  {
+    "objectID": "reference/data-quality.html#url-verification",
+    "href": "reference/data-quality.html#url-verification",
+    "title": "Data quality",
+    "section": "URL verification",
+    "text": "URL verification\nAs part of M2, every catalogued URL was checked for reachability with python3 -m sohbc check --all. All catalogued landing pages and the automated download endpoints returned HTTP 200 at the time of checking (25 sources). The federal publisher’s own portal was unreachable from the verification environment, so federal open data is reached through the Open Government portal record instead; this is noted on that catalogue entry."
+  },
+  {
+    "objectID": "reference/data-quality.html#first-published-indicator",
+    "href": "reference/data-quality.html#first-published-indicator",
+    "title": "Data quality",
+    "section": "First published indicator",
+    "text": "First published indicator\nThe first end-to-end indicator — provincial mortality rates from Statistics Canada table 13-10-0710-01 — is built by the pipeline. Its known limitations (crude, not age-standardised; spans the COVID-19 period; subject to revision) are recorded on the indicator page and are examples of the kind of entry this register is meant to capture."
+  },
+  {
+    "objectID": "reference/data-quality.html#governance",
+    "href": "reference/data-quality.html#governance",
+    "title": "Data quality",
+    "section": "Governance",
+    "text": "Governance\n\nLicences vary by source (open-government licences to publisher terms). Each catalogue entry records its licence; redistribution of anything committed must respect it.\nNo individual-level data in the repository — a hard rule.\nFirst Nations data are governed by the First Nations principles of OCAP® and specific agreements; they are cited for context, not redistributed (First Nations Information Governance Centre, n.d.).\n“Best use” standard. A source backed only by published summary statistics is admissible when it passes licence and governance checks — the goal is the best use of all publicly available information that can be appropriately used."
+  },
+  {
+    "objectID": "reference/data-quality.html#keeping-this-current",
+    "href": "reference/data-quality.html#keeping-this-current",
+    "title": "Data quality",
+    "section": "Keeping this current",
+    "text": "Keeping this current\nAdd an entry here whenever ingesting a source surfaces a problem, and update the catalogue when a gap closes. See How to ingest a source."
+  },
+  {
+    "objectID": "how-to/ingest-data.html",
+    "href": "how-to/ingest-data.html",
+    "title": "How to ingest a data source",
+    "section": "",
+    "text": "This recipe adds a data source to the catalogue and pulls it into the reproducible local layout. It assumes you have read How to contribute."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#add-or-update-the-catalogue-entry",
+    "href": "how-to/ingest-data.html#add-or-update-the-catalogue-entry",
+    "title": "How to ingest a data source",
+    "section": "1. Add or update the catalogue entry",
+    "text": "1. Add or update the catalogue entry\nSources live in data/catalogue/sources.yml. Add an entry with the required fields (see How to read an entry), including:\n\nform — how the information is published (microdata, indicator table, dashboard, report figure, API, or a discovery catalogue);\nlicence and access — the terms and how you actually obtain it;\ncoverage, frequency, and refresh — how the series is dated and updated;\ntemporal_behaviour — expected behaviour (trending, seasonal, shock_prone, stable);\nquality_notes — suppressions, revisions, definitional breaks."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#validate-the-catalogue",
+    "href": "how-to/ingest-data.html#validate-the-catalogue",
+    "title": "How to ingest a data source",
+    "section": "2. Validate the catalogue",
+    "text": "2. Validate the catalogue\nPYTHONPATH=src python3 -m sohbc validate\nFix any schema error before continuing."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#verify-the-url",
+    "href": "how-to/ingest-data.html#verify-the-url",
+    "title": "How to ingest a data source",
+    "section": "3. Verify the URL",
+    "text": "3. Verify the URL\nNever add a URL you have not confirmed resolves:\nPYTHONPATH=src python3 -m sohbc check &lt;key&gt; --include-download"
+  },
+  {
+    "objectID": "how-to/ingest-data.html#retrieve-the-data",
+    "href": "how-to/ingest-data.html#retrieve-the-data",
+    "title": "How to ingest a data source",
+    "section": "4. Retrieve the data",
+    "text": "4. Retrieve the data\nFor a machine-fetchable source, set download.kind to direct (a file) or api_json (a JSON endpoint), give its download.url, then run:\nPYTHONPATH=src python3 -m sohbc fetch &lt;key&gt;\nThe file lands in data/raw/&lt;key&gt;/ and an entry is written to data/manifest.json with its URL, size, and SHA-256 checksum. data/raw/ and the manifest are not committed — the data is reproducible from the catalogue, not stored in git.\nFor a source you must retrieve by hand (most dashboards and portals), leave download.kind: manual and place the downloaded file under data/raw/&lt;key&gt;/ yourself, or record the access route in form_of_access."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#record-problems",
+    "href": "how-to/ingest-data.html#record-problems",
+    "title": "How to ingest a data source",
+    "section": "5. Record problems",
+    "text": "5. Record problems\nIf the source has suppressions, provisional figures, or breaks, add them to the data quality report."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#check-governance",
+    "href": "how-to/ingest-data.html#check-governance",
+    "title": "How to ingest a data source",
+    "section": "6. Check governance",
+    "text": "6. Check governance\nConfirm the licence permits what you intend to do, and that no individual-level data is committed. First Nations data require governance review before use (First Nations Information Governance Centre, n.d.)."
+  },
+  {
+    "objectID": "how-to/ingest-data.html#render-and-verify",
+    "href": "how-to/ingest-data.html#render-and-verify",
+    "title": "How to ingest a data source",
+    "section": "7. Render and verify",
+    "text": "7. Render and verify\nquarto render\nThen wire the source into the indicator page (How to add an indicator) and the descriptive pipeline (milestone M3)."
+  },
+  {
+    "objectID": "how-to/contribute.html",
+    "href": "how-to/contribute.html",
+    "title": "How to contribute",
+    "section": "",
+    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later).\nPreview the documentation site locally:\nquarto preview"
+  },
+  {
+    "objectID": "how-to/contribute.html#set-up",
+    "href": "how-to/contribute.html#set-up",
+    "title": "How to contribute",
+    "section": "",
+    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later).\nPreview the documentation site locally:\nquarto preview"
+  },
+  {
+    "objectID": "how-to/contribute.html#edit-documentation",
+    "href": "how-to/contribute.html#edit-documentation",
+    "title": "How to contribute",
+    "section": "Edit documentation",
+    "text": "Edit documentation\n\nDocumentation source lives in the four Diátaxis directories: tutorials/, how-to/, reference/, and explanation/.\nThe site configuration is _quarto.yml; the landing page is index.qmd.\nDecide which Diátaxis section your page belongs in before writing: learning → tutorials, task → how-to, fact lookup → reference, understanding → explanation. See the project structure reference.\n\nCheck your page renders cleanly:\nquarto render"
+  },
+  {
+    "objectID": "how-to/contribute.html#cite-as-you-go",
+    "href": "how-to/contribute.html#cite-as-you-go",
+    "title": "How to contribute",
+    "section": "Cite as you go",
+    "text": "Cite as you go\nFactual claims about the world — statistics, definitions, attributions, descriptions of sources — should be cited:\n\nAdd the source to references.bib (BibTeX). Verify the URL loads before adding it; never guess a URL. Prefer primary sources (the issuing organisation’s own page) over secondary reporting.\nCite it inline with Pandoc citation syntax: [@key] for a parenthetical citation (renders as “(Author Year)”), @key for a narrative one.\nRender — each page generates its own reference list containing only the works it cites.\n\nProject decisions and plans (milestones, scope choices, conventions) are documented in the roadmap rather than cited. When in doubt, cite."
+  },
+  {
+    "objectID": "how-to/contribute.html#contributing-code",
+    "href": "how-to/contribute.html#contributing-code",
+    "title": "How to contribute",
+    "section": "Contributing code",
+    "text": "Contributing code\nThe language policy balances a clear top-level framework with speed where it actually matters:\n\nPython is the main language for gluing together the top-level framework and interface — orchestrating stages, wiring pipelines, and presenting results.\nPython may also act as glue around other tools — including other programming languages, such as R — whenever there is a distinct benefit: a mature statistical or domain library, official bindings, or ecosystem tooling not worth reimplementing.\nWhere performance matters and new functionality must be written, the primary implementation is in Rust, C, and/or C++:\n\nPrefer Rust for completely new (greenfield) performance code.\nC and C++ are allowed for interfacing with existing low-level libraries that already exist, when that is useful.\n\n\nIf it is unclear which case applies to your change, open an issue and ask before writing the code. Run the tooling tests before submitting:\nPYTHONPATH=src python3 -m unittest discover -s tests -v"
+  },
+  {
+    "objectID": "how-to/contribute.html#submit-changes",
+    "href": "how-to/contribute.html#submit-changes",
+    "title": "How to contribute",
+    "section": "Submit changes",
+    "text": "Submit changes\n\nCreate a branch for your change:\ngit checkout -b my-change\nCommit your work with a clear message describing the change.\nOpen a pull request against main.\nThe documentation workflow builds the site on every push to main; failures in the workflow indicate a rendering error to fix before merging."
+  },
+  {
+    "objectID": "how-to/contribute.html#where-work-is-planned",
+    "href": "how-to/contribute.html#where-work-is-planned",
+    "title": "How to contribute",
+    "section": "Where work is planned",
+    "text": "Where work is planned\nMilestones and their deliverables are tracked in the roadmap. If you want to pick up work, start with an in progress or not started milestone and open an issue to say you are taking it."
+  },
+  {
+    "objectID": "tutorials/index.html",
+    "href": "tutorials/index.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "Tutorials are learning-oriented: lessons that take you through a task step by step, assuming little prior knowledge, and leaving you with something working.\nThey complement — not replace — the how-to guides, which assume you already know the basics and just need the steps."
+  },
+  {
+    "objectID": "tutorials/index.html#available-tutorials",
+    "href": "tutorials/index.html#available-tutorials",
+    "title": "Tutorials",
+    "section": "Available tutorials",
+    "text": "Available tutorials\n\nYour first look at BC health data\nA guided walkthrough of exploring a headline health indicator for BC: loading it, plotting it over time, and comparing regions. Planned — blocked on the data landscape milestone (M2)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "State-of-Health BC",
+    "section": "",
+    "text": "State-of-Health BC (SoHBC) is a project that attempts to describe and predict the state of health in British Columbia, Canada — from defining what “health” means here, through the data and causal structures behind it, to actions that would improve it.\nThe project is early stage. This site is the project’s documentation and will grow alongside the analysis.\nTwo principles frame everything here. Health is treated as dynamic and nonstationary — a trajectory that changes over time, along with the relationships behind it (why). And while the object of study is BC’s health, the data explaining it are not limited to BC-origin data (why)."
+  },
+  {
+    "objectID": "index.html#where-to-start",
+    "href": "index.html#where-to-start",
+    "title": "State-of-Health BC",
+    "section": "Where to start",
+    "text": "Where to start\nThis documentation follows the Diátaxis framework (Procida, n.d.): four distinct modes of documentation, each answering a different kind of question.\n\n\n\nSection\nAsk it when you want to…\nStart here\n\n\n\n\nTutorials\nlearn by doing, step by step\nYour first look\n\n\nHow-to guides\naccomplish a specific task\nContribute\n\n\nReference\nlook up facts and structure\nGlossary\n\n\nExplanation\nunderstand concepts and context\nDefining health\n\n\n\nProject milestones and their status live in the Roadmap."
+  },
+  {
+    "objectID": "index.html#the-journey",
+    "href": "index.html#the-journey",
+    "title": "State-of-Health BC",
+    "section": "The journey",
+    "text": "The journey\n\nDefining health, and the state of health in BC.\nFinding and exploring data that describe the state of health in BC over time and space — “data” construed broadly, from microdata to published summary statistics.\nCharacterising the variables that are statistically dependent with health.\nCharacterising the causal structures that result in changes in the state of health.\nRecommending actions that would improve the state of health."
+  },
+  {
+    "objectID": "tutorials/first-look.html",
+    "href": "tutorials/first-look.html",
+    "title": "Tutorial: Your first look at BC health data",
+    "section": "",
+    "text": "Status: planned. This tutorial is blocked on milestone M2 (data landscape) in the roadmap, which is in progress: the data source catalogue and the sohbc acquisition pipeline now exist, but indicator-level ingestion is not yet complete. The outline below is the target structure."
+  },
+  {
+    "objectID": "tutorials/first-look.html#objective",
+    "href": "tutorials/first-look.html#objective",
+    "title": "Tutorial: Your first look at BC health data",
+    "section": "Objective",
+    "text": "Objective\nBy the end of this tutorial you will have loaded a headline health indicator for British Columbia, plotted its trend over time, and compared it across health authority regions — using only reproducible, documented steps."
+  },
+  {
+    "objectID": "tutorials/first-look.html#prerequisites",
+    "href": "tutorials/first-look.html#prerequisites",
+    "title": "Tutorial: Your first look at BC health data",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nA working Quarto environment (see How to contribute).\nThe project’s data pipeline has been run at least once."
+  },
+  {
+    "objectID": "tutorials/first-look.html#steps-target-outline",
+    "href": "tutorials/first-look.html#steps-target-outline",
+    "title": "Tutorial: Your first look at BC health data",
+    "section": "Steps (target outline)",
+    "text": "Steps (target outline)\n\nSet up. Clone the repository and render the site locally with quarto preview.\nFetch an indicator. Run the ingestion command for one indicator (e.g. life expectancy at birth) and locate the resulting dataset.\nPlot the trend. Produce a time-series chart of the indicator for BC as a whole.\nCompare regions. Break the same indicator down by health authority and overlay the regional series.\nRead the caveats. Open the indicator’s reference page and note its provenance, definition, and known limitations.\nReflect. Note what the chart does not tell you — this is where the explanation section picks up."
+  },
+  {
+    "objectID": "tutorials/first-look.html#what-you-have-learned",
+    "href": "tutorials/first-look.html#what-you-have-learned",
+    "title": "Tutorial: Your first look at BC health data",
+    "section": "What you have learned",
+    "text": "What you have learned\nHow the pipeline, reference pages, and explanation pages fit together: the same pattern used by every subsequent analysis in this project."
+  },
+  {
+    "objectID": "how-to/index.html",
+    "href": "how-to/index.html",
+    "title": "How-to guides",
+    "section": "",
+    "text": "How-to guides are task-oriented: short, focused directions for accomplishing a specific goal, assuming you already know the project’s basics. If you are still learning, start with the tutorials instead."
+  },
+  {
+    "objectID": "how-to/index.html#available-guides",
+    "href": "how-to/index.html#available-guides",
+    "title": "How-to guides",
+    "section": "Available guides",
+    "text": "Available guides\n\nContribute to the project\nSet up your environment, edit documentation, and submit changes.\n\n\nAdd an indicator\nAdd a health indicator to the measurement framework and data pipeline. In progress — the measurement framework (M1) and data catalogue (M2) are taking shape in the roadmap.\n\n\nIngest a data source\nAdd a source to the catalogue and pull it into the reproducible local layout."
+  },
+  {
+    "objectID": "how-to/add-indicator.html",
+    "href": "how-to/add-indicator.html",
+    "title": "How to add an indicator",
+    "section": "",
+    "text": "Status: partially unblocked. The measurement framework (milestone M1) and the data source catalogue (milestone M2, in progress) now exist; the process below is live for catalogued sources."
+  },
+  {
+    "objectID": "how-to/add-indicator.html#steps-target-outline",
+    "href": "how-to/add-indicator.html#steps-target-outline",
+    "title": "How to add an indicator",
+    "section": "Steps (target outline)",
+    "text": "Steps (target outline)\n\nCheck the measurement framework. Confirm which domain the indicator belongs to in the definition document (explanation).\nFind a source. Search the data source catalogue (reference) for a source covering the indicator, its geography, and its time range. Sources are construed broadly: microdata, but also published summary statistics, indicator tables, dashboards, and report figures all qualify, provided the licence and data-governance checks pass. If no source exists, record the gap in an issue before proceeding.\nAdd the ingestion. Add a fetch step to the data pipeline for the source, pinning the retrieval and documenting any licence restrictions.\nWrite the reference page. Create an indicator page in reference/ stating: definition, unit, population, source, coverage period, refresh cadence, and known caveats.\nWire it into the analysis. Add the indicator to the descriptive pipeline so it appears in the atlas (milestone M3).\nRender and verify.\nquarto render\nCross-check governance. Confirm the licence permits redistribution of anything you committed and that no individual-level data is in the repository."
+  },
+  {
+    "objectID": "reference/project-structure.html",
+    "href": "reference/project-structure.html",
+    "title": "Project structure",
+    "section": "",
+    "text": "state-of-health-bc/\n├── README.md              Project overview (start here on GitHub)\n├── ROADMAP.md             Milestones, deliverables, acceptance criteria\n├── LICENSE                GPL-3.0\n├── pyproject.toml         Python package metadata for the sohbc tooling\n├── _quarto.yml            Documentation site configuration\n├── index.qmd              Site landing page\n├── references.bib         Bibliography: sources cited in the docs\n├── src/sohbc/             Acquisition and indicator tooling (Python)\n├── tests/                 Tests for the sohbc tooling\n├── data/\n│   ├── catalogue/         Data-source catalogue (sources.yml) — committed\n│   ├── published/         Tidy indicator datasets — committed\n│   ├── raw/               Fetched data — gitignored, reproducible\n│   └── manifest.json      Fetch manifest with checksums — gitignored\n├── tutorials/             Learning-oriented: guided lessons\n├── how-to/                Task-oriented: task recipes\n├── reference/             Information-oriented: lookup pages\n├── explanation/           Understanding-oriented: concepts & context\n└── .github/workflows/     CI: renders site, deploys to gh-pages branch\nThe analysis code and data pipeline grow with the milestones: the acquisition tooling (src/sohbc/) and the data-source catalogue land in M2; descriptive analysis (M3), dependence (M4), and causal work (M5) follow."
+  },
+  {
+    "objectID": "reference/project-structure.html#repository-layout",
+    "href": "reference/project-structure.html#repository-layout",
+    "title": "Project structure",
+    "section": "",
+    "text": "state-of-health-bc/\n├── README.md              Project overview (start here on GitHub)\n├── ROADMAP.md             Milestones, deliverables, acceptance criteria\n├── LICENSE                GPL-3.0\n├── pyproject.toml         Python package metadata for the sohbc tooling\n├── _quarto.yml            Documentation site configuration\n├── index.qmd              Site landing page\n├── references.bib         Bibliography: sources cited in the docs\n├── src/sohbc/             Acquisition and indicator tooling (Python)\n├── tests/                 Tests for the sohbc tooling\n├── data/\n│   ├── catalogue/         Data-source catalogue (sources.yml) — committed\n│   ├── published/         Tidy indicator datasets — committed\n│   ├── raw/               Fetched data — gitignored, reproducible\n│   └── manifest.json      Fetch manifest with checksums — gitignored\n├── tutorials/             Learning-oriented: guided lessons\n├── how-to/                Task-oriented: task recipes\n├── reference/             Information-oriented: lookup pages\n├── explanation/           Understanding-oriented: concepts & context\n└── .github/workflows/     CI: renders site, deploys to gh-pages branch\nThe analysis code and data pipeline grow with the milestones: the acquisition tooling (src/sohbc/) and the data-source catalogue land in M2; descriptive analysis (M3), dependence (M4), and causal work (M5) follow."
+  },
+  {
+    "objectID": "reference/project-structure.html#running-the-data-pipeline",
+    "href": "reference/project-structure.html#running-the-data-pipeline",
+    "title": "Project structure",
+    "section": "Running the data pipeline",
+    "text": "Running the data pipeline\nThe sohbc tooling is a small Python package. Run it straight from the checkout with src/ on the path (or pip install -e .):\nPYTHONPATH=src python3 -m sohbc validate   # check the catalogue schema\nPYTHONPATH=src python3 -m sohbc list       # list catalogued sources\nPYTHONPATH=src python3 -m sohbc check --all  # verify source URLs\nPYTHONPATH=src python3 -m sohbc fetch --all  # fetch automated sources\nPYTHONPATH=src python3 -m sohbc indicators   # list defined indicators\nPYTHONPATH=src python3 -m sohbc build        # build published indicator datasets\nFetched data lands in data/raw/ (gitignored) with a checksum recorded in data/manifest.json, so a clean checkout reproduces the dataset from the committed catalogue; tidy indicator datasets are published (and committed) under data/published/. See How to ingest a data source.\nRun the tooling’s tests with:\nPYTHONPATH=src python3 -m unittest discover -s tests -v"
+  },
+  {
+    "objectID": "reference/project-structure.html#the-four-diátaxis-sections",
+    "href": "reference/project-structure.html#the-four-diátaxis-sections",
+    "title": "Project structure",
+    "section": "The four Diátaxis sections",
+    "text": "The four Diátaxis sections\nEach directory maps to one mode of the Diátaxis framework (Procida, n.d.):\n\n\n\n\n\n\n\n\nDirectory\nMode\nCharacter\n\n\n\n\ntutorials/\nLearning\nLessons for newcomers, run start to finish\n\n\nhow-to/\nTask\nRecipes for a specific job, assume prior knowledge\n\n\nreference/\nInformation\nNeutral, accurate, structured for lookup\n\n\nexplanation/\nUnderstanding\nDiscussion that contextualises and deepens\n\n\n\nWhen adding a page, pick the section first, then write for that mode. A single topic can justify a page in more than one section — e.g. a recipe (“how to ingest a source”) and its background (“how the ingestion pipeline works”) are different pages, not one blended page."
+  },
+  {
+    "objectID": "reference/project-structure.html#site-configuration",
+    "href": "reference/project-structure.html#site-configuration",
+    "title": "Project structure",
+    "section": "Site configuration",
+    "text": "Site configuration\n_quarto.yml controls the site:\n\nproject.render — the exact list of files rendered into the site (README and LICENSE are deliberately excluded).\nwebsite.navbar — navigation; add new pages there so they are reachable.\nformat.html.theme — light (cosmo) and dark (darkly) themes."
+  },
+  {
+    "objectID": "reference/project-structure.html#deployment",
+    "href": "reference/project-structure.html#deployment",
+    "title": "Project structure",
+    "section": "Deployment",
+    "text": "Deployment\nOn every push to main, .github/workflows/docs.yml runs quarto render and publishes the built site from _site/ to the gh-pages branch. GitHub Pages serves that branch at https://galenseilis.github.io/state-of-health-bc."
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html",
+    "href": "reference/indicator-mortality-rates-bc.html",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "",
+    "text": "Status: first published indicator (milestone M3 in progress). Regenerate with PYTHONPATH=src python3 -m sohbc build mortality_rates_bc.\nThis is the project’s first end-to-end indicator: it is fetched from a catalogued source, tidied by the pipeline, and published as a versioned dataset plus the views below. Each indicator page states its provenance and caveats (see the roadmap, milestone M3)."
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html#provenance",
+    "href": "reference/indicator-mortality-rates-bc.html#provenance",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "Provenance",
+    "text": "Provenance\n\n\n\nField\nValue\n\n\n\n\nDomain\nMortality\n\n\nDefinition\nDeaths and the mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia; crude and directly age-standardised (WHO World Standard Population 2000–2025)\n\n\nSource\nStatistics Canada, table 13-10-0710-01, Mortality rates, by age group (Statistics Canada, n.d.)\n\n\nAccess\nStatistics Canada Web Data Service (automated full-table download)\n\n\nForm\nindicator table (published summary statistics)\n\n\nGeography\nBritish Columbia, place of residence\n\n\nCoverage\n1991–present (annual); observation window shown on each figure\n\n\nFrequency / refresh\nannual\n\n\nLicence\nStatistics Canada Open Licence\n\n\nProxy note\nA proxy for the mortality domain, not the state of health itself (why)"
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html#trend",
+    "href": "reference/indicator-mortality-rates-bc.html#trend",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "Trend",
+    "text": "Trend\n\nrows = FileAttachment(\"../data/published/mortality_rates_bc.csv\").csv({typed: true})\nrates = rows.filter(d =&gt; d.characteristic === \"Mortality rate per 1,000 population\" && d.age_group === \"Age at time of death, all ages\")\ncounts = rows.filter(d =&gt; d.characteristic === \"Number of deaths\")\nasr = FileAttachment(\"../data/published/mortality_rates_bc_age_standardised.csv\").csv({typed: true})\ntrend = FileAttachment(\"../data/published/mortality_rates_bc_trend.json\").json()\nseries = rates.map(d =&gt; ({year: d.ref_date, rate: d.value, series: \"Crude\"}))\n  .concat(asr.map(d =&gt; ({year: d.ref_date, rate: d.value, series: \"Age-standardised\"})))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlot.plot({\n  title: \"Mortality rate, British Columbia (per 1,000 population)\",\n  x: {label: \"Year\", tickFormat: \"d\"},\n  y: {grid: true, label: \"Deaths per 1,000 population\"},\n  color: {legend: true},\n  marks: [\n    Plot.rectX([{x1: 2020, x2: 2025}], {x1: \"x1\", x2: \"x2\", fill: \"grey\", fillOpacity: 0.12}),\n    Plot.ruleX([trend.change_point], {stroke: \"red\", strokeDasharray: \"4,4\"}),\n    Plot.lineY(series, {x: \"year\", y: \"rate\", stroke: \"series\", tip: true}),\n    Plot.dot(series, {x: \"year\", y: \"rate\", stroke: \"series\", tip: true})\n  ]\n})\n\n\n\n\n\n\nThe crude rate is per 1,000 residents at the observed age mix; the age-standardised rate applies the WHO World Standard Population (2000–2025) (Ahmad et al. 2001), removing the effect of BC’s ageing population. The grey band marks the COVID-19 period (2020–2024) and the red dashed line the crude rate’s detected change point.\n\nPlot.plot({\n  title: \"Number of deaths, British Columbia\",\n  x: {label: \"Year\", tickFormat: \"d\"},\n  y: {grid: true, label: \"Deaths\"},\n  marks: [\n    Plot.lineY(counts, {x: \"ref_date\", y: \"value\"}),\n    Plot.dot(counts, {x: \"ref_date\", y: \"value\", tip: true})\n  ]\n})"
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html#trajectory-and-regimes",
+    "href": "reference/indicator-mortality-rates-bc.html#trajectory-and-regimes",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "Trajectory and regimes",
+    "text": "Trajectory and regimes\nA crude trend summary, recomputed on every build (data/published/mortality_rates_bc_trend.json):\n\nsegments = trend.segments.length\n  ? trend.segments\n  : [{label: \"whole series\", start: trend.start, end: trend.end, ...trend.overall}]\nInputs.table(segments, {\n  columns: [\"label\", \"start\", \"end\", \"slope_per_year\", \"slope_per_decade\"],\n  header: {label: \"segment\", start: \"from\", end: \"to\", slope_per_year: \"slope/yr\", slope_per_decade: \"slope/decade\"}\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmd`Overall the crude rate changed by **${trend.overall.slope_per_decade.toFixed(2)}** per 1,000\nper decade across ${trend.start}–${trend.end}. The best single change\npoint is **${trend.change_point}**${trend.change_point === 2020 ? \" — the onset of the COVID-19 period\" : \"\"}.`"
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html#caveats",
+    "href": "reference/indicator-mortality-rates-bc.html#caveats",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "Caveats",
+    "text": "Caveats\n\nCrude vs standardised. Two series are published: the crude rate (observed age mix) and a directly age-standardised rate using the WHO World Standard Population (2000–2025) (Ahmad et al. 2001). The crude rate can rise while the standardised rate falls if the population ages — seen here, so read the two together.\nChange point is exploratory. The single change point and segment slopes are a descriptive summary of a short series, not a formal break-point test; the post-2020 segment is especially short and volatile.\nObservation window and regimes. The series spans 1991–2024 and crosses the COVID-19 period (2020–2024), marked on the figure.\nResolution. Published here at provincial resolution. Age-group and sex breakdowns exist in the source table and can be added without changing the pipeline.\nRevisions. Statistics Canada may revise recent-year estimates; the published files are regenerated from the source on each build."
+  },
+  {
+    "objectID": "reference/indicator-mortality-rates-bc.html#reproduce",
+    "href": "reference/indicator-mortality-rates-bc.html#reproduce",
+    "title": "Indicator: Mortality rates, British Columbia",
+    "section": "Reproduce",
+    "text": "Reproduce\nPYTHONPATH=src python3 -m sohbc fetch statcan_wds\nPYTHONPATH=src python3 -m sohbc build mortality_rates_bc\nThe tidy dataset is published at data/published/mortality_rates_bc.csv, with the age-standardised series at data/published/mortality_rates_bc_age_standardised.csv (standard population weights in data/reference/who_standard_population.csv)."
+  },
+  {
+    "objectID": "reference/data-sources.html",
+    "href": "reference/data-sources.html",
+    "title": "Data sources",
+    "section": "",
+    "text": "Status: v0.1 (provisional, milestone M2 in progress). This catalogue is maintained alongside the machine-readable source list at data/catalogue/sources.yml, which the acquisition pipeline reads. Every URL below was verified reachable at the time of writing (see the data quality report).\nThis is the project’s inventory of the data that describe the state of health in BC. Data is construed broadly: microdata, indicator tables, dashboards, report figures, and catalogue/API discovery layers all qualify, provided licence and governance checks pass. The aim is the best use of all publicly available information that can be appropriately used — not “microdata or nothing” (roadmap, milestone M2)."
+  },
+  {
+    "objectID": "reference/data-sources.html#how-to-read-an-entry",
+    "href": "reference/data-sources.html#how-to-read-an-entry",
+    "title": "Data sources",
+    "section": "How to read an entry",
+    "text": "How to read an entry\nEach source is catalogued with the following fields (see data/catalogue/sources.yml):\n\n\n\nField\nMeaning\n\n\n\n\nkey\nstable identifier used by the pipeline\n\n\nform\nmicrodata, indicator_table, dashboard, report_figure, api, or catalogue (a discovery layer)\n\n\ndomains\nwhich measurement-framework domains it can serve\n\n\nresolution\nindividual, neighbourhood, HSDA, LHA, health authority, provincial, international\n\n\ncoverage\nthe published time span of the series\n\n\nfrequency / refresh\nhow often observations are dated and how often the source is updated\n\n\nlicence / access\nreuse terms and how you obtain it\n\n\norigin\nbc, canada, or international\n\n\ntemporal behaviour\nexpected behaviour: trending, seasonal, shock_prone, or stable\n\n\nquality notes\nsuppressions, revisions, definitional breaks"
+  },
+  {
+    "objectID": "reference/data-sources.html#coverage-of-the-measurement-framework",
+    "href": "reference/data-sources.html#coverage-of-the-measurement-framework",
+    "title": "Data sources",
+    "section": "Coverage of the measurement framework",
+    "text": "Coverage of the measurement framework\nEvery domain in the measurement framework is served by at least one catalogued source:\n\n\n\n\n\n\n\nDomain\nCatalogued sources\n\n\n\n\nMortality\nVital Statistics; BCCDC substance-use dashboard; BC overdose response; CIHI; Statistics Canada; FNHA\n\n\nPhysical morbidity\nBCCDC data and reports; BCCDC chronic-disease dashboard; BC Cancer; CIHI; Statistics Canada; FNHA\n\n\nMental health\nBCCDC substance-use dashboard; BCCDC data and reports; BC overdose response; CIHI; Statistics Canada; FNHA\n\n\nFunctional status\nCIHI; Statistics Canada\n\n\nSubjective wellbeing\nStatistics Canada; FNHA\n\n\nSocial wellbeing\nStatistics Canada; FNHA"
+  },
+  {
+    "objectID": "reference/data-sources.html#british-columbia-sources",
+    "href": "reference/data-sources.html#british-columbia-sources",
+    "title": "Data sources",
+    "section": "British Columbia sources",
+    "text": "British Columbia sources\n\n\n\nSource\nPublisher\nForm\nDomains\nResolution\nFrequency\n\n\n\n\nVital Statistics\nBC Stats\nindicator table\nMortality\nprovincial, HA\nannual\n\n\nPopulation Estimates\nBC Stats\nindicator table\ndenominators\nprovincial → LHA\nquarterly\n\n\nUnregulated Drug Poisoning Emergency Dashboard\nBCCDC\ndashboard\nMortality, Mental health\nprovincial, HA\nmonthly\n\n\nData and Reports\nBCCDC\ndiscovery\nPhysical morbidity, Mental health\nprovincial, HA, HSDA\nirregular\n\n\nChronic Disease Dashboard\nBCCDC\ndashboard\nPhysical morbidity\nprovincial, HA, HSDA\nannual\n\n\nOverdose response\nBC Ministry of Health\ndashboard\nMortality, Mental health\nprovincial, HA\nmonthly\n\n\nBC Cancer\nBC Cancer (PHSA)\nindicator table\nPhysical morbidity\nprovincial, HA\nannual\n\n\nFirst Nations Health Authority\nFNHA\nreport figures\nall domains\nprovincial, HA\nirregular\n\n\nWildfire status\nBC Wildfire Service\ndashboard\nexternal driver\nprovincial, HA, HSDA\ncontinuous (seasonal)"
+  },
+  {
+    "objectID": "reference/data-sources.html#national-canada-sources",
+    "href": "reference/data-sources.html#national-canada-sources",
+    "title": "Data sources",
+    "section": "National (Canada) sources",
+    "text": "National (Canada) sources\n\n\n\nSource\nPublisher\nForm\nDomains\nResolution\nFrequency\n\n\n\n\nCIHI\nCIHI\nindicator tables\nPhysical morbidity, Mental health, Functional status\nprovincial, HA\nannual\n\n\nHealth statistics\nStatistics Canada\nindicator tables\nMorbidity, Mental health, Wellbeing, Function\nprovincial, HA\nannual\n\n\nData tables\nStatistics Canada\nindicator tables\nall domains\nprovincial, HA, international\nquarterly\n\n\nPopulation and demography\nStatistics Canada\nindicator tables\ndenominators, migration\nprovincial, international\nquarterly\n\n\nWeb Data Service (WDS)\nStatistics Canada\nAPI\nautomated full-table downloads (e.g. mortality)\nprovincial, international\ncontinuous\n\n\nCanadian Wildland Fire Information System\nNatural Resources Canada\ndashboard\nexternal driver\nprovincial, international\ncontinuous (seasonal)"
+  },
+  {
+    "objectID": "reference/data-sources.html#determinants-and-stratifiers",
+    "href": "reference/data-sources.html#determinants-and-stratifiers",
+    "title": "Data sources",
+    "section": "Determinants and stratifiers",
+    "text": "Determinants and stratifiers\nUsed only to stratify health results, never as health outcomes (see the measurement framework):\n\n\n\nSource\nPublisher\nProvides\nResolution\nFrequency\n\n\n\n\nEconomy\nBC Stats\nincome, employment, business counts\nprovincial, HA\nannual\n\n\nPeople, Population and Community\nBC Stats\nincome, housing, families, migration\nprovincial → LHA\nannual\n\n\nK-12 Reporting\nMinistry of Education and Child Care\nenrolment, completion, student outcomes\nprovincial, HA\nannual"
+  },
+  {
+    "objectID": "reference/data-sources.html#international-and-external-driver-sources",
+    "href": "reference/data-sources.html#international-and-external-driver-sources",
+    "title": "Data sources",
+    "section": "International and external-driver sources",
+    "text": "International and external-driver sources\n\n\n\nSource\nPublisher\nForm\nRole\nResolution\nFrequency\n\n\n\n\nWHO data\nWHO\nindicator tables\nglobal reference, pandemic context\ninternational\nannual\n\n\nOECD Data Explorer\nOECD\nindicator tables\neconomic and health-system context\ninternational\nannual\n\n\nWorld Bank Open Data\nWorld Bank\nindicator tables\nmacroeconomic context\ninternational\nannual\n\n\nOpen Government\nGovernment of Canada\ndiscovery\nfederal datasets reaching BC\nprovincial, international\ncontinuous\n\n\n\nExternal drivers are catalogued with their origin and the mechanism by which they reach BC in data/catalogue/sources.yml (reaches_bc_via): for example, migration flows (statcan_demography), cross-border fire and smoke (cwfis), and global pandemic conditions (who_data)."
+  },
+  {
+    "objectID": "reference/data-sources.html#microdata-access-routes",
+    "href": "reference/data-sources.html#microdata-access-routes",
+    "title": "Data sources",
+    "section": "Microdata access routes",
+    "text": "Microdata access routes\nIndividual-level sources are catalogued as access routes — the approval process, not the data:\n\n\n\nSource\nProvider\nScope\nAccess\n\n\n\n\nPopulation Data BC\nPopulation Data BC\nBC administrative health records\napplication, ethics review, secure environment\n\n\nMicrodata access\nStatistics Canada\nnational survey microdata\nResearch Data Centres / remote access / custom tabulations\n\n\n\nThese are catalogued even though the data cannot be committed: they set the ceiling on what resolution is attainable and are the route to individual-level indicators. No individual-level data enters the repository."
+  },
+  {
+    "objectID": "reference/data-sources.html#governance-and-licences",
+    "href": "reference/data-sources.html#governance-and-licences",
+    "title": "Data sources",
+    "section": "Governance and licences",
+    "text": "Governance and licences\n\nLicences vary by source and are recorded per entry. Check the record before redistributing anything.\nNo individual-level data is stored in the repository. Only aggregate/public sources are fetched, and fetched data are reproducible artefacts (data/raw/) that are never committed.\nFirst Nations data are governed by First Nations principles and specific agreements; reuse must respect (First Nations Information Governance Centre, n.d.)."
+  },
+  {
+    "objectID": "reference/data-sources.html#reproducing-the-catalogue",
+    "href": "reference/data-sources.html#reproducing-the-catalogue",
+    "title": "Data sources",
+    "section": "Reproducing the catalogue",
+    "text": "Reproducing the catalogue\nexport PYTHONPATH=src\npython3 -m sohbc validate   # schema check\npython3 -m sohbc list       # list sources\npython3 -m sohbc check --all --include-download   # re-verify URLs\npython3 -m sohbc fetch --all\nSee How to ingest a data source."
+  },
+  {
+    "objectID": "explanation/index.html",
+    "href": "explanation/index.html",
+    "title": "Explanation",
+    "section": "",
+    "text": "Explanation is understanding-oriented: discussion that contextualises what you are doing and why — the background that tutorials, how-to guides, and reference deliberately leave out (one of the four modes of the Diátaxis framework (Procida, n.d.))."
+  },
+  {
+    "objectID": "explanation/index.html#available-explanations",
+    "href": "explanation/index.html#available-explanations",
+    "title": "Explanation",
+    "section": "Available explanations",
+    "text": "Available explanations\n\nDefinition of the state of health\nThe project’s provisional definition (v0.1): domains, boundaries, the proxy-versus-construct discipline, resolution, and the revision process.\n\n\nDefining health\nWhy “state of health” needs a definition before it can be measured, and what the definition must pin down.\n\n\nHealth is not stationary\nWhy the project treats health as a dynamic, nonstationary quantity — and what that rules out at every stage of the analysis.\n\n\nWhy BC only?\nThe scope decision behind limiting this project to British Columbia — and why explanatory data from outside BC still counts."
+  },
+  {
+    "objectID": "explanation/index.html#planned-explanations",
+    "href": "explanation/index.html#planned-explanations",
+    "title": "Explanation",
+    "section": "Planned explanations",
+    "text": "Planned explanations\n\nWhat the data can and cannot say — coverage, suppression, and definitional breaks in BC health data (milestone M2).\nDependence vs. causation in health data — why correlation analyses are a waypoint, not a destination (milestones M4–M5).\nHow recommendations are graded — evidence strength, uncertainty, and equity impact (milestone M6)."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html",
+    "href": "explanation/definition-of-health.html",
+    "title": "Definition of the state of health",
+    "section": "",
+    "text": "Status: provisional — version 0.1, 18 October 2026. This definition is expected to change as the project learns what is measurable and what matters. Each revision records its trigger and its changes. See Revision process."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#why-provisional",
+    "href": "explanation/definition-of-health.html#why-provisional",
+    "title": "Definition of the state of health",
+    "section": "Why provisional?",
+    "text": "Why provisional?\nThe project treats the state of health as dynamic and nonstationary (Health is not stationary): the thing being defined changes over time, and so does our understanding of it. Fixing a definition permanently would contradict that premise. Instead the definition is versioned — a working commitment that is good enough to decide what to measure now, and explicit enough that revisions are visible rather than silent.\nThe expectation is that the data landscape (milestone M2 in the roadmap) will force revisions: some domains will prove measurable, others will not; some proxies will turn out to track the construct poorly."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#the-definition-v0.1",
+    "href": "explanation/definition-of-health.html#the-definition-v0.1",
+    "title": "Definition of the state of health",
+    "section": "The definition (v0.1)",
+    "text": "The definition (v0.1)\n\n\n\n\n\n\nNote\n\n\n\nThe state of health of a population is the joint condition of its members across the domains of mortality, physical morbidity, mental health, functional status, subjective wellbeing, and social wellbeing, at a given time and place — including how that condition is distributed within the population and how it is changing over time.\n\n\nThree features of the wording carry weight:\n\nJoint condition. The domains are not interchangeable and are not summed into a single number by definition. Any single number is an index built on top of the definition, not the definition itself.\nDistribution. The state of health is a distribution, not an average — inequalities are part of the state of health, not an add-on.\nChanging. The state of health is a trajectory, not a snapshot."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#conceptual-basis",
+    "href": "explanation/definition-of-health.html#conceptual-basis",
+    "title": "Definition of the state of health",
+    "section": "Conceptual basis",
+    "text": "Conceptual basis\nThe definition builds on three established positions:\n\nWHO’s breadth. Health is “a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity” (World Health Organization 1948). This is why the definition has six domains rather than one, and why clinical status alone is insufficient.\nThe ICF’s measurability. The International Classification of Functioning, Disability and Health treats functioning and disability as outcomes of the interaction between health conditions and contextual factors, spanning body functions and structures, activities, and participation (World Health Organization 2001). This is what makes functional status a domain in its own right rather than a by-product of disease.\nThe capability approach’s evaluative anchor. Health matters because of what it enables people to do and be (Sen 1999) — which is why subjective and social wellbeing are in scope, not just biology."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#domains",
+    "href": "explanation/definition-of-health.html#domains",
+    "title": "Definition of the state of health",
+    "section": "Domains",
+    "text": "Domains\n\n\n\nDomain\nWhat it covers\nDetails\n\n\n\n\nMortality\nPremature and overall death, cause-of-death burden\nMeasurement framework\n\n\nPhysical morbidity\nDisease incidence and prevalence, chronic conditions, injury\nMeasurement framework\n\n\nMental health\nMental health status and substance-use harms\nMeasurement framework\n\n\nFunctional status\nFunctioning, disability, activities of daily living\nMeasurement framework\n\n\nSubjective wellbeing\nSelf-rated health, life satisfaction, positive wellbeing\nMeasurement framework\n\n\nSocial wellbeing\nSocial connection, support, and participation\nMeasurement framework\n\n\n\nCandidate additions. Oral health, sensory health (vision and hearing), and injury are currently folded into physical morbidity and functional status. They may be promoted to domains if the data landscape shows they can be measured distinctly and add information the current domains miss. The bar for adding a domain is that it must not merely duplicate an existing one.\nCross-cutting dimensions. Age and life-course stage, sex and gender, Indigenous identity, and geography apply to every domain rather than being domains themselves. Socioeconomic position is also used to stratify results — but as a determinant, never as a component of health (see Boundaries)."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#proxies-are-not-the-state-of-health",
+    "href": "explanation/definition-of-health.html#proxies-are-not-the-state-of-health",
+    "title": "Definition of the state of health",
+    "section": "Proxies are not the state of health",
+    "text": "Proxies are not the state of health\nThis is the project’s most important measurement discipline. The state of health is a construct: real, but not directly observable. Every number we publish is a proxy — a measurement chosen because it tracks the construct, built by someone else, for some other purpose, with its own error.\nConfusing a proxy for the construct is the central failure mode this project guards against. Consequences of the distinction:\n\nNo proxy defines its domain. Life expectancy does not define mortality’s contribution to health; it proxies it. Self-rated health does not define wellbeing.\nProxies carry two kinds of error. Ordinary measurement error, and construct error — the proxy may be reliable but track the wrong thing.\nProxies drift. Administrative definitions, coding practices, and survey instruments change over time, so a series can move because the proxy changed, not the health (nonstationarity).\nProxy disagreement is signal. When two proxies for the same construct disagree, the right response is to investigate why, not to average the disagreement away.\nIndices are models. Any composite “health index” is a model built on chosen proxies and weights — a claim to be defended, not a measurement to be read off.\nCausal analyses inherit all of this. In milestones M4–M5 the proxies are variables, and their proxy status is part of the assumptions register.\n\nEvery indicator page must therefore state the construct it proxies, the gap between proxy and construct, and the known limitations."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#boundaries",
+    "href": "explanation/definition-of-health.html#boundaries",
+    "title": "Definition of the state of health",
+    "section": "Boundaries",
+    "text": "Boundaries\nThe definition deliberately excludes:\n\nDeterminants of health — income, education, housing, environment, service access. These enter analyses as explanatory variables and as stratification dimensions, never as components of health itself.\nHealth-system activity — wait times, procedures, spending, staffing. These are inputs and system performance, not the population’s state of health (they may explain it, which is a different role).\nThe absence of disease as sufficient. The absence of disease is not full health (World Health Organization 1948).\nAny equivalence between self-reported and objective measures. Both are proxies; neither is the truth."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#resolution-and-fusion",
+    "href": "explanation/definition-of-health.html#resolution-and-fusion",
+    "title": "Definition of the state of health",
+    "section": "Resolution and fusion",
+    "text": "Resolution and fusion\nThe project uses all available levels of resolution, from individual to provincial and beyond:\n\nindividual (where microdata access and governance allow — see Why BC only? and the roadmap’s governance principles);\nneighbourhood and local health area (LHA);\nhealth service delivery area (HSDA) and health authority;\nprovincial;\nexternal / non-BC (external drivers).\n\nDifferent resolutions answer different questions and expose different things: fine resolutions show local heterogeneity that coarse summaries hide (and comparing coarse summaries to fine ones invites the ecological fallacy). The project therefore:\n\nrecords the resolution of every datum and every result;\nharmonises across resolutions where definitions are compatible;\nfuses pictures where that is useful, using multilevel/hierarchical models and other combination methods (Gelman and Hill 2007);\ntreats any fused picture as a model output — reported with its assumptions and uncertainty, never as a fact."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#temporal-semantics",
+    "href": "explanation/definition-of-health.html#temporal-semantics",
+    "title": "Definition of the state of health",
+    "section": "Temporal semantics",
+    "text": "Temporal semantics\n\nCoverage targets as far back as sources allow, with each series carrying its observation window and definitional breaks handled explicitly.\nHealth is represented as levels, slopes, and discontinuities — a trajectory, as set out in Health is not stationary.\nThe definition itself is versioned; the thing defined drifts, and so does the definition."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#boundaries-of-the-definition-itself",
+    "href": "explanation/definition-of-health.html#boundaries-of-the-definition-itself",
+    "title": "Definition of the state of health",
+    "section": "Boundaries of the definition itself",
+    "text": "Boundaries of the definition itself\nThis document defines the state of health. It deliberately does not yet settle: the exact indicator set (grows with the data landscape, M2), the weights of any future index (a modelling choice, M3+), or the causal claims that explain the state of health (M4–M5). Being honest about what a definition does not cover is part of the definition."
+  },
+  {
+    "objectID": "explanation/definition-of-health.html#revision-process",
+    "href": "explanation/definition-of-health.html#revision-process",
+    "title": "Definition of the state of health",
+    "section": "Revision process",
+    "text": "Revision process\nThe definition is revised when:\n\nthe data landscape (M2) shows a domain is unmeasurable as conceived, or a measurable domain is missing;\na proxy is shown to track its construct poorly;\nnew evidence establishes a domain, or collapses a distinction;\nthe population or measurement context shifts enough to invalidate part of the definition.\n\nEach revision: increments the version, records the trigger and the change, updates the measurement framework and glossary as needed, and is reviewed by at least one domain reviewer (roadmap M1 acceptance criterion)."
+  },
+  {
+    "objectID": "explanation/why-bc.html",
+    "href": "explanation/why-bc.html",
+    "title": "Why BC only?",
+    "section": "",
+    "text": "This is primarily due to capacity. Maybe someday the project can expand to Canada, and then to North America, and then Earth. But for now a scope of BC is already a great difficulty to face realistically."
+  },
+  {
+    "objectID": "explanation/why-bc.html#the-case-for-a-narrow-scope",
+    "href": "explanation/why-bc.html#the-case-for-a-narrow-scope",
+    "title": "Why BC only?",
+    "section": "The case for a narrow scope",
+    "text": "The case for a narrow scope\nDescribing and predicting the state of health of a population means wrestling with data acquisition, definitional consistency, geographic and demographic granularity, and causal identification — each of which is hard on its own. A jurisdiction chosen for data availability and manageable size keeps the problem finite:\n\nData access. BC-specific sources (BC Stats (Government of British Columbia, n.d.-a), DataBC (Government of British Columbia, n.d.-b), BCCDC/PHSA (BC Centre for Disease Control, n.d.; Provincial Health Services Authority, n.d.), health authority reporting (Government of British Columbia, Ministry of Health, n.d.)) plus federal sources (Statistics Canada (Statistics Canada, n.d.), CIHI (Canadian Institute for Health Information, n.d.)) give a tractable, well-documented data landscape. “Data” here is construed broadly — the aim is the best use of all publicly available information that can be appropriately used, from microdata to published summary statistics.\nInstitutional context. One province means one health system structure, one set of regional health authorities (Government of British Columbia, Ministry of Health, n.d.), one policy context — so comparisons across regions are meaningful without modelling cross-jurisdictional system differences.\nHonest completion. A finished analysis of one jurisdiction is worth more than an abandoned analysis of a continent."
+  },
+  {
+    "objectID": "explanation/why-bc.html#what-bc-only-means-and-what-it-doesnt",
+    "href": "explanation/why-bc.html#what-bc-only-means-and-what-it-doesnt",
+    "title": "Why BC only?",
+    "section": "What “BC only” means — and what it doesn’t",
+    "text": "What “BC only” means — and what it doesn’t\n“BC only” scopes the object of study: the health being described, predicted, and ultimately improved is BC’s. It does not scope the data that can explain that health. Anything outside BC that bears on BC’s state of health is relevant data:\n\nPatient flows. People receiving BC care from elsewhere — and BC residents treated outside the province — change what BC’s health system delivers and what its outcome series show.\nEconomic disturbances from elsewhere. Interest rates, tariffs, commodity prices, and recessions originating outside the province move BC household resources, employment, and in turn health outcomes and health-system demand.\nMigration and mobility. Interprovincial and international migration change the population whose health is being measured; commuting and cross-border use blur where exposures and outcomes occur.\nEnvironmental and epidemiological spillovers. Wildfire smoke, air pollution, and infectious disease introduction do not respect the provincial border.\nNational policy and supply chains. Federal fiscal and health policy, drug and device supply chains, and national media/behavioural effects all reach into BC from outside it.\n\nThe practical rule: a variable’s geographic origin is never a reason to exclude it — only its causal relevance to BC health is. The data catalogue in milestone M2 tags each source with its geographic origin and the mechanism by which it reaches BC, so external data stays visible as external rather than silently mislabelled as BC data.\nConversely, what remains out of scope is other jurisdictions’ health as an object of study: this project does not describe or predict Ontario’s or Canada’s state of health, even where their data is used as input."
+  },
+  {
+    "objectID": "explanation/why-bc.html#an-invitation",
+    "href": "explanation/why-bc.html#an-invitation",
+    "title": "Why BC only?",
+    "section": "An invitation",
+    "text": "An invitation\nThe hope is that this project inspires others who live elsewhere to start putting the pieces together about the state of health where they live. The documentation and method structure here — definition → data → dependence → causation → recommendations — are deliberately transferable."
+  }
+]

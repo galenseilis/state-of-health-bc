@@ -1,0 +1,27 @@
+{
+  "start": 1991,
+  "end": 2024,
+  "n": 34,
+  "overall": {
+    "slope_per_year": 0.0333,
+    "slope_per_decade": 0.3331
+  },
+  "change_point": 2020,
+  "segments": [
+    {
+      "label": "before",
+      "start": 1991,
+      "end": 2019,
+      "slope_per_year": 0.0179,
+      "slope_per_decade": 0.1788
+    },
+    {
+      "label": "after",
+      "start": 2020,
+      "end": 2024,
+      "slope_per_year": -0.08,
+      "slope_per_decade": -0.8
+    }
+  ],
+  "series": "Mortality rate per 1,000 population"
+}
