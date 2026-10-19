@@ -18,7 +18,9 @@ def _cmd_validate(_args: argparse.Namespace) -> int:
         print(f"INVALID: {exc}")
         return 1
     automated = sum(1 for s in sources if s.automated)
-    print(f"OK: {len(sources)} sources ({automated} automated, {len(sources) - automated} manual)")
+    print(
+        f"OK: {len(sources)} sources ({automated} automated, {len(sources) - automated} manual)"
+    )
     return 0
 
 
@@ -70,7 +72,9 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
     results = run_fetch(keys=keys, everything=args.all)
     for record in results:
         if record["status"] == "fetched":
-            print(f"fetched {record['key']:<22} {record['bytes']} bytes -> {record['path']}")
+            print(
+                f"fetched {record['key']:<22} {record['bytes']} bytes -> {record['path']}"
+            )
         else:
             print(f"manual  {record['key']:<22} {record.get('detail', '')}")
     return 0
@@ -104,23 +108,33 @@ def _cmd_build(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="sohbc", description="State-of-Health BC data tooling")
+    parser = argparse.ArgumentParser(
+        prog="sohbc", description="State-of-Health BC data tooling"
+    )
     parser.add_argument("--version", action="version", version=f"sohbc {__version__}")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    sub.add_parser("validate", help="validate the catalogue schema").set_defaults(func=_cmd_validate)
+    sub.add_parser("validate", help="validate the catalogue schema").set_defaults(
+        func=_cmd_validate
+    )
     sub.add_parser("list", help="list catalogued sources").set_defaults(func=_cmd_list)
-    sub.add_parser("plan", help="show automated vs manual retrieval").set_defaults(func=_cmd_plan)
+    sub.add_parser("plan", help="show automated vs manual retrieval").set_defaults(
+        func=_cmd_plan
+    )
 
     check = sub.add_parser("check", help="verify source URLs are reachable")
     check.add_argument("keys", nargs="*")
     check.add_argument("--all", action="store_true", help="check every source")
-    check.add_argument("--include-download", action="store_true", help="also check download URLs")
+    check.add_argument(
+        "--include-download", action="store_true", help="also check download URLs"
+    )
     check.set_defaults(func=_cmd_check)
 
     fetch = sub.add_parser("fetch", help="fetch automated sources into data/raw/")
     fetch.add_argument("keys", nargs="*")
-    fetch.add_argument("--all", action="store_true", help="fetch every automated source")
+    fetch.add_argument(
+        "--all", action="store_true", help="fetch every automated source"
+    )
     fetch.set_defaults(func=_cmd_fetch)
 
     sub.add_parser("indicators", help="list defined indicators").set_defaults(

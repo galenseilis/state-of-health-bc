@@ -18,7 +18,9 @@ from sohbc.indicators import (
 )
 
 
-def _row(geo: str, age: str, sex: str, char: str, value: str, status: str = "") -> dict[str, str]:
+def _row(
+    geo: str, age: str, sex: str, char: str, value: str, status: str = ""
+) -> dict[str, str]:
     return {
         "REF_DATE": "2020",
         "GEO": geo,
@@ -34,13 +36,41 @@ def _row(geo: str, age: str, sex: str, char: str, value: str, status: str = "") 
 class SelectRowsTests(unittest.TestCase):
     def test_filters_by_geo_age_sex_and_empty_values(self) -> None:
         rows = [
-            _row("British Columbia, place of residence", "all ages", "Both sexes", "rate", "7.5"),
-            _row("Alberta, place of residence", "all ages", "Both sexes", "rate", "7.0"),
-            _row("British Columbia, place of residence", "0 to 4", "Both sexes", "rate", "1.0"),
-            _row("British Columbia, place of residence", "all ages", "Males", "rate", "8.0"),
-            _row("British Columbia, place of residence", "all ages", "Both sexes", "rate", ""),
+            _row(
+                "British Columbia, place of residence",
+                "all ages",
+                "Both sexes",
+                "rate",
+                "7.5",
+            ),
+            _row(
+                "Alberta, place of residence", "all ages", "Both sexes", "rate", "7.0"
+            ),
+            _row(
+                "British Columbia, place of residence",
+                "0 to 4",
+                "Both sexes",
+                "rate",
+                "1.0",
+            ),
+            _row(
+                "British Columbia, place of residence",
+                "all ages",
+                "Males",
+                "rate",
+                "8.0",
+            ),
+            _row(
+                "British Columbia, place of residence",
+                "all ages",
+                "Both sexes",
+                "rate",
+                "",
+            ),
         ]
-        out = select_rows(rows, "British Columbia, place of residence", "all ages", "Both sexes")
+        out = select_rows(
+            rows, "British Columbia, place of residence", "all ages", "Both sexes"
+        )
         self.assertEqual(len(out), 1)
         self.assertEqual(out[0]["VALUE"], "7.5")
 
@@ -63,7 +93,9 @@ class TableRowsTests(unittest.TestCase):
             handle = io.StringIO()
             writer = csv.DictWriter(handle, fieldnames=["REF_DATE", "GEO", "VALUE"])
             writer.writeheader()
-            writer.writerow({"REF_DATE": "2020", "GEO": "British Columbia", "VALUE": "7.5"})
+            writer.writerow(
+                {"REF_DATE": "2020", "GEO": "British Columbia", "VALUE": "7.5"}
+            )
             archive.writestr("13100710.csv", handle.getvalue())
             archive.writestr("13100710_MetaData.csv", "ignored")
         rows = table_rows(buffer.getvalue(), "13100710")
@@ -96,18 +128,34 @@ class TrajectoryTests(unittest.TestCase):
 
 class AgeStandardisationTests(unittest.TestCase):
     def test_maps_labels_to_standard_groups(self) -> None:
-        self.assertEqual(age_label_to_standard("Age at time of death, under 1 year"), "0-4")
-        self.assertEqual(age_label_to_standard("Age at time of death, 1 to 4 years"), "0-4")
-        self.assertEqual(age_label_to_standard("Age at time of death, 65 to 69 years"), "65-69")
-        self.assertEqual(age_label_to_standard("Age at time of death, 90 years and over"), "90+")
+        self.assertEqual(
+            age_label_to_standard("Age at time of death, under 1 year"), "0-4"
+        )
+        self.assertEqual(
+            age_label_to_standard("Age at time of death, 1 to 4 years"), "0-4"
+        )
+        self.assertEqual(
+            age_label_to_standard("Age at time of death, 65 to 69 years"), "65-69"
+        )
+        self.assertEqual(
+            age_label_to_standard("Age at time of death, 90 years and over"), "90+"
+        )
         self.assertIsNone(age_label_to_standard("Age at time of death, all ages"))
 
     def test_standardised_rate_weights_by_population(self) -> None:
         rows = [
-            {"ref_date": "2020", "age_group": "Age at time of death, 5 to 9 years",
-             "characteristic": "Mortality rate per 1,000 population", "value": 10.0},
-            {"ref_date": "2020", "age_group": "Age at time of death, 65 to 69 years",
-             "characteristic": "Mortality rate per 1,000 population", "value": 100.0},
+            {
+                "ref_date": "2020",
+                "age_group": "Age at time of death, 5 to 9 years",
+                "characteristic": "Mortality rate per 1,000 population",
+                "value": 10.0,
+            },
+            {
+                "ref_date": "2020",
+                "age_group": "Age at time of death, 65 to 69 years",
+                "characteristic": "Mortality rate per 1,000 population",
+                "value": 100.0,
+            },
         ]
         weights = {"5-9": 1.0, "65-69": 3.0}
         result = age_standardise(rows, "Mortality rate per 1,000 population", weights)

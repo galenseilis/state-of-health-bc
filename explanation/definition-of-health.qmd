@@ -40,6 +40,9 @@ Three features of the wording carry weight:
 - **Distribution.** The state of health is a distribution, not an average
   — inequalities are part of the state of health, not an add-on.
 - **Changing.** The state of health is a trajectory, not a snapshot.
+  From a decision perspective, we care about the **cumulative**
+  (time-integrated) state of health over time — so actions are evaluated by
+  their effect on cumulative outcomes, not only immediate levels.
 
 ## Conceptual basis
 

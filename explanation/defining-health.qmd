@@ -63,3 +63,14 @@ service access). This project keeps them in separate layers: determinants
 enter the analysis as *explanatory variables*, never as components of
 health itself. The causal structures in milestone M5 depend on that
 distinction being drawn early.
+
+### Multi-objective and stochastic nature of recommendations
+
+Improving the cumulative state of health is a **multi-objective stochastic optimization** problem. Different health domains compete for limited resources, and effects are uncertain. We must account for:
+
+- **Multiple objectives:** mortality, morbidity, functional status, mental health, subjective wellbeing, social wellbeing.
+- **Uncertainty:** parameter uncertainty, model uncertainty, and stochasticity in outcomes.
+- **Time and dynamics:** intertemporal trade-offs, discounting/weighting over cohorts and life course.
+- **Constraints:** resources, feasibility, equity (e.g. reducing disparities), and external validity.
+
+Therefore, recommendations should be framed as candidate policies with Pareto frontiers and uncertainty intervals, not single "optimal" points.
