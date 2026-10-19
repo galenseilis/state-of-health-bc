@@ -5,14 +5,17 @@ from __future__ import annotations
 
 import csv
 import io
+import itertools
 import json
 import re
 import zipfile
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
 import requests
 
+from . import breaks
 from .catalogue import ROOT
 from .fetch import RAW_DIR, TIMEOUT, USER_AGENT
 
@@ -160,7 +163,7 @@ def write_published(rows: list[dict[str, Any]], output: Path) -> Path:
     return output
 
 
-def ols_slope(points: list[tuple[float, float]]) -> tuple[float, float, float]:
+def ols_slope(points: Sequence[tuple[float, float]]) -> tuple[float, float, float]:
     """Ordinary least squares for y = a + b x; return (slope, intercept, sse)."""
     n = len(points)
     if n < 2:
@@ -177,8 +180,18 @@ def ols_slope(points: list[tuple[float, float]]) -> tuple[float, float, float]:
     return slope, intercept, sse
 
 
-def trajectory(points: list[tuple[int, float]], min_segment: int = 5) -> dict[str, Any]:
-    """Summarise a series: overall slope and a single best change point."""
+def trajectory(
+    points: list[tuple[int, float]],
+    min_segment: int = 5,
+    n_permutations: int = breaks.N_PERMUTATIONS,
+    seed: int = breaks.SEED,
+) -> dict[str, Any]:
+    """Summarise a series: overall slope, formally tested regimes, trend.
+
+    The regime dating and the tests behind it come from
+    :mod:`sohbc.breaks`; this function only selects the headline break and
+    the segment slopes for reporting.
+    """
     points = sorted(points)
     years = [x for x, _ in points]
     slope, _, _ = ols_slope(points)
@@ -191,42 +204,49 @@ def trajectory(points: list[tuple[int, float]], min_segment: int = 5) -> dict[st
             "slope_per_decade": round(slope * 10, 4),
         },
         "change_point": None,
+        "change_points": [],
         "segments": [],
     }
-    if len(points) < 2 * min_segment:
+    tested = breaks.summarise(
+        [(float(x), float(y)) for x, y in points],
+        min_segment=min_segment,
+        n_permutations=n_permutations,
+        seed=seed,
+    )
+    result["break_test"] = tested["break_test"]
+    result["trend_test"] = tested["trend_test"]
+    result["stationarity"] = tested["stationarity"]
+    result["regime_selection"] = tested["breaks"]
+    if len(points) < 2 * min_segment or tested["breaks"] is None:
         return result
 
-    best_year: int | None = None
-    best_sse = float("inf")
-    for i in range(min_segment, len(points) - min_segment + 1):
-        left = points[:i]
-        right = points[i:]
-        try:
-            _, _, sse_left = ols_slope(left)
-            _, _, sse_right = ols_slope(right)
-        except IndicatorError:
-            continue
-        total = sse_left + sse_right
-        if total < best_sse:
-            best_sse = total
-            best_year = points[i][0]
-    if best_year is None:
-        return result
-
-    left = [(x, y) for x, y in points if x < best_year]
-    right = [(x, y) for x, y in points if x >= best_year]
-    result["change_point"] = best_year
-    for label, segment in (("before", left), ("after", right)):
-        s, _, _ = ols_slope(segment)
+    break_years = tested["breaks"]["years"]
+    result["change_points"] = break_years
+    starts = [0]
+    for year in break_years:
+        starts.append(next(i for i, (x, _) in enumerate(points) if x >= year))
+    starts.append(len(points))
+    if len(break_years) == 1:
+        labels = ["before", "after"]
+    else:
+        labels = [f"regime {i + 1}" for i in range(len(starts) - 1)]
+    slopes: list[float] = []
+    for label, (start, end) in zip(labels, itertools.pairwise(starts)):
+        segment = points[start:end]
+        segment_slope, _, _ = ols_slope(segment)
+        slopes.append(segment_slope)
         result["segments"].append(
             {
                 "label": label,
                 "start": segment[0][0],
                 "end": segment[-1][0],
-                "slope_per_year": round(s, 4),
-                "slope_per_decade": round(s * 10, 4),
+                "slope_per_year": round(segment_slope, 4),
+                "slope_per_decade": round(segment_slope * 10, 4),
             }
         )
+    if len(slopes) > 1:
+        changes = [abs(slopes[i] - slopes[i - 1]) for i in range(1, len(slopes))]
+        result["change_point"] = break_years[changes.index(max(changes))]
     return result
 
 
@@ -318,6 +338,7 @@ def build(key: str) -> dict[str, Any]:
     output = write_published(tidy_rows, spec["output"])
 
     standardised_path = None
+    standardised: list[dict[str, Any]] = []
     if spec.get("standard_population"):
         weights = load_standard_population(spec["standard_population"])
         standardised = age_standardise(
@@ -342,6 +363,23 @@ def build(key: str) -> dict[str, Any]:
                     }
                 )
 
+    standardised_trend_path = None
+    if standardised_path is not None:
+        standardised_points = [
+            (int(str(record["ref_date"])[:4]), float(record["value"]))
+            for record in standardised
+        ]
+        standardised_trend = trajectory(standardised_points)
+        standardised_trend["series"] = (
+            f"Age-standardised {spec['trajectory_characteristic'].lower()}"
+        )
+        standardised_trend_path = standardised_path.with_name(
+            standardised_path.stem + "_trend.json"
+        )
+        standardised_trend_path.write_text(
+            json.dumps(standardised_trend, indent=2) + "\n", encoding="utf-8"
+        )
+
     trend_path = None
     if spec.get("trajectory_characteristic"):
         points = series_points(
@@ -358,6 +396,6 @@ def build(key: str) -> dict[str, Any]:
         "rows": len(tidy_rows),
         "output": output,
         "standardised": standardised_path,
+        "standardised_trend": standardised_trend_path,
         "trend": trend_path,
     }
-

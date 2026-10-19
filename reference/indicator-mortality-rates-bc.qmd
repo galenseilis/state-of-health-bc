@@ -35,6 +35,7 @@ rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 populati
 counts = rows.filter(d => d.characteristic === "Number of deaths")
 asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true})
 trend = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
+asrTrend = FileAttachment("../data/published/mortality_rates_bc_age_standardised_trend.json").json()
 series = rates.map(d => ({year: d.ref_date, rate: d.value, series: "Crude"}))
   .concat(asr.map(d => ({year: d.ref_date, rate: d.value, series: "Age-standardised"})))
 ```
@@ -48,7 +49,8 @@ Plot.plot({
   color: {legend: true},
   marks: [
     Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
-    Plot.ruleX([trend.change_point], {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.ruleX(trend.change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.ruleX(asrTrend.change_points, {stroke: "steelblue", strokeDasharray: "2,3"}),
     Plot.lineY(series, {x: "year", y: "rate", stroke: "series", tip: true}),
     Plot.dot(series, {x: "year", y: "rate", stroke: "series", tip: true})
   ]
@@ -58,8 +60,9 @@ Plot.plot({
 The **crude** rate is per 1,000 residents at the observed age mix; the
 **age-standardised** rate applies the WHO World Standard Population
 (2000–2025) [@whoStandardPop], removing the effect of BC's ageing
-population. The grey band marks the COVID-19 period (2020–2024) and the
-red dashed line the crude rate's detected change point.
+population. The grey band marks the COVID-19 period (2020–2024); the red
+dashed lines are the crude rate's regime breaks, the blue dotted lines
+the age-standardised rate's.
 
 ```{ojs}
 //| echo: false
@@ -76,8 +79,9 @@ Plot.plot({
 
 ## Trajectory and regimes
 
-A crude trend summary, recomputed on every build
-(`data/published/mortality_rates_bc_trend.json`):
+Trend summaries, recomputed on every build
+(`data/published/mortality_rates_bc_trend.json`,
+`data/published/mortality_rates_bc_age_standardised_trend.json`):
 
 ```{ojs}
 //| echo: false
@@ -86,17 +90,53 @@ segments = trend.segments.length
   : [{label: "whole series", start: trend.start, end: trend.end, ...trend.overall}]
 Inputs.table(segments, {
   columns: ["label", "start", "end", "slope_per_year", "slope_per_decade"],
-  header: {label: "segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade"}
+  header: {label: "crude segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade"}
 })
 ```
 
 ```{ojs}
 //| echo: false
-md`Overall the crude rate changed by **${trend.overall.slope_per_decade.toFixed(2)}** per 1,000
-per decade across ${trend.start}–${trend.end}. The best single change
-point is **${trend.change_point}**${trend.change_point === 2020 ? " — the onset of the COVID-19 period" : ""}.`
+md`Over ${trend.start}–${trend.end} the crude rate changed by
+**${trend.overall.slope_per_decade.toFixed(2)}** per 1,000 per decade, and the
+series is **${trend.stationarity.verdict}**.
+It carries a monotone trend (Kendall's tau = ${trend.trend_test.tau.toFixed(2)},
+p = ${trend.trend_test.p_value.toFixed(3)}) and departure from a single straight
+line (residual-permutation test, p = ${trend.break_test.p_value.toFixed(3)}).
+The BIC-selected regimes break at ${trend.change_points.join(", ")}, the largest
+slope change at **${trend.change_point}**${trend.change_point === 2020 ? " — the onset of the COVID-19 period" : ""}.`
 ```
 
+The age-standardised rate tells a different story, because it is the one
+that abstracts from population ageing:
+
+```{ojs}
+//| echo: false
+asrSegments = asrTrend.segments
+Inputs.table(asrSegments, {
+  columns: ["label", "start", "end", "slope_per_year", "slope_per_decade"],
+  header: {label: "standardised segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade"}
+})
+```
+
+```{ojs}
+//| echo: false
+md`The age-standardised rate is **${asrTrend.stationarity.verdict}**
+(Kendall's tau = ${asrTrend.trend_test.tau.toFixed(2)},
+p = ${asrTrend.trend_test.p_value.toFixed(3)}; break test
+p = ${asrTrend.break_test.p_value.toFixed(3)}), with a regime break at
+**${asrTrend.change_point}**: the decline reverses there — the standardised
+rate fell before it and has risen since.`
+```
+
+**Method.** Regimes are dated by a piecewise-linear segmentation, solved
+exactly by dynamic programming, with the number of breaks chosen by BIC;
+whether the series departs from one straight line is tested by residual
+permutation [@truong2020selective], and the trend by Kendall's tau. Each
+series is therefore labelled stationary or not over its observed window,
+as milestone M3 requires. The full test output, including every candidate
+segmentation, is in the trend JSON. The permutation test assumes
+exchangeable residuals — autocorrelation is not modelled — so it is a
+test of departure from a linear trend, not a full time-series model.
 
 ## Caveats
 
@@ -105,9 +145,14 @@ point is **${trend.change_point}**${trend.change_point === 2020 ? " — the onse
   World Standard Population (2000–2025) [@whoStandardPop]. The crude rate
   can rise while the standardised rate falls if the population ages — seen
   here, so read the two together.
-- **Change point is exploratory.** The single change point and segment
-  slopes are a descriptive summary of a short series, not a formal
-  break-point test; the post-2020 segment is especially short and volatile.
+- **Break detection, not explanation.** The regimes are dated by a formal
+  test (above) [@truong2020selective]; the test says that a break beyond a
+  single straight line exists, not what caused it, and the 2020–2024
+  regime rests on five annual points, so its slope is the least certain.
+- **The standardised turnaround predates the pandemic.** The
+  age-standardised rate's regime break falls at 2013, before the COVID-19
+  period, so the pandemic does not explain the reversal on its own; the
+  pipeline dates the change and does not attribute it.
 - **Observation window and regimes.** The series spans 1991–2024 and
   crosses the COVID-19 period (2020–2024), marked on the figure.
 - **Resolution.** Published here at provincial resolution. Age-group and
@@ -126,4 +171,6 @@ uv run sohbc build mortality_rates_bc
 The tidy dataset is published at `data/published/mortality_rates_bc.csv`,
 with the age-standardised series at
 `data/published/mortality_rates_bc_age_standardised.csv` (standard
-population weights in `data/reference/who_standard_population.csv`).
+population weights in `data/reference/who_standard_population.csv`) and
+the trend tests at `data/published/mortality_rates_bc_trend.json` and
+`data/published/mortality_rates_bc_age_standardised_trend.json`.

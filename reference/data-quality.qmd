@@ -59,7 +59,11 @@ mislead a reader who trusted a number at face value belongs here.
 
 These are candidates for the **regime-aware reporting** required by
 milestone M3; each marks a point where a series before and after is
-effectively different.
+effectively different. The pipeline dates regime breaks from the data
+itself (piecewise-linear segmentation with BIC selection, plus a
+permutation test for a break beyond a linear trend); the table below
+records the *known causes* behind such breaks, which the statistical
+test can locate but cannot name.
 
 | Break | Affected sources | Implication |
 |-------|------------------|-------------|
@@ -84,9 +88,11 @@ entry.
 The first end-to-end indicator — provincial
 [mortality rates](indicator-mortality-rates-bc.qmd) from Statistics
 Canada table 13-10-0710-01 — is built by the pipeline. Its known
-limitations (crude, not age-standardised; spans the COVID-19 period;
-subject to revision) are recorded on the indicator page and are examples
-of the kind of entry this register is meant to capture.
+limitations (published at provincial resolution only, both sexes, spans
+the COVID-19 period, subject to revision) are recorded on the indicator
+page and are examples of the kind of entry this register is meant to
+capture. Its regime breaks are dated by the formal tests documented on
+that page rather than read off by eye.
 
 ## Governance
 

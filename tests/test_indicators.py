@@ -115,14 +115,28 @@ class TrajectoryTests(unittest.TestCase):
     def test_detects_change_point(self) -> None:
         points = [(y, 2.0 * y) for y in range(2000, 2011)]
         points += [(y, 100.0 - 2.0 * y) for y in range(2011, 2022)]
-        result = trajectory(points, min_segment=5)
+        result = trajectory(points, min_segment=5, n_permutations=199)
         self.assertEqual(result["change_point"], 2011)
+        self.assertEqual(result["change_points"], [2011])
         self.assertEqual(len(result["segments"]), 2)
         self.assertLess(result["segments"][1]["slope_per_year"], 0)
+
+    def test_reports_formal_break_and_trend_tests(self) -> None:
+        points = [(y, 2.0 * y) for y in range(2000, 2011)]
+        points += [(y, 100.0 - 2.0 * y) for y in range(2011, 2022)]
+        result = trajectory(points, min_segment=5, n_permutations=199)
+        self.assertTrue(result["break_test"]["significant"])
+        self.assertTrue(result["break_test"]["method"])
+        self.assertIn("p_value", result["trend_test"])
+        self.assertEqual(result["stationarity"]["verdict"], "nonstationary")
+        self.assertTrue(result["stationarity"]["reasons"])
+        self.assertEqual(result["regime_selection"]["years"], [2011])
 
     def test_short_series_has_no_change_point(self) -> None:
         result = trajectory([(2000, 1.0), (2001, 1.1), (2002, 1.2)], min_segment=5)
         self.assertIsNone(result["change_point"])
+        self.assertEqual(result["change_points"], [])
+        self.assertEqual(result["stationarity"]["verdict"], "undetermined")
         self.assertEqual(result["n"], 3)
 
 

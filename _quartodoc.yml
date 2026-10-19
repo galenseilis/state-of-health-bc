@@ -13,4 +13,5 @@ quartodoc:
         - catalogue
         - fetch
         - indicators
+        - breaks
         - __main__
