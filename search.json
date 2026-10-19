@@ -165,7 +165,7 @@
     "href": "reference/api/catalogue.html",
     "title": "catalogue",
     "section": "",
-    "text": "catalogue\nLoading and validation of the data-source catalogue.\n\n\n\n\n\nName\nDescription\n\n\n\n\nCatalogueError\nRaised when the catalogue is malformed.\n\n\nSource\nA single data source in the catalogue.\n\n\n\n\n\ncatalogue.CatalogueError()\nRaised when the catalogue is malformed.\n\n\n\ncatalogue.Source(\n    self\n    key\n    title\n    publisher\n    url\n    form\n    domains\n    resolution\n    geography\n    coverage\n    frequency\n    refresh\n    licence\n    access\n    origin\n    temporal_behaviour\n    download\n    indicators=list()\n    quality_notes=''\n    citation=None\n    form_of_access=''\n    reaches_bc_via=None\n)\nA single data source in the catalogue.\nAttributes: key: Stable identifier for the source. title: Human-readable title of the source. publisher: Publishing organisation. url: Landing page URL. form: Form of the source (microdata, indicator_table, dashboard, etc). domains: Domains the source covers. resolution: Geographic/administrative resolutions available. geography: Geographic coverage description. coverage: Temporal coverage description. frequency: Update frequency. refresh: Refresh cadence. licence: Licensing terms. access: Access model (public, registration, request). origin: Origin geography (bc, canada, international). temporal_behaviour: Temporal behaviour classification. download: Download configuration dictionary. indicators: Indicators this source provides. quality_notes: Quality-related notes. citation: Citation string if provided. form_of_access: Description of how access is obtained. reaches_bc_via: Mechanism by which external sources reach BC.\n\n\n\n\n\nName\nDescription\n\n\n\n\nautomated\nReturn True if this source can be fetched automatically.\n\n\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nload\nLoad the data source catalogue from a YAML file.\n\n\n\n\n\ncatalogue.load(path=None)\nLoad the data source catalogue from a YAML file.\nArgs: path: Optional path to the catalogue YAML. Defaults to the project catalogue at data/catalogue/sources.yml.\nReturns: listSource: List of catalogue sources.\nRaises: CatalogueError: If the catalogue is missing, malformed, or contains invalid values."
+    "text": "catalogue\nLoading and validation of the data-source catalogue.\n\n\n\n\n\nName\nDescription\n\n\n\n\nCatalogueError\nRaised when the catalogue is malformed.\n\n\nSource\nA single data source in the catalogue.\n\n\n\n\n\ncatalogue.CatalogueError()\nRaised when the catalogue is malformed.\n\n\n\ncatalogue.Source(\n    self\n    key\n    title\n    publisher\n    url\n    form\n    domains\n    resolution\n    geography\n    coverage\n    frequency\n    refresh\n    licence\n    access\n    origin\n    temporal_behaviour\n    download\n    indicators=list()\n    quality_notes=''\n    citation=None\n    form_of_access=''\n    reaches_bc_via=None\n)\nA single data source in the catalogue.\nAttributes: key: Stable identifier for the source. title: Human-readable title of the source. publisher: Publishing organisation. url: Landing page URL. form: Form of the source (microdata, indicator_table, dashboard, etc). domains: Domains the source covers. resolution: Geographic/administrative resolutions available. geography: Geographic coverage description. coverage: Temporal coverage description. frequency: Update frequency. refresh: Refresh cadence. licence: Licensing terms. access: Access model (public, registration, request). origin: Origin geography (bc, canada, international). temporal_behaviour: Temporal behaviour classification. download: Download configuration dictionary. indicators: Indicators this source provides. quality_notes: Quality-related notes. citation: Citation string if provided. form_of_access: Description of how access is obtained. reaches_bc_via: Mechanism by which external sources reach BC.\n\n\n\n\n\nName\nDescription\n\n\n\n\nautomated\nReturn True if this source can be fetched automatically.\n\n\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nload\nLoad the data source catalogue from a YAML file.\n\n\n\n\n\ncatalogue.load(path=None)\nLoad the data source catalogue from a YAML file.\nArgs: path: Optional path to the catalogue YAML. Defaults to the project catalogue at data/catalogue/sources.yml, located through the SOHBC_ROOT environment variable or by searching upwards from the working directory and from this package’s location.\nReturns: listSource: List of catalogue sources.\nRaises: CatalogueError: If the catalogue is missing, malformed, or contains invalid values."
   },
   {
     "objectID": "reference/api/catalogue.html#classes",
@@ -179,7 +179,7 @@
     "href": "reference/api/catalogue.html#functions",
     "title": "catalogue",
     "section": "",
-    "text": "Name\nDescription\n\n\n\n\nload\nLoad the data source catalogue from a YAML file.\n\n\n\n\n\ncatalogue.load(path=None)\nLoad the data source catalogue from a YAML file.\nArgs: path: Optional path to the catalogue YAML. Defaults to the project catalogue at data/catalogue/sources.yml.\nReturns: listSource: List of catalogue sources.\nRaises: CatalogueError: If the catalogue is missing, malformed, or contains invalid values."
+    "text": "Name\nDescription\n\n\n\n\nload\nLoad the data source catalogue from a YAML file.\n\n\n\n\n\ncatalogue.load(path=None)\nLoad the data source catalogue from a YAML file.\nArgs: path: Optional path to the catalogue YAML. Defaults to the project catalogue at data/catalogue/sources.yml, located through the SOHBC_ROOT environment variable or by searching upwards from the working directory and from this package’s location.\nReturns: listSource: List of catalogue sources.\nRaises: CatalogueError: If the catalogue is missing, malformed, or contains invalid values."
   },
   {
     "objectID": "reference/api/fetch.html",
@@ -263,7 +263,7 @@
     "href": "reference/data-quality.html#url-verification",
     "title": "Data quality",
     "section": "URL verification",
-    "text": "URL verification\nAs part of M2, every catalogued URL was checked for reachability with python3 -m sohbc check --all. All catalogued landing pages and the automated download endpoints returned HTTP 200 at the time of checking (25 sources). The federal publisher’s own portal was unreachable from the verification environment, so federal open data is reached through the Open Government portal record instead; this is noted on that catalogue entry."
+    "text": "URL verification\nAs part of M2, every catalogued URL was checked for reachability with uv run sohbc check --all. All catalogued landing pages and the automated download endpoints returned HTTP 200 at the time of checking (25 sources). The federal publisher’s own portal was unreachable from the verification environment, so federal open data is reached through the Open Government portal record instead; this is noted on that catalogue entry."
   },
   {
     "objectID": "reference/data-quality.html#first-published-indicator",
@@ -305,21 +305,21 @@
     "href": "how-to/ingest-data.html#validate-the-catalogue",
     "title": "How to ingest a data source",
     "section": "2. Validate the catalogue",
-    "text": "2. Validate the catalogue\nPYTHONPATH=src python3 -m sohbc validate\nFix any schema error before continuing."
+    "text": "2. Validate the catalogue\nuv run sohbc validate\nFix any schema error before continuing."
   },
   {
     "objectID": "how-to/ingest-data.html#verify-the-url",
     "href": "how-to/ingest-data.html#verify-the-url",
     "title": "How to ingest a data source",
     "section": "3. Verify the URL",
-    "text": "3. Verify the URL\nNever add a URL you have not confirmed resolves:\nPYTHONPATH=src python3 -m sohbc check &lt;key&gt; --include-download"
+    "text": "3. Verify the URL\nNever add a URL you have not confirmed resolves:\nuv run sohbc check &lt;key&gt; --include-download"
   },
   {
     "objectID": "how-to/ingest-data.html#retrieve-the-data",
     "href": "how-to/ingest-data.html#retrieve-the-data",
     "title": "How to ingest a data source",
     "section": "4. Retrieve the data",
-    "text": "4. Retrieve the data\nFor a machine-fetchable source, set download.kind to direct (a file) or api_json (a JSON endpoint), give its download.url, then run:\nPYTHONPATH=src python3 -m sohbc fetch &lt;key&gt;\nThe file lands in data/raw/&lt;key&gt;/ and an entry is written to data/manifest.json with its URL, size, and SHA-256 checksum. data/raw/ and the manifest are not committed — the data is reproducible from the catalogue, not stored in git.\nFor a source you must retrieve by hand (most dashboards and portals), leave download.kind: manual and place the downloaded file under data/raw/&lt;key&gt;/ yourself, or record the access route in form_of_access."
+    "text": "4. Retrieve the data\nFor a machine-fetchable source, set download.kind to direct (a file) or api_json (a JSON endpoint), give its download.url, then run:\nuv run sohbc fetch &lt;key&gt;\nThe file lands in data/raw/&lt;key&gt;/ and an entry is written to data/manifest.json with its URL, size, and SHA-256 checksum. data/raw/ and the manifest are not committed — the data is reproducible from the catalogue, not stored in git.\nFor a source you must retrieve by hand (most dashboards and portals), leave download.kind: manual and place the downloaded file under data/raw/&lt;key&gt;/ yourself, or record the access route in form_of_access."
   },
   {
     "objectID": "how-to/ingest-data.html#record-problems",
@@ -347,14 +347,14 @@
     "href": "how-to/contribute.html",
     "title": "How to contribute",
     "section": "",
-    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later).\nPreview the documentation site locally:\nquarto preview"
+    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later) and uv.\nCreate the Python environment (installs the sohbc package and the development tools):\nuv sync\nPreview the documentation site locally:\nquarto preview"
   },
   {
     "objectID": "how-to/contribute.html#set-up",
     "href": "how-to/contribute.html#set-up",
     "title": "How to contribute",
     "section": "",
-    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later).\nPreview the documentation site locally:\nquarto preview"
+    "text": "Clone the repository:\ngit clone https://github.com/galenseilis/state-of-health-bc.git\ncd state-of-health-bc\nInstall Quarto (version 1.4 or later) and uv.\nCreate the Python environment (installs the sohbc package and the development tools):\nuv sync\nPreview the documentation site locally:\nquarto preview"
   },
   {
     "objectID": "how-to/contribute.html#edit-documentation",
@@ -375,14 +375,14 @@
     "href": "how-to/contribute.html#contributing-code",
     "title": "How to contribute",
     "section": "Contributing code",
-    "text": "Contributing code\nThe language policy balances a clear top-level framework with speed where it actually matters:\n\nPython is the main language for gluing together the top-level framework and interface — orchestrating stages, wiring pipelines, and presenting results.\nPython may also act as glue around other tools — including other programming languages, such as R — whenever there is a distinct benefit: a mature statistical or domain library, official bindings, or ecosystem tooling not worth reimplementing.\nWhere performance matters and new functionality must be written, the primary implementation is in Rust, C, and/or C++:\n\nPrefer Rust for completely new (greenfield) performance code.\nC and C++ are allowed for interfacing with existing low-level libraries that already exist, when that is useful.\n\n\nIf it is unclear which case applies to your change, open an issue and ask before writing the code. Run the tooling tests before submitting:\nPYTHONPATH=src python3 -m unittest discover -s tests -v"
+    "text": "Contributing code\nThe language policy balances a clear top-level framework with speed where it actually matters:\n\nPython is the main language for gluing together the top-level framework and interface — orchestrating stages, wiring pipelines, and presenting results.\nPython may also act as glue around other tools — including other programming languages, such as R — whenever there is a distinct benefit: a mature statistical or domain library, official bindings, or ecosystem tooling not worth reimplementing.\nWhere performance matters and new functionality must be written, the primary implementation is in Rust, C, and/or C++:\n\nPrefer Rust for completely new (greenfield) performance code.\nC and C++ are allowed for interfacing with existing low-level libraries that already exist, when that is useful.\n\n\nIf it is unclear which case applies to your change, open an issue and ask before writing the code. Run the tooling tests before submitting:\nuv run python -m unittest discover -s tests -v"
   },
   {
     "objectID": "how-to/contribute.html#submit-changes",
     "href": "how-to/contribute.html#submit-changes",
     "title": "How to contribute",
     "section": "Submit changes",
-    "text": "Submit changes\n\nCreate a branch for your change:\ngit checkout -b my-change\nCommit your work with a clear message describing the change.\nOpen a pull request against main.\nThe documentation workflow builds the site on every push to main; failures in the workflow indicate a rendering error to fix before merging."
+    "text": "Submit changes\n\nCreate a branch for your change:\ngit checkout -b my-change\nCommit your work with a clear message describing the change.\nOpen a pull request against main.\nThe CI workflow runs the test suite, and the documentation workflow builds the site, on every push to main; failures in either indicate a problem to fix before merging."
   },
   {
     "objectID": "how-to/contribute.html#where-work-is-planned",
@@ -508,7 +508,7 @@
     "href": "reference/project-structure.html#running-the-data-pipeline",
     "title": "Project structure",
     "section": "Running the data pipeline",
-    "text": "Running the data pipeline\nThe sohbc tooling is a small Python package. Run it straight from the checkout with src/ on the path (or pip install -e .):\nPYTHONPATH=src python3 -m sohbc validate   # check the catalogue schema\nPYTHONPATH=src python3 -m sohbc list       # list catalogued sources\nPYTHONPATH=src python3 -m sohbc check --all  # verify source URLs\nPYTHONPATH=src python3 -m sohbc fetch --all  # fetch automated sources\nPYTHONPATH=src python3 -m sohbc indicators   # list defined indicators\nPYTHONPATH=src python3 -m sohbc build        # build published indicator datasets\nFetched data lands in data/raw/ (gitignored) with a checksum recorded in data/manifest.json, so a clean checkout reproduces the dataset from the committed catalogue; tidy indicator datasets are published (and committed) under data/published/. See How to ingest a data source.\nRun the tooling’s tests with:\nPYTHONPATH=src python3 -m unittest discover -s tests -v"
+    "text": "Running the data pipeline\nThe sohbc tooling is a small Python package. After uv sync, run it through the project environment:\nuv run sohbc validate   # check the catalogue schema\nuv run sohbc list       # list catalogued sources\nuv run sohbc check --all  # verify source URLs\nuv run sohbc fetch --all  # fetch automated sources\nuv run sohbc indicators   # list defined indicators\nuv run sohbc build        # build published indicator datasets\nFetched data lands in data/raw/ (gitignored) with a checksum recorded in data/manifest.json, so a clean checkout reproduces the dataset from the committed catalogue; tidy indicator datasets are published (and committed) under data/published/. See How to ingest a data source.\nRun the tooling’s tests with:\nuv run python -m unittest discover -s tests -v"
   },
   {
     "objectID": "reference/project-structure.html#the-four-diátaxis-sections",
@@ -536,7 +536,7 @@
     "href": "reference/indicator-mortality-rates-bc.html",
     "title": "Indicator: Mortality rates, British Columbia",
     "section": "",
-    "text": "Status: first published indicator (milestone M3 in progress). Regenerate with PYTHONPATH=src python3 -m sohbc build mortality_rates_bc.\nThis is the project’s first end-to-end indicator: it is fetched from a catalogued source, tidied by the pipeline, and published as a versioned dataset plus the views below. Each indicator page states its provenance and caveats (see the roadmap, milestone M3)."
+    "text": "Status: first published indicator (milestone M3 in progress). Regenerate with uv run sohbc build mortality_rates_bc.\nThis is the project’s first end-to-end indicator: it is fetched from a catalogued source, tidied by the pipeline, and published as a versioned dataset plus the views below. Each indicator page states its provenance and caveats (see the roadmap, milestone M3)."
   },
   {
     "objectID": "reference/indicator-mortality-rates-bc.html#provenance",
@@ -571,7 +571,7 @@
     "href": "reference/indicator-mortality-rates-bc.html#reproduce",
     "title": "Indicator: Mortality rates, British Columbia",
     "section": "Reproduce",
-    "text": "Reproduce\nPYTHONPATH=src python3 -m sohbc fetch statcan_wds\nPYTHONPATH=src python3 -m sohbc build mortality_rates_bc\nThe tidy dataset is published at data/published/mortality_rates_bc.csv, with the age-standardised series at data/published/mortality_rates_bc_age_standardised.csv (standard population weights in data/reference/who_standard_population.csv)."
+    "text": "Reproduce\nuv run sohbc fetch statcan_wds\nuv run sohbc build mortality_rates_bc\nThe tidy dataset is published at data/published/mortality_rates_bc.csv, with the age-standardised series at data/published/mortality_rates_bc_age_standardised.csv (standard population weights in data/reference/who_standard_population.csv)."
   },
   {
     "objectID": "reference/api/index.html",
@@ -676,7 +676,7 @@
     "href": "reference/data-sources.html#reproducing-the-catalogue",
     "title": "Data sources",
     "section": "Reproducing the catalogue",
-    "text": "Reproducing the catalogue\nexport PYTHONPATH=src\npython3 -m sohbc validate   # schema check\npython3 -m sohbc list       # list sources\npython3 -m sohbc check --all --include-download   # re-verify URLs\npython3 -m sohbc fetch --all\nSee How to ingest a data source."
+    "text": "Reproducing the catalogue\nuv run sohbc validate   # schema check\nuv run sohbc list       # list sources\nuv run sohbc check --all --include-download   # re-verify URLs\nuv run sohbc fetch --all\nSee How to ingest a data source."
   },
   {
     "objectID": "explanation/index.html",

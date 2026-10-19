@@ -322,18 +322,18 @@ div.csl-indent {
 </section>
 <section id="validate-the-catalogue" class="level2">
 <h2 class="anchored" data-anchor-id="validate-the-catalogue">2. Validate the catalogue</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python3</span> <span class="at">-m</span> sohbc validate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc validate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Fix any schema error before continuing.</p>
 </section>
 <section id="verify-the-url" class="level2">
 <h2 class="anchored" data-anchor-id="verify-the-url">3. Verify the URL</h2>
 <p>Never add a URL you have not confirmed resolves:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python3</span> <span class="at">-m</span> sohbc check <span class="op">&lt;</span>key<span class="op">&gt;</span> --include-download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc check <span class="op">&lt;</span>key<span class="op">&gt;</span> --include-download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="retrieve-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="retrieve-the-data">4. Retrieve the data</h2>
 <p>For a machine-fetchable source, set <code>download.kind</code> to <code>direct</code> (a file) or <code>api_json</code> (a JSON endpoint), give its <code>download.url</code>, then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python3</span> <span class="at">-m</span> sohbc fetch <span class="op">&lt;</span>key<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch <span class="op">&lt;</span>key<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The file lands in <code>data/raw/&lt;key&gt;/</code> and an entry is written to <code>data/manifest.json</code> with its URL, size, and SHA-256 checksum. <strong><code>data/raw/</code> and the manifest are not committed</strong> — the data is reproducible from the catalogue, not stored in git.</p>
 <p>For a source you must retrieve by hand (most dashboards and portals), leave <code>download.kind: manual</code> and place the downloaded file under <code>data/raw/&lt;key&gt;/</code> yourself, or record the access route in <code>form_of_access</code>.</p>
 </section>

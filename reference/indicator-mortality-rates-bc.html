@@ -308,7 +308,7 @@ div.csl-indent {
 </header>
 
 
-<p><em>Status: first published indicator (milestone M3 in progress). Regenerate with <code>PYTHONPATH=src python3 -m sohbc build mortality_rates_bc</code>.</em></p>
+<p><em>Status: first published indicator (milestone M3 in progress). Regenerate with <code>uv run sohbc build mortality_rates_bc</code>.</em></p>
 <p>This is the project’s first end-to-end <a href="../reference/index.html">indicator</a>: it is fetched from a catalogued source, tidied by the pipeline, and published as a versioned dataset plus the views below. Each indicator page states its provenance and caveats (see the <a href="../ROADMAP.html">roadmap</a>, milestone M3).</p>
 <section id="provenance" class="level2">
 <h2 class="anchored" data-anchor-id="provenance">Provenance</h2>
@@ -502,8 +502,8 @@ div.csl-indent {
 </section>
 <section id="reproduce" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python3</span> <span class="at">-m</span> sohbc fetch statcan_wds</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python3</span> <span class="at">-m</span> sohbc build mortality_rates_bc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch statcan_wds</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build mortality_rates_bc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The tidy dataset is published at <code>data/published/mortality_rates_bc.csv</code>, with the age-standardised series at <code>data/published/mortality_rates_bc_age_standardised.csv</code> (standard population weights in <code>data/reference/who_standard_population.csv</code>).</p>
 
 
