@@ -36,32 +36,46 @@ workflow so all later work has a place to live.
 - New contributors can find the project overview, roadmap, and the four
   Diátaxis entry points from the landing page.
 
-**Status:** in progress
+**Status:** complete — content committed; enable GitHub Pages (source:
+`gh-pages` branch) in repository settings to publish
 **Depends on:** nothing
 
 ---
 
 ## M1 — Defining the state of health
 
-**Goal:** Produce a defensible, written definition of health and of the
-"state of health" in BC that can be operationalised as measurable
-indicators.
+**Goal:** Produce a **provisional, versioned** definition of health and
+of the "state of health" in BC that can be operationalised as measurable
+indicators, together with the measurement framework that turns it into
+candidate indicators. The definition is expected to evolve as the project
+learns what is measurable; revisions are recorded, never silent.
 
 **Deliverables:**
 
-- A definition document covering: conceptual basis (e.g. WHO, ICF,
-  capability-based views), scope decisions (physical, mental, functional,
-  wellbeing), and what is deliberately excluded.
+- A definition document covering: conceptual basis (WHO, ICF,
+  capability-based views), the domains, what is deliberately excluded,
+  and a stated revision process.
+- **Proxy discipline**: the definition distinguishes the construct (the
+  state of health) from proxies (every indicator), so that no proxy is
+  confused for the state of health, no proxy is taken to define its
+  domain, and composite indices are treated as models rather than
+  measurements.
 - **Temporal semantics** in the definition: health is specified as a
   time-varying state (a trajectory with levels, slopes, and possible
   discontinuities), not a timeless attribute. The definition states what
   changes over what timescale, and that indicators are re-evaluated as
   the underlying population changes.
+- **All resolutions**: the definition commits to using all available
+  levels of resolution (individual, neighbourhood/HSDA/LHA, health
+  authority, provincial, external/non-BC), recording the resolution of
+  every datum and result, and treating any fusion across resolutions as
+  a model output with stated assumptions.
 - A measurement framework: domains and candidate indicator families for
-  each domain (mortality, morbidity, mental health, functional status,
-  determinants context, etc.), each indicator with a stated expected
-  temporal behaviour (gradually trending, seasonally varying, shock-prone,
-  or plausibly stable over the analysis window).
+  each domain (mortality, physical morbidity, mental health, functional
+  status, subjective wellbeing, social wellbeing), each with candidate
+  sources and stated expected temporal behaviour (gradually trending,
+  seasonally varying, shock-prone, or plausibly stable over the analysis
+  window).
 - Glossary of terms used consistently across the project.
 
 **Acceptance criteria:**
@@ -73,8 +87,13 @@ indicators.
 - The definition explicitly answers: is the state of health a snapshot,
   a trajectory, or both — and how the project will detect when its own
   description of health has gone stale.
+- The definition distinguishes constructs from proxies, and states how
+  results at different resolutions are recorded and combined.
+- The definition carries a version number and a revision process.
 
-**Status:** not started
+**Status:** in progress — v0.1 drafted (definition document, measurement
+framework, glossary); fusing across resolutions and domain additions still
+to be stress-tested once M2 lands
 **Depends on:** M0
 
 ---
@@ -115,7 +134,11 @@ published summary statistics.
   nothing": an indicator backed only by published summary statistics
   still qualifies when it passes licence and governance checks.
 
-**Status:** not started
+**Status:** in progress — catalogue of 24 sources (all URLs verified),
+including determinant/stratifier sources and microdata access routes; a
+Python acquisition pipeline and a data-quality register are drafted.
+Outstanding: microdata approvals, neighbourhood-level outcomes, and
+cross-border patient-flow / supply-chain external drivers
 **Depends on:** M1
 
 ---
@@ -268,6 +291,12 @@ These run alongside every milestone:
   individual-level data in the repository.
 - **Documentation.** New capabilities land with matching documentation in
   the correct Diátaxis section.
+- **Engineering conventions.** The top-level framework and interface are
+  written in Python; Python may glue around other tools and languages
+  (including R) where that has a distinct benefit; performance-critical
+  new functionality is implemented in Rust, C, and/or C++ — preferring
+  Rust for greenfield code, and allowing C/C++ to interface with existing
+  low-level libraries. See [How to contribute](how-to/contribute.qmd).
 - **Citations.** Factual claims about the world are cited: sources are
   recorded in `references.bib` and cited inline with Pandoc citation
   syntax (`[@key]`), so each page renders its own reference list from

@@ -10,11 +10,24 @@ Terms are listed alphabetically. This glossary grows with milestone M1
 assumed cause-and-effect relationships among variables, used to reason
 about what interventions would change health outcomes [@pearl2009].
 
+**Construct**
+: The thing a measurement is intended to represent — for example the state
+of health, or one of its domains. Constructs are real but not directly
+observable; measurements of them are
+[proxies](#proxy). See the [definition of the state of
+health](../explanation/definition-of-health.qmd).
+
 **Data**
 : Construed broadly: any publicly available information that can be
 appropriately used for the project's goals — from microdata through
 published summary statistics, indicator tables, dashboards, and report
 figures.
+
+**Definition (provisional)**
+: The project's working definition of the state of health. It is
+versioned and expected to evolve as the project learns what is
+measurable; each revision records its trigger and its changes. See the
+[definition document](../explanation/definition-of-health.qmd).
 
 **Diátaxis**
 : The documentation framework this site follows, organising docs into
@@ -28,11 +41,19 @@ common geographic breakdown for BC health data.
 
 **Indicator**
 : A defined, sourced, reproducible measurement used to represent some
-aspect of the state of health (e.g. life expectancy at birth).
+aspect of the state of health (e.g. life expectancy at birth). An
+indicator is a [proxy](#proxy), never the construct itself.
 
 **Measurement framework**
 : The scheme of domains and candidate indicators that operationalises the
-project's definition of the state of health.
+project's definition of the state of health. See the [measurement
+framework](../reference/measurement-framework.qmd).
+
+**Multilevel model**
+: A statistical model in which data at more than one level of resolution
+(e.g. individuals within regions) are modelled jointly, allowing
+information to be shared across levels [@gelman2007]. One of the ways the
+project fuses pictures at different resolutions.
 
 **Nonstationarity**
 : The property of a series or relationship whose statistical properties
@@ -46,16 +67,30 @@ stationary](../explanation/nonstationarity.qmd).
 figure in this project carries its observation window, because a result
 true for one window may not hold for another.
 
+**Proxy**
+: A measurement used in place of a construct that cannot be observed
+directly — every indicator in this project is a proxy. Proxies carry
+measurement error and construct error, and can drift over time; they are
+never identical with the state of health they track. See [Proxies are not
+the state of health](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health).
+
 **Regime shift**
 : An abrupt change in the level or behaviour of a series — e.g. an
 epidemic, health system reform, or coding definition change — after
 which the series is effectively a different one. Comparisons spanning a
 regime shift are treated separately from comparisons within a regime.
 
+**Resolution**
+: The level at which a datum or result is observed — individual,
+neighbourhood, HSDA, health authority, provincial, or external/non-BC.
+This project uses all available resolutions and records the resolution of
+every result.
+
 **State of health (SoH)**
 : The condition of health in a population at a point in time and space —
-the central quantity this project describes and predicts. Precise
-definition: planned (milestone M1).
+the central quantity this project describes and predicts. Defined
+provisionally in the [definition
+document](../explanation/definition-of-health.qmd).
 
 **Stationarity**
 : The opposite of nonstationarity: a series or relationship whose

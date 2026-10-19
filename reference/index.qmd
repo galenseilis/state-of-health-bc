@@ -12,6 +12,21 @@ not reading order.
 
 Definitions of the terms this project uses consistently.
 
+### [Measurement framework](measurement-framework.qmd)
+
+Domains mapped to candidate indicator families and likely sources
+(provisional, milestone M1).
+
+### [Data sources](data-sources.qmd)
+
+The catalogue of catalogued data sources: form, coverage, licence,
+access, resolution, and quality notes (milestone M2, in progress).
+
+### [Data quality](data-quality.qmd)
+
+Known gaps, revisions, suppressions, and definitional breaks in the
+catalogued data (milestone M2).
+
 ### [Project structure](project-structure.qmd)
 
 What lives where in the repository and how the documentation site is

@@ -1,0 +1,78 @@
+---
+title: "How to ingest a data source"
+---
+
+This recipe adds a data source to the catalogue and pulls it into the
+reproducible local layout. It assumes you have read
+[How to contribute](contribute.qmd).
+
+## 1. Add or update the catalogue entry
+
+Sources live in `data/catalogue/sources.yml`. Add an entry with the
+required fields (see [How to read an entry](../reference/data-sources.qmd#how-to-read-an-entry)),
+including:
+
+- `form` — how the information is published (microdata, indicator table,
+  dashboard, report figure, API, or a discovery catalogue);
+- `licence` and `access` — the terms and how you actually obtain it;
+- `coverage`, `frequency`, and `refresh` — how the series is dated and
+  updated;
+- `temporal_behaviour` — expected behaviour (`trending`, `seasonal`,
+  `shock_prone`, `stable`);
+- `quality_notes` — suppressions, revisions, definitional breaks.
+
+## 2. Validate the catalogue
+
+```bash
+PYTHONPATH=src python3 -m sohbc validate
+```
+
+Fix any schema error before continuing.
+
+## 3. Verify the URL
+
+Never add a URL you have not confirmed resolves:
+
+```bash
+PYTHONPATH=src python3 -m sohbc check <key> --include-download
+```
+
+## 4. Retrieve the data
+
+For a machine-fetchable source, set `download.kind` to `direct` (a file)
+or `api_json` (a JSON endpoint), give its `download.url`, then run:
+
+```bash
+PYTHONPATH=src python3 -m sohbc fetch <key>
+```
+
+The file lands in `data/raw/<key>/` and an entry is written to
+`data/manifest.json` with its URL, size, and SHA-256 checksum.
+**`data/raw/` and the manifest are not committed** — the data is
+reproducible from the catalogue, not stored in git.
+
+For a source you must retrieve by hand (most dashboards and portals),
+leave `download.kind: manual` and place the downloaded file under
+`data/raw/<key>/` yourself, or record the access route in
+`form_of_access`.
+
+## 5. Record problems
+
+If the source has suppressions, provisional figures, or breaks, add them
+to the [data quality report](../reference/data-quality.qmd).
+
+## 6. Check governance
+
+Confirm the licence permits what you intend to do, and that **no
+individual-level data** is committed. First Nations data require
+governance review before use [@fnigcOcap].
+
+## 7. Render and verify
+
+```bash
+quarto render
+```
+
+Then wire the source into the indicator page
+([How to add an indicator](add-indicator.qmd)) and the descriptive
+pipeline (milestone M3).

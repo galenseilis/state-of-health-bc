@@ -16,5 +16,10 @@ Set up your environment, edit documentation, and submit changes.
 ### [Add an indicator](add-indicator.qmd)
 
 Add a health indicator to the measurement framework and data pipeline.
-*Planned — blocked on milestone M1 (definition) in the
-[roadmap](../ROADMAP.md).*
+*In progress — the measurement framework (M1) and data catalogue (M2) are
+taking shape in the [roadmap](../ROADMAP.md).*
+
+### [Ingest a data source](ingest-data.qmd)
+
+Add a source to the catalogue and pull it into the reproducible local
+layout.

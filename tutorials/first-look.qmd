@@ -3,8 +3,10 @@ title: "Tutorial: Your first look at BC health data"
 ---
 
 *Status: planned. This tutorial is blocked on milestone M2 (data
-landscape) in the [roadmap](../ROADMAP.md). The outline below is the
-target structure.*
+landscape) in the [roadmap](../ROADMAP.md), which is in progress: the
+[data source catalogue](../reference/data-sources.qmd) and the `sohbc`
+acquisition pipeline now exist, but indicator-level ingestion is not yet
+complete. The outline below is the target structure.*
 
 ## Objective
 

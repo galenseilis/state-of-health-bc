@@ -9,9 +9,16 @@ state-of-health-bc/
 ├── README.md              Project overview (start here on GitHub)
 ├── ROADMAP.md             Milestones, deliverables, acceptance criteria
 ├── LICENSE                GPL-3.0
+├── pyproject.toml         Python package metadata for the sohbc tooling
 ├── _quarto.yml            Documentation site configuration
 ├── index.qmd              Site landing page
 ├── references.bib         Bibliography: sources cited in the docs
+├── src/sohbc/             Acquisition tooling (Python)
+├── tests/                 Tests for the sohbc tooling
+├── data/
+│   ├── catalogue/         Data-source catalogue (sources.yml) — committed
+│   ├── raw/               Fetched data — gitignored, reproducible
+│   └── manifest.json      Fetch manifest with checksums — gitignored
 ├── tutorials/             Learning-oriented: guided lessons
 ├── how-to/                Task-oriented: task recipes
 ├── reference/             Information-oriented: lookup pages
@@ -19,8 +26,33 @@ state-of-health-bc/
 └── .github/workflows/     CI: renders site, deploys to gh-pages branch
 ```
 
-Analysis code and data pipelines will be added as milestones M2–M5 land;
-their layout will be documented here when they arrive.
+The analysis code and data pipeline grow with the milestones: the
+acquisition tooling (`src/sohbc/`) and the data-source catalogue land in
+M2; descriptive analysis (M3), dependence (M4), and causal work (M5)
+follow.
+
+## Running the data pipeline
+
+The `sohbc` tooling is a small Python package. Run it straight from the
+checkout with `src/` on the path (or `pip install -e .`):
+
+```bash
+PYTHONPATH=src python3 -m sohbc validate   # check the catalogue schema
+PYTHONPATH=src python3 -m sohbc list       # list catalogued sources
+PYTHONPATH=src python3 -m sohbc check --all  # verify source URLs
+PYTHONPATH=src python3 -m sohbc fetch --all  # fetch automated sources
+```
+
+Fetched data lands in `data/raw/` (gitignored) with a checksum recorded
+in `data/manifest.json`, so a clean checkout reproduces the dataset from
+the committed catalogue. See
+[How to ingest a data source](../how-to/ingest-data.qmd).
+
+Run the tooling's tests with:
+
+```bash
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+```
 
 ## The four Diátaxis sections
 

@@ -1,0 +1,100 @@
+---
+title: "Data quality"
+---
+
+*Status: v0.1 (milestone M2 in progress). This is the project's running
+register of known problems with the
+[data sources](data-sources.qmd). It is expected to grow as sources are
+ingested in earnest.*
+
+## What this report covers
+
+The [roadmap](../ROADMAP.md) asks for a register of **known gaps,
+revisions, suppressions, and definitional breaks**. Anything that would
+mislead a reader who trusted a number at face value belongs here.
+
+## Known gaps
+
+- **Determinants and stratifiers.** Income, education, and employment are
+  used to stratify results (see the
+  [measurement framework](measurement-framework.qmd)); BC Stats, the BC
+  Data Catalogue, Statistics Canada, and K-12 reporting are catalogued as
+  their sources. They are **determinants, not health outcomes**, and are
+  never reported as health on their own.
+- **Microdata access.** Individual-level sources are catalogued as
+  [access routes](data-sources.qmd#microdata-access-routes) (Population
+  Data BC; Statistics Canada Research Data Centres) but no approvals are
+  in place yet, so the catalogue is aggregate-only in practice. Nothing
+  individual-level may enter the repository regardless.
+- **Neighbourhood-level health indicators.** Population denominators exist
+  at LHA/neighbourhood resolution, but health outcomes are not yet
+  catalogued below health-authority level.
+- **External drivers.** Cross-border patient flows and supply-chain
+  pressures are identified as relevant but have **no catalogued source**
+  yet; the wildfire, demographic, and macro series are the current
+  stand-ins.
+- **Social wellbeing.** Measures of social connection and belonging are
+  sparse and carried on a small number of survey series only.
+
+## Revisions and provisional figures
+
+- **Substance-use mortality** is published provisionally and revised
+  upward as investigations conclude [@bccdcDrugs]. Preliminary and final
+  figures must never be pooled without noting the vintage.
+- **Cancer statistics** for the most recent years are typically incomplete
+  because of registration lag [@bcCancer].
+- **Population estimates** at sub-provincial levels are revised as
+  administrative sources update; rates computed on them inherit the
+  revision.
+- **National survey estimates** carry sampling error and are occasionally
+  revised after release [@statcan].
+
+## Suppression
+
+- **Small-area counts** (e.g. vital statistics by small geography) are
+  suppressed for privacy [@bcStatsVital]. Suppressed cells are missing,
+  not zero; treating them as zero biases rates.
+
+## Definitional breaks (regime shifts)
+
+These are candidates for the **regime-aware reporting** required by
+milestone M3; each marks a point where a series before and after is
+effectively different.
+
+| Break | Affected sources | Implication |
+|-------|------------------|-------------|
+| Cause-of-death coding revisions (ICD revisions) | Vital Statistics; national mortality | Cause-specific mortality series are not directly comparable across the revision boundary |
+| Declared public-health emergency (2016) | BCCDC substance-use dashboard; overdose response | Surveillance expanded at the emergency; counts before and after reflect different detection intensity |
+| COVID-19 pandemic (2020–) | mortality, morbidity, mental health | Both a real shock and a measurement shock (care disruption, coding changes) |
+| Survey redesigns (e.g. Canadian Community Health Survey) | Statistics Canada health series | Break in trend; pre- and post-redesign estimates differ |
+| Indicator-definition updates | CIHI indicators | Rebased or redefined indicators reset their own series |
+
+## URL verification
+
+As part of M2, every catalogued URL was checked for reachability with
+`python3 -m sohbc check --all`. All catalogued landing pages and the one
+automated download endpoint returned HTTP 200 at the time of checking
+(24 sources). The federal publisher's own portal was unreachable from the
+verification environment, so federal open data is reached through the
+Open Government portal record instead; this is noted on that catalogue
+entry.
+
+## Governance
+
+- **Licences vary** by source (open-government licences to publisher
+  terms). Each catalogue entry records its licence; redistribution of
+  anything committed must respect it.
+- **No individual-level data** in the repository — a hard rule.
+- **First Nations data** are governed by the First Nations principles of
+  OCAP® and specific agreements; they are cited for context, not
+  redistributed [@fnigcOcap].
+- **"Best use" standard.** A source backed only by published summary
+  statistics is admissible when it passes licence and governance checks —
+  the goal is the best use of all publicly available information that can
+  be appropriately used.
+
+## Keeping this current
+
+Add an entry here whenever ingesting a source surfaces a problem, and
+update the [catalogue](data-sources.qmd) when a gap closes. See
+[How to ingest a source](../how-to/ingest-data.qmd).

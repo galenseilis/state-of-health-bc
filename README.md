@@ -45,9 +45,11 @@ Two principles frame the work:
 
 ## Status
 
-Early stage. The repository currently contains the project definition,
-the roadmap, and the documentation site. Analysis code and data land with
-milestones M1–M5 (see the [roadmap](ROADMAP.md)).
+Early stage. The repository contains the project definition, the roadmap,
+the documentation site, the provisional definition of health (M1), and a
+first cut of the data landscape (M2): a data-source catalogue, a small
+Python acquisition pipeline (`src/sohbc/`), and a data-quality register.
+Descriptive analysis (M3) and later stages follow the [roadmap](ROADMAP.md).
 
 ## Documentation
 
@@ -74,9 +76,13 @@ quarto preview
 ├── README.md              This file
 ├── ROADMAP.md             Milestones, deliverables, acceptance criteria
 ├── LICENSE                GPL-3.0
+├── pyproject.toml         Python package metadata for the sohbc tooling
 ├── _quarto.yml            Documentation site configuration
 ├── index.qmd              Documentation landing page
 ├── references.bib         Bibliography: sources cited in the docs
+├── src/sohbc/             Acquisition tooling (Python)
+├── data/catalogue/        Data-source catalogue (committed)
+├── data/raw/              Fetched data (gitignored, reproducible)
 ├── tutorials/             Learning-oriented documentation
 ├── how-to/                Task-oriented documentation
 ├── reference/             Information-oriented documentation
@@ -90,7 +96,9 @@ See [How to contribute](https://galenseilis.github.io/state-of-health-bc/how-to/
 in the docs. Open an issue before starting non-trivial work, and place new
 documentation in the correct Diátaxis section. Cite sources for factual
 claims: entries live in `references.bib` and are cited inline with
-`[@key]` syntax.
+`[@key]` syntax. Code follows the language policy in that guide: Python
+for the top-level framework and interface, Rust/C/C++ for
+performance-critical work.
 
 ## Why BC only?
 

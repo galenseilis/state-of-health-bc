@@ -1,0 +1,557 @@
+# Data source catalogue for State-of-Health BC (milestone M2).
+#
+# This file is the machine-readable source of truth for the acquisition
+# pipeline (`python -m sohbc`). The human-readable version is
+# reference/data-sources.qmd; the data quality report is
+# reference/data-quality.qmd.
+#
+# "Data" is construed broadly (roadmap M2): microdata, indicator tables,
+# dashboards, report figures, and APIs all qualify. Nothing individual-level
+# is committed to the repository.
+#
+# Schema (per source):
+#   key             stable identifier, used for filenames and CLI arguments
+#   title           human-readable name
+#   publisher       organisation responsible for the source
+#   url             canonical landing page (verified reachable)
+#   citation        optional key in references.bib
+#   form            microdata | indicator_table | dashboard | report_figure | api | catalogue
+#   domains         list of M1 domains, or [External driver]
+#   indicators      indicator families this source can back
+#   resolution      list of: individual, neighbourhood, hsda, health_authority, provincial, international
+#   geography       spatial scope as published
+#   coverage        temporal coverage as published (verify at ingest)
+#   frequency       monthly | quarterly | annual | irregular
+#   refresh         refresh cadence as published
+#   licence         licence / terms
+#   access          public | registration | request
+#   form_of_access  how you actually get it
+#   origin          bc | canada | international
+#   reaches_bc_via  mechanism by which an external source reaches BC (external drivers only)
+#   temporal_behaviour  trending | seasonal | shock_prone | stable
+#   quality_notes   known caveats, suppressions, revisions
+#   download        {kind: manual|direct|api_json, url, filename}
+schema_version: 1
+
+sources:
+  - key: bcstats_vital
+    title: "Vital Statistics"
+    publisher: "BC Stats, Government of British Columbia"
+    url: "https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/vital-statistics"
+    form: indicator_table
+    domains: [Mortality]
+    indicators: ["Life expectancy", "Age-standardised mortality", "Infant mortality", "Cause-specific deaths"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "varies by table — verify at ingest"
+    frequency: annual
+    refresh: "annual"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "web tables and downloadable files"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Small-area counts can be suppressed for privacy; cause-of-death coding follows ICD revisions (definitional breaks across revisions)."
+    download:
+      kind: manual
+
+  - key: bcstats_population
+    title: "Population Estimates"
+    publisher: "BC Stats, Government of British Columbia"
+    url: "https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/population-estimates"
+    form: indicator_table
+    domains: []
+    indicators: ["Population denominators", "Age–sex structure"]
+    resolution: [provincial, health_authority, hsda, lha]
+    geography: "British Columbia"
+    coverage: "varies by series — verify at ingest"
+    frequency: quarterly
+    refresh: "quarterly"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "web tables and downloadable files"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Denominator source; sub-provincial estimates can be revised. Use for rates, not as a health outcome."
+    download:
+      kind: manual
+
+  - key: databc_catalogue
+    title: "BC Data Catalogue"
+    publisher: "DataBC, Government of British Columbia"
+    url: "https://catalogue.data.gov.bc.ca/"
+    form: catalogue
+    domains: []
+    indicators: ["Discovery of provincial datasets across domains"]
+    resolution: [provincial, health_authority, hsda, lha, neighbourhood]
+    geography: "British Columbia"
+    coverage: "varies by dataset"
+    frequency: irregular
+    refresh: "continuous"
+    licence: "varies by dataset — check each record"
+    access: public
+    form_of_access: "CKAN web catalogue with public search API"
+    origin: bc
+    temporal_behaviour: stable
+    quality_notes: "Discovery layer, not a dataset: every dataset it points to must be catalogued separately with its own licence and quality notes."
+    download:
+      kind: api_json
+      url: "https://catalogue.data.gov.bc.ca/api/3/action/package_search?q=health&rows=5"
+      filename: "bc-data-catalogue-health-search.json"
+
+  - key: bccdc_sud
+    title: "Unregulated Drug Poisoning Emergency Dashboard"
+    publisher: "BC Centre for Disease Control"
+    url: "https://www.bccdc.ca/health-professionals/data-reports/substance-use-harm-reduction-dashboard"
+    citation: bccdcDrugs
+    form: dashboard
+    domains: [Mortality, Mental health]
+    indicators: ["Toxic drug toxicity deaths", "Overdose events"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "2015–present (expanding)"
+    frequency: monthly
+    refresh: "monthly"
+    licence: "BC Government — see source terms"
+    access: public
+    form_of_access: "interactive dashboard; provisional figures subject to revision"
+    origin: bc
+    temporal_behaviour: shock_prone
+    quality_notes: "Early-release figures are provisional and revised upward; a definitional break in surveillance occurred with the 2016 public-health emergency. Overdose responses are not equal to deaths."
+    download:
+      kind: manual
+
+  - key: bccdc_data_reports
+    title: "Data and Reports"
+    publisher: "BC Centre for Disease Control"
+    url: "https://www.bccdc.ca/health-professionals/data-reports"
+    form: catalogue
+    domains: [Physical morbidity, Mental health]
+    indicators: ["Reportable communicable disease", "Immunisation coverage", "Environmental health"]
+    resolution: [provincial, health_authority, hsda]
+    geography: "British Columbia"
+    coverage: "varies by report"
+    frequency: irregular
+    refresh: "irregular"
+    licence: "BC Government — see source terms"
+    access: public
+    form_of_access: "report index"
+    origin: bc
+    temporal_behaviour: seasonal
+    quality_notes: "Index of BCCDC reports; each report has its own period, geography, and revision history."
+    download:
+      kind: manual
+
+  - key: bccdc_chronic
+    title: "Chronic Disease Dashboard"
+    publisher: "BC Centre for Disease Control"
+    url: "https://www.bccdc.ca/health-professionals/data-reports/chronic-disease-dashboard"
+    form: dashboard
+    domains: [Physical morbidity]
+    indicators: ["Diabetes prevalence", "Hypertension prevalence", "COPD prevalence"]
+    resolution: [provincial, health_authority, hsda]
+    geography: "British Columbia"
+    coverage: "varies by condition — verify at ingest"
+    frequency: annual
+    refresh: "annual"
+    licence: "BC Government — see source terms"
+    access: public
+    form_of_access: "interactive dashboard"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Prevalence depends on administrative case definitions; comparability across regions is affected by access to primary care and screening intensity."
+    download:
+      kind: manual
+
+  - key: bc_overdose
+    title: "Overdose response (BC)"
+    publisher: "Government of British Columbia, Ministry of Health"
+    url: "https://www2.gov.bc.ca/gov/content/overdose"
+    form: dashboard
+    domains: [Mortality, Mental health]
+    indicators: ["Illicit drug toxicity deaths"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "2016–present"
+    frequency: monthly
+    refresh: "monthly"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "web page with reports and data"
+    origin: bc
+    temporal_behaviour: shock_prone
+    quality_notes: "Cross-check against BC Coroners Service and BCCDC dashboards; provisional counts differ across sources."
+    download:
+      kind: manual
+
+  - key: bc_cancer
+    title: "BC Cancer"
+    publisher: "BC Cancer, Provincial Health Services Authority"
+    url: "https://www.bccancer.bc.ca/"
+    form: indicator_table
+    domains: [Physical morbidity]
+    indicators: ["Cancer incidence", "Cancer mortality", "Cancer prevalence"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "long series — verify at ingest"
+    frequency: annual
+    refresh: "annual"
+    licence: "PHSA — see source terms"
+    access: public
+    form_of_access: "statistics and reports"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Registry-based; incidence and mortality can be affected by screening intensity and reporting lags (recent years typically incomplete)."
+    download:
+      kind: manual
+
+  - key: cihi
+    title: "Canadian Institute for Health Information"
+    publisher: "Canadian Institute for Health Information"
+    url: "https://www.cihi.ca/en"
+    citation: cihi
+    form: indicator_table
+    domains: [Physical morbidity, Mental health, Functional status]
+    indicators: ["Health system performance indicators", "Hospitalisations", "Continuing care"]
+    resolution: [provincial, health_authority]
+    geography: "Canada (provincial breakdowns include BC)"
+    coverage: "varies by indicator"
+    frequency: annual
+    refresh: "varies"
+    licence: "CIHI — see terms of use"
+    access: public
+    form_of_access: "indicators and data tables"
+    origin: canada
+    reaches_bc_via: "provincial reporting; BC figures appear in national comparative series"
+    temporal_behaviour: trending
+    quality_notes: "Comparability across jurisdictions depends on harmonised definitions; some indicators rest on administrative data with coverage differences."
+    download:
+      kind: manual
+
+  - key: statcan_health
+    title: "Health statistics (Statistics Canada)"
+    publisher: "Statistics Canada"
+    url: "https://www.statcan.gc.ca/en/subjects-start/health"
+    citation: statcan
+    form: indicator_table
+    domains: [Physical morbidity, Mental health, Subjective wellbeing, Social wellbeing, Functional status]
+    indicators: ["Self-rated health", "Chronic conditions", "Mental health", "Life satisfaction", "Disability"]
+    resolution: [provincial, health_authority]
+    geography: "Canada (BC available in most tables)"
+    coverage: "varies by survey"
+    frequency: annual
+    refresh: "varies"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "subject portal leading to data tables"
+    origin: canada
+    reaches_bc_via: "national surveys with provincial estimates; BC results published alongside other provinces"
+    temporal_behaviour: stable
+    quality_notes: "Survey-based: subject to sampling error, non-response, and redesign effects (e.g. CCHS redesign 2015) that create definitional breaks."
+    download:
+      kind: manual
+
+  - key: statcan_data
+    title: "Statistics Canada data tables"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/n1/en/type/data"
+    citation: statcan
+    form: indicator_table
+    domains: [Mortality, Physical morbidity, Mental health, Functional status, Subjective wellbeing, Social wellbeing]
+    indicators: ["Vital statistics", "Population estimates", "Economic accounts", "Labour"]
+    resolution: [provincial, health_authority, international]
+    geography: "Canada (BC and international comparators)"
+    coverage: "varies by table"
+    frequency: quarterly
+    refresh: "varies"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "table repository with download and API options"
+    origin: canada
+    reaches_bc_via: "BC breakdowns within national tables; some tables support international comparison"
+    temporal_behaviour: trending
+    quality_notes: "Wide table catalogue; each table has its own revision policy and notes on comparability."
+    download:
+      kind: manual
+
+  - key: statcan_demography
+    title: "Population and demography (Statistics Canada)"
+    publisher: "Statistics Canada"
+    url: "https://www.statcan.gc.ca/en/subjects-start/population_and_demography"
+    citation: statcan
+    form: indicator_table
+    domains: []
+    indicators: ["Population estimates", "Migration", "Age structure"]
+    resolution: [provincial, international]
+    geography: "Canada (with migration flows)"
+    coverage: "varies"
+    frequency: quarterly
+    refresh: "quarterly"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "subject portal leading to data tables"
+    origin: canada
+    reaches_bc_via: "interprovincial and international migration flows into and out of BC"
+    temporal_behaviour: trending
+    quality_notes: "Migration estimates are revised as administrative sources are updated; composition change interacts with health measurement (selection)."
+    download:
+      kind: manual
+
+  - key: fnha
+    title: "First Nations Health Authority"
+    publisher: "First Nations Health Authority"
+    url: "https://www.fnha.ca/"
+    form: report_figure
+    domains: [Mortality, Physical morbidity, Mental health, Subjective wellbeing, Social wellbeing]
+    indicators: ["First Nations health and wellness indicators"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia (First Nations)"
+    coverage: "varies"
+    frequency: irregular
+    refresh: "irregular"
+    licence: "FNHA — see source terms; First Nations data governance applies"
+    access: public
+    form_of_access: "reports"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "First Nations data are governed by First Nations principles (OCAP®) and specific data-sharing agreements; reuse must respect those governance requirements [@fnigcOcap]."
+    download:
+      kind: manual
+
+  - key: who_data
+    title: "WHO data"
+    publisher: "World Health Organization"
+    url: "https://www.who.int/data"
+    citation: whocovid
+    form: indicator_table
+    domains: []
+    indicators: ["International health indicators", "Global reference series"]
+    resolution: [international]
+    geography: "Global (incl. Canada)"
+    coverage: "varies"
+    frequency: annual
+    refresh: "varies"
+    licence: "WHO — see terms"
+    access: public
+    form_of_access: "observatory and data portal"
+    origin: international
+    reaches_bc_via: "external reference series (e.g. pandemics) that condition BC outcomes"
+    temporal_behaviour: shock_prone
+    quality_notes: "Cross-national comparability varies with national reporting capacity; global aggregates may mask national detail."
+    download:
+      kind: manual
+
+  - key: oecd_data
+    title: "OECD Data Explorer"
+    publisher: "Organisation for Economic Co-operation and Development"
+    url: "https://data-explorer.oecd.org/"
+    form: indicator_table
+    domains: []
+    indicators: ["Health expenditure", "Health status", "Socioeconomic context"]
+    resolution: [international]
+    geography: "OECD members (incl. Canada)"
+    coverage: "varies"
+    frequency: annual
+    refresh: "varies"
+    licence: "OECD — see terms"
+    access: public
+    form_of_access: "data explorer and API"
+    origin: international
+    reaches_bc_via: "national comparisons and economic context relevant to BC"
+    temporal_behaviour: trending
+    quality_notes: "International comparability relies on harmonised definitions; may differ from domestic series."
+    download:
+      kind: manual
+
+  - key: worldbank_data
+    title: "World Bank Open Data"
+    publisher: "The World Bank"
+    url: "https://data.worldbank.org/"
+    form: indicator_table
+    domains: []
+    indicators: ["Macroeconomic and development indicators"]
+    resolution: [international]
+    geography: "Global (incl. Canada)"
+    coverage: "varies"
+    frequency: annual
+    refresh: "varies"
+    licence: "CC BY 4.0 (World Bank terms)"
+    access: public
+    form_of_access: "portal with documented API"
+    origin: international
+    reaches_bc_via: "macroeconomic conditions bearing on BC through trade and finance"
+    temporal_behaviour: trending
+    quality_notes: "Macroeconomic aggregates; revisions common."
+    download:
+      kind: manual
+
+  - key: bc_wildfire
+    title: "BC Wildfire Service — wildfire status"
+    publisher: "Government of British Columbia"
+    url: "https://www2.gov.bc.ca/gov/content/safety/wildfire-status"
+    form: dashboard
+    domains: []
+    indicators: ["Wildfire activity", "Smoke exposure context"]
+    resolution: [provincial, health_authority, hsda]
+    geography: "British Columbia"
+    coverage: "current season with historical summaries"
+    frequency: daily
+    refresh: "continuous (seasonal)"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "status page and datasets via the BC Data Catalogue"
+    origin: bc
+    temporal_behaviour: shock_prone
+    quality_notes: "Seasonal and episodic; smoke exposure is a plausible transient driver of respiratory morbidity."
+    download:
+      kind: manual
+
+  - key: cwfis
+    title: "Canadian Wildland Fire Information System"
+    publisher: "Natural Resources Canada"
+    url: "https://cwfis.cfs.nrcan.gc.ca/"
+    form: dashboard
+    domains: []
+    indicators: ["Fire weather", "Smoke and air quality context"]
+    resolution: [provincial, international]
+    geography: "Canada (with cross-border fire/smoke)"
+    coverage: "historical and near-real-time"
+    frequency: daily
+    refresh: "continuous (seasonal)"
+    licence: "Government of Canada — see terms"
+    access: public
+    form_of_access: "maps and datasets"
+    origin: canada
+    reaches_bc_via: "cross-border wildfire and smoke affecting BC air quality"
+    temporal_behaviour: seasonal
+    quality_notes: "Smoke transport is cross-border; attribution of exposure to a jurisdiction is approximate."
+    download:
+      kind: manual
+
+  - key: open_canada
+    title: "Open Government Portal"
+    publisher: "Government of Canada"
+    url: "https://open.canada.ca/en/open-data"
+    form: catalogue
+    domains: []
+    indicators: ["Discovery of federal datasets (e.g. immigration, environment)"]
+    resolution: [provincial, international]
+    geography: "Canada"
+    coverage: "varies by dataset"
+    frequency: irregular
+    refresh: "continuous"
+    licence: "Open Government Licence – Canada (varies by record)"
+    access: public
+    form_of_access: "CKAN-style catalogue"
+    origin: canada
+    reaches_bc_via: "federal datasets (immigration, environment, economy) that reach BC"
+    temporal_behaviour: stable
+    quality_notes: "Discovery layer; catalogued separately per dataset. Used as the route to federal external-driver data because the publisher's own portal was unreachable during M2 verification."
+    download:
+      kind: manual
+
+  - key: bcstats_economy
+    title: "Economy"
+    publisher: "BC Stats, Government of British Columbia"
+    url: "https://www2.gov.bc.ca/gov/content/data/statistics/economy"
+    form: indicator_table
+    domains: []
+    indicators: ["Income", "Employment", "Business counts"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "varies by series — verify at ingest"
+    frequency: annual
+    refresh: "varies"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "web tables"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "A determinant / stratifier used only to stratify health results — not a health outcome."
+    download:
+      kind: manual
+
+  - key: bcstats_people
+    title: "People, Population and Community"
+    publisher: "BC Stats, Government of British Columbia"
+    url: "https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community"
+    form: indicator_table
+    domains: []
+    indicators: ["Income", "Families and households", "Housing", "Migration", "Population"]
+    resolution: [provincial, health_authority, hsda, lha]
+    geography: "British Columbia"
+    coverage: "varies by series — verify at ingest"
+    frequency: annual
+    refresh: "varies"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "web tables"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Determinant / stratifier source (income, housing, migration) and denominator context; not a health outcome."
+    download:
+      kind: manual
+
+  - key: bc_education
+    title: "K-12 Reporting"
+    publisher: "Government of British Columbia, Ministry of Education and Child Care"
+    url: "https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12"
+    form: indicator_table
+    domains: []
+    indicators: ["School enrolment", "Completion rates", "Student outcomes"]
+    resolution: [provincial, health_authority]
+    geography: "British Columbia"
+    coverage: "varies"
+    frequency: annual
+    refresh: "annual"
+    licence: "Open Government Licence – British Columbia"
+    access: public
+    form_of_access: "reports and downloadable tables"
+    origin: bc
+    temporal_behaviour: trending
+    quality_notes: "Education is a stratifier / determinant, not a health outcome; small-cell suppression applies to student-level breakdowns."
+    download:
+      kind: manual
+
+  - key: popdata
+    title: "Population Data BC"
+    publisher: "Population Data BC"
+    url: "https://www.popdata.bc.ca/"
+    form: microdata
+    domains: [Mortality, Physical morbidity, Mental health, Functional status]
+    indicators: ["Administrative health records (access route)"]
+    resolution: [individual]
+    geography: "British Columbia"
+    coverage: "varies by dataset and approval"
+    frequency: irregular
+    refresh: "varies"
+    licence: "Access governed by data-sharing agreements and research-ethics approval"
+    access: request
+    form_of_access: "application, ethics review, and approved secure research environment"
+    origin: bc
+    temporal_behaviour: stable
+    quality_notes: "Individual-level access route. Data must never be committed to the repository; approvals, privacy, and security requirements apply."
+    download:
+      kind: manual
+
+  - key: statcan_microdata
+    title: "Microdata access (Statistics Canada)"
+    publisher: "Statistics Canada"
+    url: "https://www.statcan.gc.ca/en/microdata/data-centres"
+    form: microdata
+    domains: [Physical morbidity, Mental health, Functional status, Subjective wellbeing, Social wellbeing]
+    indicators: ["Survey microdata (access route)"]
+    resolution: [individual]
+    geography: "Canada (incl. BC)"
+    coverage: "varies by survey"
+    frequency: irregular
+    refresh: "varies"
+    licence: "Access governed by the Statistics Act and Research Data Centre program terms"
+    access: request
+    form_of_access: "Research Data Centres, remote access, or custom tabulations"
+    origin: canada
+    reaches_bc_via: "BC residents sampled within national survey microdata"
+    temporal_behaviour: stable
+    quality_notes: "Individual-level access route. Approval required; the repository must never hold individual records."
+    download:
+      kind: manual

@@ -222,6 +222,13 @@ __marimo__/
 # Quarto
 _site/
 .quarto/
+site_libs/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Project data: fetched data is reproducible, never committed
+data/raw/
+data/interim/
+data/processed/
+data/manifest.json

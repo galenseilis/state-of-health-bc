@@ -2,8 +2,10 @@
 title: "How to add an indicator"
 ---
 
-*Status: planned. This guide is blocked on milestone M1 (definition) in
-the [roadmap](../ROADMAP.md). The outline below is the target process.*
+*Status: partially unblocked. The [measurement
+framework](../reference/measurement-framework.qmd) (milestone M1) and the
+[data source catalogue](../reference/data-sources.qmd) (milestone M2, in
+progress) now exist; the process below is live for catalogued sources.*
 
 ## Steps (target outline)
 

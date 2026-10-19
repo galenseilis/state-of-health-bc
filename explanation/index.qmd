@@ -9,6 +9,11 @@ the [Diátaxis](https://diataxis.fr) framework [@procidadiataxis]).
 
 ## Available explanations
 
+### [Definition of the state of health](definition-of-health.qmd)
+
+The project's provisional definition (v0.1): domains, boundaries, the
+proxy-versus-construct discipline, resolution, and the revision process.
+
 ### [Defining health](defining-health.qmd)
 
 Why "state of health" needs a definition before it can be measured, and

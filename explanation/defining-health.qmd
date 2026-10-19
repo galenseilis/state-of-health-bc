@@ -2,9 +2,10 @@
 title: "Defining health"
 ---
 
-*Status: outline. The full definition document is milestone M1 in the
-[roadmap](../ROADMAP.md); this page records the problem the definition
-has to solve.*
+*Status: outline. The project's provisional definition now lives at
+[Definition of the state of health](definition-of-health.qmd) (milestone
+M1 in the [roadmap](../ROADMAP.md)); this page records the problem that
+definition has to solve.*
 
 ## Why define health first?
 

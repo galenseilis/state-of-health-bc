@@ -38,18 +38,28 @@ website:
             text: Contribute to the project
           - href: how-to/add-indicator.qmd
             text: Add an indicator
+          - href: how-to/ingest-data.qmd
+            text: Ingest a data source
       - text: "Reference"
         menu:
           - href: reference/index.qmd
             text: Overview
           - href: reference/glossary.qmd
             text: Glossary
+          - href: reference/measurement-framework.qmd
+            text: Measurement framework
+          - href: reference/data-sources.qmd
+            text: Data sources
+          - href: reference/data-quality.qmd
+            text: Data quality
           - href: reference/project-structure.qmd
             text: Project structure
       - text: "Explanation"
         menu:
           - href: explanation/index.qmd
             text: Overview
+          - href: explanation/definition-of-health.qmd
+            text: Definition of the state of health
           - href: explanation/defining-health.qmd
             text: Defining health
           - href: explanation/nonstationarity.qmd

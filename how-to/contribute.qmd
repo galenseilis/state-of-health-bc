@@ -54,6 +54,31 @@ attributions, descriptions of sources — should be cited:
 Project decisions and plans (milestones, scope choices, conventions)
 are documented in the roadmap rather than cited. When in doubt, cite.
 
+## Contributing code
+
+The language policy balances a clear top-level framework with speed where
+it actually matters:
+
+- **Python is the main language** for gluing together the top-level
+  framework and interface — orchestrating stages, wiring pipelines, and
+  presenting results.
+- **Python may also act as glue around other tools — including other
+  programming languages, such as R —** whenever there is a distinct
+  benefit: a mature statistical or domain library, official bindings, or
+  ecosystem tooling not worth reimplementing.
+- **Where performance matters and new functionality must be written, the
+  primary implementation is in Rust, C, and/or C++:**
+  - **Prefer Rust for completely new (greenfield) performance code.**
+  - **C and C++ are allowed** for interfacing with existing low-level
+    libraries that already exist, when that is useful.
+
+If it is unclear which case applies to your change, open an issue and ask
+before writing the code. Run the tooling tests before submitting:
+
+```bash
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+```
+
 ## Submit changes
 
 1. Create a branch for your change:

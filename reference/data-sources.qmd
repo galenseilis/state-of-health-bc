@@ -1,0 +1,135 @@
+---
+title: "Data sources"
+---
+
+*Status: **v0.1 (provisional, milestone M2 in progress)**. This catalogue
+is maintained alongside the machine-readable source list at
+`data/catalogue/sources.yml`, which the acquisition pipeline reads. Every
+URL below was verified reachable at the time of writing (see the
+[data quality report](data-quality.qmd)).*
+
+This is the project's inventory of the data that describe the state of
+health in BC. **Data is construed broadly**: microdata, indicator tables,
+dashboards, report figures, and catalogue/API discovery layers all
+qualify, provided licence and governance checks pass. The aim is the best
+use of all publicly available information that can be appropriately used
+— not "microdata or nothing"
+([roadmap](../ROADMAP.md), milestone M2).
+
+## How to read an entry
+
+Each source is catalogued with the following fields (see
+`data/catalogue/sources.yml`):
+
+| Field | Meaning |
+|-------|---------|
+| **key** | stable identifier used by the pipeline |
+| **form** | `microdata`, `indicator_table`, `dashboard`, `report_figure`, `api`, or `catalogue` (a discovery layer) |
+| **domains** | which [measurement-framework](measurement-framework.qmd) domains it can serve |
+| **resolution** | individual, neighbourhood, HSDA, LHA, health authority, provincial, international |
+| **coverage** | the published time span of the series |
+| **frequency / refresh** | how often observations are dated and how often the source is updated |
+| **licence / access** | reuse terms and how you obtain it |
+| **origin** | `bc`, `canada`, or `international` |
+| **temporal behaviour** | expected behaviour: `trending`, `seasonal`, `shock_prone`, or `stable` |
+| **quality notes** | suppressions, revisions, definitional breaks |
+
+## Coverage of the measurement framework
+
+Every domain in the [measurement framework](measurement-framework.qmd) is
+served by at least one catalogued source:
+
+| Domain | Catalogued sources |
+|--------|--------------------|
+| Mortality | Vital Statistics; BCCDC substance-use dashboard; BC overdose response; CIHI; Statistics Canada; FNHA |
+| Physical morbidity | BCCDC data and reports; BCCDC chronic-disease dashboard; BC Cancer; CIHI; Statistics Canada; FNHA |
+| Mental health | BCCDC substance-use dashboard; BCCDC data and reports; BC overdose response; CIHI; Statistics Canada; FNHA |
+| Functional status | CIHI; Statistics Canada |
+| Subjective wellbeing | Statistics Canada; FNHA |
+| Social wellbeing | Statistics Canada; FNHA |
+
+## British Columbia sources
+
+| Source | Publisher | Form | Domains | Resolution | Frequency |
+|--------|-----------|------|---------|-----------|-----------|
+| [Vital Statistics](https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/vital-statistics) | BC Stats | indicator table | Mortality | provincial, HA | annual |
+| [Population Estimates](https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/population-estimates) | BC Stats | indicator table | denominators | provincial → LHA | quarterly |
+| [Unregulated Drug Poisoning Emergency Dashboard](https://www.bccdc.ca/health-professionals/data-reports/substance-use-harm-reduction-dashboard) | BCCDC | dashboard | Mortality, Mental health | provincial, HA | monthly |
+| [Data and Reports](https://www.bccdc.ca/health-professionals/data-reports) | BCCDC | discovery | Physical morbidity, Mental health | provincial, HA, HSDA | irregular |
+| [Chronic Disease Dashboard](https://www.bccdc.ca/health-professionals/data-reports/chronic-disease-dashboard) | BCCDC | dashboard | Physical morbidity | provincial, HA, HSDA | annual |
+| [Overdose response](https://www2.gov.bc.ca/gov/content/overdose) | BC Ministry of Health | dashboard | Mortality, Mental health | provincial, HA | monthly |
+| [BC Cancer](https://www.bccancer.bc.ca/) | BC Cancer (PHSA) | indicator table | Physical morbidity | provincial, HA | annual |
+| [First Nations Health Authority](https://www.fnha.ca/) | FNHA | report figures | all domains | provincial, HA | irregular |
+| [Wildfire status](https://www2.gov.bc.ca/gov/content/safety/wildfire-status) | BC Wildfire Service | dashboard | external driver | provincial, HA, HSDA | continuous (seasonal) |
+
+## National (Canada) sources
+
+| Source | Publisher | Form | Domains | Resolution | Frequency |
+|--------|-----------|------|---------|-----------|-----------|
+| [CIHI](https://www.cihi.ca/en) | CIHI | indicator tables | Physical morbidity, Mental health, Functional status | provincial, HA | annual |
+| [Health statistics](https://www.statcan.gc.ca/en/subjects-start/health) | Statistics Canada | indicator tables | Morbidity, Mental health, Wellbeing, Function | provincial, HA | annual |
+| [Data tables](https://www150.statcan.gc.ca/n1/en/type/data) | Statistics Canada | indicator tables | all domains | provincial, HA, international | quarterly |
+| [Population and demography](https://www.statcan.gc.ca/en/subjects-start/population_and_demography) | Statistics Canada | indicator tables | denominators, migration | provincial, international | quarterly |
+| [Canadian Wildland Fire Information System](https://cwfis.cfs.nrcan.gc.ca/) | Natural Resources Canada | dashboard | external driver | provincial, international | continuous (seasonal) |
+
+## Determinants and stratifiers
+
+Used only to **stratify** health results, never as health outcomes
+(see the [measurement framework](measurement-framework.qmd)):
+
+| Source | Publisher | Provides | Resolution | Frequency |
+|--------|-----------|----------|-----------|-----------|
+| [Economy](https://www2.gov.bc.ca/gov/content/data/statistics/economy) | BC Stats | income, employment, business counts | provincial, HA | annual |
+| [People, Population and Community](https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community) | BC Stats | income, housing, families, migration | provincial → LHA | annual |
+| [K-12 Reporting](https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12) | Ministry of Education and Child Care | enrolment, completion, student outcomes | provincial, HA | annual |
+
+## International and external-driver sources
+
+| Source | Publisher | Form | Role | Resolution | Frequency |
+|--------|-----------|------|------|-----------|-----------|
+| [WHO data](https://www.who.int/data) | WHO | indicator tables | global reference, pandemic context | international | annual |
+| [OECD Data Explorer](https://data-explorer.oecd.org/) | OECD | indicator tables | economic and health-system context | international | annual |
+| [World Bank Open Data](https://data.worldbank.org/) | World Bank | indicator tables | macroeconomic context | international | annual |
+| [Open Government](https://open.canada.ca/en/open-data) | Government of Canada | discovery | federal datasets reaching BC | provincial, international | continuous |
+
+External drivers are catalogued with their **origin** and the mechanism by
+which they reach BC in `data/catalogue/sources.yml` (`reaches_bc_via`):
+for example, migration flows (`statcan_demography`), cross-border fire
+and smoke (`cwfis`), and global pandemic conditions (`who_data`).
+
+## Microdata access routes
+
+Individual-level sources are catalogued as **access routes** — the
+approval process, not the data:
+
+| Source | Provider | Scope | Access |
+|--------|----------|-------|--------|
+| [Population Data BC](https://www.popdata.bc.ca/) | Population Data BC | BC administrative health records | application, ethics review, secure environment |
+| [Microdata access](https://www.statcan.gc.ca/en/microdata/data-centres) | Statistics Canada | national survey microdata | Research Data Centres / remote access / custom tabulations |
+
+These are catalogued even though the data cannot be committed: they set
+the ceiling on what resolution is attainable and are the route to
+individual-level indicators. **No individual-level data enters the
+repository.**
+
+## Governance and licences
+
+- Licences vary by source and are recorded per entry. Check the record
+  before redistributing anything.
+- No individual-level data is stored in the repository. Only
+  aggregate/public sources are fetched, and fetched data are
+  reproducible artefacts (`data/raw/`) that are never committed.
+- First Nations data are governed by First Nations principles and
+  specific agreements; reuse must respect [@fnigcOcap].
+
+## Reproducing the catalogue
+
+```bash
+export PYTHONPATH=src
+python3 -m sohbc validate   # schema check
+python3 -m sohbc list       # list sources
+python3 -m sohbc check --all --include-download   # re-verify URLs
+python3 -m sohbc fetch --all
+```
+
+See [How to ingest a data source](../how-to/ingest-data.qmd).

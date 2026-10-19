@@ -1,0 +1,55 @@
+---
+title: "Measurement framework"
+---
+
+*Status: **v0.1 (provisional)** — candidate indicator families only. The
+data landscape (milestone M2 in the [roadmap](../ROADMAP.md)) will
+confirm, replace, or drop these. Nothing here is a commitment to a
+specific indicator.*
+
+This page operationalises the [definition of the state of health](../explanation/definition-of-health.qmd):
+each domain maps to **candidate indicator families**, with example
+indicators and likely sources. It is a lookup table, not an argument —
+the reasoning lives in the definition document.
+
+**Read with the proxy caveat in mind.** Every entry below is a proxy
+([definition](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)),
+chosen for tractability, not identity with the construct.
+
+## Domains and candidate indicator families
+
+| Domain | Candidate indicator families | Example indicators | Likely sources |
+|--------|------------------------------|--------------------|----------------|
+| Mortality | Overall and premature mortality; cause-specific burden | Life expectancy at birth; age-standardised mortality; infant mortality; potential years of life lost; toxic drug toxicity deaths | BC Stats / Vital Statistics [@bcStats]; BCCDC [@bccdcDrugs]; Statistics Canada [@statcan]; CIHI [@cihi] |
+| Physical morbidity | Chronic disease prevalence; notifiable disease; cancer; injury | Diabetes, hypertension, COPD prevalence; reportable communicable disease rates; cancer incidence; injury hospitalisations | BCCDC [@bccdc]; Statistics Canada [@statcan]; CIHI [@cihi] |
+| Mental health | Mental health status; substance-use harms; suicide | Depression/anxiety prevalence; hospitalisations for mental health; overdose events; suicide mortality | Statistics Canada [@statcan]; BCCDC [@bccdcDrugs]; CIHI [@cihi] |
+| Functional status | Disability and activity limitation; care needs | Activity limitation rates; disability rates; home- and community-care use; long-term-care use | Statistics Canada [@statcan]; CIHI [@cihi] |
+| Subjective wellbeing | Self-rated health; life satisfaction; positive wellbeing | Self-rated health (excellent–poor); life satisfaction; positive mental health | Statistics Canada [@statcan] |
+| Social wellbeing | Social connection and support; belonging | Loneliness/social support measures; sense of community belonging | Statistics Canada [@statcan] |
+
+## Cross-cutting dimensions
+
+Apply to every domain. Recorded as breakdowns, not as domains:
+
+- Age and life-course stage
+- Sex and gender
+- Indigenous identity
+- Geography (health authority, HSDA, LHA, neighbourhood, province)
+- Socioeconomic position — a **determinant**, used only to stratify
+
+## Resolution
+
+Each candidate indicator will be catalogued at every resolution for which
+it exists — individual (where microdata access permits), neighbourhood,
+HSDA, health authority, provincial, and external/non-BC. Where
+resolutions must be combined, that is a modelling step with stated
+assumptions, not a data property
+([definition](../explanation/definition-of-health.qmd#resolution-and-fusion)).
+
+## How entries graduate
+
+A candidate family becomes a catalogued indicator (milestone M2) when:
+a source is found and verified; its form (microdata, summary statistics,
+dashboard, report) is recorded; licence and governance checks pass; and
+its proxy-to-construct gap is documented. See
+[How to add an indicator](../how-to/add-indicator.qmd).

@@ -1,0 +1,189 @@
+---
+title: "Definition of the state of health"
+---
+
+*Status: **provisional** — version 0.1, 18 October 2026. This definition
+is expected to change as the project learns what is measurable and what
+matters. Each revision records its trigger and its changes. See
+[Revision process](#revision-process).*
+
+## Why provisional?
+
+The project treats the state of health as dynamic and nonstationary
+([Health is not stationary](nonstationarity.qmd)): the thing being
+defined changes over time, and so does our understanding of it. Fixing a
+definition permanently would contradict that premise. Instead the
+definition is **versioned** — a working commitment that is good enough to
+decide what to measure now, and explicit enough that revisions are visible
+rather than silent.
+
+The expectation is that the data landscape (milestone M2 in the
+[roadmap](../ROADMAP.md)) will force revisions: some domains will prove
+measurable, others will not; some proxies will turn out to track the
+construct poorly.
+
+## The definition (v0.1)
+
+::: {.callout-note}
+**The state of health of a population** is the joint condition of its
+members across the domains of **mortality, physical morbidity, mental
+health, functional status, subjective wellbeing, and social wellbeing**,
+at a given time and place — including how that condition is distributed
+within the population and how it is changing over time.
+:::
+
+Three features of the wording carry weight:
+
+- **Joint condition.** The domains are not interchangeable and are not
+  summed into a single number by definition. Any single number is an
+  *index* built on top of the definition, not the definition itself.
+- **Distribution.** The state of health is a distribution, not an average
+  — inequalities are part of the state of health, not an add-on.
+- **Changing.** The state of health is a trajectory, not a snapshot.
+
+## Conceptual basis
+
+The definition builds on three established positions:
+
+- **WHO's breadth.** Health is "a state of complete physical, mental and
+  social well-being and not merely the absence of disease or infirmity"
+  [@who1948]. This is why the definition has six domains rather than one,
+  and why clinical status alone is insufficient.
+- **The ICF's measurability.** The International Classification of
+  Functioning, Disability and Health treats functioning and disability as
+  outcomes of the interaction between health conditions and contextual
+  factors, spanning body functions and structures, activities, and
+  participation [@who2001icf]. This is what makes functional status a
+  domain in its own right rather than a by-product of disease.
+- **The capability approach's evaluative anchor.** Health matters because
+  of what it enables people to do and be [@sen1999] — which is why
+  subjective and social wellbeing are in scope, not just biology.
+
+## Domains
+
+| Domain | What it covers | Details |
+|--------|----------------|---------|
+| Mortality | Premature and overall death, cause-of-death burden | [Measurement framework](../reference/measurement-framework.qmd) |
+| Physical morbidity | Disease incidence and prevalence, chronic conditions, injury | [Measurement framework](../reference/measurement-framework.qmd) |
+| Mental health | Mental health status and substance-use harms | [Measurement framework](../reference/measurement-framework.qmd) |
+| Functional status | Functioning, disability, activities of daily living | [Measurement framework](../reference/measurement-framework.qmd) |
+| Subjective wellbeing | Self-rated health, life satisfaction, positive wellbeing | [Measurement framework](../reference/measurement-framework.qmd) |
+| Social wellbeing | Social connection, support, and participation | [Measurement framework](../reference/measurement-framework.qmd) |
+
+**Candidate additions.** Oral health, sensory health (vision and
+hearing), and injury are currently folded into physical morbidity and
+functional status. They may be promoted to domains if the data landscape
+shows they can be measured distinctly and add information the current
+domains miss. The bar for adding a domain is that it must not merely
+duplicate an existing one.
+
+**Cross-cutting dimensions.** Age and life-course stage, sex and gender,
+Indigenous identity, and geography apply to every domain rather than
+being domains themselves. Socioeconomic position is also used to
+stratify results — but as a *determinant*, never as a component of
+health (see [Boundaries](#boundaries)).
+
+## Proxies are not the state of health
+
+This is the project's most important measurement discipline. The state of
+health is a **construct**: real, but not directly observable. Every
+number we publish is a **proxy** — a measurement chosen because it tracks
+the construct, built by someone else, for some other purpose, with its
+own error.
+
+Confusing a proxy for the construct is the central failure mode this
+project guards against. Consequences of the distinction:
+
+- **No proxy defines its domain.** Life expectancy does not *define*
+  mortality's contribution to health; it proxies it. Self-rated health
+  does not *define* wellbeing.
+- **Proxies carry two kinds of error.** Ordinary measurement error, and
+  construct error — the proxy may be reliable but track the wrong thing.
+- **Proxies drift.** Administrative definitions, coding practices, and
+  survey instruments change over time, so a series can move because the
+  *proxy* changed, not the health ([nonstationarity](nonstationarity.qmd)).
+- **Proxy disagreement is signal.** When two proxies for the same
+  construct disagree, the right response is to investigate why, not to
+  average the disagreement away.
+- **Indices are models.** Any composite "health index" is a model built
+  on chosen proxies and weights — a claim to be defended, not a
+  measurement to be read off.
+- **Causal analyses inherit all of this.** In milestones M4–M5 the
+  proxies are variables, and their proxy status is part of the
+  assumptions register.
+
+Every indicator page must therefore state the construct it proxies, the
+gap between proxy and construct, and the known limitations.
+
+## Boundaries
+
+The definition deliberately excludes:
+
+- **Determinants of health** — income, education, housing, environment,
+  service access. These enter analyses as explanatory variables and as
+  stratification dimensions, never as components of health itself.
+- **Health-system activity** — wait times, procedures, spending,
+  staffing. These are inputs and system performance, not the population's
+  state of health (they may *explain* it, which is a different role).
+- **The absence of disease as sufficient.** The absence of disease is not
+  full health [@who1948].
+- **Any equivalence between self-reported and objective measures.**
+  Both are proxies; neither is the truth.
+
+## Resolution and fusion
+
+The project uses **all available levels of resolution**, from individual
+to provincial and beyond:
+
+- individual (where microdata access and governance allow — see
+  [Why BC only?](why-bc.qmd) and the roadmap's governance principles);
+- neighbourhood and local health area (LHA);
+- health service delivery area (HSDA) and health authority;
+- provincial;
+- external / non-BC (external drivers).
+
+Different resolutions answer different questions and expose different
+things: fine resolutions show local heterogeneity that coarse summaries
+hide (and comparing coarse summaries to fine ones invites the ecological
+fallacy). The project therefore:
+
+1. records the **resolution** of every datum and every result;
+2. **harmonises** across resolutions where definitions are compatible;
+3. **fuses** pictures where that is useful, using multilevel/hierarchical
+   models and other combination methods [@gelman2007];
+4. treats any fused picture as a **model output** — reported with its
+   assumptions and uncertainty, never as a fact.
+
+## Temporal semantics
+
+- Coverage targets **as far back as sources allow**, with each series
+  carrying its observation window and definitional breaks handled
+  explicitly.
+- Health is represented as levels, slopes, and discontinuities — a
+  trajectory, as set out in [Health is not stationary](nonstationarity.qmd).
+- The definition itself is versioned; the thing defined drifts, and so
+  does the definition.
+
+## Boundaries of the definition itself
+
+This document defines the *state of health*. It deliberately does not yet
+settle: the exact indicator set (grows with the data landscape, M2), the
+weights of any future index (a modelling choice, M3+), or the causal
+claims that explain the state of health (M4–M5). Being honest about what
+a definition does not cover is part of the definition.
+
+## Revision process
+
+The definition is revised when:
+
+- the data landscape (M2) shows a domain is unmeasurable as conceived, or
+  a measurable domain is missing;
+- a proxy is shown to track its construct poorly;
+- new evidence establishes a domain, or collapses a distinction;
+- the population or measurement context shifts enough to invalidate part
+  of the definition.
+
+Each revision: increments the version, records the trigger and the
+change, updates the [measurement framework](../reference/measurement-framework.qmd)
+and [glossary](../reference/glossary.qmd) as needed, and is reviewed by at
+least one domain reviewer (roadmap M1 acceptance criterion).
