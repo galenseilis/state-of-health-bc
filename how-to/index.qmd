@@ -1,0 +1,20 @@
+---
+title: "How-to guides"
+---
+
+How-to guides are **task-oriented**: short, focused directions for
+accomplishing a specific goal, assuming you already know the project's
+basics. If you are still learning, start with the
+[tutorials](../tutorials/index.qmd) instead.
+
+## Available guides
+
+### [Contribute to the project](contribute.qmd)
+
+Set up your environment, edit documentation, and submit changes.
+
+### [Add an indicator](add-indicator.qmd)
+
+Add a health indicator to the measurement framework and data pipeline.
+*Planned — blocked on milestone M1 (definition) in the
+[roadmap](../ROADMAP.md).*

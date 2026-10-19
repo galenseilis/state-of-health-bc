@@ -1,0 +1,64 @@
+---
+title: "Defining health"
+---
+
+*Status: outline. The full definition document is milestone M1 in the
+[roadmap](../ROADMAP.md); this page records the problem the definition
+has to solve.*
+
+## Why define health first?
+
+"State of health" sounds like something you could just measure. It is
+not. Before any indicator can be collected, compared over time, or used
+in a causal model, the project must commit to what counts as health and
+what does not — otherwise every downstream number rests on a different
+unstated assumption.
+
+A definition is doing real work here. It determines:
+
+- **What gets measured.** Longevity only? Mental health? Functional
+  capacity? Subjective wellbeing? Each choice admits some indicators and
+  excludes others.
+- **What comparisons mean.** Two regions' "health" are only comparable
+  if both were measured against the same definition.
+- **What the causal analysis is *of*.** A causal model of health outcomes
+  is undefined until the outcome is defined.
+
+## What the definition must pin down
+
+The definition document (M1) will commit to:
+
+1. **Conceptual basis** — which established frameworks the definition
+   builds on — e.g. the WHO definition of health as "a state of complete
+   physical, mental and social well-being" [@who1948], the ICF
+   functioning model [@who2001icf], capability approaches [@sen1999] —
+   and why.
+2. **Domains** — the set of dimensions counted as part of the state of
+   health (candidate families: mortality, morbidity, mental health,
+   functional status, and context kept strictly separate from health
+   itself).
+3. **Boundaries** — what is explicitly excluded, and why (e.g.
+   determinants of health are not health; health-system inputs are not
+   health).
+4. **Unit of analysis** — population-level vs. individual-level, and the
+   geographic granularity the project works at.
+5. **Temporal semantics** — health as a time-varying state: a trajectory
+   with levels, slopes, and possible discontinuities, not a timeless
+   attribute. Each domain declares its expected temporal behaviour
+   (trending, seasonally varying, shock-prone, or plausibly stable), and
+   the definition states how the project will detect when its description
+   of health has gone stale (see
+   [Health is not stationary](nonstationarity.qmd)).
+6. **Operationalisation** — for each domain, the candidate indicator
+   families that can represent it with obtainable data — noting that
+   data explaining BC's health need not originate in BC (see
+   [Why BC only?](why-bc.qmd)).
+
+## The hard boundary: health vs. its determinants
+
+The most common failure mode in "state of health" projects is quietly
+mixing health outcomes with their determinants (income, environment,
+service access). This project keeps them in separate layers: determinants
+enter the analysis as *explanatory variables*, never as components of
+health itself. The causal structures in milestone M5 depend on that
+distinction being drawn early.

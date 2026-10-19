@@ -1,0 +1,30 @@
+---
+title: "Reference"
+---
+
+Reference material is **information-oriented**: descriptions of the
+machinery and facts you consult while working — organised for lookup,
+not reading order.
+
+## Available reference
+
+### [Glossary](glossary.qmd)
+
+Definitions of the terms this project uses consistently.
+
+### [Project structure](project-structure.qmd)
+
+What lives where in the repository and how the documentation site is
+organised.
+
+### Planned
+
+- **Data source catalogue** — every data source: coverage, licence,
+  access route, refresh cadence, and source form (microdata, summary
+  statistics, dashboard, or report). "Data" is construed broadly: the
+  aim is the best use of all publicly available information that can be
+  appropriately used (milestone M2).
+- **Indicator reference pages** — one page per indicator: definition,
+  unit, population, provenance, caveats (milestones M1–M3).
+- **Methods reference** — statistical and causal methods used, with
+  parameters (milestones M4–M5).

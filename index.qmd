@@ -1,0 +1,56 @@
+---
+title: "State-of-Health BC"
+---
+
+**State-of-Health BC (SoHBC)** is a project that attempts to describe and
+predict the state of health in British Columbia, Canada — from defining
+what "health" means here, through the data and causal structures behind
+it, to actions that would improve it.
+
+::: {.callout-warning}
+## Disclaimer — caveat emptor
+
+State-of-Health BC is an **independent project**. It is not officially
+endorsed by, affiliated with, or produced by any organisation — including
+the Government of British Columbia, the Provincial Health Services
+Authority (PHSA), the BC Centre for Disease Control (BCCDC), any regional
+health authority, the First Nations Health Authority, or any other body.
+It does not speak for them, and any errors are the project's own. This
+remains the case until further notice.
+:::
+
+The project is early stage. This site is the project's documentation and
+will grow alongside the analysis.
+
+Two principles frame everything here. Health is treated as **dynamic and
+nonstationary** — a trajectory that changes over time, along with the
+relationships behind it ([why](explanation/nonstationarity.qmd)). And
+while the object of study is BC's health, the data explaining it are
+not limited to BC-origin data ([why](explanation/why-bc.qmd)).
+
+## Where to start
+
+This documentation follows the [Diátaxis](https://diataxis.fr) framework
+[@procidadiataxis]: four distinct modes of documentation, each answering
+a different kind of question.
+
+| Section | Ask it when you want to... | Start here |
+|---------|----------------------------|------------|
+| [Tutorials](tutorials/index.qmd) | learn by doing, step by step | [Your first look](tutorials/first-look.qmd) |
+| [How-to guides](how-to/index.qmd) | accomplish a specific task | [Contribute](how-to/contribute.qmd) |
+| [Reference](reference/index.qmd) | look up facts and structure | [Glossary](reference/glossary.qmd) |
+| [Explanation](explanation/index.qmd) | understand concepts and context | [Defining health](explanation/defining-health.qmd) |
+
+Project milestones and their status live in the [Roadmap](ROADMAP.md).
+
+## The journey
+
+1. Defining health, and the state of health in BC.
+2. Finding and exploring data that describe the state of health in BC
+   over time and space — "data" construed broadly, from microdata to
+   published summary statistics.
+3. Characterising the variables that are statistically dependent with
+   health.
+4. Characterising the causal structures that result in changes in the
+   state of health.
+5. Recommending actions that would improve the state of health.

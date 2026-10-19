@@ -1,0 +1,65 @@
+---
+title: "Glossary"
+---
+
+Terms are listed alphabetically. This glossary grows with milestone M1
+(definition) in the [roadmap](../ROADMAP.md).
+
+**Causal structure**
+: A representation (typically a directed acyclic graph, or DAG) of the
+assumed cause-and-effect relationships among variables, used to reason
+about what interventions would change health outcomes [@pearl2009].
+
+**Data**
+: Construed broadly: any publicly available information that can be
+appropriately used for the project's goals — from microdata through
+published summary statistics, indicator tables, dashboards, and report
+figures.
+
+**Diátaxis**
+: The documentation framework this site follows, organising docs into
+four modes: tutorials, how-to guides, reference, and explanation
+[@procidadiataxis].
+
+**Health authority**
+: One of the regional organisations delivering health services in BC
+(e.g. Vancouver Coastal Health, Fraser Health) [@bcHealthAuthorities]. A
+common geographic breakdown for BC health data.
+
+**Indicator**
+: A defined, sourced, reproducible measurement used to represent some
+aspect of the state of health (e.g. life expectancy at birth).
+
+**Measurement framework**
+: The scheme of domains and candidate indicators that operationalises the
+project's definition of the state of health.
+
+**Nonstationarity**
+: The property of a series or relationship whose statistical properties
+(level, variability, association with other variables) change over time
+[@box2015; @hyndman2021]. The project assumes BC's health is
+nonstationary in all three senses; see [Health is not
+stationary](../explanation/nonstationarity.qmd).
+
+**Observation window**
+: The time period a reported result was estimated on. Every published
+figure in this project carries its observation window, because a result
+true for one window may not hold for another.
+
+**Regime shift**
+: An abrupt change in the level or behaviour of a series — e.g. an
+epidemic, health system reform, or coding definition change — after
+which the series is effectively a different one. Comparisons spanning a
+regime shift are treated separately from comparisons within a regime.
+
+**State of health (SoH)**
+: The condition of health in a population at a point in time and space —
+the central quantity this project describes and predicts. Precise
+definition: planned (milestone M1).
+
+**Stationarity**
+: The opposite of nonstationarity: a series or relationship whose
+statistical properties hold steady over the analysis window. Pooled
+single estimates are only reported when stationarity is supported
+[@box2015; @hyndman2021]; see [Health is not
+stationary](../explanation/nonstationarity.qmd).

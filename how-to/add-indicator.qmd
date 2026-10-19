@@ -1,0 +1,36 @@
+---
+title: "How to add an indicator"
+---
+
+*Status: planned. This guide is blocked on milestone M1 (definition) in
+the [roadmap](../ROADMAP.md). The outline below is the target process.*
+
+## Steps (target outline)
+
+1. **Check the measurement framework.** Confirm which domain the
+   indicator belongs to in the definition document
+   ([explanation](../explanation/defining-health.qmd)).
+2. **Find a source.** Search the data source catalogue
+   ([reference](../reference/index.qmd)) for a source covering the
+   indicator, its geography, and its time range. Sources are construed
+   broadly: microdata, but also published summary statistics, indicator
+   tables, dashboards, and report figures all qualify, provided the
+   licence and data-governance checks pass. If no source exists, record
+   the gap in an issue before proceeding.
+3. **Add the ingestion.** Add a fetch step to the data pipeline for the
+   source, pinning the retrieval and documenting any licence
+   restrictions.
+4. **Write the reference page.** Create an indicator page in
+   `reference/` stating: definition, unit, population, source, coverage
+   period, refresh cadence, and known caveats.
+5. **Wire it into the analysis.** Add the indicator to the descriptive
+   pipeline so it appears in the atlas (milestone M3).
+6. **Render and verify.**
+
+   ```bash
+   quarto render
+   ```
+
+7. **Cross-check governance.** Confirm the licence permits redistribution
+   of anything you committed and that no individual-level data is in the
+   repository.

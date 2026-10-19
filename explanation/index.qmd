@@ -1,0 +1,34 @@
+---
+title: "Explanation"
+---
+
+Explanation is **understanding-oriented**: discussion that contextualises
+what you are doing and why — the *background* that tutorials, how-to
+guides, and reference deliberately leave out (one of the four modes of
+the [Diátaxis](https://diataxis.fr) framework [@procidadiataxis]).
+
+## Available explanations
+
+### [Defining health](defining-health.qmd)
+
+Why "state of health" needs a definition before it can be measured, and
+what the definition must pin down.
+
+### [Health is not stationary](nonstationarity.qmd)
+
+Why the project treats health as a dynamic, nonstationary quantity — and
+what that rules out at every stage of the analysis.
+
+### [Why BC only?](why-bc.qmd)
+
+The scope decision behind limiting this project to British Columbia —
+and why explanatory data from outside BC still counts.
+
+## Planned explanations
+
+- **What the data can and cannot say** — coverage, suppression, and
+  definitional breaks in BC health data (milestone M2).
+- **Dependence vs. causation in health data** — why correlation
+  analyses are a waypoint, not a destination (milestones M4–M5).
+- **How recommendations are graded** — evidence strength, uncertainty,
+  and equity impact (milestone M6).

@@ -1,0 +1,39 @@
+---
+title: "Tutorial: Your first look at BC health data"
+---
+
+*Status: planned. This tutorial is blocked on milestone M2 (data
+landscape) in the [roadmap](../ROADMAP.md). The outline below is the
+target structure.*
+
+## Objective
+
+By the end of this tutorial you will have loaded a headline health
+indicator for British Columbia, plotted its trend over time, and compared
+it across health authority regions — using only reproducible, documented
+steps.
+
+## Prerequisites
+
+- A working Quarto environment (see [How to contribute](../how-to/contribute.qmd)).
+- The project's data pipeline has been run at least once.
+
+## Steps (target outline)
+
+1. **Set up.** Clone the repository and render the site locally with
+   `quarto preview`.
+2. **Fetch an indicator.** Run the ingestion command for one indicator
+   (e.g. life expectancy at birth) and locate the resulting dataset.
+3. **Plot the trend.** Produce a time-series chart of the indicator for
+   BC as a whole.
+4. **Compare regions.** Break the same indicator down by health
+   authority and overlay the regional series.
+5. **Read the caveats.** Open the indicator's reference page and note
+   its provenance, definition, and known limitations.
+6. **Reflect.** Note what the chart does *not* tell you — this is where
+   the [explanation](../explanation/index.qmd) section picks up.
+
+## What you have learned
+
+How the pipeline, reference pages, and explanation pages fit together:
+the same pattern used by every subsequent analysis in this project.

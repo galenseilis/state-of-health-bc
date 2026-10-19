@@ -1,0 +1,18 @@
+---
+title: "Tutorials"
+---
+
+Tutorials are **learning-oriented**: lessons that take you through a task
+step by step, assuming little prior knowledge, and leaving you with
+something working.
+
+They complement — not replace — the [how-to guides](../how-to/index.qmd),
+which assume you already know the basics and just need the steps.
+
+## Available tutorials
+
+### [Your first look at BC health data](first-look.qmd)
+
+A guided walkthrough of exploring a headline health indicator for BC:
+loading it, plotting it over time, and comparing regions. *Planned —
+blocked on the data landscape milestone (M2).*

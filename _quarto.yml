@@ -1,0 +1,68 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - tutorials/
+    - how-to/
+    - reference/
+    - explanation/
+    - ROADMAP.md
+
+bibliography: references.bib
+
+website:
+  title: "State-of-Health BC"
+  site-url: "https://galenseilis.github.io/state-of-health-bc"
+  repo-url: "https://github.com/galenseilis/state-of-health-bc"
+  repo-actions: [edit, issue]
+  page-footer:
+    left: "State-of-Health BC — licensed GPL-3.0"
+    center: "Independent project — not endorsed by any organisation"
+    right: "Built with Quarto"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: "Tutorials"
+        menu:
+          - href: tutorials/index.qmd
+            text: Overview
+          - href: tutorials/first-look.qmd
+            text: Your first look at BC health data
+      - text: "How-to guides"
+        menu:
+          - href: how-to/index.qmd
+            text: Overview
+          - href: how-to/contribute.qmd
+            text: Contribute to the project
+          - href: how-to/add-indicator.qmd
+            text: Add an indicator
+      - text: "Reference"
+        menu:
+          - href: reference/index.qmd
+            text: Overview
+          - href: reference/glossary.qmd
+            text: Glossary
+          - href: reference/project-structure.qmd
+            text: Project structure
+      - text: "Explanation"
+        menu:
+          - href: explanation/index.qmd
+            text: Overview
+          - href: explanation/defining-health.qmd
+            text: Defining health
+          - href: explanation/nonstationarity.qmd
+            text: Health is not stationary
+          - href: explanation/why-bc.qmd
+            text: Why BC only?
+      - href: ROADMAP.md
+        text: Roadmap
+
+format:
+  html:
+    theme:
+      - cosmo
+      - darkly
+    toc: true
+    link-external-newwindow: true

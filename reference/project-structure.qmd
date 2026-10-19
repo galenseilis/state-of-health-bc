@@ -1,0 +1,57 @@
+---
+title: "Project structure"
+---
+
+## Repository layout
+
+```
+state-of-health-bc/
+├── README.md              Project overview (start here on GitHub)
+├── ROADMAP.md             Milestones, deliverables, acceptance criteria
+├── LICENSE                GPL-3.0
+├── _quarto.yml            Documentation site configuration
+├── index.qmd              Site landing page
+├── references.bib         Bibliography: sources cited in the docs
+├── tutorials/             Learning-oriented: guided lessons
+├── how-to/                Task-oriented: task recipes
+├── reference/             Information-oriented: lookup pages
+├── explanation/           Understanding-oriented: concepts & context
+└── .github/workflows/     CI: renders site, deploys to gh-pages branch
+```
+
+Analysis code and data pipelines will be added as milestones M2–M5 land;
+their layout will be documented here when they arrive.
+
+## The four Diátaxis sections
+
+Each directory maps to one mode of the
+[Diátaxis](https://diataxis.fr) framework [@procidadiataxis]:
+
+| Directory | Mode | Character |
+|-----------|------|-----------|
+| `tutorials/` | Learning | Lessons for newcomers, run start to finish |
+| `how-to/` | Task | Recipes for a specific job, assume prior knowledge |
+| `reference/` | Information | Neutral, accurate, structured for lookup |
+| `explanation/` | Understanding | Discussion that contextualises and deepens |
+
+When adding a page, pick the section first, then write for that mode.
+A single topic can justify a page in more than one section — e.g. a
+recipe ("how to ingest a source") and its background ("how the ingestion
+pipeline works") are different pages, not one blended page.
+
+## Site configuration
+
+`_quarto.yml` controls the site:
+
+- `project.render` — the exact list of files rendered into the site
+  (README and LICENSE are deliberately excluded).
+- `website.navbar` — navigation; add new pages there so they are
+  reachable.
+- `format.html.theme` — light (`cosmo`) and dark (`darkly`) themes.
+
+## Deployment
+
+On every push to `main`, `.github/workflows/docs.yml` runs `quarto render`
+and publishes the built site from `_site/` to the `gh-pages` branch.
+GitHub Pages serves that branch at
+<https://galenseilis.github.io/state-of-health-bc>.

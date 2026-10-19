@@ -1,0 +1,77 @@
+---
+title: "Health is not stationary"
+---
+
+*This page frames an assumption that runs through the whole project: the
+state of health, and everything associated with it, changes over time.
+It is reflected in every milestone of the [roadmap](../ROADMAP.md).*
+
+## What nonstationarity means here
+
+A quantity is **stationary** if its statistical properties — average
+level, variability, relationships with other variables — stay the same
+over time; **nonstationary** means they drift: the average moves, the
+variability changes, or the relationships themselves change
+[@box2015; @hyndman2021].
+
+The project assumes BC's health is nonstationary in all three senses:
+
+1. **The outcome drifts.** Life expectancy, disease burden, mental
+   health, and functional status trend, oscillate, and jump. Secular
+   improvements, epidemics (including the COVID-19 pandemic [@whocovid]
+   and the toxic drug crisis in BC [@bccdcDrugs]), demographic aging,
+   and policy or health-system reforms all move the level — sometimes
+   gradually, sometimes as abrupt regime shifts.
+2. **Relationships drift.** A variable associated with health in one
+   decade need not be associated in the next. Income gradients, the
+   effect of health-system capacity, and behavioural risk factors all
+   operate in a changing context; a pooled estimate over many years may
+   describe no actual period well.
+3. **The data-generating process drifts.** Even when health itself is
+   unchanged, the *measurement* changes: coding definitions, survey
+   methods, coverage, and reporting practice evolve. Part of any apparent
+   change in a series is change in how it was recorded.
+
+## What this rules out
+
+The intuitive way to report "the state of health" is a snapshot: this is
+BC's number, here is how it compares. A dynamic view rejects the
+snapshot as the headline:
+
+- **Levels without trajectories hide the direction.** A stable-looking
+  level can be the crossing point of rising and falling trends in
+  subpopulations.
+- **Single pooled estimates hide instability.** A decade-long average
+  association can be the blend of two periods with different — even
+  opposite — relationships.
+- **Undated conclusions rot.** A finding true for 2000–2019 may be false
+  for 2020 onward, but reads identically unless its window is stated.
+
+## What follows for each stage of the project
+
+- **Definition (M1).** Health is defined as a time-varying state with
+  temporal semantics — a trajectory with levels, slopes, and possible
+  discontinuities — not a timeless attribute.
+- **Data (M2).** Catalogues record coverage windows, refresh cadence,
+  revisions, and definitional breaks; series are checked for structural
+  breaks before use.
+- **Description (M3).** Trends, turning points, and change points are
+  reported alongside levels; regimes (pre- and post-shock) are compared
+  explicitly rather than blended.
+- **Dependence (M4).** Associations are estimated over stated windows
+  and tested for stability before any pooled number is reported.
+- **Causation (M5).** Causal structures are time-indexed: lagged
+  effects, feedback loops, and time-varying confounding are represented,
+  and each causal claim carries a validity window.
+- **Recommendations (M6).** Every recommendation is dated, tied to the
+  window of evidence behind it, and paired with the drift indicators
+  that would trigger re-evaluation.
+
+## The practical consequence: re-run, don't just publish once
+
+If health is nonstationary, publishing an analysis is not the end of the
+job. The pipeline must be re-runnable as new data arrive, and results
+versioned with their observation window — so that "what is the state of
+health in BC?" can be answered again, differently, when it *has* changed.
+This is a cross-cutting concern in the roadmap: vigilance about
+drift applies to every milestone, not once at the end.

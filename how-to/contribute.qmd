@@ -1,0 +1,76 @@
+---
+title: "How to contribute"
+---
+
+## Set up
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/galenseilis/state-of-health-bc.git
+   cd state-of-health-bc
+   ```
+
+2. Install [Quarto](https://quarto.org/docs/get-started/) (version 1.4 or
+   later).
+
+3. Preview the documentation site locally:
+
+   ```bash
+   quarto preview
+   ```
+
+## Edit documentation
+
+- Documentation source lives in the four Diátaxis directories:
+  `tutorials/`, `how-to/`, `reference/`, and `explanation/`.
+- The site configuration is `_quarto.yml`; the landing page is
+  `index.qmd`.
+- Decide which Diátaxis section your page belongs in **before** writing:
+  learning → tutorials, task → how-to, fact lookup → reference,
+  understanding → explanation. See the
+  [project structure reference](../reference/project-structure.qmd).
+
+Check your page renders cleanly:
+
+```bash
+quarto render
+```
+
+## Cite as you go
+
+Factual claims about the world — statistics, definitions,
+attributions, descriptions of sources — should be cited:
+
+1. Add the source to `references.bib` (BibTeX). **Verify the URL loads
+   before adding it; never guess a URL.** Prefer primary sources
+   (the issuing organisation's own page) over secondary reporting.
+2. Cite it inline with Pandoc citation syntax: `[@key]` for a
+   parenthetical citation (renders as "(Author Year)"), `@key` for a
+   narrative one.
+3. Render — each page generates its own reference list containing only
+   the works it cites.
+
+Project decisions and plans (milestones, scope choices, conventions)
+are documented in the roadmap rather than cited. When in doubt, cite.
+
+## Submit changes
+
+1. Create a branch for your change:
+
+   ```bash
+   git checkout -b my-change
+   ```
+
+2. Commit your work with a clear message describing the change.
+3. Open a pull request against `main`.
+4. The documentation workflow builds the site on every push to `main`;
+   failures in the workflow indicate a rendering error to fix before
+   merging.
+
+## Where work is planned
+
+Milestones and their deliverables are tracked in the
+[roadmap](../ROADMAP.md). If you want to pick up work, start with an
+`in progress` or `not started` milestone and open an issue to say you
+are taking it.

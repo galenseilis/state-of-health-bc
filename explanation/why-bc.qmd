@@ -1,0 +1,71 @@
+---
+title: "Why BC only?"
+---
+
+This is primarily due to capacity. Maybe someday the project can expand
+to Canada, and then to North America, and then Earth. But for now a scope
+of BC is already a great difficulty to face realistically.
+
+## The case for a narrow scope
+
+Describing and predicting the state of health of a population means
+wrestling with data acquisition, definitional consistency, geographic
+and demographic granularity, and causal identification — each of which is
+hard on its own. A jurisdiction chosen for data availability and
+manageable size keeps the problem finite:
+
+- **Data access.** BC-specific sources (BC Stats [@bcStats], DataBC
+  [@databc], BCCDC/PHSA [@bccdc; @phsa], health authority reporting
+  [@bcHealthAuthorities]) plus federal sources (Statistics Canada
+  [@statcan], CIHI [@cihi]) give a tractable, well-documented data
+  landscape. "Data" here is construed broadly — the aim is the best use
+  of all publicly available information that can be appropriately used,
+  from microdata to published summary statistics.
+- **Institutional context.** One province means one health system
+  structure, one set of regional health authorities
+  [@bcHealthAuthorities], one policy context — so comparisons across
+  regions are meaningful without modelling cross-jurisdictional system
+  differences.
+- **Honest completion.** A finished analysis of one jurisdiction is worth
+  more than an abandoned analysis of a continent.
+
+## What "BC only" means — and what it doesn't
+
+"BC only" scopes the **object of study**: the health being described,
+predicted, and ultimately improved is BC's. It does *not* scope the data
+that can explain that health. Anything outside BC that bears on BC's
+state of health is relevant data:
+
+- **Patient flows.** People receiving BC care from elsewhere — and BC
+  residents treated outside the province — change what BC's health
+  system delivers and what its outcome series show.
+- **Economic disturbances from elsewhere.** Interest rates, tariffs,
+  commodity prices, and recessions originating outside the province move
+  BC household resources, employment, and in turn health outcomes and
+  health-system demand.
+- **Migration and mobility.** Interprovincial and international migration
+  change the population whose health is being measured; commuting and
+  cross-border use blur where exposures and outcomes occur.
+- **Environmental and epidemiological spillovers.** Wildfire smoke,
+  air pollution, and infectious disease introduction do not respect the
+  provincial border.
+- **National policy and supply chains.** Federal fiscal and health
+  policy, drug and device supply chains, and national media/behavioural
+  effects all reach into BC from outside it.
+
+The practical rule: a variable's *geographic origin* is never a reason
+to exclude it — only its causal relevance to BC health is. The data
+catalogue in milestone M2 tags each source with its geographic origin
+and the mechanism by which it reaches BC, so external data stays visible
+as external rather than silently mislabelled as BC data.
+
+Conversely, what remains out of scope is *other jurisdictions' health as
+an object of study*: this project does not describe or predict Ontario's
+or Canada's state of health, even where their data is used as input.
+
+## An invitation
+
+The hope is that this project inspires others who live elsewhere to start
+putting the pieces together about the state of health where *they* live.
+The documentation and method structure here — definition → data →
+dependence → causation → recommendations — are deliberately transferable.
