@@ -251,8 +251,10 @@ state of health.
 
 ## M6 — Recommendations
 
-**Goal:** Recommend actions that would improve the state of health, with
-explicit evidence grading and uncertainty.
+**Goal:** Recommend actions that would improve the **cumulative** state
+of health (maximising the time-integrated state of health over time,
+rather than point-in-time snapshots), with explicit evidence grading
+and uncertainty.
 
 **Deliverables:**
 

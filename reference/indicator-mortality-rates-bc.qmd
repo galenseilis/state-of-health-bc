@@ -16,7 +16,7 @@ the views below. Each indicator page states its provenance and caveats
 | Field | Value |
 |-------|-------|
 | **Domain** | [Mortality](../reference/measurement-framework.qmd) |
-| **Definition** | Deaths and the mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia; crude and directly age-standardised (WHO World Standard Population 2000–2025) |
+| **Definition** | Deaths and the mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia; crude and directly age-standardised (WHO World Standard Population 2000–2025) [@whoStandardPop] |
 | **Source** | Statistics Canada, table 13-10-0710-01, *Mortality rates, by age group* [@statcan_wds_table] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published summary statistics) |

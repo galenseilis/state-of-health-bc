@@ -53,4 +53,6 @@ Project milestones and their status live in the [Roadmap](ROADMAP.md).
    health.
 4. Characterising the causal structures that result in changes in the
    state of health.
-5. Recommending actions that would improve the state of health.
+5. Recommending actions that would improve the **cumulative** state of
+   health over time (maximising the time-integrated state of health across
+   individuals and cohorts).

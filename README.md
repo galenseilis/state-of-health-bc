@@ -19,7 +19,6 @@ until further notice.
 ## What it does
 
 The project follows a five-stage journey:
-
 1. **Define** health, and the state of health in BC.
 2. **Find and explore** data that describe the state of health in BC over
    time and space — "data" construed broadly, from microdata to published
@@ -28,7 +27,10 @@ The project follows a five-stage journey:
    health.
 4. **Characterise** the causal structures that result in changes in the
    state of health.
-5. **Recommend** actions that would improve the state of health.
+5. **Recommend** actions that would improve the **cumulative** state of
+   health over time (maximising the time-integrated state of health across
+   individuals and cohorts), rather than a single point-in-time snapshot.
+
 
 Each stage is broken into milestones with deliverables and acceptance
 criteria in [ROADMAP.md](ROADMAP.md).
