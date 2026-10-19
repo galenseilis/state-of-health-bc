@@ -16,7 +16,7 @@ the views below. Each indicator page states its provenance and caveats
 | Field | Value |
 |-------|-------|
 | **Domain** | [Mortality](../reference/measurement-framework.qmd) |
-| **Definition** | Deaths and the crude mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia |
+| **Definition** | Deaths and the mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia; crude and directly age-standardised (WHO World Standard Population 2000–2025) |
 | **Source** | Statistics Canada, table 13-10-0710-01, *Mortality rates, by age group* [@statcan_wds_table] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published summary statistics) |
@@ -31,29 +31,35 @@ the views below. Each indicator page states its provenance and caveats
 ```{ojs}
 //| echo: false
 rows = FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
-rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population")
+rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages")
 counts = rows.filter(d => d.characteristic === "Number of deaths")
+asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true})
 trend = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
+series = rates.map(d => ({year: d.ref_date, rate: d.value, series: "Crude"}))
+  .concat(asr.map(d => ({year: d.ref_date, rate: d.value, series: "Age-standardised"})))
 ```
 
 ```{ojs}
 //| echo: false
 Plot.plot({
-  title: "Crude mortality rate, British Columbia (per 1,000 population)",
+  title: "Mortality rate, British Columbia (per 1,000 population)",
   x: {label: "Year", tickFormat: "d"},
   y: {grid: true, label: "Deaths per 1,000 population"},
+  color: {legend: true},
   marks: [
-    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "orange", fillOpacity: 0.12}),
+    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
     Plot.ruleX([trend.change_point], {stroke: "red", strokeDasharray: "4,4"}),
-    Plot.lineY(rates, {x: "ref_date", y: "value"}),
-    Plot.dot(rates, {x: "ref_date", y: "value", tip: true})
+    Plot.lineY(series, {x: "year", y: "rate", stroke: "series", tip: true}),
+    Plot.dot(series, {x: "year", y: "rate", stroke: "series", tip: true})
   ]
 })
 ```
 
-The shaded band marks the COVID-19 period (2020–2024) and the dashed
-red line the detected change point. Both are regime annotations
-(milestone M3).
+The **crude** rate is per 1,000 residents at the observed age mix; the
+**age-standardised** rate applies the WHO World Standard Population
+(2000–2025) [@whoStandardPop], removing the effect of BC's ageing
+population. The grey band marks the COVID-19 period (2020–2024) and the
+red dashed line the crude rate's detected change point.
 
 ```{ojs}
 //| echo: false
@@ -94,10 +100,11 @@ point is **${trend.change_point}**${trend.change_point === 2020 ? " — the onse
 
 ## Caveats
 
-- **Crude, not standardised.** The rate is not age-adjusted, so it reflects
-  both real change and shifts in BC's age structure. Age-standardisation
-  (using the age-group breakdown already present in the raw table and a
-  cited standard population) is a planned refinement.
+- **Crude vs standardised.** Two series are published: the crude rate
+  (observed age mix) and a directly age-standardised rate using the WHO
+  World Standard Population (2000–2025) [@whoStandardPop]. The crude rate
+  can rise while the standardised rate falls if the population ages — seen
+  here, so read the two together.
 - **Change point is exploratory.** The single change point and segment
   slopes are a descriptive summary of a short series, not a formal
   break-point test; the post-2020 segment is especially short and volatile.
@@ -116,4 +123,7 @@ PYTHONPATH=src python3 -m sohbc fetch statcan_wds
 PYTHONPATH=src python3 -m sohbc build mortality_rates_bc
 ```
 
-The tidy dataset is published at `data/published/mortality_rates_bc.csv`.
+The tidy dataset is published at `data/published/mortality_rates_bc.csv`,
+with the age-standardised series at
+`data/published/mortality_rates_bc_age_standardised.csv` (standard
+population weights in `data/reference/who_standard_population.csv`).

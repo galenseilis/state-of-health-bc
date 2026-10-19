@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,12 @@ from .catalogue import ROOT
 from .fetch import RAW_DIR, TIMEOUT, USER_AGENT
 
 PUBLISHED_DIR = ROOT / "data" / "published"
+REFERENCE_DIR = ROOT / "data" / "reference"
+
+STANDARD_FIELDS = ["ref_date", "characteristic", "value", "uom", "standard"]
+REFERENCE_DIR = ROOT / "data" / "reference"
+
+ALL_AGES = "Age at time of death, all ages"
 
 INDICATORS: dict[str, dict[str, Any]] = {
     "mortality_rates_bc": {
@@ -25,13 +32,17 @@ INDICATORS: dict[str, dict[str, Any]] = {
         "source_table": "13-10-0710-01",
         "source_table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310071001",
         "geo": "British Columbia, place of residence",
-        "age_group": "Age at time of death, all ages",
+        "age_group": None,
         "sex": "Both sexes",
+        "all_ages": "Age at time of death, all ages",
         "output": PUBLISHED_DIR / "mortality_rates_bc.csv",
+        "standard_population": REFERENCE_DIR / "who_standard_population.csv",
+        "standard_name": "WHO World Standard Population (2000-2025)",
         "trajectory_characteristic": "Mortality rate per 1,000 population",
         "definition": (
             "Deaths and the crude mortality rate (deaths per 1,000 population), "
-            "all ages, both sexes, resident in British Columbia."
+            "all ages, both sexes, resident in British Columbia, plus an "
+            "age-standardised rate using the WHO World Standard Population."
         ),
         "caveats": (
             "Crude rate: not adjusted to a standard population, so it reflects "
@@ -211,14 +222,75 @@ def trajectory(points: list[tuple[int, float]], min_segment: int = 5) -> dict[st
 
 
 def series_points(
-    rows: list[dict[str, Any]], characteristic: str
+    rows: list[dict[str, Any]],
+    characteristic: str,
+    age_group: str | None = None,
 ) -> list[tuple[int, float]]:
     points = []
     for row in rows:
         if row["characteristic"] != characteristic:
             continue
+        if age_group is not None and row["age_group"] != age_group:
+            continue
         points.append((int(str(row["ref_date"])[:4]), float(row["value"])))
     return points
+
+
+AGE_PREFIX = "Age at time of death, "
+
+
+def age_label_to_standard(label: str) -> str | None:
+    """Map a StatCan age label to a WHO standard-population age-group id."""
+    if not label.startswith(AGE_PREFIX):
+        return None
+    rest = label[len(AGE_PREFIX) :].strip()
+    if rest == "under 1 year":
+        return "0-4"
+    if rest.endswith("years and over"):
+        low = rest.split(" ", 1)[0]
+        return f"{low}+"
+    match = re.match(r"^(\d+)\s+to\s+(\d+)\s+years$", rest)
+    if match:
+        low, high = match.group(1), match.group(2)
+        if int(low) <= 4 and int(high) <= 4:
+            return "0-4"
+        return f"{low}-{high}"
+    return None
+
+
+def load_standard_population(path: Path) -> dict[str, float]:
+    weights: dict[str, float] = {}
+    with path.open(encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            weights[row["age_group"]] = float(row["proportion"])
+    if not weights:
+        raise IndicatorError(f"empty standard population file: {path}")
+    return weights
+
+
+def age_standardise(
+    rows: list[dict[str, Any]],
+    characteristic: str,
+    weights: dict[str, float],
+) -> list[dict[str, Any]]:
+    """Direct age-standardisation of age-specific rates to a standard population."""
+    by_year: dict[str, dict[str, float]] = {}
+    for row in rows:
+        if row["characteristic"] != characteristic:
+            continue
+        group = age_label_to_standard(row["age_group"])
+        if group is None or group not in weights:
+            continue
+        by_year.setdefault(str(row["ref_date"]), {})[group] = float(row["value"])
+
+    results: list[dict[str, Any]] = []
+    for ref_date, groups in sorted(by_year.items()):
+        total_weight = sum(weights[group] for group in groups)
+        if total_weight == 0:
+            continue
+        rate = sum(weights[group] * value for group, value in groups.items()) / total_weight
+        results.append({"ref_date": ref_date, "value": round(rate, 4)})
+    return results
 
 
 def build(key: str) -> dict[str, Any]:
@@ -233,12 +305,48 @@ def build(key: str) -> dict[str, Any]:
         raise IndicatorError(f"indicator {key} selected no rows")
     output = write_published(tidy_rows, spec["output"])
 
+    standardised_path = None
+    if spec.get("standard_population"):
+        weights = load_standard_population(spec["standard_population"])
+        standardised = age_standardise(
+            tidy_rows, spec["trajectory_characteristic"], weights
+        )
+        standardised_path = spec["output"].with_name(
+            spec["output"].stem + "_age_standardised.csv"
+        )
+        with standardised_path.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=STANDARD_FIELDS)
+            writer.writeheader()
+            for record in standardised:
+                writer.writerow(
+                    {
+                        "ref_date": record["ref_date"],
+                        "characteristic": (
+                            f"Age-standardised {spec['trajectory_characteristic'].lower()}"
+                        ),
+                        "value": record["value"],
+                        "uom": "per 1,000 population",
+                        "standard": spec["standard_name"],
+                    }
+                )
+
     trend_path = None
     if spec.get("trajectory_characteristic"):
-        points = series_points(tidy_rows, spec["trajectory_characteristic"])
+        points = series_points(
+            tidy_rows,
+            spec["trajectory_characteristic"],
+            age_group=spec.get("all_ages"),
+        )
         trend = trajectory(points)
         trend["series"] = spec["trajectory_characteristic"]
         trend_path = spec["output"].with_name(spec["output"].stem + "_trend.json")
         trend_path.write_text(json.dumps(trend, indent=2) + "\n", encoding="utf-8")
-    return {"indicator": key, "rows": len(tidy_rows), "output": output, "trend": trend_path}
+    return {
+        "indicator": key,
+        "rows": len(tidy_rows),
+        "output": output,
+        "standardised": standardised_path,
+        "trend": trend_path,
+    }
+
 
