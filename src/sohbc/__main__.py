@@ -100,16 +100,18 @@ def _cmd_build(args: argparse.Namespace) -> int:
             f"built {key:<22} {result['rows']:>5} rows -> "
             f"{result['output'].relative_to(ROOT)}"
         )
-        if result["standardised"] is not None:
+        if result.get("dispersion") is not None:
+            print(f"      dispersion -> {result['dispersion'].relative_to(ROOT)}")
+        if result.get("standardised") is not None:
             print(f"      standardised -> {result['standardised'].relative_to(ROOT)}")
-        if result["standardised_trend"] is not None:
+        if result.get("standardised_trend") is not None:
             print(
                 "      standardised trend -> "
                 f"{result['standardised_trend'].relative_to(ROOT)}"
             )
-        if result["trend"] is not None:
+        if result.get("trend") is not None:
             print(f"      trend -> {result['trend'].relative_to(ROOT)}")
-        if result["by_sex_trend"] is not None:
+        if result.get("by_sex_trend") is not None:
             print(f"      by-sex trend -> {result['by_sex_trend'].relative_to(ROOT)}")
     return 0
 

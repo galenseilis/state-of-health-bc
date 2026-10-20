@@ -1,0 +1,136 @@
+---
+title: "Indicator: Mortality inequality across BC health regions"
+---
+
+*Status: a published sub-provincial indicator (milestone M3 in progress).
+Regenerate with `uv run sohbc build mortality_inequality_bc`.*
+
+This indicator is the project's first **sub-provincial** view. It shows how
+age-standardised premature and potentially avoidable mortality vary across
+British Columbia's health authorities and health service delivery areas,
+from Statistics Canada table 13-10-0931-01. Unlike the trend indicators it
+is a **cross-sectional** measure: the source is published as overlapping
+three-year averages, so it supports a regional snapshot, not a
+year-by-year trajectory.
+
+## Provenance
+
+| Field | Value |
+|-------|-------|
+| **Domain** | [Mortality](../reference/measurement-framework.qmd) |
+| **Definition** | Age-standardised premature and potentially avoidable mortality rates (per 100,000) by BC health authority and health service delivery area, both sexes (and by sex) [@statcan_health_regions] |
+| **Source** | Statistics Canada, table 13-10-0931-01, *Premature and potentially avoidable mortality, three-year period, Canada, provinces, territories, health regions and peer groups* [@statcan_health_regions] |
+| **Access** | Statistics Canada Web Data Service (automated full-table download) |
+| **Form** | indicator table (published summary statistics) |
+| **Geography** | British Columbia: 5 health authorities and 17 health service delivery areas (2023 boundaries) |
+| **Coverage** | 2020/2022 and 2021/2023 (three-year periods) |
+| **Frequency / refresh** | annual |
+| **Licence** | Statistics Canada Open Licence |
+| **Proxy note** | A proxy for the mortality domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
+
+## The regional gap
+
+```{ojs}
+//| echo: false
+disp = FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
+prem = disp.dispersion["Premature mortality"]["Both sexes"]
+avoid = disp.dispersion["Potentially avoidable mortality"]["Both sexes"]
+rows = prem.regions.map(r => ({region: r.region.replace(" Health Service Delivery Area", ""), value: r.value}))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: `Age-standardised premature mortality by health service delivery area, ${prem.ref_date} (per 100,000)`,
+  marginLeft: 175,
+  x: {grid: true, label: "Premature deaths per 100,000"},
+  y: {label: null, domain: rows.map(d => d.region)},
+  marks: [
+    Plot.barX(rows, {y: "region", x: "value", fill: "value", tip: true}),
+    Plot.ruleX([prem.mean], {stroke: "black", strokeDasharray: "4,4"})
+  ],
+  color: {scheme: "Reds", legend: false}
+})
+```
+
+The dashed line is the mean across areas. Premature mortality ranges about
+**3×** from the lowest to the highest service delivery area, and the
+potentially-avoidable series shows the same pattern.
+
+## Dispersion by cause and sex
+
+```{ojs}
+//| echo: false
+causeRows = disp.causes.flatMap(cause =>
+  disp.sexes.map(sex => {
+    const d = disp.dispersion[cause][sex]
+    return d && {
+      cause,
+      sex,
+      period: d.ref_date,
+      n_regions: d.n_regions,
+      lowest: `${d.lowest.value.toFixed(1)} (${d.lowest.region.replace(" Health Service Delivery Area", "")})`,
+      highest: `${d.highest.value.toFixed(1)} (${d.highest.region.replace(" Health Service Delivery Area", "")})`,
+      ratio: d.ratio,
+      range: d.range
+    }
+  }).filter(Boolean)
+)
+Inputs.table(causeRows, {
+  columns: ["cause", "sex", "period", "n_regions", "lowest", "highest", "ratio", "range"],
+  header: {cause: "cause", sex: "sex", period: "period", n_regions: "areas", lowest: "lowest", highest: "highest", ratio: "ratio", range: "range"},
+  width: {cause: 190, lowest: 170, highest: 170}
+})
+```
+
+```{ojs}
+//| echo: false
+md`Across **${prem.n_regions}** service delivery areas in
+${prem.ref_date}, premature mortality ranges from
+**${prem.lowest.value.toFixed(1)}** in
+${prem.lowest.region.replace(" Health Service Delivery Area", "")} to
+**${prem.highest.value.toFixed(1)}** in
+${prem.highest.region.replace(" Health Service Delivery Area", "")}, a
+ratio of **${prem.ratio.toFixed(1)}** (mean
+${prem.mean.toFixed(0)}). Potentially avoidable mortality is more unequal
+still at **${avoid.ratio.toFixed(1)}×**. The northern and interior service
+delivery areas sit highest and the Vancouver-metro areas lowest.`
+```
+
+**Method.** Dispersion is computed per cause, sex, and reference period at
+the service-delivery-area level, so authorities are not double-counted
+alongside the areas they contain. The published files hold every region
+and period; the JSON summary holds the sorted values, the extremes, the
+ratio, the range, and the mean. No regime test is run: the source is
+three-year averages over two overlapping periods.
+
+## Caveats
+
+- **Cross-sectional, not a trajectory.** The source publishes three-year
+  averages only, so this indicator dates the regional gap but cannot show
+  how it moved. The trend indicators carry the temporal story.
+- **Boundaries move.** Health-region boundaries changed across table
+  vintages; the 2023 boundary set is used here. Comparisons across
+  vintages are not like-for-like.
+- **Overlapping intervals.** Every rate carries a 95% confidence interval
+  and neighbouring regions' intervals overlap, so the ordering in the
+  middle of the distribution is not sharp. The gap between the extremes
+  is.
+- **Small-area suppression.** Some area/period/sex cells are suppressed
+  for reliability, so the number of areas reported varies by stratum.
+- **Regional ≠ individual.** A high regional rate does not describe every
+  person in the region; ecological patterns are not individual risks.
+- **No causal claim.** The regional pattern co-moves with age structure,
+  remoteness, income, and service access; attribution is M4/M5 work.
+
+## Reproduce
+
+```bash
+uv run sohbc fetch statcan_health_regions
+uv run sohbc build mortality_inequality_bc
+```
+
+The tidy dataset is published at
+`data/published/mortality_inequality_bc.csv` (all regions, causes, sexes,
+periods) and the dispersion summary at
+`data/published/mortality_inequality_bc_dispersion.json`.

@@ -78,7 +78,7 @@ test can locate but cannot name.
 As part of M2, every catalogued URL was checked for reachability with
 `uv run sohbc check --all`. All catalogued landing pages and the
 automated download endpoints returned HTTP 200 at the time of checking
-(27 sources). The federal publisher's own portal was unreachable from the
+(28 sources). The federal publisher's own portal was unreachable from the
 verification environment, so federal open data is reached through the
 Open Government portal record instead; this is noted on that catalogue
 entry.
@@ -109,6 +109,15 @@ estimates bring caveat classes the administrative tables did not:
 sampling error, coefficient-of-variation suppression (flagged cells), and
 a collection-frame change mid-series, so a step in the series may be a
 step in the measurement. These are recorded on the indicator pages.
+
+A fourth source takes the project below the province: Statistics Canada
+table 13-10-0931-01 supplies [age-standardised premature and potentially
+avoidable mortality](indicator-mortality-inequality-bc.qmd) for BC's five
+health authorities and 17 health service delivery areas. It adds two
+caveat classes of its own — health-region boundaries that change across
+table vintages, and rates published only as overlapping **three-year
+averages**, so the source supports a regional snapshot but not a regional
+trajectory; the trend machinery is therefore not applied to it.
 
 ## Governance
 

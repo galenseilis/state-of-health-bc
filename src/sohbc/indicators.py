@@ -24,6 +24,19 @@ REFERENCE_DIR = ROOT / "data" / "reference"
 
 STANDARD_FIELDS = ["ref_date", "sex", "characteristic", "value", "uom", "standard"]
 
+REGION_FIELDS = [
+    "ref_date",
+    "region",
+    "region_level",
+    "sex",
+    "indicator",
+    "cause",
+    "characteristic",
+    "value",
+    "uom",
+    "status",
+]
+
 ALL_AGES = "Age at time of death, all ages"
 
 #: Default dimension-label lookups, keyed by the tidy column they fill.
@@ -247,6 +260,44 @@ _CCHS_SPECS = [
 ]
 
 INDICATORS.update(dict(_CCHS_SPECS))
+
+INDICATORS["mortality_inequality_bc"] = {
+    "title": "Mortality inequality across BC health regions",
+    "domain": "Mortality",
+    "mode": "cross_section",
+    "source_key": "statcan_health_regions",
+    "source_table": "13-10-0931-01",
+    "source_table_url": (
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310093101"
+    ),
+    "province": "British Columbia",
+    "sexes": ["Both sexes", "Males", "Females"],
+    "indicators": ["Mortality"],
+    "causes": [
+        "Premature mortality",
+        "Potentially avoidable mortality",
+        "Mortality from preventable causes",
+        "Mortality from treatable causes",
+    ],
+    "trajectory_characteristic": "Age-standardized rate",
+    "output": PUBLISHED_DIR / "mortality_inequality_bc.csv",
+    "breakdown_label": "dispersion",
+    "definition": (
+        "Age-standardised premature and potentially avoidable mortality "
+        "rates (per 100,000 population) for the five BC health authorities "
+        "and 17 health service delivery areas, both sexes (and by sex), from "
+        "Statistics Canada table 13-10-0931-01. The published view reports "
+        "the cross-regional spread in the most recent three-year period."
+    ),
+    "caveats": (
+        "Three-year averages, so this is a cross-sectional inequality "
+        "snapshot, not a year-by-year trajectory; rate confidence intervals "
+        "overlap between neighbouring regions and small-area counts may be "
+        "suppressed. Health-region boundaries changed across table vintages "
+        "(2023 boundaries used here). Provincial resolution is available for "
+        "trend; this source is for the regional gap."
+    ),
+}
 
 TIDY_FIELDS = [
     "ref_date",
@@ -598,10 +649,171 @@ def sex_breakdown(
     return breakdown
 
 
+def region_level(geo: str) -> str:
+    """Classify a health-region geography name for a tidy dataset."""
+    name = geo.split(",")[0].strip()
+    if name.endswith("Health Authority"):
+        return "health_authority"
+    if name.endswith("Health Service Delivery Area"):
+        return "health_service_delivery_area"
+    return "province"
+
+
+def tidy_regions(
+    rows: list[dict[str, str]],
+    province: str,
+    sexes: Sequence[str],
+    indicators: Sequence[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Tidy sub-provincial health-region rows, keeping the geography name."""
+    keep = set(indicators) if indicators else None
+    tidy_rows: list[dict[str, Any]] = []
+    for row in rows:
+        geo = row.get("GEO", "")
+        name = geo.split(",")[0].strip()
+        if province not in geo or name == province:
+            continue
+        if row.get("Sex") not in sexes:
+            continue
+        if keep is not None and row.get("Indicators") not in keep:
+            continue
+        value_raw = row.get("VALUE")
+        if not value_raw:
+            continue
+        value = float(value_raw)
+        if value.is_integer():
+            value = int(value)
+        tidy_rows.append(
+            {
+                "ref_date": row.get("REF_DATE", ""),
+                "region": name,
+                "region_level": region_level(geo),
+                "sex": row.get("Sex", ""),
+                "indicator": row.get("Indicators", ""),
+                "cause": row.get("Selected causes of death", ""),
+                "characteristic": row.get("Characteristics", ""),
+                "value": value,
+                "uom": row.get("UOM", ""),
+                "status": row.get("STATUS", ""),
+            }
+        )
+    tidy_rows.sort(
+        key=lambda r: (r["ref_date"], r["cause"], r["sex"], r["region"])
+    )
+    return tidy_rows
+
+
+def dispersion(
+    rows: list[dict[str, Any]],
+    cause: str,
+    characteristic: str,
+    sex: str,
+    indicator: str = "Mortality",
+    level: str = "health_service_delivery_area",
+) -> dict[str, Any] | None:
+    """Summarise the spread of one cross-sectional indicator across regions.
+
+    Returns the sorted regional values for the most recent reference period,
+    with the highest and lowest regions, their ratio, and the range. Only
+    regions at ``level`` are compared, so authorities are not double-counted
+    alongside the service delivery areas they contain.
+    """
+    selected = [
+        r
+        for r in rows
+        if r["cause"] == cause
+        and r["characteristic"] == characteristic
+        and r["sex"] == sex
+        and r["indicator"] == indicator
+        and r["region_level"] == level
+    ]
+    if not selected:
+        return None
+    latest = max(r["ref_date"] for r in selected)
+    period = sorted(
+        (r for r in selected if r["ref_date"] == latest),
+        key=lambda r: r["region"],
+    )
+    values = [(r["region"], float(r["value"])) for r in period]
+    if not values:
+        return None
+    values.sort(key=lambda item: item[1])
+    low_region, low_value = values[0]
+    high_region, high_value = values[-1]
+    mean = sum(v for _, v in values) / len(values)
+    return {
+        "ref_date": latest,
+        "level": level,
+        "n_regions": len(values),
+        "regions": [{"region": name, "value": value} for name, value in values],
+        "lowest": {"region": low_region, "value": low_value},
+        "highest": {"region": high_region, "value": high_value},
+        "ratio": round(high_value / low_value, 3) if low_value else None,
+        "range": round(high_value - low_value, 3),
+        "mean": round(mean, 3),
+    }
+
+
+def build_cross_section(spec: dict[str, Any]) -> dict[str, Any]:
+    """Build a sub-provincial cross-sectional indicator.
+
+    Unlike the time-series indicators this does not run regime tests: the
+    source is published as overlapping three-year averages, so the value it
+    adds is the spread across regions in a single period, not a trajectory.
+    """
+    table_id = spec["source_table"]
+    zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
+    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    sexes: list[str] = list(spec.get("sexes") or ["Both sexes"])
+    tidy_rows = tidy_regions(
+        rows, spec["province"], sexes, indicators=spec.get("indicators")
+    )
+    if not tidy_rows:
+        raise IndicatorError("cross-section selected no rows")
+    output = spec["output"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=REGION_FIELDS)
+        writer.writeheader()
+        writer.writerows(tidy_rows)
+
+    summary: dict[str, Any] = {
+        "source": spec["title"],
+        "reference_periods": sorted({r["ref_date"] for r in tidy_rows}),
+        "causes": spec.get("causes", []),
+        "sexes": sexes,
+        "level": "health_service_delivery_area",
+    }
+    main_indicator = (spec.get("indicators") or ["Mortality"])[0]
+    for cause in spec.get("causes", []):
+        summary.setdefault("dispersion", {})[cause] = {
+            sex: dispersion(
+                tidy_rows,
+                cause,
+                spec["trajectory_characteristic"],
+                sex,
+                indicator=main_indicator,
+                level="health_service_delivery_area",
+            )
+            for sex in sexes
+        }
+    summary_path = output.with_name(output.stem + "_dispersion.json")
+    summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+
+    return {
+        "indicator": spec["source_table"],
+        "rows": len(tidy_rows),
+        "output": output,
+        "dispersion": summary_path,
+    }
+
+
 def build(key: str) -> dict[str, Any]:
     if key not in INDICATORS:
         raise IndicatorError(f"unknown indicator: {key}")
     spec = INDICATORS[key]
+    if spec.get("mode") == "cross_section":
+        return build_cross_section(spec)
     sexes: list[str] = list(spec.get("sexes") or [spec.get("sex")])
     dimensions = spec.get("dimensions")
     table_id = spec["source_table"]

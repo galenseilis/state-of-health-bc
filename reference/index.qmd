@@ -43,6 +43,12 @@ regenerable chart.
 Life expectancy at birth by sex (1980–2024), the project's second
 published indicator, from Statistics Canada's complete life table.
 
+### [Indicator: Mortality inequality across BC health regions](indicator-mortality-inequality-bc.qmd)
+
+The project's first sub-provincial indicator: age-standardised premature
+and potentially avoidable mortality across BC's health authorities and
+health service delivery areas (2021/2023).
+
 ### [Indicator: Life satisfaction, British Columbia](indicator-life-satisfaction-bc.qmd)
 
 Life satisfaction among BC adults (2015–2024) from the Canadian Community

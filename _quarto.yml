@@ -64,6 +64,8 @@ website:
             text: "Indicator: Mortality rates"
           - href: reference/indicator-life-expectancy-bc.qmd
             text: "Indicator: Life expectancy"
+          - href: reference/indicator-mortality-inequality-bc.qmd
+            text: "Indicator: Regional mortality inequality"
           - href: reference/indicator-life-satisfaction-bc.qmd
             text: "Indicator: Life satisfaction"
           - href: reference/indicator-wellbeing-cchs-bc.qmd

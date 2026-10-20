@@ -5,11 +5,11 @@ title: "State of health in BC: a descriptive report"
 ::: {.callout-note}
 ## Version and observation window
 
-**Report version 0.2** · observation windows: mortality **1991–2024**,
-life expectancy **1980–2024**, survey indicators **2015–2024** · generated
-from the published datasets by `quarto render`. Regenerate the underlying
-data with `uv run sohbc build` before re-rendering (see
-[Reproduce](#reproduce)).
+**Report version 0.3** · observation windows: mortality **1991–2024**,
+life expectancy **1980–2024**, survey indicators **2015–2024**,
+sub-provincial mortality **2021/2023** · generated from the published
+datasets by `quarto render`. Regenerate the underlying data with
+`uv run sohbc build` before re-rendering (see [Reproduce](#reproduce)).
 
 Numbers in this report are **regenerated on every build** from the files
 under `data/published/`; nothing here is typed in by hand. If a figure and
@@ -20,9 +20,10 @@ This is an edition of the project's "State of health in BC" descriptive
 report (deliverable of milestone M3 in the [roadmap](../ROADMAP.md)). It
 describes what the currently-ingested indicators show — **not** the state
 of health in full. The indicator set now spans mortality and survey-based
-morbidity, mental health, and wellbeing; the report will keep widening,
-and each edition carries its observation window because the numbers are
-dated, not timeless ([why](../explanation/nonstationarity.qmd)).
+morbidity, mental health, and wellbeing, and reaches **below the province**
+to the regional mortality gap; the report will keep widening, and each
+edition carries its observation window because the numbers are dated, not
+timeless ([why](../explanation/nonstationarity.qmd)).
 
 ## What is covered
 
@@ -30,12 +31,13 @@ dated, not timeless ([why](../explanation/nonstationarity.qmd)).
 |-----------|--------|--------|------------|-------|--------|
 | [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F | StatCan 13-10-0710-01 |
 | [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
+| [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2021/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 |
 | [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
 | [Ten survey indicators](indicator-wellbeing-cchs-bc.qmd) | Morbidity, mental health, wellbeing, access to care | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
 
-All are **proxies** for their domains, not the state of health itself, and
-all are at provincial resolution — sub-provincial inequalities are not yet
-described (see [Next editions](#next-editions)).
+All are **proxies** for their domains, not the state of health itself. One
+indicator now reaches sub-provincial resolution; the rest remain
+provincial (see [Next editions](#next-editions)).
 
 ## The headline: every series moves, and the rules change
 
@@ -313,14 +315,58 @@ ${mortBySex.age_standardised.Females.change_point}).`
 
 ## Inequalities across regions
 
-**Not yet described.** Both current indicators are published at
-*provincial* resolution only. The road map's M3 calls for inequality
-reporting across health authorities and regions; that requires
-sub-provincial ingestion (separate Statistics Canada health-region tables,
-or BC-specific sources such as BCCDC's dashboards), which is outstanding.
-Until then this report makes **no claim about regional inequality** —
-treat any provincial average here as one that could sit atop very
-different regional trajectories.
+The sub-provincial view is now published for mortality. Using Statistics
+Canada table 13-10-0931-01 (three-year averages, 2021/2023), the
+age-standardised premature-mortality rate varies widely across BC's health
+service delivery areas.
+
+```{ojs}
+//| echo: false
+disp = FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
+prem = disp.dispersion["Premature mortality"]["Both sexes"]
+avoid = disp.dispersion["Potentially avoidable mortality"]["Both sexes"]
+regions = prem.regions.map(r => ({region: r.region.replace(" Health Service Delivery Area", ""), value: r.value}))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: `Age-standardised premature mortality by health service delivery area, ${prem.ref_date} (per 100,000)`,
+  marginLeft: 170,
+  x: {grid: true, label: "Premature deaths per 100,000"},
+  y: {label: null, domain: regions.map(d => d.region)},
+  marks: [
+    Plot.barX(regions, {y: "region", x: "value", fill: "value", tip: true}),
+    Plot.ruleX([prem.mean], {stroke: "black", strokeDasharray: "4,4"})
+  ],
+  color: {scheme: "Reds", legend: false}
+})
+```
+
+```{ojs}
+//| echo: false
+md`Across **${prem.n_regions}** health service delivery areas, premature
+mortality ranges from **${prem.lowest.value.toFixed(1)}** in
+${prem.lowest.region.replace(" Health Service Delivery Area", "")} to
+**${prem.highest.value.toFixed(1)}** in
+${prem.highest.region.replace(" Health Service Delivery Area", "")} — a
+**${prem.ratio.toFixed(1)}×** gap, against a provincial average of about
+${prem.mean.toFixed(0)}. Potentially avoidable mortality shows the same
+pattern (${avoid.ratio.toFixed(1)}×). The dashed line is the mean across
+areas. The northern and interior service delivery areas are consistently
+highest, the Vancouver-metro areas lowest.`
+```
+
+This is a genuine inequality signal, and it is exactly what a
+provincial-average report hides. Two limits apply. First, the source is
+**three-year averages** and covers only two overlapping periods, so it
+supports this cross-sectional snapshot but **not** a regional trajectory —
+the trend machinery is not run on it. Second, the rate confidence
+intervals overlap between neighbouring regions, so the ordering at the
+middle of the distribution is not sharp; the roughly 3× gap between the
+extremes is. **No causal claim** is made here: the regional pattern
+co-moves with age structure, remoteness, and service access, which are
+M4/M5 questions.
 
 ## Reading this report
 
@@ -344,7 +390,7 @@ different regional trajectories.
 ## Reproduce
 
 ```bash
-uv run sohbc fetch statcan_wds statcan_life_tables statcan_health_indicators
+uv run sohbc fetch statcan_wds statcan_life_tables statcan_health_indicators statcan_health_regions
 uv run sohbc build
 quarto render reference/state-of-health-report.qmd
 ```
@@ -357,7 +403,7 @@ criterion of milestone M3.
 
 Planned (M3 outstanding work):
 
-- sub-provincial (health-authority / HSDA) map and inequality views;
+- sub-provincial views for the survey and life-expectancy indicators, not
+  only mortality;
 - age-specific trajectories, not only all-ages and 18-plus;
-- explicit regime-aware within-versus-across-regime comparisons;
-- further indicator families (functional status, health-system access).
+- explicit regime-aware within-versus-across-regime comparisons.

@@ -12,12 +12,15 @@ from sohbc.indicators import (
     INDICATORS,
     age_label_to_standard,
     age_standardise,
+    dispersion,
     ols_slope,
+    region_level,
     select_rows,
     series_points,
     sex_breakdown,
     table_rows,
     tidy,
+    tidy_regions,
     trajectory,
     wds_download_json,
 )
@@ -321,6 +324,135 @@ class SexBreakdownTests(unittest.TestCase):
             result["Females"]["overall"]["slope_per_year"],
             places=6,
         )
+
+
+class RegionLevelTests(unittest.TestCase):
+    def test_classifies_authority_area_and_province(self) -> None:
+        self.assertEqual(
+            region_level("Fraser Health Authority, British Columbia"),
+            "health_authority",
+        )
+        self.assertEqual(
+            region_level(
+                "Richmond Health Service Delivery Area, British Columbia"
+            ),
+            "health_service_delivery_area",
+        )
+        self.assertEqual(region_level("British Columbia"), "province")
+
+
+class TidyRegionsTests(unittest.TestCase):
+    def _region_row(
+        self, geo: str, sex: str, value: str, indicator: str = "Mortality"
+    ) -> dict[str, str]:
+        return {
+            "REF_DATE": "2021/2023",
+            "GEO": geo,
+            "Sex": sex,
+            "Indicators": indicator,
+            "Selected causes of death": "Premature mortality",
+            "Characteristics": "Age-standardized rate",
+            "UOM": "Age-standardized rate per 100,000 population",
+            "VALUE": value,
+            "STATUS": "",
+        }
+
+    def test_drops_province_and_keeps_regions(self) -> None:
+        rows = [
+            self._region_row("British Columbia", "Both sexes", "342.3"),
+            self._region_row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "Both sexes",
+                "183.5",
+            ),
+        ]
+        result = tidy_regions(rows, "British Columbia", ["Both sexes"])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["region"], "Richmond Health Service Delivery Area")
+        self.assertEqual(result[0]["region_level"], "health_service_delivery_area")
+
+    def test_filters_by_indicator(self) -> None:
+        rows = [
+            self._region_row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "Both sexes",
+                "183.5",
+                indicator="Mortality",
+            ),
+            self._region_row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "Both sexes",
+                "9939.5",
+                indicator="Potential years of life lost",
+            ),
+        ]
+        result = tidy_regions(
+            rows, "British Columbia", ["Both sexes"], indicators=["Mortality"]
+        )
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["value"], 183.5)
+
+    def test_filters_by_sex_and_skips_empty_values(self) -> None:
+        rows = [
+            self._region_row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "Males",
+                "200",
+            ),
+            self._region_row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "Females",
+                "",
+            ),
+        ]
+        result = tidy_regions(rows, "British Columbia", ["Males"])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["sex"], "Males")
+
+
+class DispersionTests(unittest.TestCase):
+    def _tidy(self, region: str, level: str, value: float) -> dict:
+        return {
+            "ref_date": "2021/2023",
+            "region": region,
+            "region_level": level,
+            "sex": "Both sexes",
+            "indicator": "Mortality",
+            "cause": "Premature mortality",
+            "characteristic": "Age-standardized rate",
+            "value": value,
+        }
+
+    def test_reports_lowest_highest_ratio_and_range(self) -> None:
+        rows = [
+            self._tidy("Richmond", "health_service_delivery_area", 183.5),
+            self._tidy("Northwest", "health_service_delivery_area", 551.3),
+            self._tidy("Fraser", "health_service_delivery_area", 300.0),
+        ]
+        result = dispersion(
+            rows, "Premature mortality", "Age-standardized rate", "Both sexes"
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result["n_regions"], 3)
+        self.assertEqual(result["lowest"]["region"], "Richmond")
+        self.assertEqual(result["highest"]["region"], "Northwest")
+        self.assertAlmostEqual(result["ratio"], round(551.3 / 183.5, 3))
+        self.assertAlmostEqual(result["range"], round(551.3 - 183.5, 3))
+
+    def test_excludes_other_levels(self) -> None:
+        rows = [
+            self._tidy("Richmond", "health_service_delivery_area", 183.5),
+            self._tidy("Northern", "health_authority", 999.0),
+        ]
+        result = dispersion(
+            rows, "Premature mortality", "Age-standardized rate", "Both sexes"
+        )
+        self.assertEqual(result["n_regions"], 1)
+        self.assertEqual(result["highest"]["region"], "Richmond")
+
+    def test_returns_none_when_no_match(self) -> None:
+        result = dispersion([], "Premature mortality", "Age-standardized rate", "Males")
+        self.assertIsNone(result)
 
 
 if __name__ == "__main__":

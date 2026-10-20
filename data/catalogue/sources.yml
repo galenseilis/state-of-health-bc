@@ -525,6 +525,31 @@ sources:
       url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100905/en"
       filename: "13100905-download.json"
 
+  - key: statcan_health_regions
+    title: "Premature and potentially avoidable mortality, by health region (Web Data Service)"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310093101"
+    citation: statcan
+    form: indicator_table
+    domains: [Mortality]
+    indicators: ["Premature mortality, potentially avoidable mortality (preventable and treatable), age-standardised rates by health region and health service delivery area (table 13-10-0931-01)"]
+    resolution: [provincial, health_authority, health_service_delivery_area]
+    geography: "Canada, provinces, territories, health regions and health service delivery areas (2023 boundaries)"
+    coverage: "2020/2022 and 2021/2023 (three-year periods)"
+    frequency: annual
+    refresh: "annual"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC rows within the national table, including the five BC health authorities and 17 health service delivery areas"
+    temporal_behaviour: trending
+    quality_notes: "Sub-provincial mortality, published as overlapping three-year averages to stabilise small-area rates, so it supports a cross-sectional inequality snapshot but not a year-by-year trajectory. Health-region boundaries changed across table vintages (the 2023 boundary set is used here) and rates carry 95% confidence intervals that overlap between neighbouring regions. Counts in small areas are suppressed or flagged."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100931/en"
+      filename: "13100931-download.json"
+
   - key: bcstats_economy
     title: "Economy"
     publisher: "BC Stats, Government of British Columbia"
