@@ -32,6 +32,11 @@ catalogued sources.
 The project's first published indicator, with provenance, caveats, and a
 regenerable chart.
 
+### [Indicator: Life expectancy at birth, British Columbia](indicator-life-expectancy-bc.qmd)
+
+Life expectancy at birth by sex (1980–2024), the project's second
+published indicator, from Statistics Canada's complete life table.
+
 ### [Project structure](project-structure.qmd)
 
 What lives where in the repository and how the documentation site is

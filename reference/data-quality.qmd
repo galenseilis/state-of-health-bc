@@ -95,6 +95,12 @@ page and are examples of the kind of entry this register is meant to
 capture. Its regime breaks are dated by the formal tests documented on
 that page rather than read off by eye.
 
+A second indicator, [life expectancy at birth](indicator-life-expectancy-bc.qmd)
+by sex (Statistics Canada table 13-10-0837-01), is now built through the
+same pipeline; it shares the mortality domain and the same caveat
+classes (period measure, revision of recent years, COVID-19 period,
+source sex categories). The source table has no sub-provincial rows.
+
 ## Governance
 
 - **Licences vary** by source (open-government licences to publisher

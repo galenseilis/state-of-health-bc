@@ -475,6 +475,31 @@ sources:
       url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100710/en"
       filename: "13100710-download.json"
 
+  - key: statcan_life_tables
+    title: "Statistics Canada life tables (Web Data Service)"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310083701"
+    citation: statcan
+    form: indicator_table
+    domains: [Mortality]
+    indicators: ["Life expectancy at birth and at age 65, by sex (table 13-10-0837-01)"]
+    resolution: [provincial]
+    geography: "Canada, provinces (except Prince Edward Island)"
+    coverage: "1980-2024 (annual)"
+    frequency: annual
+    refresh: "annual"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC rows within the national life tables"
+    temporal_behaviour: trending
+    quality_notes: "Complete life table, single-year estimates. Recent-year estimates are subject to revision; the 2020-2022 period reflects the COVID-19 mortality shock. Prince Edward Island is excluded from this table series."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100837/en"
+      filename: "13100837-download.json"
+
   - key: bcstats_economy
     title: "Economy"
     publisher: "BC Stats, Government of British Columbia"

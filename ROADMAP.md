@@ -173,15 +173,16 @@ cross-border patient-flow / supply-chain external drivers
   the covered window; nonstationary series carry their trend/regime
   interpretation, not a single summary value.
 
-**Status:** in progress — the pipeline builds and publishes a first
-end-to-end indicator (provincial mortality rates, Statistics Canada
-13-10-0710-01) with regenerable charts, crude and age-standardised (WHO
-standard) series by sex, and formal regime dating: piecewise-linear
-segmentation with BIC selection, a residual-permutation break test, and
-a Kendall-tau trend test, so every series — including the male and
-female breakdowns — is labelled stationary or not over its observed
-window. Outstanding: the wider indicator set, sub-provincial (map) views
-and inequality reporting, age-specific trajectories, and the
+**Status:** in progress — the pipeline builds and publishes two
+end-to-end indicators from catalogued Statistics Canada tables, each with
+regenerable charts, crude and age-standardised (WHO standard) series by
+sex, and formal regime dating: piecewise-linear segmentation with BIC
+selection, a residual-permutation break test, and a Kendall-tau trend
+test, so every series — including the male and female breakdowns — is
+labelled stationary or not over its observed window. The indicators are
+provincial mortality rates (13-10-0710-01) and life expectancy at birth
+(13-10-0837-01). Outstanding: the wider indicator set, sub-provincial
+(map) views and inequality reporting, age-specific trajectories, and the
 descriptive report
 **Depends on:** M2
 

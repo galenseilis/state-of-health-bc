@@ -26,6 +26,13 @@ STANDARD_FIELDS = ["ref_date", "sex", "characteristic", "value", "uom", "standar
 
 ALL_AGES = "Age at time of death, all ages"
 
+#: Default dimension-label lookups, keyed by the tidy column they fill.
+DEFAULT_DIMENSIONS: dict[str, str] = {
+    "age_group": "Age at time of death",
+    "sex": "Sex",
+    "characteristic": "Characteristics",
+}
+
 INDICATORS: dict[str, dict[str, Any]] = {
     "mortality_rates_bc": {
         "title": "Mortality rates, British Columbia",
@@ -41,6 +48,7 @@ INDICATORS: dict[str, dict[str, Any]] = {
         "standard_population": REFERENCE_DIR / "who_standard_population.csv",
         "standard_name": "WHO World Standard Population (2000-2025)",
         "trajectory_characteristic": "Mortality rate per 1,000 population",
+        "breakdown_label": "crude",
         "definition": (
             "Deaths and the crude mortality rate (deaths per 1,000 population), "
             "all ages, by sex (both sexes, males, females), resident in "
@@ -52,6 +60,39 @@ INDICATORS: dict[str, dict[str, Any]] = {
             "both real change and shifts in the age structure of the population. "
             "Sex categories are those of the source (both sexes, males, "
             "females). Recent years include the COVID-19 period."
+        ),
+    },
+    "life_expectancy_bc": {
+        "title": "Life expectancy at birth, British Columbia",
+        "domain": "Mortality",
+        "source_key": "statcan_life_tables",
+        "source_table": "13-10-0837-01",
+        "source_table_url": (
+            "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310083701"
+        ),
+        "dimensions": {
+            "age_group": "Age group",
+            "sex": "Sex",
+            "characteristic": "Element",
+        },
+        "geo": "British Columbia",
+        "age_group": "0 years",
+        "sexes": ["Both sexes", "Males", "Females"],
+        "output": PUBLISHED_DIR / "life_expectancy_bc.csv",
+        "trajectory_characteristic": "Life expectancy (in years) at age x (ex)",
+        "breakdown_label": "levels",
+        "definition": (
+            "Life expectancy at birth (age 0), in years, by sex (both sexes, "
+            "males, females), resident in British Columbia. Derived from the "
+            "complete life table of Statistics Canada table 13-10-0837-01."
+        ),
+        "caveats": (
+            "Life expectancy is a period measure: it is the average length of "
+            "life a synthetic cohort would experience if it lived its whole "
+            "life under the age-specific death rates of the reference year. It "
+            "reports nothing about the health of those alive. Single-year "
+            "estimates are subject to revision, and the 2020-2022 period "
+            "reflects the COVID-19 mortality shock."
         ),
     },
 }
@@ -72,8 +113,21 @@ class IndicatorError(ValueError):
     """Raised when an indicator cannot be built."""
 
 
-def wds_download_json(source_key: str) -> Path:
-    return RAW_DIR / source_key / "13100710-download.json"
+def wds_download_json(source_key: str, table_id: str | None = None) -> Path:
+    """Path to a WDS download manifest for a source (and optional table).
+
+    Args:
+        source_key: Catalogue key of the WDS source.
+        table_id: Table id used to name the manifest file; when omitted,
+            the single ``*-download.json`` manifest in the directory is
+            used (the layout of a single-table source).
+    """
+    directory = RAW_DIR / source_key
+    if table_id is None:
+        return directory / "13100710-download.json"
+    digits = table_id.split("-")
+    stem = "".join(digits[:3]) if len(digits) >= 3 else re.sub(r"\D", "", table_id)
+    return directory / f"{stem}-download.json"
 
 
 def wds_zip_url(manifest_path: Path) -> str:
@@ -118,14 +172,22 @@ def select_rows(
     geo: str,
     age_group: str | None,
     sex: str | None,
+    dimensions: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
+    labels = dimensions or DEFAULT_DIMENSIONS
+    age_field = labels.get("age_group")
+    sex_field = labels.get("sex")
     selected = []
     for row in rows:
         if row.get("GEO") != geo:
             continue
-        if age_group is not None and row.get("Age at time of death") != age_group:
+        if (
+            age_group is not None
+            and age_field is not None
+            and row.get(age_field) != age_group
+        ):
             continue
-        if sex is not None and row.get("Sex") != sex:
+        if sex is not None and sex_field is not None and row.get(sex_field) != sex:
             continue
         if not row.get("VALUE"):
             continue
@@ -133,7 +195,13 @@ def select_rows(
     return selected
 
 
-def tidy(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+def tidy(
+    rows: list[dict[str, str]], dimensions: dict[str, str] | None = None
+) -> list[dict[str, Any]]:
+    labels = dimensions or DEFAULT_DIMENSIONS
+    age_field = labels.get("age_group")
+    sex_field = labels.get("sex")
+    characteristic_field = labels.get("characteristic", "Characteristics")
     tidy_rows: list[dict[str, Any]] = []
     for row in rows:
         value = float(row["VALUE"])
@@ -143,9 +211,9 @@ def tidy(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
             {
                 "ref_date": row.get("REF_DATE", ""),
                 "geo": row.get("GEO", ""),
-                "age_group": row.get("Age at time of death", ""),
-                "sex": row.get("Sex", ""),
-                "characteristic": row.get("Characteristics", ""),
+                "age_group": row.get(age_field, "") if age_field else "",
+                "sex": row.get(sex_field, "") if sex_field else "",
+                "characteristic": row.get(characteristic_field, ""),
                 "value": value,
                 "uom": row.get("UOM", ""),
                 "status": row.get("STATUS", ""),
@@ -376,10 +444,16 @@ def build(key: str) -> dict[str, Any]:
         raise IndicatorError(f"unknown indicator: {key}")
     spec = INDICATORS[key]
     sexes: list[str] = list(spec.get("sexes") or [spec.get("sex")])
-    zip_url = wds_zip_url(wds_download_json(spec["source_key"]))
-    rows = table_rows(fetch_wds_zip(zip_url), spec["source_table"])
-    chosen = select_rows(rows, spec["geo"], spec.get("age_group"), sex=None)
-    tidy_rows = tidy(chosen)
+    dimensions = spec.get("dimensions")
+    table_id = spec["source_table"]
+    zip_url = wds_zip_url(
+        wds_download_json(spec["source_key"], table_id=table_id)
+    )
+    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    chosen = select_rows(
+        rows, spec["geo"], spec.get("age_group"), sex=None, dimensions=dimensions
+    )
+    tidy_rows = tidy(chosen, dimensions=dimensions)
     if not tidy_rows:
         raise IndicatorError(f"indicator {key} selected no rows")
     output = write_published(tidy_rows, spec["output"])
@@ -454,22 +528,24 @@ def build(key: str) -> dict[str, Any]:
             )
 
         breakdown: dict[str, Any] = {
-            "crude": sex_breakdown(
+            spec.get("breakdown_label", "levels"): sex_breakdown(
                 tidy_rows,
                 characteristic,
                 sexes,
                 age_group=spec.get("all_ages"),
             ),
-            "age_standardised": {},
         }
-        for sex in sexes:
-            sex_points = [
-                (int(str(record["ref_date"])[:4]), float(record["value"]))
-                for record in standardised
-                if record["sex"] == sex
-            ]
-            if sex_points:
-                breakdown["age_standardised"][sex] = trajectory(sex_points)
+        if standardised:
+            standardised_breakdown: dict[str, Any] = {}
+            for sex in sexes:
+                sex_points = [
+                    (int(str(record["ref_date"])[:4]), float(record["value"]))
+                    for record in standardised
+                    if record["sex"] == sex
+                ]
+                if sex_points:
+                    standardised_breakdown[sex] = trajectory(sex_points)
+            breakdown["age_standardised"] = standardised_breakdown
         by_sex_trend_path = spec["output"].with_name(
             spec["output"].stem + "_by_sex_trend.json"
         )

@@ -8,6 +8,8 @@ import unittest
 import zipfile
 
 from sohbc.indicators import (
+    DEFAULT_DIMENSIONS,
+    INDICATORS,
     age_label_to_standard,
     age_standardise,
     ols_slope,
@@ -17,7 +19,25 @@ from sohbc.indicators import (
     table_rows,
     tidy,
     trajectory,
+    wds_download_json,
 )
+
+LIFE_DIMENSIONS = INDICATORS["life_expectancy_bc"]["dimensions"]
+
+
+def _life_row(
+    geo: str, age: str, sex: str, element: str, value: str
+) -> dict[str, str]:
+    return {
+        "REF_DATE": "2020",
+        "GEO": geo,
+        "Age group": age,
+        "Sex": sex,
+        "Element": element,
+        "UOM": "Number",
+        "VALUE": value,
+        "STATUS": "",
+    }
 
 
 def _row(
@@ -92,6 +112,25 @@ class SelectRowsTests(unittest.TestCase):
         )
         self.assertEqual(len(out), 3)
 
+    def test_custom_dimension_labels(self) -> None:
+        rows = [
+            _life_row(
+                "British Columbia", "0 years", "Both sexes", "life expectancy", "82.5"
+            ),
+            _life_row(
+                "British Columbia", "65 years", "Both sexes", "life expectancy", "20.0"
+            ),
+        ]
+        out = select_rows(
+            rows,
+            "British Columbia",
+            "0 years",
+            None,
+            dimensions=LIFE_DIMENSIONS,
+        )
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0]["Age group"], "0 years")
+
 
 class TidyTests(unittest.TestCase):
     def test_converts_values_and_sorts(self) -> None:
@@ -106,6 +145,29 @@ class TidyTests(unittest.TestCase):
         self.assertEqual(out[0]["value"], 8)
         self.assertIsInstance(out[0]["value"], int)
         self.assertEqual(out[1]["value"], 7.5)
+
+    def test_custom_dimension_labels(self) -> None:
+        rows = [
+            _life_row(
+                "British Columbia", "0 years", "Males", "life expectancy", "80.16"
+            )
+        ]
+        out = tidy(rows, dimensions=LIFE_DIMENSIONS)
+        self.assertEqual(out[0]["age_group"], "0 years")
+        self.assertEqual(out[0]["sex"], "Males")
+        self.assertEqual(out[0]["characteristic"], "life expectancy")
+        self.assertEqual(out[0]["value"], 80.16)
+
+
+class DownloadManifestTests(unittest.TestCase):
+    def test_manifest_filename_uses_table_stem(self) -> None:
+        path = wds_download_json("statcan_life_tables", table_id="13-10-0837-01")
+        self.assertEqual(path.name, "13100837-download.json")
+        self.assertEqual(path.parent.name, "statcan_life_tables")
+
+    def test_manifest_default_is_legacy_layout(self) -> None:
+        path = wds_download_json("statcan_wds")
+        self.assertEqual(path.name, "13100710-download.json")
 
 
 class TableRowsTests(unittest.TestCase):
