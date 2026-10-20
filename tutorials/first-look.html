@@ -26,7 +26,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -166,8 +220,28 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Data quality</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reference/state-of-health-report.html">
+ <span class="dropdown-text">Descriptive report</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reference/indicator-mortality-rates-bc.html">
  <span class="dropdown-text">Indicator: Mortality rates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-life-expectancy-bc.html">
+ <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-mortality-inequality-bc.html">
+ <span class="dropdown-text">Indicator: Regional mortality inequality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-life-satisfaction-bc.html">
+ <span class="dropdown-text">Indicator: Life satisfaction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-wellbeing-cchs-bc.html">
+ <span class="dropdown-text">Indicator family: Health survey</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reference/project-structure.html">
@@ -222,10 +296,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#steps-target-outline" id="toc-steps-target-outline" class="nav-link" data-scroll-target="#steps-target-outline">Steps (target outline)</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#see-what-the-project-knows-about" id="toc-see-what-the-project-knows-about" class="nav-link" data-scroll-target="#see-what-the-project-knows-about">1. See what the project knows about</a></li>
+  <li><a href="#fetch-the-raw-source" id="toc-fetch-the-raw-source" class="nav-link" data-scroll-target="#fetch-the-raw-source">2. Fetch the raw source</a></li>
+  <li><a href="#build-the-tidy-dataset" id="toc-build-the-tidy-dataset" class="nav-link" data-scroll-target="#build-the-tidy-dataset">3. Build the tidy dataset</a></li>
+  <li><a href="#look-at-the-trajectory" id="toc-look-at-the-trajectory" class="nav-link" data-scroll-target="#look-at-the-trajectory">4. Look at the trajectory</a></li>
+  <li><a href="#read-the-caveats" id="toc-read-the-caveats" class="nav-link" data-scroll-target="#read-the-caveats">5. Read the caveats</a></li>
+  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">6. Reflect</a></li>
   <li><a href="#what-you-have-learned" id="toc-what-you-have-learned" class="nav-link" data-scroll-target="#what-you-have-learned">What you have learned</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/tutorials/first-look.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -251,37 +330,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><em>Status: planned. This tutorial is blocked on milestone M2 (data landscape) in the <a href="../ROADMAP.html">roadmap</a>, which is in progress: the <a href="../reference/data-sources.html">data source catalogue</a> and the <code>sohbc</code> acquisition pipeline now exist, but indicator-level ingestion is not yet complete. The outline below is the target structure.</em></p>
-<section id="objective" class="level2">
-<h2 class="anchored" data-anchor-id="objective">Objective</h2>
-<p>By the end of this tutorial you will have loaded a headline health indicator for British Columbia, plotted its trend over time, and compared it across health authority regions — using only reproducible, documented steps.</p>
-</section>
+<p><em>Status: available for the two published indicators (mortality rates and life expectancy). The regional-comparison step awaits sub-provincial ingestion (milestone M3 in the <a href="../ROADMAP.html">roadmap</a>).</em></p>
+<p>In this tutorial you will fetch a headline health indicator for British Columbia, build it from source into a tidy dataset, and look at its trajectory — using only reproducible, documented steps. No prior familiarity with the project is assumed.</p>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
 <ul>
-<li>A working Quarto environment (see <a href="../how-to/contribute.html">How to contribute</a>).</li>
-<li>The project’s data pipeline has been run at least once.</li>
+<li>A working environment (see <a href="../how-to/contribute.html">How to contribute</a>): Quarto and <code>uv</code> installed, <code>uv sync</code> run once.</li>
+<li>No data needs to be present beforehand — we fetch it in step 2.</li>
 </ul>
 </section>
-<section id="steps-target-outline" class="level2">
-<h2 class="anchored" data-anchor-id="steps-target-outline">Steps (target outline)</h2>
+<section id="see-what-the-project-knows-about" class="level2">
+<h2 class="anchored" data-anchor-id="see-what-the-project-knows-about">1. See what the project knows about</h2>
+<p>Lists the indicators the pipeline can build, and the catalogued data sources behind them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc indicators</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>indicators</code> lists the entries the pipeline can build — mortality rates, life expectancy, a sub-provincial mortality-inequality view, and a family of survey indicators (life satisfaction, perceived health and mental health, anxiety and mood disorders, diabetes, high blood pressure, having a regular provider, daily smoking) — each tagged with its measurement-framework domain. <code>list</code> shows the catalogued sources; only a few are marked <code>auto</code> (the pipeline can fetch them without a browser).</p>
+</section>
+<section id="fetch-the-raw-source" class="level2">
+<h2 class="anchored" data-anchor-id="fetch-the-raw-source">2. Fetch the raw source</h2>
+<p>Each indicator names a catalogued source. Life expectancy comes from Statistics Canada’s life tables. Fetch it into the reproducible local layout:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch statcan_life_tables</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The raw response lands in <code>data/raw/statcan_life_tables/</code> and a checksum is recorded in <code>data/manifest.json</code>. Raw data is <strong>not</strong> committed: the catalogue and this command are what make it reproducible.</p>
+</section>
+<section id="build-the-tidy-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="build-the-tidy-dataset">3. Build the tidy dataset</h2>
+<p>Turn the raw table into a published, tidy dataset:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build life_expectancy_bc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This writes <code>data/published/life_expectancy_bc.csv</code> plus trend-test JSON. Look at the first rows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-4</span> data/published/life_expectancy_bc.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Every datum carries its reference date, geography, age group, sex, and characteristic, so nothing about its resolution is lost (a project rule — see the <a href="../reference/measurement-framework.html">measurement framework</a>).</p>
+</section>
+<section id="look-at-the-trajectory" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-the-trajectory">4. Look at the trajectory</h2>
+<p>Load the tidy file and plot the series in the language of your choice. The R-and-Python-agnostic view is simply to read the published chart on the indicator’s <a href="../reference/indicator-life-expectancy-bc.html">reference page</a>, which is regenerated from the same files on every render.</p>
+<p>To make your own view, the two headline characteristics are:</p>
+<ul>
+<li><code>Life expectancy (in years) at age x (ex)</code> with <code>age_group == "0 years"</code> — life expectancy at birth.</li>
+<li><code>Number of deaths</code> and <code>Mortality rate per 1,000 population</code> in <code>data/published/mortality_rates_bc.csv</code> — the mortality indicator.</li>
+</ul>
+<p>Two habits the project expects of any view you build:</p>
 <ol type="1">
-<li><strong>Set up.</strong> Clone the repository and render the site locally with <code>quarto preview</code>.</li>
-<li><strong>Fetch an indicator.</strong> Run the ingestion command for one indicator (e.g.&nbsp;life expectancy at birth) and locate the resulting dataset.</li>
-<li><strong>Plot the trend.</strong> Produce a time-series chart of the indicator for BC as a whole.</li>
-<li><strong>Compare regions.</strong> Break the same indicator down by health authority and overlay the regional series.</li>
-<li><strong>Read the caveats.</strong> Open the indicator’s reference page and note its provenance, definition, and known limitations.</li>
-<li><strong>Reflect.</strong> Note what the chart does <em>not</em> tell you — this is where the <a href="../explanation/index.html">explanation</a> section picks up.</li>
+<li><strong>Plot the whole window, not one point.</strong> The trajectory JSON alongside each CSV states whether the series is stationary over its window and, if not, where the regimes break. Read the number <em>and</em> its window.</li>
+<li><strong>Mark the regimes.</strong> The COVID-19 period (2020–2024) is shaded on the published charts; regime breaks are drawn as dashed lines. A series that moves is not necessarily a series whose <em>rule</em> changed — the tests distinguish the two.</li>
 </ol>
+</section>
+<section id="read-the-caveats" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-caveats">5. Read the caveats</h2>
+<p>Open the indicator’s reference page and read its provenance table and caveats. For life expectancy, the key caveat is that it is a <strong>period</strong> measure — the average lifespan of a synthetic cohort under one year’s death rates <span class="citation" data-cites="statcan_life_table">(<a href="#ref-statcan_life_table" role="doc-biblioref">Statistics Canada, n.d.</a>)</span> — not anyone’s expected lifespan and not a statement about the health of the living.</p>
+</section>
+<section id="reflect" class="level2">
+<h2 class="anchored" data-anchor-id="reflect">6. Reflect</h2>
+<p>Note what the chart does <em>not</em> tell you. Life expectancy at birth says nothing about morbidity, functional status, or wellbeing; a rising value can coexist with worsening health among the living. This is exactly why the project treats every indicator as a <strong>proxy</strong> for a domain, never the state of health itself — the <a href="../explanation/index.html">explanation</a> section takes this up.</p>
 </section>
 <section id="what-you-have-learned" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-have-learned">What you have learned</h2>
-<p>How the pipeline, reference pages, and explanation pages fit together: the same pattern used by every subsequent analysis in this project.</p>
+<p>The whole project follows the pattern you just walked: a catalogued source → a fetch step → a reproducible build into tidy data with its resolution recorded → a trajectory view that states its window and regimes → a proxy that is read alongside its caveats. Every later indicator and analysis reuses it.</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<ul>
+<li><a href="../how-to/add-indicator.html">Add an indicator</a> of your own.</li>
+<li><a href="../how-to/ingest-data.html">Ingest a data source</a> into the catalogue.</li>
+<li><strong>Regional comparison</strong> — the roadmap’s M3 outstanding work — is where this tutorial’s target structure originally pointed; it needs sub-provincial ingestion first.</li>
+</ul>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-statcan_life_table" class="csl-entry" role="listitem">
+Statistics Canada. n.d. <em>Life Expectancy and Other Elements of the Complete Life Table, Single-Year Estimates, Canada, All Provinces Except <span>Prince Edward Island</span> (Table 13-10-0837-01)</em>. Accessed October 19, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310083701">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310083701</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

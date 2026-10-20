@@ -1,0 +1,99 @@
+{
+  "start": 2015,
+  "end": 2024,
+  "n": 10,
+  "overall": {
+    "slope_per_year": -0.44,
+    "slope_per_decade": -4.4
+  },
+  "change_point": 2020,
+  "change_points": [
+    2020
+  ],
+  "segments": [
+    {
+      "label": "before",
+      "start": 2015,
+      "end": 2019,
+      "slope_per_year": -0.73,
+      "slope_per_decade": -7.3,
+      "fitted_start": 10.18,
+      "fitted_end": 7.26,
+      "change_within": -2.92
+    },
+    {
+      "label": "after",
+      "start": 2020,
+      "end": 2024,
+      "slope_per_year": -0.1,
+      "slope_per_decade": -1.0,
+      "fitted_start": 6.68,
+      "fitted_end": 6.28,
+      "change_within": -0.4
+    }
+  ],
+  "break_test": {
+    "method": "residual-permutation test (H0: one straight line)",
+    "statistic_sse_reduction": 2.001,
+    "n_permutations": 1999,
+    "seed": 20241018,
+    "p_value": 0.0745,
+    "significant": false,
+    "change_point": 2020
+  },
+  "trend_test": {
+    "method": "Kendall tau (rank-based monotone trend)",
+    "tau": -0.7191,
+    "p_value": 0.004057,
+    "significant": true
+  },
+  "stationarity": {
+    "verdict": "nonstationary",
+    "reasons": [
+      "monotone trend (Kendall tau=-0.7191, p=0.004057)"
+    ]
+  },
+  "regime_selection": {
+    "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+    "min_segment": 5,
+    "max_breaks_considered": 1,
+    "n_breaks": 1,
+    "years": [
+      2020
+    ],
+    "sse": 1.867,
+    "bic": -5.2696,
+    "candidates": [
+      {
+        "n_breaks": 0,
+        "years": [],
+        "sse": 3.868,
+        "bic": -4.8933
+      },
+      {
+        "n_breaks": 1,
+        "years": [
+          2020
+        ],
+        "sse": 1.867,
+        "bic": -5.2696
+      }
+    ]
+  },
+  "jumps": [
+    {
+      "year": 2020,
+      "previous_level": 6.53,
+      "next_level": 6.68,
+      "jump": 0.15
+    }
+  ],
+  "decomposition": {
+    "observed_change": -4.1,
+    "within_regime_change": -3.32,
+    "between_regime_change": 0.15,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+  },
+  "series": "Percent",
+  "sex": "Both sexes"
+}

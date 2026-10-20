@@ -1,0 +1,78 @@
+{
+  "start": 2015,
+  "end": 2024,
+  "n": 10,
+  "overall": {
+    "slope_per_year": 1.3855,
+    "slope_per_decade": 13.8545
+  },
+  "change_point": null,
+  "change_points": [],
+  "segments": [
+    {
+      "label": "regime 1",
+      "start": 2015,
+      "end": 2024,
+      "slope_per_year": 1.3855,
+      "slope_per_decade": 13.8545,
+      "fitted_start": 5.7055,
+      "fitted_end": 18.1745,
+      "change_within": 12.4691
+    }
+  ],
+  "break_test": {
+    "method": "residual-permutation test (H0: one straight line)",
+    "statistic_sse_reduction": 9.251545,
+    "n_permutations": 1999,
+    "seed": 20241018,
+    "p_value": 0.092,
+    "significant": false,
+    "change_point": 2020
+  },
+  "trend_test": {
+    "method": "Kendall tau (rank-based monotone trend)",
+    "tau": 0.8411,
+    "p_value": 0.000849,
+    "significant": true
+  },
+  "stationarity": {
+    "verdict": "nonstationary",
+    "reasons": [
+      "monotone trend (Kendall tau=0.8411, p=0.000849)"
+    ]
+  },
+  "regime_selection": {
+    "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+    "min_segment": 5,
+    "max_breaks_considered": 1,
+    "n_breaks": 0,
+    "years": [],
+    "sse": 19.186545,
+    "bic": 11.1214,
+    "candidates": [
+      {
+        "n_breaks": 0,
+        "years": [],
+        "sse": 19.186545,
+        "bic": 11.1214
+      },
+      {
+        "n_breaks": 1,
+        "years": [
+          2020
+        ],
+        "sse": 9.935,
+        "bic": 11.4477
+      }
+    ]
+  },
+  "jumps": [],
+  "decomposition": {
+    "observed_change": 11.4,
+    "within_regime_change": 12.4691,
+    "between_regime_change": 0,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+  },
+  "series": "Percent",
+  "sex": "Both sexes"
+}

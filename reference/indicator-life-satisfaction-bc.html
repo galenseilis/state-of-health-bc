@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Indicator: Life satisfaction, British Columbia – State-of-Health BC</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">State-of-Health BC</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="../tutorials/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tutorials/first-look.html">
+ <span class="dropdown-text">Your first look at BC health data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/contribute.html">
+ <span class="dropdown-text">Contribute to the project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/add-indicator.html">
+ <span class="dropdown-text">Add an indicator</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/ingest-data.html">
+ <span class="dropdown-text">Ingest a data source</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reference" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Reference</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
+        <li>
+    <a class="dropdown-item" href="../reference/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/api/index.html">
+ <span class="dropdown-text">API</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/measurement-framework.html">
+ <span class="dropdown-text">Measurement framework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/data-sources.html">
+ <span class="dropdown-text">Data sources</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/data-quality.html">
+ <span class="dropdown-text">Data quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/state-of-health-report.html">
+ <span class="dropdown-text">Descriptive report</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-mortality-rates-bc.html">
+ <span class="dropdown-text">Indicator: Mortality rates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-life-expectancy-bc.html">
+ <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-mortality-inequality-bc.html">
+ <span class="dropdown-text">Indicator: Regional mortality inequality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-life-satisfaction-bc.html">
+ <span class="dropdown-text">Indicator: Life satisfaction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-wellbeing-cchs-bc.html">
+ <span class="dropdown-text">Indicator family: Health survey</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/project-structure.html">
+ <span class="dropdown-text">Project structure</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="../explanation/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/definition-of-health.html">
+ <span class="dropdown-text">Definition of the state of health</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/defining-health.html">
+ <span class="dropdown-text">Defining health</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/nonstationarity.html">
+ <span class="dropdown-text">Health is not stationary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/why-bc.html">
+ <span class="dropdown-text">Why BC only?</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../ROADMAP.html"> 
+<span class="menu-text">Roadmap</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#provenance" id="toc-provenance" class="nav-link active" data-scroll-target="#provenance">Provenance</a></li>
+  <li><a href="#trend" id="toc-trend" class="nav-link" data-scroll-target="#trend">Trend</a></li>
+  <li><a href="#trajectory-and-regimes" id="toc-trajectory-and-regimes" class="nav-link" data-scroll-target="#trajectory-and-regimes">Trajectory and regimes</a></li>
+  <li><a href="#caveats" id="toc-caveats" class="nav-link" data-scroll-target="#caveats">Caveats</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/reference/indicator-life-satisfaction-bc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Indicator: Life satisfaction, British Columbia</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Status: a published indicator from the survey family (milestone M3 in progress). Regenerate with <code>uv run sohbc build life_satisfaction_bc</code>.</em></p>
+<p>This indicator widens the project beyond mortality. It is fetched from a catalogued Statistics Canada table, tidied by the same pipeline as the <a href="../reference/indicator-mortality-rates-bc.html">mortality</a> and <a href="../reference/indicator-life-expectancy-bc.html">life expectancy</a> indicators, and published as a versioned dataset plus the views below. The whole survey family is described on the <a href="../reference/indicator-wellbeing-cchs-bc.html">CCHS indicator page</a>.</p>
+<section id="provenance" class="level2">
+<h2 class="anchored" data-anchor-id="provenance">Provenance</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Domain</strong></td>
+<td><a href="../reference/measurement-framework.html">Subjective wellbeing</a></td>
+</tr>
+<tr class="even">
+<td><strong>Definition</strong></td>
+<td>Percent of British Columbians aged 18 and over who report being satisfied or very satisfied with life, annual 2015–2024 <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.</a>)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Source</strong></td>
+<td>Statistics Canada, table 13-10-0905-01, <em>Health indicator statistics, annual estimates</em> (Canadian Community Health Survey) <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.</a>)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Access</strong></td>
+<td>Statistics Canada Web Data Service (automated full-table download)</td>
+</tr>
+<tr class="odd">
+<td><strong>Form</strong></td>
+<td>indicator table (published survey summary statistics)</td>
+</tr>
+<tr class="even">
+<td><strong>Geography</strong></td>
+<td>British Columbia (no sub-provincial rows in this table)</td>
+</tr>
+<tr class="odd">
+<td><strong>Coverage</strong></td>
+<td>2015–2024 (annual); observation window shown on each figure</td>
+</tr>
+<tr class="even">
+<td><strong>Frequency / refresh</strong></td>
+<td>annual</td>
+</tr>
+<tr class="odd">
+<td><strong>Licence</strong></td>
+<td>Statistics Canada Open Licence</td>
+</tr>
+<tr class="even">
+<td><strong>Proxy note</strong></td>
+<td>A self-reported proxy in the wellbeing domain, not the state of health itself (<a href="../explanation/definition-of-health.html#proxies-are-not-the-state-of-health">why</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trend" class="level2">
+<h2 class="anchored" data-anchor-id="trend">Trend</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="34" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 33;"><span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/life_satisfaction_bc.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({<span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span>})</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>bySex <span class="op">=</span> rows<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">sex</span> <span class="op">!==</span> <span class="st">"Both sexes"</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>headline <span class="op">=</span> rows<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">sex</span> <span class="op">===</span> <span class="st">"Both sexes"</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/life_satisfaction_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>bySexTrend <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/life_satisfaction_bc_by_sex_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="42" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 41;"><span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span><span class="op">:</span> <span class="st">"Life satisfaction (satisfied or very satisfied), British Columbia (% of adults)"</span><span class="op">,</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Year"</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> <span class="st">"d"</span>}<span class="op">,</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"% of adults aged 18+"</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="dv">70</span><span class="op">,</span> <span class="dv">100</span>]}<span class="op">,</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">rectX</span>([{<span class="dt">x1</span><span class="op">:</span> <span class="dv">2020</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="dv">2024</span>}]<span class="op">,</span> {<span class="dt">x1</span><span class="op">:</span> <span class="st">"x1"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"x2"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"grey"</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.12</span>})<span class="op">,</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>(bySexTrend<span class="op">.</span><span class="at">levels</span>[<span class="st">"Both sexes"</span>]<span class="op">.</span><span class="at">change_points</span><span class="op">,</span> {<span class="dt">stroke</span><span class="op">:</span> <span class="st">"red"</span><span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span>})<span class="op">,</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">lineY</span>(bySex<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"ref_date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"sex"</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">,</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(bySex<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"ref_date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"sex"</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">,</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">lineY</span>(headline<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"ref_date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">,</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(headline<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"ref_date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span>})</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>The black line is both sexes, the coloured lines are the source’s sex categories. The grey band marks the COVID-19 period (2020–2024); the red dashed line is the regime break dated by the pipeline.</p>
+</section>
+<section id="trajectory-and-regimes" class="level2">
+<h2 class="anchored" data-anchor-id="trajectory-and-regimes">Trajectory and regimes</h2>
+<p>Trend summaries, recomputed on every build (<code>data/published/life_satisfaction_bc_trend.json</code>, <code>data/published/life_satisfaction_bc_by_sex_trend.json</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="70" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 69;"><span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`Over </span><span class="sc">${</span>trend<span class="op">.</span><span class="at">start</span><span class="sc">}</span><span class="vs">–</span><span class="sc">${</span>trend<span class="op">.</span><span class="at">end</span><span class="sc">}</span><span class="vs"> life satisfaction (both sexes)</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="vs">changed by **</span><span class="sc">${</span>trend<span class="op">.</span><span class="at">overall</span><span class="op">.</span><span class="at">slope_per_decade</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">** percentage</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="vs">points per decade, and the series is **</span><span class="sc">${</span>trend<span class="op">.</span><span class="at">stationarity</span><span class="op">.</span><span class="at">verdict</span><span class="sc">}</span><span class="vs">**. It</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="vs">carries a downward rank trend (Kendall's tau =</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="sc">${</span>trend<span class="op">.</span><span class="at">trend_test</span><span class="op">.</span><span class="at">tau</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">, p =</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="sc">${</span>trend<span class="op">.</span><span class="at">trend_test</span><span class="op">.</span><span class="at">p_value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">) and a departure from a single</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="vs">straight line (residual-permutation test, p =</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="sc">${</span>trend<span class="op">.</span><span class="at">break_test</span><span class="op">.</span><span class="at">p_value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">). The BIC-selected regimes break at</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="sc">${</span>trend<span class="op">.</span><span class="at">change_points</span><span class="op">.</span><span class="fu">join</span>(<span class="st">", "</span>)<span class="sc">}</span><span class="vs">: **</span><span class="sc">${</span>trend<span class="op">.</span><span class="at">segments</span>[<span class="dv">0</span>]<span class="op">.</span><span class="at">slope_per_decade</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">** pp/decade</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="vs">before, **</span><span class="sc">${</span>trend<span class="op">.</span><span class="at">segments</span>[<span class="dv">1</span>]<span class="op">.</span><span class="at">slope_per_decade</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">** pp/decade</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="vs">from </span><span class="sc">${</span>trend<span class="op">.</span><span class="at">segments</span>[<span class="dv">1</span>]<span class="op">.</span><span class="at">start</span><span class="sc">}</span><span class="vs">.`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="86" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>sexRows <span class="op">=</span> [<span class="st">"Both sexes"</span><span class="op">,</span> <span class="st">"Males"</span><span class="op">,</span> <span class="st">"Females"</span>]<span class="op">.</span><span class="fu">map</span>(sex <span class="kw">=&gt;</span> ({</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>  sex<span class="op">,</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>bySexTrend<span class="op">.</span><span class="at">levels</span>[sex]</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>}))<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sex</span><span class="op">:</span> d<span class="op">.</span><span class="at">sex</span><span class="op">,</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>  <span class="dt">slope_per_decade</span><span class="op">:</span> d<span class="op">.</span><span class="at">overall</span><span class="op">.</span><span class="at">slope_per_decade</span><span class="op">,</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>  <span class="dt">verdict</span><span class="op">:</span> d<span class="op">.</span><span class="at">stationarity</span><span class="op">.</span><span class="at">verdict</span><span class="op">,</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  <span class="dt">change_points</span><span class="op">:</span> d<span class="op">.</span><span class="at">change_points</span><span class="op">.</span><span class="fu">join</span>(<span class="st">", "</span>) <span class="op">||</span> <span class="st">"—"</span><span class="op">,</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>  <span class="dt">change_point</span><span class="op">:</span> d<span class="op">.</span><span class="at">change_point</span> <span class="op">??</span> <span class="st">"—"</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(sexRows<span class="op">,</span> {</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  <span class="dt">columns</span><span class="op">:</span> [<span class="st">"sex"</span><span class="op">,</span> <span class="st">"slope_per_decade"</span><span class="op">,</span> <span class="st">"verdict"</span><span class="op">,</span> <span class="st">"change_points"</span><span class="op">,</span> <span class="st">"change_point"</span>]<span class="op">,</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  <span class="dt">header</span><span class="op">:</span> {<span class="dt">sex</span><span class="op">:</span> <span class="st">"sex"</span><span class="op">,</span> <span class="dt">slope_per_decade</span><span class="op">:</span> <span class="st">"slope/decade (pp)"</span><span class="op">,</span> <span class="dt">verdict</span><span class="op">:</span> <span class="st">"stationarity"</span><span class="op">,</span> <span class="dt">change_points</span><span class="op">:</span> <span class="st">"regime breaks"</span><span class="op">,</span> <span class="dt">change_point</span><span class="op">:</span> <span class="st">"largest break"</span>}</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p><strong>Method.</strong> Regimes are dated by a piecewise-linear segmentation, solved exactly by dynamic programming, with the number of breaks chosen by BIC; whether the series departs from one straight line is tested by residual permutation <span class="citation" data-cites="truong2020selective">(<a href="#ref-truong2020selective" role="doc-biblioref">Truong et al. 2020</a>)</span>, and the trend by Kendall’s tau. Each series is therefore labelled stationary or not over its observed window, as milestone M3 requires. The full test output, including every candidate segmentation, is in the trend JSON. The permutation test assumes exchangeable residuals — autocorrelation is not modelled — so it is a test of departure from a linear trend, not a full time-series model.</p>
+</section>
+<section id="caveats" class="level2">
+<h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
+<ul>
+<li><strong>Survey estimate.</strong> Life satisfaction is self-reported on a national survey; it carries sampling error and a coefficient-of-variation release policy, so individual cells may be suppressed or flagged. The plotted series are the published point estimates.</li>
+<li><strong>Measurement, not only change.</strong> The CCHS collection frame changed over 2015–2024 and 2020–2021 collection was disrupted by the pandemic. Part of the 2020 break may be a change in <em>how</em> the series was measured, not only in how people answered. The pipeline dates the break; it does not attribute it.</li>
+<li><strong>Break detection, not explanation.</strong> The regimes are dated by a formal test (above); the test says a break beyond a single straight line exists, not what caused it.</li>
+<li><strong>Sex categories are the source’s.</strong> The table publishes both sexes, males, and females; the pipeline reports these as given.</li>
+<li><strong>No sub-provincial rows.</strong> The source table is provincial only; health-authority and regional survey series are separate products.</li>
+<li><strong>Revisions.</strong> Statistics Canada may revise survey estimates; the published files are regenerated from the source on each build.</li>
+</ul>
+</section>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch statcan_health_indicators</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build life_satisfaction_bc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The tidy dataset is published at <code>data/published/life_satisfaction_bc.csv</code> (by sex). The headline trend test is at <code>data/published/life_satisfaction_bc_trend.json</code> and the per-sex tests at <code>data/published/life_satisfaction_bc_by_sex_trend.json</code>.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-statcan_health_indicators" class="csl-entry" role="listitem">
+Statistics Canada. n.d. <em>Health Indicator Statistics, Annual Estimates (Table 13-10-0905-01)</em>. Accessed October 19, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501</a>.
+</div>
+<div id="ref-truong2020selective" class="csl-entry" role="listitem">
+Truong, Charles, Laurent Oudre, and Nicolas Vayatis. 2020. <span>“Selective Review of Offline Change Point Detection Methods.”</span> <em>Signal Processing</em> 167: 107299. <a href="https://doi.org/10.1016/j.sigpro.2019.107299">https://doi.org/10.1016/j.sigpro.2019.107299</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InJvd3MgPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2xpZmVfc2F0aXNmYWN0aW9uX2JjLmNzdlwiKS5jc3Yoe3R5cGVkOiB0cnVlfSlcbmJ5U2V4ID0gcm93cy5maWx0ZXIoZCA9PiBkLnNleCAhPT0gXCJCb3RoIHNleGVzXCIpXG5oZWFkbGluZSA9IHJvd3MuZmlsdGVyKGQgPT4gZC5zZXggPT09IFwiQm90aCBzZXhlc1wiKVxudHJlbmQgPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2xpZmVfc2F0aXNmYWN0aW9uX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG5ieVNleFRyZW5kID0gRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9saWZlX3NhdGlzZmFjdGlvbl9iY19ieV9zZXhfdHJlbmQuanNvblwiKS5qc29uKClcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QucGxvdCh7XG4gIHRpdGxlOiBcIkxpZmUgc2F0aXNmYWN0aW9uIChzYXRpc2ZpZWQgb3IgdmVyeSBzYXRpc2ZpZWQpLCBCcml0aXNoIENvbHVtYmlhICglIG9mIGFkdWx0cylcIixcbiAgeDoge2xhYmVsOiBcIlllYXJcIiwgdGlja0Zvcm1hdDogXCJkXCJ9LFxuICB5OiB7Z3JpZDogdHJ1ZSwgbGFiZWw6IFwiJSBvZiBhZHVsdHMgYWdlZCAxOCtcIiwgZG9tYWluOiBbNzAsIDEwMF19LFxuICBjb2xvcjoge2xlZ2VuZDogdHJ1ZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5yZWN0WChbe3gxOiAyMDIwLCB4MjogMjAyNH1dLCB7eDE6IFwieDFcIiwgeDI6IFwieDJcIiwgZmlsbDogXCJncmV5XCIsIGZpbGxPcGFjaXR5OiAwLjEyfSksXG4gICAgUGxvdC5ydWxlWChieVNleFRyZW5kLmxldmVsc1tcIkJvdGggc2V4ZXNcIl0uY2hhbmdlX3BvaW50cywge3N0cm9rZTogXCJyZWRcIiwgc3Ryb2tlRGFzaGFycmF5OiBcIjQsNFwifSksXG4gICAgUGxvdC5saW5lWShieVNleCwge3g6IFwicmVmX2RhdGVcIiwgeTogXCJ2YWx1ZVwiLCBzdHJva2U6IFwic2V4XCIsIHRpcDogdHJ1ZX0pLFxuICAgIFBsb3QuZG90KGJ5U2V4LCB7eDogXCJyZWZfZGF0ZVwiLCB5OiBcInZhbHVlXCIsIHN0cm9rZTogXCJzZXhcIiwgdGlwOiB0cnVlfSksXG4gICAgUGxvdC5saW5lWShoZWFkbGluZSwge3g6IFwicmVmX2RhdGVcIiwgeTogXCJ2YWx1ZVwiLCBzdHJva2U6IFwiYmxhY2tcIiwgc3Ryb2tlV2lkdGg6IDIuNSwgdGlwOiB0cnVlfSksXG4gICAgUGxvdC5kb3QoaGVhZGxpbmUsIHt4OiBcInJlZl9kYXRlXCIsIHk6IFwidmFsdWVcIiwgc3Ryb2tlOiBcImJsYWNrXCIsIHRpcDogdHJ1ZX0pXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJtZGBPdmVyICR7dHJlbmQuc3RhcnR94oCTJHt0cmVuZC5lbmR9IGxpZmUgc2F0aXNmYWN0aW9uIChib3RoIHNleGVzKVxuY2hhbmdlZCBieSAqKiR7dHJlbmQub3ZlcmFsbC5zbG9wZV9wZXJfZGVjYWRlLnRvRml4ZWQoMil9KiogcGVyY2VudGFnZVxucG9pbnRzIHBlciBkZWNhZGUsIGFuZCB0aGUgc2VyaWVzIGlzICoqJHt0cmVuZC5zdGF0aW9uYXJpdHkudmVyZGljdH0qKi4gSXRcbmNhcnJpZXMgYSBkb3dud2FyZCByYW5rIHRyZW5kIChLZW5kYWxsJ3MgdGF1ID1cbiR7dHJlbmQudHJlbmRfdGVzdC50YXUudG9GaXhlZCgyKX0sIHAgPVxuJHt0cmVuZC50cmVuZF90ZXN0LnBfdmFsdWUudG9GaXhlZCgzKX0pIGFuZCBhIGRlcGFydHVyZSBmcm9tIGEgc2luZ2xlXG5zdHJhaWdodCBsaW5lIChyZXNpZHVhbC1wZXJtdXRhdGlvbiB0ZXN0LCBwID1cbiR7dHJlbmQuYnJlYWtfdGVzdC5wX3ZhbHVlLnRvRml4ZWQoMyl9KS4gVGhlIEJJQy1zZWxlY3RlZCByZWdpbWVzIGJyZWFrIGF0XG4ke3RyZW5kLmNoYW5nZV9wb2ludHMuam9pbihcIiwgXCIpfTogKioke3RyZW5kLnNlZ21lbnRzWzBdLnNsb3BlX3Blcl9kZWNhZGUudG9GaXhlZCgxKX0qKiBwcC9kZWNhZGVcbmJlZm9yZSwgKioke3RyZW5kLnNlZ21lbnRzWzFdLnNsb3BlX3Blcl9kZWNhZGUudG9GaXhlZCgxKX0qKiBwcC9kZWNhZGVcbmZyb20gJHt0cmVuZC5zZWdtZW50c1sxXS5zdGFydH0uYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoic2V4Um93cyA9IFtcIkJvdGggc2V4ZXNcIiwgXCJNYWxlc1wiLCBcIkZlbWFsZXNcIl0ubWFwKHNleCA9PiAoe1xuICBzZXgsXG4gIC4uLmJ5U2V4VHJlbmQubGV2ZWxzW3NleF1cbn0pKS5tYXAoZCA9PiAoe1xuICBzZXg6IGQuc2V4LFxuICBzbG9wZV9wZXJfZGVjYWRlOiBkLm92ZXJhbGwuc2xvcGVfcGVyX2RlY2FkZSxcbiAgdmVyZGljdDogZC5zdGF0aW9uYXJpdHkudmVyZGljdCxcbiAgY2hhbmdlX3BvaW50czogZC5jaGFuZ2VfcG9pbnRzLmpvaW4oXCIsIFwiKSB8fCBcIuKAlFwiLFxuICBjaGFuZ2VfcG9pbnQ6IGQuY2hhbmdlX3BvaW50ID8/IFwi4oCUXCJcbn0pKVxuSW5wdXRzLnRhYmxlKHNleFJvd3MsIHtcbiAgY29sdW1uczogW1wic2V4XCIsIFwic2xvcGVfcGVyX2RlY2FkZVwiLCBcInZlcmRpY3RcIiwgXCJjaGFuZ2VfcG9pbnRzXCIsIFwiY2hhbmdlX3BvaW50XCJdLFxuICBoZWFkZXI6IHtzZXg6IFwic2V4XCIsIHNsb3BlX3Blcl9kZWNhZGU6IFwic2xvcGUvZGVjYWRlIChwcClcIiwgdmVyZGljdDogXCJzdGF0aW9uYXJpdHlcIiwgY2hhbmdlX3BvaW50czogXCJyZWdpbWUgYnJlYWtzXCIsIGNoYW5nZV9wb2ludDogXCJsYXJnZXN0IGJyZWFrXCJ9XG59KVxuIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../reference";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/galenseilis\.github\.io\/state-of-health-bc");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>State-of-Health BC — licensed GPL-3.0</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Independent project — not endorsed by any organisation</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/reference/indicator-life-satisfaction-bc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

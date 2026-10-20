@@ -1,0 +1,1013 @@
+{
+  "source": "Mortality inequality across BC health regions",
+  "reference_periods": [
+    "2020/2022",
+    "2021/2023"
+  ],
+  "causes": [
+    "Premature mortality",
+    "Potentially avoidable mortality",
+    "Mortality from preventable causes",
+    "Mortality from treatable causes"
+  ],
+  "sexes": [
+    "Both sexes",
+    "Males",
+    "Females"
+  ],
+  "level": "health_service_delivery_area",
+  "dispersion": {
+    "Premature mortality": {
+      "Both sexes": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 183.5
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 259.8
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 265.1
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 298.5
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 316.2
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 341.1
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 362.4
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 376.5
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 407.0
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 411.2
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 414.1
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 427.3
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 467.1
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 548.4
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 549.8
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 551.3
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 183.5
+        },
+        "highest": {
+          "region": "Northwest Health Service Delivery Area",
+          "value": 551.3
+        },
+        "ratio": 3.004,
+        "range": 367.8,
+        "mean": 386.206
+      },
+      "Males": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 246.4
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 334.7
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 345.2
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 390.2
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 406.5
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 463.9
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 474.4
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 498.4
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 516.8
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 523.3
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 536.9
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 560.1
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 597.5
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 625.2
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 656.0
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 675.0
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 246.4
+        },
+        "highest": {
+          "region": "Northern Interior Health Service Delivery Area",
+          "value": 675.0
+        },
+        "ratio": 2.739,
+        "range": 428.6,
+        "mean": 490.656
+      },
+      "Females": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 127.7
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 189.2
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 189.5
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 210.7
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 214.2
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 232.6
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 259.3
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 260.8
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 289.3
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 293.4
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 297.7
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 316.5
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 337.2
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 418.6
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 436.1
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 471.1
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 127.7
+        },
+        "highest": {
+          "region": "Northwest Health Service Delivery Area",
+          "value": 471.1
+        },
+        "ratio": 3.689,
+        "range": 343.4,
+        "mean": 283.994
+      }
+    },
+    "Potentially avoidable mortality": {
+      "Both sexes": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 114.0
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 156.8
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 171.5
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 193.3
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 200.0
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 228.5
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 236.7
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 249.9
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 267.9
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 268.5
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 279.6
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 284.7
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 311.2
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 363.3
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 371.4
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 383.0
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 114.0
+        },
+        "highest": {
+          "region": "Northeast Health Service Delivery Area",
+          "value": 383.0
+        },
+        "ratio": 3.36,
+        "range": 269.0,
+        "mean": 255.019
+      },
+      "Males": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 155.0
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 203.5
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 226.1
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 255.5
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 259.6
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 303.3
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 322.0
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 335.2
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 341.5
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 351.6
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 362.0
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 376.7
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 402.8
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 423.3
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 449.3
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 449.5
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 155.0
+        },
+        "highest": {
+          "region": "Northeast Health Service Delivery Area",
+          "value": 449.5
+        },
+        "ratio": 2.9,
+        "range": 294.5,
+        "mean": 326.056
+      },
+      "Females": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 77.9
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 112.8
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 120.0
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 133.7
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 139.6
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 144.9
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 168.9
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 169.0
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 189.5
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 195.3
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 196.0
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 199.3
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 219.9
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 275.0
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 312.0
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 315.4
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 77.9
+        },
+        "highest": {
+          "region": "Northwest Health Service Delivery Area",
+          "value": 315.4
+        },
+        "ratio": 4.049,
+        "range": 237.5,
+        "mean": 185.575
+      }
+    },
+    "Mortality from preventable causes": {
+      "Both sexes": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 74.3
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 111.6
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 117.5
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 134.3
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 138.0
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 167.3
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 177.3
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 183.7
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 194.2
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 201.7
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 204.1
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 210.3
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 235.4
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 274.0
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 275.8
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 283.4
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 74.3
+        },
+        "highest": {
+          "region": "Northeast Health Service Delivery Area",
+          "value": 283.4
+        },
+        "ratio": 3.814,
+        "range": 209.1,
+        "mean": 186.431
+      },
+      "Males": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 111.2
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 156.5
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 165.8
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 191.9
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 194.3
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 235.8
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 248.3
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 258.7
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 268.0
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 268.7
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 283.4
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 284.6
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 317.7
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 328.6
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 345.6
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 351.7
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 111.2
+        },
+        "highest": {
+          "region": "Northern Interior Health Service Delivery Area",
+          "value": 351.7
+        },
+        "ratio": 3.163,
+        "range": 240.5,
+        "mean": 250.675
+      },
+      "Females": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 41.7
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 69.2
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 71.8
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 79.0
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 85.6
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 90.1
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 112.1
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 117.9
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 125.1
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 126.5
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 134.8
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 138.5
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 153.3
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 194.2
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 217.1
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 218.7
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 41.7
+        },
+        "highest": {
+          "region": "Northwest Health Service Delivery Area",
+          "value": 218.7
+        },
+        "ratio": 5.245,
+        "range": 177.0,
+        "mean": 123.475
+      }
+    },
+    "Mortality from treatable causes": {
+      "Both sexes": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 39.8
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 45.2
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 54.0
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 59.0
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 59.4
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 61.2
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 62.1
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 66.2
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 66.8
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 69.3
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 73.6
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 75.8
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 80.6
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 89.3
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 95.7
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 99.6
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 39.8
+        },
+        "highest": {
+          "region": "Northeast Health Service Delivery Area",
+          "value": 99.6
+        },
+        "ratio": 2.503,
+        "range": 59.8,
+        "mean": 68.6
+      },
+      "Males": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 43.8
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 47.0
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 60.3
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 63.6
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 65.3
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 67.5
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 72.8
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 73.7
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 76.5
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 77.4
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 83.7
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 85.1
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 93.3
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 94.7
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 97.6
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 103.9
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 43.8
+        },
+        "highest": {
+          "region": "Northeast Health Service Delivery Area",
+          "value": 103.9
+        },
+        "ratio": 2.372,
+        "range": 60.1,
+        "mean": 75.388
+      },
+      "Females": {
+        "ref_date": "2021/2023",
+        "level": "health_service_delivery_area",
+        "n_regions": 16,
+        "regions": [
+          {
+            "region": "Richmond Health Service Delivery Area",
+            "value": 36.2
+          },
+          {
+            "region": "North Shore/Coast Garibaldi Health Service Delivery Area",
+            "value": 43.6
+          },
+          {
+            "region": "Fraser North Health Service Delivery Area",
+            "value": 48.2
+          },
+          {
+            "region": "Vancouver Health Service Delivery Area",
+            "value": 49.5
+          },
+          {
+            "region": "East Kootenay Health Service Delivery Area",
+            "value": 51.1
+          },
+          {
+            "region": "Fraser South Health Service Delivery Area",
+            "value": 54.7
+          },
+          {
+            "region": "Okanagan Health Service Delivery Area",
+            "value": 56.8
+          },
+          {
+            "region": "South Vancouver Island Health Service Delivery Area",
+            "value": 59.3
+          },
+          {
+            "region": "North Vancouver Island Health Service Delivery Area",
+            "value": 60.8
+          },
+          {
+            "region": "Kootenay-Boundary Health Service Delivery Area",
+            "value": 61.1
+          },
+          {
+            "region": "Central Vancouver Island Health Service Delivery Area",
+            "value": 64.5
+          },
+          {
+            "region": "Thompson/Cariboo Health Service Delivery Area",
+            "value": 66.7
+          },
+          {
+            "region": "Fraser East Health Service Delivery Area",
+            "value": 68.8
+          },
+          {
+            "region": "Northern Interior Health Service Delivery Area",
+            "value": 80.7
+          },
+          {
+            "region": "Northeast Health Service Delivery Area",
+            "value": 94.9
+          },
+          {
+            "region": "Northwest Health Service Delivery Area",
+            "value": 96.7
+          }
+        ],
+        "lowest": {
+          "region": "Richmond Health Service Delivery Area",
+          "value": 36.2
+        },
+        "highest": {
+          "region": "Northwest Health Service Delivery Area",
+          "value": 96.7
+        },
+        "ratio": 2.671,
+        "range": 60.5,
+        "mean": 62.1
+      }
+    }
+  }
+}

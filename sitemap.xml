@@ -2,102 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/ROADMAP.html</loc>
-    <lastmod>2026-10-19T15:15:15.885Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.947Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/explanation/nonstationarity.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.953Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/explanation/defining-health.html</loc>
-    <lastmod>2026-10-19T15:15:15.886Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.952Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-life-expectancy-bc.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/reference/measurement-framework.html</loc>
-    <lastmod>2026-10-19T15:15:15.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/catalogue.html</loc>
-    <lastmod>2026-10-19T15:15:35.924Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/breaks.html</loc>
-    <lastmod>2026-10-19T15:15:35.939Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/index.html</loc>
-    <lastmod>2026-10-19T15:15:35.905Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-mortality-rates-bc.html</loc>
-    <lastmod>2026-10-19T15:15:15.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/project-structure.html</loc>
-    <lastmod>2026-10-19T15:15:15.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/add-indicator.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/index.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/tutorials/first-look.html</loc>
-    <lastmod>2026-10-19T15:15:15.891Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/index.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/tutorials/index.html</loc>
-    <lastmod>2026-10-19T15:15:15.891Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/contribute.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/ingest-data.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/data-quality.html</loc>
-    <lastmod>2026-10-19T15:15:15.888Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/index.html</loc>
-    <lastmod>2026-10-19T15:15:15.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/glossary.html</loc>
-    <lastmod>2026-10-19T15:15:15.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/fetch.html</loc>
-    <lastmod>2026-10-19T15:15:35.928Z</lastmod>
-  </url>
-  <url>
-    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/indicators.html</loc>
-    <lastmod>2026-10-19T15:15:35.934Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/reference/data-sources.html</loc>
-    <lastmod>2026-10-19T15:15:15.888Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/indicators.html</loc>
+    <lastmod>2026-10-20T19:27:39.410Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/fetch.html</loc>
+    <lastmod>2026-10-20T19:27:39.397Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/glossary.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-mortality-rates-bc.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/index.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/data-quality.html</loc>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/ingest-data.html</loc>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/contribute.html</loc>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/tutorials/index.html</loc>
+    <lastmod>2026-10-20T19:27:14.956Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/index.html</loc>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/tutorials/first-look.html</loc>
+    <lastmod>2026-10-20T19:27:14.956Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/index.html</loc>
+    <lastmod>2026-10-20T19:27:14.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/how-to/add-indicator.html</loc>
+    <lastmod>2026-10-20T19:27:14.953Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/project-structure.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-wellbeing-cchs-bc.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-life-satisfaction-bc.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/index.html</loc>
+    <lastmod>2026-10-20T19:27:39.377Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/breaks.html</loc>
+    <lastmod>2026-10-20T19:27:39.415Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/api/catalogue.html</loc>
+    <lastmod>2026-10-20T19:27:39.393Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/indicator-mortality-inequality-bc.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://galenseilis.github.io/state-of-health-bc/reference/state-of-health-report.html</loc>
+    <lastmod>2026-10-20T19:27:14.955Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/explanation/index.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.953Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/explanation/definition-of-health.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.953Z</lastmod>
   </url>
   <url>
     <loc>https://galenseilis.github.io/state-of-health-bc/explanation/why-bc.html</loc>
-    <lastmod>2026-10-19T15:15:15.887Z</lastmod>
+    <lastmod>2026-10-20T19:27:14.953Z</lastmod>
   </url>
 </urlset>

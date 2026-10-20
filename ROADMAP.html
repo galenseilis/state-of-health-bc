@@ -185,8 +185,28 @@ div.csl-indent {
  <span class="dropdown-text">Data quality</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./reference/state-of-health-report.html">
+ <span class="dropdown-text">Descriptive report</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./reference/indicator-mortality-rates-bc.html">
  <span class="dropdown-text">Indicator: Mortality rates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reference/indicator-life-expectancy-bc.html">
+ <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reference/indicator-mortality-inequality-bc.html">
+ <span class="dropdown-text">Indicator: Regional mortality inequality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reference/indicator-life-satisfaction-bc.html">
+ <span class="dropdown-text">Indicator: Life satisfaction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reference/indicator-wellbeing-cchs-bc.html">
+ <span class="dropdown-text">Indicator family: Health survey</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./reference/project-structure.html">
@@ -324,7 +344,7 @@ div.csl-indent {
 <li>A clean checkout plus the documented commands reproduces the ingested dataset.</li>
 <li>The catalogue is judged by “best use of all publicly available information that can be appropriately used” — not “microdata or nothing”: an indicator backed only by published summary statistics still qualifies when it passes licence and governance checks.</li>
 </ul>
-<p><strong>Status:</strong> in progress — catalogue of 24 sources (all URLs verified), including determinant/stratifier sources and microdata access routes; a Python acquisition pipeline and a data-quality register are drafted. Outstanding: microdata approvals, neighbourhood-level outcomes, and cross-border patient-flow / supply-chain external drivers <strong>Depends on:</strong> M1</p>
+<p><strong>Status:</strong> in progress — catalogue of 28 sources (all URLs verified), including determinant/stratifier sources and microdata access routes; a Python acquisition pipeline and a data-quality register are drafted. Outstanding: microdata approvals, neighbourhood-level outcomes, and cross-border patient-flow / supply-chain external drivers <strong>Depends on:</strong> M1</p>
 <hr>
 </section>
 <section id="m3-descriptive-atlas" class="level2">
@@ -344,7 +364,7 @@ div.csl-indent {
 <li>Each indicator page states its provenance and known limitations.</li>
 <li>Every indicator’s page states whether the series is stationary over the covered window; nonstationary series carry their trend/regime interpretation, not a single summary value.</li>
 </ul>
-<p><strong>Status:</strong> in progress — the pipeline builds and publishes a first end-to-end indicator (provincial mortality rates, Statistics Canada 13-10-0710-01) with regenerable charts, crude and age-standardised (WHO standard) series, and formal regime dating: piecewise-linear segmentation with BIC selection, a residual-permutation break test, and a Kendall-tau trend test, so every series is labelled stationary or not over its observed window. Outstanding: the wider indicator set, sub-provincial (map) views and inequality reporting, age/sex breakdowns of the published indicator, and the descriptive report <strong>Depends on:</strong> M2</p>
+<p><strong>Status:</strong> in progress — the pipeline builds and publishes indicators from catalogued Statistics Canada tables, each with regenerable charts and formal regime dating: piecewise-linear segmentation with BIC selection, a residual-permutation break test, and a Kendall-tau trend test, so every series — including the sex breakdowns — is labelled stationary or not over its observed window. The mortality indicator (13-10-0710-01) carries crude and age-standardised (WHO standard) series; life expectancy at birth (13-10-0837-01) carries annual levels by sex; a survey family (13-10-0905-01, ten series across morbidity, mental health, subjective and social wellbeing, and access to care) widens the report beyond mortality; and a sub-provincial view (13-10-0931-01) reports the age-standardised premature-mortality gap across BC’s five health authorities and 17 health service delivery areas. The mortality indicator is also decomposed by five-year age group, each with its own trend and regime summary. Edition 0.3 of the descriptive report (“State of health in BC”) is published and regenerates end-to-end from the published datasets. Outstanding: sub-provincial views for the survey and life-expectancy indicators, and regime-aware within-versus-across-regime comparisons. <strong>Depends on:</strong> M2</p>
 <hr>
 </section>
 <section id="m4-statistical-dependence" class="level2">
