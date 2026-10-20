@@ -1,0 +1,80 @@
+{
+  "start": 2015,
+  "end": 2024,
+  "n": 10,
+  "overall": {
+    "slope_per_year": -1.0576,
+    "slope_per_decade": -10.5758
+  },
+  "change_point": 2020,
+  "change_points": [
+    2020
+  ],
+  "segments": [
+    {
+      "label": "before",
+      "start": 2015,
+      "end": 2019,
+      "slope_per_year": -0.2,
+      "slope_per_decade": -2.0
+    },
+    {
+      "label": "after",
+      "start": 2020,
+      "end": 2024,
+      "slope_per_year": -2.3,
+      "slope_per_decade": -23.0
+    }
+  ],
+  "break_test": {
+    "method": "residual-permutation test (H0: one straight line)",
+    "statistic_sse_reduction": 23.027515,
+    "n_permutations": 1999,
+    "seed": 20241018,
+    "p_value": 0.034,
+    "significant": true,
+    "change_point": 2020
+  },
+  "trend_test": {
+    "method": "Kendall tau (rank-based monotone trend)",
+    "tau": -0.7191,
+    "p_value": 0.004057,
+    "significant": true
+  },
+  "stationarity": {
+    "verdict": "nonstationary",
+    "reasons": [
+      "monotone trend (Kendall tau=-0.7191, p=0.004057)",
+      "break beyond a straight line (permutation test, p=0.034)"
+    ]
+  },
+  "regime_selection": {
+    "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+    "min_segment": 5,
+    "max_breaks_considered": 1,
+    "n_breaks": 1,
+    "years": [
+      2020
+    ],
+    "sse": 13.42,
+    "bic": 14.4545,
+    "candidates": [
+      {
+        "n_breaks": 0,
+        "years": [],
+        "sse": 36.447515,
+        "bic": 17.5381
+      },
+      {
+        "n_breaks": 1,
+        "years": [
+          2020
+        ],
+        "sse": 13.42,
+        "bic": 14.4545
+      }
+    ]
+  },
+  "series": "Percent",
+  "sex": "Both sexes"
+}

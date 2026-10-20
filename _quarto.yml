@@ -64,6 +64,10 @@ website:
             text: "Indicator: Mortality rates"
           - href: reference/indicator-life-expectancy-bc.qmd
             text: "Indicator: Life expectancy"
+          - href: reference/indicator-life-satisfaction-bc.qmd
+            text: "Indicator: Life satisfaction"
+          - href: reference/indicator-wellbeing-cchs-bc.qmd
+            text: "Indicator family: Health survey"
           - href: reference/project-structure.qmd
             text: Project structure
       - text: "Explanation"

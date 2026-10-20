@@ -27,10 +27,13 @@ uv run sohbc indicators
 uv run sohbc list
 ```
 
-`indicators` shows two entries — `mortality_rates_bc` and
-`life_expectancy_bc` — each tagged with its measurement-framework domain.
-`list` shows the catalogued sources; only a few are marked `auto` (the
-pipeline can fetch them without a browser).
+`indicators` lists the entries the pipeline can build — mortality rates,
+life expectancy, and a family of survey indicators (life satisfaction,
+perceived health and mental health, anxiety and mood disorders, diabetes,
+high blood pressure, having a regular provider, daily smoking) — each
+tagged with its measurement-framework domain. `list` shows the catalogued
+sources; only a few are marked `auto` (the pipeline can fetch them without
+a browser).
 
 ## 2. Fetch the raw source
 

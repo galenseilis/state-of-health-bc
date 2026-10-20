@@ -1,0 +1,169 @@
+---
+title: "Indicator family: Health survey indicators, British Columbia"
+---
+
+*Status: a published indicator family (milestone M3 in progress). Regenerate
+all series with `uv run sohbc build`.*
+
+This page covers the family of British Columbia indicators that the
+pipeline extracts from a single Statistics Canada survey table, widening
+the project beyond mortality into physical morbidity, mental health,
+subjective wellbeing, social wellbeing, and access to care. Each series is
+published as its own versioned tidy dataset and trend files; the [life
+satisfaction](indicator-life-satisfaction-bc.qmd) series has its own
+worked page.
+
+## Provenance
+
+| Field | Value |
+|-------|-------|
+| **Domains** | [Physical morbidity, mental health, subjective wellbeing, social wellbeing](../reference/measurement-framework.qmd) |
+| **Definition** | Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2024 [@statcan_health_indicators] |
+| **Source** | Statistics Canada, table 13-10-0905-01, *Health indicator statistics, annual estimates* (Canadian Community Health Survey) [@statcan_health_indicators] |
+| **Access** | Statistics Canada Web Data Service (automated full-table download) |
+| **Form** | indicator table (published survey summary statistics) |
+| **Geography** | British Columbia (no sub-provincial rows in this table) |
+| **Coverage** | 2015–2024 (annual); observation window shown on each figure |
+| **Frequency / refresh** | annual |
+| **Licence** | Statistics Canada Open Licence |
+| **Proxy note** | Self-reported proxies, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
+
+## The family
+
+```{ojs}
+//| echo: false
+tLife = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+tPhyH = FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
+tMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
+tBelong = FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
+tAnx = FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
+tMood = FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
+tDiab = FileAttachment("../data/published/diabetes_bc_trend.json").json()
+tBp = FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
+tProv = FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
+tSmoke = FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
+```
+
+```{ojs}
+//| echo: false
+series = [
+  {key: "life_satisfaction_bc", label: "Life satisfaction", domain: "Subjective wellbeing", direction: "higher is better", trend: tLife},
+  {key: "perceived_health_fair_poor_bc", label: "Perceived health, fair or poor", domain: "Subjective wellbeing", direction: "lower is better", trend: tPhyH},
+  {key: "perceived_mental_health_fair_poor_bc", label: "Perceived mental health, fair or poor", domain: "Mental health", direction: "lower is better", trend: tMentH},
+  {key: "sense_of_belonging_bc", label: "Sense of belonging to local community", domain: "Social wellbeing", direction: "higher is better", trend: tBelong},
+  {key: "anxiety_disorder_bc", label: "Anxiety disorder", domain: "Mental health", direction: "lower is better", trend: tAnx},
+  {key: "mood_disorder_bc", label: "Mood disorder", domain: "Mental health", direction: "lower is better", trend: tMood},
+  {key: "diabetes_bc", label: "Diabetes", domain: "Physical morbidity", direction: "lower is better", trend: tDiab},
+  {key: "high_blood_pressure_bc", label: "High blood pressure", domain: "Physical morbidity", direction: "lower is better", trend: tBp},
+  {key: "has_regular_provider_bc", label: "Has a regular healthcare provider", domain: "Access to care", direction: "higher is better", trend: tProv},
+  {key: "smoker_daily_bc", label: "Current daily smoker", domain: "Physical morbidity", direction: "lower is better", trend: tSmoke}
+]
+family = series.map(s => {
+  const t = s.trend
+  const segs = t.segments.length > 1
+    ? t.segments.map(g => `${g.slope_per_decade.toFixed(1)} (${g.start}–${g.end})`).join("; ")
+    : "single regime"
+  return {
+    label: s.label,
+    domain: s.domain,
+    direction: s.direction,
+    slope_per_decade: t.overall.slope_per_decade,
+    verdict: t.stationarity.verdict,
+    change_point: t.change_point ?? "—",
+    segments: segs
+  }
+})
+Inputs.table(family, {
+  columns: ["label", "domain", "direction", "slope_per_decade", "verdict", "change_point", "segments"],
+  header: {
+    label: "series", domain: "domain", direction: "better if…",
+    slope_per_decade: "slope/decade (pp)", verdict: "stationarity",
+    change_point: "largest break", segments: "regimes (pp/decade)"
+  },
+  width: {label: 210, segments: 240}
+})
+```
+    direction: s.direction,
+    slope_per_decade: t.overall.slope_per_decade,
+    verdict: t.stationarity.verdict,
+    change_point: cp,
+    segments: segs
+  }
+})
+Inputs.table(family, {
+  columns: ["label", "domain", "direction", "slope_per_decade", "verdict", "change_point", "segments"],
+  header: {
+    label: "series", domain: "domain", direction: "better if…",
+    slope_per_decade: "slope/decade (pp)", verdict: "stationarity",
+    change_point: "largest break", segments: "regimes (pp/decade)"
+  },
+  width: {label: 210, segments: 240}
+})
+```
+
+Each slope is in percentage points per decade over 2015–2024, for both
+sexes; a positive slope is not automatically good or bad — the *better
+if…* column states the direction that the measurement treats as
+favourable. `stationarity` is the pipeline's label from the formal tests
+(stationary, nonstationary, or undetermined where the series is too short
+for the test to have power); `largest break` is the BIC-selected change
+point, where one exists.
+
+## What the family shows
+
+The series are not all moving the same way, and the direction of movement
+follows the direction of the measurement:
+
+- **Wellbeing is falling.** Life satisfaction (`-11.5` pp/decade;
+  break at 2020) and sense of belonging (`-10.6` pp/decade; break at
+  2020) both fell sharply, and both are dated to 2020 by the pipeline.
+- **Poor self-rated state is rising.** Perceived mental health fair or
+  poor rose `+13.9` pp/decade and perceived health fair or poor `+4.7`
+  pp/decade; both are nonstationary.
+- **Mental-health conditions are rising.** Anxiety (`+8.4` pp/decade) and
+  mood disorders (`+5.5` pp/decade, break at 2020) both increased.
+- **Some behaviours improve.** Daily smoking fell `-4.4` pp/decade, though
+  the regime split at 2020 shows the decline flattening after 2020
+  (`-7.3` before, `-1.0` after).
+- **Two series are flat.** Diabetes (`+0.8`) and having a regular
+  healthcare provider (`-2.1`) are labelled **stationary** over the
+  window — no evidence of a trend beyond year-to-year noise.
+
+Read together, the family is a picture of rising self-reported distress
+and falling life evaluation over a decade, with the clearest breaks
+coinciding with 2020. The pipeline dates those breaks; this page does not
+claim they are caused by the pandemic.
+
+## Caveats
+
+- **Survey estimate.** Every series is self-reported on a national survey,
+  carrying sampling error and a coefficient-of-variation release policy;
+  some cells are suppressed or flagged. Plotted values are published point
+  estimates.
+- **Measurement, not only change.** The CCHS collection frame changed over
+  2015–2024 and 2020–2021 collection was disrupted by the pandemic. A
+  step in a series may be a step in the measurement. Direction of the
+  breaks is dated, not attributed.
+- **Short window.** Ten annual points is a short series; the
+  stationarity test has limited power, which is why some series are
+  labelled *undetermined* rather than stationary.
+- **Self-report and definition drift.** "Percent" mixes reported
+  behaviour, diagnosed conditions, and self-rated state; each has a
+  different relationship to health, and a survey question that changes
+  wording does not change meaninglessly.
+- **No sub-provincial rows.** Provincial only; regional survey series are
+  separate products.
+- **Revisions.** Statistics Canada may revise estimates; the published
+  files are regenerated from the source on each build.
+
+## Reproduce
+
+```bash
+uv run sohbc fetch statcan_health_indicators
+uv run sohbc build
+```
+
+Every series publishes `data/published/<key>.csv`,
+`data/published/<key>_trend.json`, and
+`data/published/<key>_by_sex_trend.json`. The selection and definitions
+are in `src/sohbc/indicators.py`; add or remove a series there and rebuild.

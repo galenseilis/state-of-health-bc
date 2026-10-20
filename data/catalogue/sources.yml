@@ -500,6 +500,31 @@ sources:
       url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100837/en"
       filename: "13100837-download.json"
 
+  - key: statcan_health_indicators
+    title: "Health indicator statistics, annual estimates (Web Data Service)"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501"
+    citation: statcan
+    form: indicator_table
+    domains: [Physical morbidity, Mental health, Subjective wellbeing, Social wellbeing]
+    indicators: ["Self-rated health and mental health, chronic conditions, health behaviours, life satisfaction, and sense of belonging (table 13-10-0905-01, Canadian Community Health Survey)"]
+    resolution: [provincial]
+    geography: "Canada (excluding territories) and provinces"
+    coverage: "2015-2024 (annual)"
+    frequency: annual
+    refresh: "annual"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC rows within the national table"
+    temporal_behaviour: trending
+    quality_notes: "Survey estimates carry sampling error and a coefficient-of-variation based release policy (suppressed or flagged cells: status 'F', 'E', 'x'). Reference periods are survey years; the CCHS collection frame changed over the series and 2020-2021 collection was disrupted by the pandemic, so part of any apparent change is measurement change. Percent series are the proportion of the population aged 18 and over (or the stated age group) reporting the characteristic."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100905/en"
+      filename: "13100905-download.json"
+
   - key: bcstats_economy
     title: "Economy"
     publisher: "BC Stats, Government of British Columbia"

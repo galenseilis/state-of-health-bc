@@ -97,12 +97,164 @@ INDICATORS: dict[str, dict[str, Any]] = {
     },
 }
 
+CCHS_DIMENSIONS: dict[str, str] = {
+    "age_group": "Age group",
+    "sex": "Sex",
+    "characteristic": "Characteristics",
+}
+
+#: Reference period rows available for every CCHS indicator (table 13-10-0905-01).
+CCHS_START, CCHS_END = 2015, 2024
+
+
+def _cchs_indicator(
+    key: str,
+    title: str,
+    domain: str,
+    measure: str,
+    definition: str,
+    caveats: str,
+) -> tuple[str, dict[str, Any]]:
+    """Build a spec for one British Columbia series in table 13-10-0905-01.
+
+    Every series is the survey "Percent" estimate for the population aged 18
+    and over, both sexes, at provincial resolution.
+    """
+    return key, {
+        "title": title,
+        "domain": domain,
+        "source_key": "statcan_health_indicators",
+        "source_table": "13-10-0905-01",
+        "source_table_url": (
+            "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501"
+        ),
+        "dimensions": CCHS_DIMENSIONS,
+        "filters": {"Indicators": measure, "Characteristics": "Percent"},
+        "measure": measure,
+        "geo": "British Columbia",
+        "age_group": "Total, 18 years and over",
+        "sexes": ["Both sexes", "Males", "Females"],
+        "all_ages": "Total, 18 years and over",
+        "output": PUBLISHED_DIR / f"{key}.csv",
+        "trajectory_characteristic": "Percent",
+        "breakdown_label": "levels",
+        "definition": definition,
+        "caveats": caveats,
+    }
+
+
+CCHS_CAVEAT = (
+    "Survey estimate (Canadian Community Health Survey): carries sampling "
+    "error and a coefficient-of-variation release policy, so some cells are "
+    "suppressed or flagged. The collection frame changed over the series and "
+    "2020-2021 collection was disrupted by the pandemic, so part of any "
+    "apparent change is measurement change. Reported for the population aged "
+    "18 and over, both sexes, at provincial resolution."
+)
+
+_CCHS_SPECS = [
+    _cchs_indicator(
+        "life_satisfaction_bc",
+        "Life satisfaction, British Columbia",
+        "Subjective wellbeing",
+        "Life satisfaction, satisfied or very satisfied",
+        "Percent of British Columbians aged 18 and over who report being "
+        "satisfied or very satisfied with life, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "perceived_health_fair_poor_bc",
+        "Perceived health, fair or poor, British Columbia",
+        "Subjective wellbeing",
+        "Perceived health, fair or poor",
+        "Percent of British Columbians aged 18 and over who rate their own "
+        "health as fair or poor, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "perceived_mental_health_fair_poor_bc",
+        "Perceived mental health, fair or poor, British Columbia",
+        "Mental health",
+        "Perceived mental health, fair or poor",
+        "Percent of British Columbians aged 18 and over who rate their own "
+        "mental health as fair or poor, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "sense_of_belonging_bc",
+        "Sense of belonging to local community, British Columbia",
+        "Social wellbeing",
+        "Sense of belonging to local community, somewhat strong or very strong",
+        "Percent of British Columbians aged 18 and over who report a somewhat "
+        "strong or very strong sense of belonging to their local community, "
+        "annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "anxiety_disorder_bc",
+        "Anxiety disorder, British Columbia",
+        "Mental health",
+        "Anxiety disorder",
+        "Percent of British Columbians aged 18 and over who report an anxiety "
+        "disorder, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "mood_disorder_bc",
+        "Mood disorder, British Columbia",
+        "Mental health",
+        "Mood disorder",
+        "Percent of British Columbians aged 18 and over who report a mood "
+        "disorder, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "diabetes_bc",
+        "Diabetes, British Columbia",
+        "Physical morbidity",
+        "Diabetes",
+        "Percent of British Columbians aged 18 and over who report diabetes, "
+        "annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "high_blood_pressure_bc",
+        "High blood pressure, British Columbia",
+        "Physical morbidity",
+        "High blood pressure",
+        "Percent of British Columbians aged 18 and over who report high blood "
+        "pressure, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "has_regular_provider_bc",
+        "Has a regular healthcare provider, British Columbia",
+        "Functional status",
+        "Has a regular healthcare provider",
+        "Percent of British Columbians aged 18 and over who report having a "
+        "regular healthcare provider, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+    _cchs_indicator(
+        "smoker_daily_bc",
+        "Current daily smoker, British Columbia",
+        "Physical morbidity",
+        "Current smoker, daily",
+        "Percent of British Columbians aged 18 and over who report smoking "
+        "daily, annual 2015-2024.",
+        CCHS_CAVEAT,
+    ),
+]
+
+INDICATORS.update(dict(_CCHS_SPECS))
+
 TIDY_FIELDS = [
     "ref_date",
     "geo",
     "age_group",
     "sex",
     "characteristic",
+    "measure",
     "value",
     "uom",
     "status",
@@ -173,10 +325,12 @@ def select_rows(
     age_group: str | None,
     sex: str | None,
     dimensions: dict[str, str] | None = None,
+    filters: dict[str, str] | None = None,
 ) -> list[dict[str, str]]:
     labels = dimensions or DEFAULT_DIMENSIONS
     age_field = labels.get("age_group")
     sex_field = labels.get("sex")
+    required = filters or {}
     selected = []
     for row in rows:
         if row.get("GEO") != geo:
@@ -189,6 +343,8 @@ def select_rows(
             continue
         if sex is not None and sex_field is not None and row.get(sex_field) != sex:
             continue
+        if any(row.get(column) != value for column, value in required.items()):
+            continue
         if not row.get("VALUE"):
             continue
         selected.append(row)
@@ -196,7 +352,9 @@ def select_rows(
 
 
 def tidy(
-    rows: list[dict[str, str]], dimensions: dict[str, str] | None = None
+    rows: list[dict[str, str]],
+    dimensions: dict[str, str] | None = None,
+    measure: str | None = None,
 ) -> list[dict[str, Any]]:
     labels = dimensions or DEFAULT_DIMENSIONS
     age_field = labels.get("age_group")
@@ -214,6 +372,7 @@ def tidy(
                 "age_group": row.get(age_field, "") if age_field else "",
                 "sex": row.get(sex_field, "") if sex_field else "",
                 "characteristic": row.get(characteristic_field, ""),
+                "measure": measure if measure is not None else "",
                 "value": value,
                 "uom": row.get("UOM", ""),
                 "status": row.get("STATUS", ""),
@@ -451,9 +610,14 @@ def build(key: str) -> dict[str, Any]:
     )
     rows = table_rows(fetch_wds_zip(zip_url), table_id)
     chosen = select_rows(
-        rows, spec["geo"], spec.get("age_group"), sex=None, dimensions=dimensions
+        rows,
+        spec["geo"],
+        spec.get("age_group"),
+        sex=None,
+        dimensions=dimensions,
+        filters=spec.get("filters"),
     )
-    tidy_rows = tidy(chosen, dimensions=dimensions)
+    tidy_rows = tidy(chosen, dimensions=dimensions, measure=spec.get("measure"))
     if not tidy_rows:
         raise IndicatorError(f"indicator {key} selected no rows")
     output = write_published(tidy_rows, spec["output"])

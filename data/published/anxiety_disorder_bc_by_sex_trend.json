@@ -1,0 +1,82 @@
+{
+  "levels": {
+    "Both sexes": {
+      "start": 2015,
+      "end": 2024,
+      "n": 9,
+      "overall": {
+        "slope_per_year": 0.8368,
+        "slope_per_decade": 8.3677
+      },
+      "change_point": null,
+      "change_points": [],
+      "segments": [],
+      "break_test": null,
+      "trend_test": {
+        "method": "Kendall tau (rank-based monotone trend)",
+        "tau": 0.6111,
+        "p_value": 0.024741,
+        "significant": true
+      },
+      "stationarity": {
+        "verdict": "undetermined",
+        "reasons": [
+          "series has 9 points; at least 10 are needed for two regimes"
+        ]
+      },
+      "regime_selection": null
+    },
+    "Males": {
+      "start": 2015,
+      "end": 2024,
+      "n": 9,
+      "overall": {
+        "slope_per_year": 0.6235,
+        "slope_per_decade": 6.2355
+      },
+      "change_point": null,
+      "change_points": [],
+      "segments": [],
+      "break_test": null,
+      "trend_test": {
+        "method": "Kendall tau (rank-based monotone trend)",
+        "tau": 0.5916,
+        "p_value": 0.027708,
+        "significant": true
+      },
+      "stationarity": {
+        "verdict": "undetermined",
+        "reasons": [
+          "series has 9 points; at least 10 are needed for two regimes"
+        ]
+      },
+      "regime_selection": null
+    },
+    "Females": {
+      "start": 2015,
+      "end": 2024,
+      "n": 9,
+      "overall": {
+        "slope_per_year": 1.0387,
+        "slope_per_decade": 10.3871
+      },
+      "change_point": null,
+      "change_points": [],
+      "segments": [],
+      "break_test": null,
+      "trend_test": {
+        "method": "Kendall tau (rank-based monotone trend)",
+        "tau": 0.5556,
+        "p_value": 0.044615,
+        "significant": true
+      },
+      "stationarity": {
+        "verdict": "undetermined",
+        "reasons": [
+          "series has 9 points; at least 10 are needed for two regimes"
+        ]
+      },
+      "regime_selection": null
+    }
+  }
+}

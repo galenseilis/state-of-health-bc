@@ -134,7 +134,7 @@ published summary statistics.
   nothing": an indicator backed only by published summary statistics
   still qualifies when it passes licence and governance checks.
 
-**Status:** in progress — catalogue of 26 sources (all URLs verified),
+**Status:** in progress — catalogue of 27 sources (all URLs verified),
 including determinant/stratifier sources and microdata access routes; a
 Python acquisition pipeline and a data-quality register are drafted.
 Outstanding: microdata approvals, neighbourhood-level outcomes, and
@@ -173,19 +173,21 @@ cross-border patient-flow / supply-chain external drivers
   the covered window; nonstationary series carry their trend/regime
   interpretation, not a single summary value.
 
-**Status:** in progress — the pipeline builds and publishes two
-end-to-end indicators from catalogued Statistics Canada tables, each with
-regenerable charts, crude and age-standardised (WHO standard) series by
-sex, and formal regime dating: piecewise-linear segmentation with BIC
-selection, a residual-permutation break test, and a Kendall-tau trend
-test, so every series — including the male and female breakdowns — is
-labelled stationary or not over its observed window. The indicators are
-provincial mortality rates (13-10-0710-01) and life expectancy at birth
-(13-10-0837-01). A first edition of the descriptive report
-("State of health in BC", version 0.1) is published and regenerates
-end-to-end from the published datasets. Outstanding: the wider indicator
-set, sub-provincial (map) views and inequality reporting, age-specific
-trajectories, and regime-aware within-versus-across-regime comparisons
+**Status:** in progress — the pipeline builds and publishes indicators
+from catalogued Statistics Canada tables, each with regenerable charts and
+formal regime dating: piecewise-linear segmentation with BIC selection, a
+residual-permutation break test, and a Kendall-tau trend test, so every
+series — including the sex breakdowns — is labelled stationary or not
+over its observed window. The mortality indicator (13-10-0710-01) carries
+crude and age-standardised (WHO standard) series; life expectancy at birth
+(13-10-0837-01) carries annual levels by sex; and a survey family
+(13-10-0905-01, ten series across morbidity, mental health, subjective and
+social wellbeing, and access to care) now widens the report beyond
+mortality. Edition 0.2 of the descriptive report ("State of health in
+BC") is published and regenerates end-to-end from the published datasets.
+Outstanding: sub-provincial (map) views and inequality reporting,
+age-specific trajectories, and regime-aware within-versus-across-regime
+comparisons.
 **Depends on:** M2
 
 ---

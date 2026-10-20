@@ -43,6 +43,17 @@ regenerable chart.
 Life expectancy at birth by sex (1980–2024), the project's second
 published indicator, from Statistics Canada's complete life table.
 
+### [Indicator: Life satisfaction, British Columbia](indicator-life-satisfaction-bc.qmd)
+
+Life satisfaction among BC adults (2015–2024) from the Canadian Community
+Health Survey, the first published indicator outside the mortality domain.
+
+### [Indicator family: Health survey indicators, British Columbia](indicator-wellbeing-cchs-bc.qmd)
+
+Ten BC survey series (physical morbidity, mental health, subjective and
+social wellbeing, access to care) drawn from one Statistics Canada table,
+with their trend and regime summaries side by side.
+
 ### [Project structure](project-structure.qmd)
 
 What lives where in the repository and how the documentation site is

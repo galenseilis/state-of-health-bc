@@ -78,7 +78,7 @@ test can locate but cannot name.
 As part of M2, every catalogued URL was checked for reachability with
 `uv run sohbc check --all`. All catalogued landing pages and the
 automated download endpoints returned HTTP 200 at the time of checking
-(26 sources). The federal publisher's own portal was unreachable from the
+(27 sources). The federal publisher's own portal was unreachable from the
 verification environment, so federal open data is reached through the
 Open Government portal record instead; this is noted on that catalogue
 entry.
@@ -100,6 +100,15 @@ by sex (Statistics Canada table 13-10-0837-01), is now built through the
 same pipeline; it shares the mortality domain and the same caveat
 classes (period measure, revision of recent years, COVID-19 period,
 source sex categories). The source table has no sub-provincial rows.
+
+A third source, Statistics Canada table 13-10-0905-01, supplies a family
+of survey indicators that widen the framework beyond mortality:
+[life satisfaction](indicator-life-satisfaction-bc.qmd) and [mental
+health](indicator-wellbeing-cchs-bc.qmd) series among them. Survey
+estimates bring caveat classes the administrative tables did not:
+sampling error, coefficient-of-variation suppression (flagged cells), and
+a collection-frame change mid-series, so a step in the series may be a
+step in the measurement. These are recorded on the indicator pages.
 
 ## Governance
 

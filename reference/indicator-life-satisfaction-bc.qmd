@@ -1,0 +1,143 @@
+---
+title: "Indicator: Life satisfaction, British Columbia"
+---
+
+*Status: a published indicator from the survey family (milestone M3 in
+progress). Regenerate with `uv run sohbc build life_satisfaction_bc`.*
+
+This indicator widens the project beyond mortality. It is fetched from a
+catalogued Statistics Canada table, tidied by the same pipeline as the
+[mortality](indicator-mortality-rates-bc.qmd) and [life
+expectancy](indicator-life-expectancy-bc.qmd) indicators, and published as
+a versioned dataset plus the views below. The whole survey family is
+described on the [CCHS indicator page](indicator-wellbeing-cchs-bc.qmd).
+
+## Provenance
+
+| Field | Value |
+|-------|-------|
+| **Domain** | [Subjective wellbeing](../reference/measurement-framework.qmd) |
+| **Definition** | Percent of British Columbians aged 18 and over who report being satisfied or very satisfied with life, annual 2015–2024 [@statcan_health_indicators] |
+| **Source** | Statistics Canada, table 13-10-0905-01, *Health indicator statistics, annual estimates* (Canadian Community Health Survey) [@statcan_health_indicators] |
+| **Access** | Statistics Canada Web Data Service (automated full-table download) |
+| **Form** | indicator table (published survey summary statistics) |
+| **Geography** | British Columbia (no sub-provincial rows in this table) |
+| **Coverage** | 2015–2024 (annual); observation window shown on each figure |
+| **Frequency / refresh** | annual |
+| **Licence** | Statistics Canada Open Licence |
+| **Proxy note** | A self-reported proxy in the wellbeing domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
+
+## Trend
+
+```{ojs}
+//| echo: false
+rows = FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
+bySex = rows.filter(d => d.sex !== "Both sexes")
+headline = rows.filter(d => d.sex === "Both sexes")
+trend = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+bySexTrend = FileAttachment("../data/published/life_satisfaction_bc_by_sex_trend.json").json()
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Life satisfaction (satisfied or very satisfied), British Columbia (% of adults)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "% of adults aged 18+", domain: [70, 100]},
+  color: {legend: true},
+  marks: [
+    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.ruleX(bySexTrend.levels["Both sexes"].change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.lineY(bySex, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
+    Plot.dot(bySex, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
+    Plot.lineY(headline, {x: "ref_date", y: "value", stroke: "black", strokeWidth: 2.5, tip: true}),
+    Plot.dot(headline, {x: "ref_date", y: "value", stroke: "black", tip: true})
+  ]
+})
+```
+
+The black line is both sexes, the coloured lines are the source's sex
+categories. The grey band marks the COVID-19 period (2020–2024); the red
+dashed line is the regime break dated by the pipeline.
+
+## Trajectory and regimes
+
+Trend summaries, recomputed on every build
+(`data/published/life_satisfaction_bc_trend.json`,
+`data/published/life_satisfaction_bc_by_sex_trend.json`):
+
+```{ojs}
+//| echo: false
+md`Over ${trend.start}–${trend.end} life satisfaction (both sexes)
+changed by **${trend.overall.slope_per_decade.toFixed(2)}** percentage
+points per decade, and the series is **${trend.stationarity.verdict}**. It
+carries a downward rank trend (Kendall's tau =
+${trend.trend_test.tau.toFixed(2)}, p =
+${trend.trend_test.p_value.toFixed(3)}) and a departure from a single
+straight line (residual-permutation test, p =
+${trend.break_test.p_value.toFixed(3)}). The BIC-selected regimes break at
+${trend.change_points.join(", ")}: **${trend.segments[0].slope_per_decade.toFixed(1)}** pp/decade
+before, **${trend.segments[1].slope_per_decade.toFixed(1)}** pp/decade
+from ${trend.segments[1].start}.`
+```
+
+```{ojs}
+//| echo: false
+sexRows = ["Both sexes", "Males", "Females"].map(sex => ({
+  sex,
+  ...bySexTrend.levels[sex]
+})).map(d => ({
+  sex: d.sex,
+  slope_per_decade: d.overall.slope_per_decade,
+  verdict: d.stationarity.verdict,
+  change_points: d.change_points.join(", ") || "—",
+  change_point: d.change_point ?? "—"
+}))
+Inputs.table(sexRows, {
+  columns: ["sex", "slope_per_decade", "verdict", "change_points", "change_point"],
+  header: {sex: "sex", slope_per_decade: "slope/decade (pp)", verdict: "stationarity", change_points: "regime breaks", change_point: "largest break"}
+})
+```
+
+**Method.** Regimes are dated by a piecewise-linear segmentation, solved
+exactly by dynamic programming, with the number of breaks chosen by BIC;
+whether the series departs from one straight line is tested by residual
+permutation [@truong2020selective], and the trend by Kendall's tau. Each
+series is therefore labelled stationary or not over its observed window,
+as milestone M3 requires. The full test output, including every candidate
+segmentation, is in the trend JSON. The permutation test assumes
+exchangeable residuals — autocorrelation is not modelled — so it is a
+test of departure from a linear trend, not a full time-series model.
+
+## Caveats
+
+- **Survey estimate.** Life satisfaction is self-reported on a national
+  survey; it carries sampling error and a coefficient-of-variation release
+  policy, so individual cells may be suppressed or flagged. The plotted
+  series are the published point estimates.
+- **Measurement, not only change.** The CCHS collection frame changed over
+  2015–2024 and 2020–2021 collection was disrupted by the pandemic. Part
+  of the 2020 break may be a change in *how* the series was measured, not
+  only in how people answered. The pipeline dates the break; it does not
+  attribute it.
+- **Break detection, not explanation.** The regimes are dated by a formal
+  test (above); the test says a break beyond a single straight line
+  exists, not what caused it.
+- **Sex categories are the source's.** The table publishes both sexes,
+  males, and females; the pipeline reports these as given.
+- **No sub-provincial rows.** The source table is provincial only;
+  health-authority and regional survey series are separate products.
+- **Revisions.** Statistics Canada may revise survey estimates; the
+  published files are regenerated from the source on each build.
+
+## Reproduce
+
+```bash
+uv run sohbc fetch statcan_health_indicators
+uv run sohbc build life_satisfaction_bc
+```
+
+The tidy dataset is published at
+`data/published/life_satisfaction_bc.csv` (by sex). The headline trend test
+is at `data/published/life_satisfaction_bc_trend.json` and the per-sex
+tests at `data/published/life_satisfaction_bc_by_sex_trend.json`.

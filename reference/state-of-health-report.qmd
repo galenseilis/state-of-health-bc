@@ -5,24 +5,24 @@ title: "State of health in BC: a descriptive report"
 ::: {.callout-note}
 ## Version and observation window
 
-**Report version 0.1** · observation windows: mortality **1991–2024**,
-life expectancy **1980–2024** · generated from the published datasets by
-`quarto render`. Regenerate the underlying data with
-`uv run sohbc build` before re-rendering (see [Reproduce](#reproduce)).
+**Report version 0.2** · observation windows: mortality **1991–2024**,
+life expectancy **1980–2024**, survey indicators **2015–2024** · generated
+from the published datasets by `quarto render`. Regenerate the underlying
+data with `uv run sohbc build` before re-rendering (see
+[Reproduce](#reproduce)).
 
 Numbers in this report are **regenerated on every build** from the files
 under `data/published/`; nothing here is typed in by hand. If a figure and
 this prose disagree, the figure is right.
 :::
 
-This is the first edition of the project's "State of health in BC"
-descriptive report (deliverable of milestone M3 in the
-[roadmap](../ROADMAP.md)). It describes what the currently-ingested
-indicators show — **not** the state of health in full. Two indicators are
-published so far, both in the mortality domain; the report will widen as
-the indicator set does, and each edition carries its observation window
-because the numbers are dated, not timeless
-([why](../explanation/nonstationarity.qmd)).
+This is an edition of the project's "State of health in BC" descriptive
+report (deliverable of milestone M3 in the [roadmap](../ROADMAP.md)). It
+describes what the currently-ingested indicators show — **not** the state
+of health in full. The indicator set now spans mortality and survey-based
+morbidity, mental health, and wellbeing; the report will keep widening,
+and each edition carries its observation window because the numbers are
+dated, not timeless ([why](../explanation/nonstationarity.qmd)).
 
 ## What is covered
 
@@ -30,10 +30,12 @@ because the numbers are dated, not timeless
 |-----------|--------|--------|------------|-------|--------|
 | [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F | StatCan 13-10-0710-01 |
 | [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
+| [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
+| [Ten survey indicators](indicator-wellbeing-cchs-bc.qmd) | Morbidity, mental health, wellbeing, access to care | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
 
-Both are **proxies** for the mortality domain, not the state of health
-itself, and both are at provincial resolution — sub-provincial
-inequalities are not yet described (see [Next editions](#next-editions)).
+All are **proxies** for their domains, not the state of health itself, and
+all are at provincial resolution — sub-provincial inequalities are not yet
+described (see [Next editions](#next-editions)).
 
 ## The headline: every series moves, and the rules change
 
@@ -45,10 +47,46 @@ life = FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
 lifeBySex = FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
 mortBySex = FileAttachment("../data/published/mortality_rates_bc_by_sex_trend.json").json()
 
+surveyKeys = [
+  ["Life satisfaction", "life_satisfaction_bc"],
+  ["Perceived health, fair or poor", "perceived_health_fair_poor_bc"],
+  ["Perceived mental health, fair or poor", "perceived_mental_health_fair_poor_bc"],
+  ["Sense of belonging", "sense_of_belonging_bc"],
+  ["Anxiety disorder", "anxiety_disorder_bc"],
+  ["Mood disorder", "mood_disorder_bc"],
+  ["Diabetes", "diabetes_bc"],
+  ["High blood pressure", "high_blood_pressure_bc"],
+  ["Has a regular provider", "has_regular_provider_bc"],
+  ["Daily smoker", "smoker_daily_bc"]
+]
+tLifeSat = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+tPhyH = FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
+tMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
+tBelong = FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
+tAnx = FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
+tMood = FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
+tDiab = FileAttachment("../data/published/diabetes_bc_trend.json").json()
+tBp = FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
+tProv = FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
+tSmoke = FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
+survey = [
+  {label: "Life satisfaction", t: tLifeSat},
+  {label: "Perceived health, fair or poor", t: tPhyH},
+  {label: "Perceived mental health, fair or poor", t: tMentH},
+  {label: "Sense of belonging", t: tBelong},
+  {label: "Anxiety disorder", t: tAnx},
+  {label: "Mood disorder", t: tMood},
+  {label: "Diabetes", t: tDiab},
+  {label: "High blood pressure", t: tBp},
+  {label: "Has a regular provider", t: tProv},
+  {label: "Daily smoker", t: tSmoke}
+]
+
 summary = [
   {series: "Mortality rate (crude)", window: `${mort.start}–${mort.end}`, slope_per_decade: mort.overall.slope_per_decade, verdict: mort.stationarity.verdict, breaks: mort.change_points.join(", ") || "—"},
   {series: "Mortality rate (age-standardised)", window: `${mortAsr.start}–${mortAsr.end}`, slope_per_decade: mortAsr.overall.slope_per_decade, verdict: mortAsr.stationarity.verdict, breaks: mortAsr.change_points.join(", ") || "—"},
-  {series: "Life expectancy at birth", window: `${life.start}–${life.end}`, slope_per_decade: life.overall.slope_per_decade, verdict: life.stationarity.verdict, breaks: life.change_points.join(", ") || "—"}
+  {series: "Life expectancy at birth", window: `${life.start}–${life.end}`, slope_per_decade: life.overall.slope_per_decade, verdict: life.stationarity.verdict, breaks: life.change_points.join(", ") || "—"},
+  ...survey.map(s => ({series: s.label, window: `${s.t.start}–${s.t.end}`, slope_per_decade: s.t.overall.slope_per_decade, verdict: s.t.stationarity.verdict, breaks: s.t.change_points.join(", ") || "—"}))
 ]
 Inputs.table(summary, {
   columns: ["series", "window", "slope_per_decade", "verdict", "breaks"],
@@ -56,18 +94,21 @@ Inputs.table(summary, {
 })
 ```
 
-Three things follow from the table, and they are the report's core
+Several things follow from the table, and they are the report's core
 finding:
 
-1. **Nothing is stationary.** Every series changes over its window; a
-   single summary value would be false to all of them.
+1. **Almost nothing is stationary.** Nearly every series changes over its
+   window; a single summary value would be false to almost all of them.
+   Two — diabetes and having a regular provider — are labelled stationary
+   over their short window, so absence of evidence is reported as such.
 2. **Direction differs by measure.** The crude mortality rate and life
    expectancy trend in opposite senses, because crude mortality is not
    age-adjusted while life expectancy already integrates the age pattern
-   of death.
-3. **The change is not one slope.** Every series carries at least one
-   regime break beyond a straight line (all significant at the 5% level
-   by the residual-permutation test); the breaks are the story, not noise.
+   of death; the survey series likewise split, with wellbeing falling
+   while self-reported poor health and mental-health conditions rise.
+3. **The change is not one slope.** Many series carry a regime break
+   beyond a straight line, several dated to 2020; the breaks are the
+   story, not noise.
 
 ## Mortality: an ageing population masks a turning point
 
@@ -157,6 +198,78 @@ The male and female series turn differently (below), so even this
 agreement about *whether* there was a break comes with disagreement about
 *when*.
 
+## Beyond mortality: wellbeing down, distress up
+
+The survey family widens the report past death. Over 2015–2024, the
+wellbeing series fall and the self-reported distress series rise, and
+several breaks land on 2020.
+
+```{ojs}
+//| echo: false
+cLifeSat = FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
+cBelong = FileAttachment("../data/published/sense_of_belonging_bc.csv").csv({typed: true})
+cMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc.csv").csv({typed: true})
+cAnx = FileAttachment("../data/published/anxiety_disorder_bc.csv").csv({typed: true})
+cMood = FileAttachment("../data/published/mood_disorder_bc.csv").csv({typed: true})
+cSmoke = FileAttachment("../data/published/smoker_daily_bc.csv").csv({typed: true})
+surveyChart = [
+  ["Life satisfaction", cLifeSat],
+  ["Sense of belonging", cBelong],
+  ["Perceived mental health, fair or poor", cMentH],
+  ["Anxiety disorder", cAnx],
+  ["Mood disorder", cMood],
+  ["Daily smoker", cSmoke]
+]
+```
+
+```{ojs}
+//| echo: false
+flat = surveyChart.flatMap(([series, rows]) =>
+  rows.filter(d => d.sex === "Both sexes").map(d => ({year: d.ref_date, value: d.value, series}))
+)
+Plot.plot({
+  title: "Selected survey indicators, British Columbia (% of adults)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "% of adults aged 18+"},
+  color: {legend: false},
+  facet: {data: flat, y: "series", label: null},
+  marks: [
+    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.lineY(flat, {x: "year", y: "value", stroke: "series", tip: true}),
+    Plot.dot(flat, {x: "year", y: "value", stroke: "series", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+ls = survey.find(s => s.label === "Life satisfaction").t
+sb = survey.find(s => s.label === "Sense of belonging").t
+pmh = survey.find(s => s.label === "Perceived mental health, fair or poor").t
+anx = survey.find(s => s.label === "Anxiety disorder").t
+md = survey.find(s => s.label === "Mood disorder").t
+smk = survey.find(s => s.label === "Daily smoker").t
+md`Over ${ls.start}–${ls.end} life satisfaction fell
+**${ls.overall.slope_per_decade.toFixed(1)}** points per decade and sense
+of belonging **${sb.overall.slope_per_decade.toFixed(1)}**; both break at
+**${ls.change_point}**. In the same window, perceived *poor* mental health
+rose **${pmh.overall.slope_per_decade.toFixed(1)}**, anxiety disorder
+**${anx.overall.slope_per_decade.toFixed(1)}**, and mood disorder
+**${md.overall.slope_per_decade.toFixed(1)}** points per decade (mood
+disorder also breaks at **${md.change_point}**). Daily smoking *fell*
+**${smk.overall.slope_per_decade.toFixed(1)}**, but its regimes split at
+2020 too: **${smk.segments[0].slope_per_decade.toFixed(1)}**/decade before,
+**${smk.segments[1].slope_per_decade.toFixed(1)}**/decade after. All are
+survey estimates: the 2020 coincidence is dated, not attributed, and part
+of any step may be measurement (see the
+[indicator family page](indicator-wellbeing-cchs-bc.qmd)).`
+```
+
+The survey window is short (ten annual points), so the stationarity test
+has limited power and two series come back **undetermined** rather than
+stationary. The family is read side by side on the
+[indicator family page](indicator-wellbeing-cchs-bc.qmd).
+
 ## Sex differences
 
 ```{ojs}
@@ -213,20 +326,25 @@ different regional trajectories.
 
 - **Dates are the point.** Every number above belongs to its window;
   reproducing the pipeline on refreshed data may change the verdicts.
-- **Two proxies, one domain.** Mortality and life expectancy are both
-  mortality-domain proxies. Nothing here speaks to morbidity, mental
-  health, functional status, or wellbeing.
+- **Proxies, several domains.** Mortality and life expectancy are
+  mortality-domain proxies; the survey family adds self-reported
+  morbidity, mental health, wellbeing, and access to care. None is the
+  state of health itself, and a self-report is not a diagnosis.
 - **Break detection is not explanation.** The dated regimes come from a
   formal test of departure from a straight line
   [@truong2020selective]; the test says *where* the rule changes, not
   *why*. Attribution is M4/M5 work.
 - **Aggregates hide sub-series.** A both-sexes series is not a summary of
   the male and female trajectories; read them separately.
+- **Survey versus administrative.** The mortality series are
+  administrative (complete counts), the survey series are samples: the
+  latter carry sampling error, suppression, and a mid-series collection
+  change, so a survey step may be measurement, not change.
 
 ## Reproduce
 
 ```bash
-uv run sohbc fetch statcan_wds statcan_life_tables
+uv run sohbc fetch statcan_wds statcan_life_tables statcan_health_indicators
 uv run sohbc build
 quarto render reference/state-of-health-report.qmd
 ```
@@ -239,8 +357,7 @@ criterion of milestone M3.
 
 Planned (M3 outstanding work):
 
-- the wider indicator set (morbidity, mental health, functional status,
-  wellbeing, subjective wellbeing);
 - sub-provincial (health-authority / HSDA) map and inequality views;
-- age-specific trajectories, not only all-ages;
-- explicit regime-aware within-versus-across-regime comparisons.
+- age-specific trajectories, not only all-ages and 18-plus;
+- explicit regime-aware within-versus-across-regime comparisons;
+- further indicator families (functional status, health-system access).

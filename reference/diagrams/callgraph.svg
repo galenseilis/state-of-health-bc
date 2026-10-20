@@ -34,9 +34,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2589.94,-264.16 2582.55,-264.8 2588.72,-268.91 2589.94,-264.16"/>
 </g>
 <!-- sohbc__indicators__build -->
-<g id="node42" class="node">
+<g id="node43" class="node">
 <title>sohbc__indicators__build</title>
-<g id="a_node42"><a xlink:title="sohbc.indicators.build">
+<g id="a_node43"><a xlink:title="sohbc.indicators.build">
 <path fill="#eef4fb" stroke="black" d="M2372.75,-568C2372.75,-568 2301.25,-568 2301.25,-568 2295.25,-568 2289.25,-562 2289.25,-556 2289.25,-556 2289.25,-544 2289.25,-544 2289.25,-538 2295.25,-532 2301.25,-532 2301.25,-532 2372.75,-532 2372.75,-532 2378.75,-532 2384.75,-538 2384.75,-544 2384.75,-544 2384.75,-556 2384.75,-556 2384.75,-562 2378.75,-568 2372.75,-568"/>
 <text xml:space="preserve" text-anchor="middle" x="2337" y="-546.88" font-family="Times,serif" font-size="10.00">indicators.build</text>
 </a>
@@ -255,7 +255,7 @@
 <!-- sohbc____main____main&#45;&gt;sohbc__indicators__IndicatorError -->
 <g id="edge19" class="edge">
 <title>sohbc____main____main&#45;&gt;sohbc__indicators__IndicatorError</title>
-<path fill="none" stroke="#4a5568" d="M1078.69,-773.76C1386.89,-751.93 3150,-627 3150,-627 3150,-627 3150,-627 3150,-397 3150,-397 3118,-380 3118,-380 3118,-380 2825,-304 2825,-304 2825,-304 2684.86,-278.4 2592.42,-261.51"/>
+<path fill="none" stroke="#4a5568" d="M1078.98,-763.52C1086.02,-761.46 1091,-760 1091,-760 1091,-760 3150,-627 3150,-627 3150,-627 3150,-627 3150,-397 3150,-397 3118,-380 3118,-380 3118,-380 2825,-304 2825,-304 2825,-304 2684.86,-278.4 2592.42,-261.51"/>
 <polygon fill="#4a5568" stroke="#4a5568" points="2593,-259.13 2585.68,-260.28 2592.12,-263.95 2593,-259.13"/>
 </g>
 <!-- sohbc__breaks__BreakError -->
@@ -729,19 +729,28 @@
 <path fill="none" stroke="#4a5568" d="M1299.91,-536.86C1346.41,-524.83 1418.14,-506.27 1470.91,-492.62"/>
 <polygon fill="#4a5568" stroke="#4a5568" points="1471.25,-495.06 1477.42,-490.93 1470.03,-490.32 1471.25,-495.06"/>
 </g>
-<!-- sohbc__indicators__age_label_to_standard -->
+<!-- sohbc__indicators___cchs_indicator -->
 <g id="node40" class="node">
+<title>sohbc__indicators___cchs_indicator</title>
+<g id="a_node40"><a xlink:title="sohbc.indicators._cchs_indicator">
+<path fill="#eef4fb" stroke="black" d="M1238.62,-796C1238.62,-796 1115.38,-796 1115.38,-796 1109.38,-796 1103.38,-790 1103.38,-784 1103.38,-784 1103.38,-772 1103.38,-772 1103.38,-766 1109.38,-760 1115.38,-760 1115.38,-760 1238.62,-760 1238.62,-760 1244.62,-760 1250.62,-766 1250.62,-772 1250.62,-772 1250.62,-784 1250.62,-784 1250.62,-790 1244.62,-796 1238.62,-796"/>
+<text xml:space="preserve" text-anchor="middle" x="1177" y="-774.88" font-family="Times,serif" font-size="10.00">indicators._cchs_indicator</text>
+</a>
+</g>
+</g>
+<!-- sohbc__indicators__age_label_to_standard -->
+<g id="node41" class="node">
 <title>sohbc__indicators__age_label_to_standard</title>
-<g id="a_node40"><a xlink:title="sohbc.indicators.age_label_to_standard">
+<g id="a_node41"><a xlink:title="sohbc.indicators.age_label_to_standard">
 <path fill="#eef4fb" stroke="black" d="M2819,-416C2819,-416 2659,-416 2659,-416 2653,-416 2647,-410 2647,-404 2647,-404 2647,-392 2647,-392 2647,-386 2653,-380 2659,-380 2659,-380 2819,-380 2819,-380 2825,-380 2831,-386 2831,-392 2831,-392 2831,-404 2831,-404 2831,-410 2825,-416 2819,-416"/>
 <text xml:space="preserve" text-anchor="middle" x="2739" y="-394.88" font-family="Times,serif" font-size="10.00">indicators.age_label_to_standard</text>
 </a>
 </g>
 </g>
 <!-- sohbc__indicators__age_standardise -->
-<g id="node41" class="node">
+<g id="node42" class="node">
 <title>sohbc__indicators__age_standardise</title>
-<g id="a_node41"><a xlink:title="sohbc.indicators.age_standardise">
+<g id="a_node42"><a xlink:title="sohbc.indicators.age_standardise">
 <path fill="#eef4fb" stroke="black" d="M2730.62,-492C2730.62,-492 2601.38,-492 2601.38,-492 2595.38,-492 2589.38,-486 2589.38,-480 2589.38,-480 2589.38,-468 2589.38,-468 2589.38,-462 2595.38,-456 2601.38,-456 2601.38,-456 2730.62,-456 2730.62,-456 2736.62,-456 2742.62,-462 2742.62,-468 2742.62,-468 2742.62,-480 2742.62,-480 2742.62,-486 2736.62,-492 2730.62,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="2666" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.age_standardise</text>
 </a>
@@ -766,9 +775,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2581.21,-496.58 2587.5,-492.66 2580.13,-491.8 2581.21,-496.58"/>
 </g>
 <!-- sohbc__indicators__fetch_wds_zip -->
-<g id="node43" class="node">
+<g id="node44" class="node">
 <title>sohbc__indicators__fetch_wds_zip</title>
-<g id="a_node43"><a xlink:title="sohbc.indicators.fetch_wds_zip">
+<g id="a_node44"><a xlink:title="sohbc.indicators.fetch_wds_zip">
 <path fill="#eef4fb" stroke="black" d="M2896.25,-492C2896.25,-492 2779.75,-492 2779.75,-492 2773.75,-492 2767.75,-486 2767.75,-480 2767.75,-480 2767.75,-468 2767.75,-468 2767.75,-462 2773.75,-456 2779.75,-456 2779.75,-456 2896.25,-456 2896.25,-456 2902.25,-456 2908.25,-462 2908.25,-468 2908.25,-468 2908.25,-480 2908.25,-480 2908.25,-486 2902.25,-492 2896.25,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="2838" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.fetch_wds_zip</text>
 </a>
@@ -781,9 +790,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2759.76,-493.53 2766.12,-489.72 2758.77,-488.73 2759.76,-493.53"/>
 </g>
 <!-- sohbc__indicators__load_standard_population -->
-<g id="node44" class="node">
+<g id="node45" class="node">
 <title>sohbc__indicators__load_standard_population</title>
-<g id="a_node44"><a xlink:title="sohbc.indicators.load_standard_population">
+<g id="a_node45"><a xlink:title="sohbc.indicators.load_standard_population">
 <path fill="#eef4fb" stroke="black" d="M1914,-340C1914,-340 1736,-340 1736,-340 1730,-340 1724,-334 1724,-328 1724,-328 1724,-316 1724,-316 1724,-310 1730,-304 1736,-304 1736,-304 1914,-304 1914,-304 1920,-304 1926,-310 1926,-316 1926,-316 1926,-328 1926,-328 1926,-334 1920,-340 1914,-340"/>
 <text xml:space="preserve" text-anchor="middle" x="1825" y="-318.88" font-family="Times,serif" font-size="10.00">indicators.load_standard_population</text>
 </a>
@@ -796,9 +805,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="1805.76,-348.38 1808.57,-341.52 1802.09,-345.13 1805.76,-348.38"/>
 </g>
 <!-- sohbc__indicators__select_rows -->
-<g id="node46" class="node">
+<g id="node47" class="node">
 <title>sohbc__indicators__select_rows</title>
-<g id="a_node46"><a xlink:title="sohbc.indicators.select_rows">
+<g id="a_node47"><a xlink:title="sohbc.indicators.select_rows">
 <path fill="#eef4fb" stroke="black" d="M3048.88,-492C3048.88,-492 2945.12,-492 2945.12,-492 2939.12,-492 2933.12,-486 2933.12,-480 2933.12,-480 2933.12,-468 2933.12,-468 2933.12,-462 2939.12,-456 2945.12,-456 2945.12,-456 3048.88,-456 3048.88,-456 3054.88,-456 3060.88,-462 3060.88,-468 3060.88,-468 3060.88,-480 3060.88,-480 3060.88,-486 3054.88,-492 3048.88,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="2997" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.select_rows</text>
 </a>
@@ -811,9 +820,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2925.1,-493.59 2931.4,-489.67 2924.03,-488.81 2925.1,-493.59"/>
 </g>
 <!-- sohbc__indicators__series_points -->
-<g id="node47" class="node">
+<g id="node48" class="node">
 <title>sohbc__indicators__series_points</title>
-<g id="a_node47"><a xlink:title="sohbc.indicators.series_points">
+<g id="a_node48"><a xlink:title="sohbc.indicators.series_points">
 <path fill="#eef4fb" stroke="black" d="M1987,-416C1987,-416 1875,-416 1875,-416 1869,-416 1863,-410 1863,-404 1863,-404 1863,-392 1863,-392 1863,-386 1869,-380 1875,-380 1875,-380 1987,-380 1987,-380 1993,-380 1999,-386 1999,-392 1999,-392 1999,-404 1999,-404 1999,-410 1993,-416 1987,-416"/>
 <text xml:space="preserve" text-anchor="middle" x="1931" y="-394.88" font-family="Times,serif" font-size="10.00">indicators.series_points</text>
 </a>
@@ -826,9 +835,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="1856.49,-421.01 1862.65,-416.87 1855.25,-416.27 1856.49,-421.01"/>
 </g>
 <!-- sohbc__indicators__sex_breakdown -->
-<g id="node48" class="node">
+<g id="node49" class="node">
 <title>sohbc__indicators__sex_breakdown</title>
-<g id="a_node48"><a xlink:title="sohbc.indicators.sex_breakdown">
+<g id="a_node49"><a xlink:title="sohbc.indicators.sex_breakdown">
 <path fill="#eef4fb" stroke="black" d="M2399.38,-492C2399.38,-492 2274.62,-492 2274.62,-492 2268.62,-492 2262.62,-486 2262.62,-480 2262.62,-480 2262.62,-468 2262.62,-468 2262.62,-462 2268.62,-456 2274.62,-456 2274.62,-456 2399.38,-456 2399.38,-456 2405.38,-456 2411.38,-462 2411.38,-468 2411.38,-468 2411.38,-480 2411.38,-480 2411.38,-486 2405.38,-492 2399.38,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="2337" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.sex_breakdown</text>
 </a>
@@ -841,9 +850,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2339.45,-500.84 2337,-493.84 2334.55,-500.84 2339.45,-500.84"/>
 </g>
 <!-- sohbc__indicators__table_rows -->
-<g id="node49" class="node">
+<g id="node50" class="node">
 <title>sohbc__indicators__table_rows</title>
-<g id="a_node49"><a xlink:title="sohbc.indicators.table_rows">
+<g id="a_node50"><a xlink:title="sohbc.indicators.table_rows">
 <path fill="#eef4fb" stroke="black" d="M2263,-340C2263,-340 2163,-340 2163,-340 2157,-340 2151,-334 2151,-328 2151,-328 2151,-316 2151,-316 2151,-310 2157,-304 2163,-304 2163,-304 2263,-304 2263,-304 2269,-304 2275,-310 2275,-316 2275,-316 2275,-328 2275,-328 2275,-334 2269,-340 2263,-340"/>
 <text xml:space="preserve" text-anchor="middle" x="2213" y="-318.88" font-family="Times,serif" font-size="10.00">indicators.table_rows</text>
 </a>
@@ -856,9 +865,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2221.03,-348.24 2217.14,-341.93 2216.25,-349.29 2221.03,-348.24"/>
 </g>
 <!-- sohbc__indicators__tidy -->
-<g id="node50" class="node">
+<g id="node51" class="node">
 <title>sohbc__indicators__tidy</title>
-<g id="a_node50"><a xlink:title="sohbc.indicators.tidy">
+<g id="a_node51"><a xlink:title="sohbc.indicators.tidy">
 <path fill="#eef4fb" stroke="black" d="M1802.38,-492C1802.38,-492 1737.62,-492 1737.62,-492 1731.62,-492 1725.62,-486 1725.62,-480 1725.62,-480 1725.62,-468 1725.62,-468 1725.62,-462 1731.62,-456 1737.62,-456 1737.62,-456 1802.38,-456 1802.38,-456 1808.38,-456 1814.38,-462 1814.38,-468 1814.38,-468 1814.38,-480 1814.38,-480 1814.38,-486 1808.38,-492 1802.38,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="1770" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.tidy</text>
 </a>
@@ -871,9 +880,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="1823.49,-488.4 1816.08,-488.74 1822.09,-493.09 1823.49,-488.4"/>
 </g>
 <!-- sohbc__indicators__trajectory -->
-<g id="node51" class="node">
+<g id="node52" class="node">
 <title>sohbc__indicators__trajectory</title>
-<g id="a_node51"><a xlink:title="sohbc.indicators.trajectory">
+<g id="a_node52"><a xlink:title="sohbc.indicators.trajectory">
 <path fill="#eef4fb" stroke="black" d="M2559,-416C2559,-416 2465,-416 2465,-416 2459,-416 2453,-410 2453,-404 2453,-404 2453,-392 2453,-392 2453,-386 2459,-380 2465,-380 2465,-380 2559,-380 2559,-380 2565,-380 2571,-386 2571,-392 2571,-392 2571,-404 2571,-404 2571,-410 2565,-416 2559,-416"/>
 <text xml:space="preserve" text-anchor="middle" x="2512" y="-394.88" font-family="Times,serif" font-size="10.00">indicators.trajectory</text>
 </a>
@@ -886,9 +895,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2502.3,-425.24 2503.08,-417.86 2497.87,-423.14 2502.3,-425.24"/>
 </g>
 <!-- sohbc__indicators__wds_download_json -->
-<g id="node52" class="node">
+<g id="node53" class="node">
 <title>sohbc__indicators__wds_download_json</title>
-<g id="a_node52"><a xlink:title="sohbc.indicators.wds_download_json">
+<g id="a_node53"><a xlink:title="sohbc.indicators.wds_download_json">
 <path fill="#eef4fb" stroke="black" d="M1998.25,-492C1998.25,-492 1851.75,-492 1851.75,-492 1845.75,-492 1839.75,-486 1839.75,-480 1839.75,-480 1839.75,-468 1839.75,-468 1839.75,-462 1845.75,-456 1851.75,-456 1851.75,-456 1998.25,-456 1998.25,-456 2004.25,-456 2010.25,-462 2010.25,-468 2010.25,-468 2010.25,-480 2010.25,-480 2010.25,-486 2004.25,-492 1998.25,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="1925" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.wds_download_json</text>
 </a>
@@ -901,9 +910,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2019.52,-489.49 2012.19,-490.66 2018.65,-494.31 2019.52,-489.49"/>
 </g>
 <!-- sohbc__indicators__wds_zip_url -->
-<g id="node53" class="node">
+<g id="node54" class="node">
 <title>sohbc__indicators__wds_zip_url</title>
-<g id="a_node53"><a xlink:title="sohbc.indicators.wds_zip_url">
+<g id="a_node54"><a xlink:title="sohbc.indicators.wds_zip_url">
 <path fill="#eef4fb" stroke="black" d="M2417.62,-340C2417.62,-340 2312.38,-340 2312.38,-340 2306.38,-340 2300.38,-334 2300.38,-328 2300.38,-328 2300.38,-316 2300.38,-316 2300.38,-310 2306.38,-304 2312.38,-304 2312.38,-304 2417.62,-304 2417.62,-304 2423.62,-304 2429.62,-310 2429.62,-316 2429.62,-316 2429.62,-328 2429.62,-328 2429.62,-334 2423.62,-340 2417.62,-340"/>
 <text xml:space="preserve" text-anchor="middle" x="2365" y="-318.88" font-family="Times,serif" font-size="10.00">indicators.wds_zip_url</text>
 </a>
@@ -916,9 +925,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2378.41,-347.18 2373.33,-341.77 2373.93,-349.16 2378.41,-347.18"/>
 </g>
 <!-- sohbc__indicators__write_published -->
-<g id="node54" class="node">
+<g id="node55" class="node">
 <title>sohbc__indicators__write_published</title>
-<g id="a_node54"><a xlink:title="sohbc.indicators.write_published">
+<g id="a_node55"><a xlink:title="sohbc.indicators.write_published">
 <path fill="#eef4fb" stroke="black" d="M2174.5,-492C2174.5,-492 2047.5,-492 2047.5,-492 2041.5,-492 2035.5,-486 2035.5,-480 2035.5,-480 2035.5,-468 2035.5,-468 2035.5,-462 2041.5,-456 2047.5,-456 2047.5,-456 2174.5,-456 2174.5,-456 2180.5,-456 2186.5,-462 2186.5,-468 2186.5,-468 2186.5,-480 2186.5,-480 2186.5,-486 2180.5,-492 2174.5,-492"/>
 <text xml:space="preserve" text-anchor="middle" x="2111" y="-470.88" font-family="Times,serif" font-size="10.00">indicators.write_published</text>
 </a>
@@ -937,9 +946,9 @@
 <polygon fill="#4a5568" stroke="#4a5568" points="2433.77,-257.99 2440.47,-254.8 2433.25,-253.11 2433.77,-257.99"/>
 </g>
 <!-- sohbc__indicators__ols_slope -->
-<g id="node45" class="node">
+<g id="node46" class="node">
 <title>sohbc__indicators__ols_slope</title>
-<g id="a_node45"><a xlink:title="sohbc.indicators.ols_slope">
+<g id="a_node46"><a xlink:title="sohbc.indicators.ols_slope">
 <path fill="#eef4fb" stroke="black" d="M2558.88,-340C2558.88,-340 2467.12,-340 2467.12,-340 2461.12,-340 2455.12,-334 2455.12,-328 2455.12,-328 2455.12,-316 2455.12,-316 2455.12,-310 2461.12,-304 2467.12,-304 2467.12,-304 2558.88,-304 2558.88,-304 2564.88,-304 2570.88,-310 2570.88,-316 2570.88,-316 2570.88,-328 2570.88,-328 2570.88,-334 2564.88,-340 2558.88,-340"/>
 <text xml:space="preserve" text-anchor="middle" x="2513" y="-318.88" font-family="Times,serif" font-size="10.00">indicators.ols_slope</text>
 </a>
