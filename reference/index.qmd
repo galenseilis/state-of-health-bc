@@ -27,6 +27,12 @@ access, resolution, and quality notes (milestone M2, in progress).
 Known gaps, revisions, suppressions, and definitional breaks in the
 catalogued sources.
 
+### [State of health in BC: a descriptive report](state-of-health-report.qmd)
+
+The first edition of the project's descriptive report (milestone M3):
+trends, sex breakdowns, and stated observation windows across the
+published indicators.
+
 ### [Indicator: Mortality rates, British Columbia](indicator-mortality-rates-bc.qmd)
 
 The project's first published indicator, with provenance, caveats, and a

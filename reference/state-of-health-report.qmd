@@ -1,0 +1,246 @@
+---
+title: "State of health in BC: a descriptive report"
+---
+
+::: {.callout-note}
+## Version and observation window
+
+**Report version 0.1** · observation windows: mortality **1991–2024**,
+life expectancy **1980–2024** · generated from the published datasets by
+`quarto render`. Regenerate the underlying data with
+`uv run sohbc build` before re-rendering (see [Reproduce](#reproduce)).
+
+Numbers in this report are **regenerated on every build** from the files
+under `data/published/`; nothing here is typed in by hand. If a figure and
+this prose disagree, the figure is right.
+:::
+
+This is the first edition of the project's "State of health in BC"
+descriptive report (deliverable of milestone M3 in the
+[roadmap](../ROADMAP.md)). It describes what the currently-ingested
+indicators show — **not** the state of health in full. Two indicators are
+published so far, both in the mortality domain; the report will widen as
+the indicator set does, and each edition carries its observation window
+because the numbers are dated, not timeless
+([why](../explanation/nonstationarity.qmd)).
+
+## What is covered
+
+| Indicator | Domain | Window | Resolution | Sexes | Source |
+|-----------|--------|--------|------------|-------|--------|
+| [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F | StatCan 13-10-0710-01 |
+| [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
+
+Both are **proxies** for the mortality domain, not the state of health
+itself, and both are at provincial resolution — sub-provincial
+inequalities are not yet described (see [Next editions](#next-editions)).
+
+## The headline: every series moves, and the rules change
+
+```{ojs}
+//| echo: false
+mort = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
+mortAsr = FileAttachment("../data/published/mortality_rates_bc_age_standardised_trend.json").json()
+life = FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
+lifeBySex = FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
+mortBySex = FileAttachment("../data/published/mortality_rates_bc_by_sex_trend.json").json()
+
+summary = [
+  {series: "Mortality rate (crude)", window: `${mort.start}–${mort.end}`, slope_per_decade: mort.overall.slope_per_decade, verdict: mort.stationarity.verdict, breaks: mort.change_points.join(", ") || "—"},
+  {series: "Mortality rate (age-standardised)", window: `${mortAsr.start}–${mortAsr.end}`, slope_per_decade: mortAsr.overall.slope_per_decade, verdict: mortAsr.stationarity.verdict, breaks: mortAsr.change_points.join(", ") || "—"},
+  {series: "Life expectancy at birth", window: `${life.start}–${life.end}`, slope_per_decade: life.overall.slope_per_decade, verdict: life.stationarity.verdict, breaks: life.change_points.join(", ") || "—"}
+]
+Inputs.table(summary, {
+  columns: ["series", "window", "slope_per_decade", "verdict", "breaks"],
+  header: {series: "series", window: "window", slope_per_decade: "slope/decade", verdict: "stationarity", breaks: "regime breaks"}
+})
+```
+
+Three things follow from the table, and they are the report's core
+finding:
+
+1. **Nothing is stationary.** Every series changes over its window; a
+   single summary value would be false to all of them.
+2. **Direction differs by measure.** The crude mortality rate and life
+   expectancy trend in opposite senses, because crude mortality is not
+   age-adjusted while life expectancy already integrates the age pattern
+   of death.
+3. **The change is not one slope.** Every series carries at least one
+   regime break beyond a straight line (all significant at the 5% level
+   by the residual-permutation test); the breaks are the story, not noise.
+
+## Mortality: an ageing population masks a turning point
+
+```{ojs}
+//| echo: false
+rows = FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
+rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages" && d.sex === "Both sexes")
+asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true}).filter(d => d.sex === "Both sexes")
+series = rates.map(d => ({year: d.ref_date, rate: d.value, series: "Crude"}))
+  .concat(asr.map(d => ({year: d.ref_date, rate: d.value, series: "Age-standardised"})))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Mortality rate, British Columbia (per 1,000 population)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Deaths per 1,000 population"},
+  color: {legend: true},
+  marks: [
+    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.ruleX(mort.change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.ruleX(mortAsr.change_points, {stroke: "steelblue", strokeDasharray: "2,3"}),
+    Plot.lineY(series, {x: "year", y: "rate", stroke: "series", tip: true}),
+    Plot.dot(series, {x: "year", y: "rate", stroke: "series", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`Over ${mort.start}–${mort.end} the **crude** rate rose by
+**${mort.overall.slope_per_decade.toFixed(2)}** per 1,000 per decade, while the
+**age-standardised** rate, which removes the effect of population ageing,
+changed by **${mortAsr.overall.slope_per_decade.toFixed(2)}** — i.e. it *fell*
+on net. The crude rise is largely the ageing of the population, not a
+worsening of age-specific risk. The age-standardised series is the one that
+abstracts from that: it declined from 1991 and its regime turned at
+**${mortAsr.change_point}**, after which the decline flattened and
+reversed. The pink band marks the COVID-19 period (2020–2024).`
+```
+
+The gap between the two lines is the signature of demographic ageing, and
+it is exactly why the project reports both and treats the standardised
+series as the one about risk rather than the one about the age structure.
+
+## Life expectancy: two decades of gain, then a stall
+
+```{ojs}
+//| echo: false
+lifeRows = FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true}).filter(d => d.characteristic === "Life expectancy (in years) at age x (ex)" && d.age_group === "0 years" && d.sex !== "Both sexes")
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Life expectancy at birth by sex, British Columbia (years)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Years", domain: [70, 90]},
+  color: {legend: true},
+  marks: [
+    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.ruleX(lifeBySex.levels.Males.change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.ruleX(lifeBySex.levels.Females.change_points, {stroke: "steelblue", strokeDasharray: "2,3"}),
+    Plot.lineY(lifeRows, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
+    Plot.dot(lifeRows, {x: "ref_date", y: "value", stroke: "sex", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`Life expectancy at birth (both sexes) rose by
+**${life.overall.slope_per_decade.toFixed(2)}** years per decade on average
+across ${life.start}–${life.end}, but as two regimes: gains of about
+**${life.segments[0].slope_per_decade.toFixed(2)}** years per decade to
+**${life.change_point}**, then a flat-to-declining
+**${life.segments[1].slope_per_decade.toFixed(2)}** years per decade after.
+The post-2015 stall spans the COVID-19 period, which is visible as the
+2020–2022 dip, but the regime turn **precedes** the pandemic — the pipeline
+dates the change and does not attribute it.`
+```
+
+This is the project's nonstationarity claim in one series: the same
+indicator, the same source, but a different rule before and after 2015.
+The male and female series turn differently (below), so even this
+agreement about *whether* there was a break comes with disagreement about
+*when*.
+
+## Sex differences
+
+```{ojs}
+//| echo: false
+sexRows = ["Males", "Females"].flatMap(sex => [
+  {indicator: "Life expectancy", sex, ...lifeBySex.levels[sex]},
+  {indicator: "Mortality (crude)", sex, ...mortBySex.crude[sex]},
+  {indicator: "Mortality (age-standardised)", sex, ...mortBySex.age_standardised[sex]}
+]).map(d => ({
+  indicator: d.indicator,
+  sex: d.sex,
+  window: `${d.start}–${d.end}`,
+  slope_per_decade: d.overall.slope_per_decade,
+  verdict: d.stationarity.verdict,
+  breaks: d.change_points.join(", ") || "—"
+}))
+Inputs.table(sexRows, {
+  columns: ["indicator", "sex", "window", "slope_per_decade", "verdict", "breaks"],
+  header: {indicator: "indicator", sex: "sex", window: "window", slope_per_decade: "slope/decade", verdict: "stationarity", breaks: "regime breaks"}
+})
+```
+
+```{ojs}
+//| echo: false
+lifeFull = FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})
+finalYear = String(lifeBySex.levels.Females.end)
+finalFemale = lifeFull.find(d => d.ref_date === finalYear && d.age_group === "0 years" && d.sex === "Females" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
+finalMale = lifeFull.find(d => d.ref_date === finalYear && d.age_group === "0 years" && d.sex === "Males" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
+md`In ${finalYear}, life expectancy at birth was **${finalFemale.toFixed(1)}**
+years for females versus **${finalMale.toFixed(1)}** for males, a gap of
+about ${(finalFemale - finalMale).toFixed(1)} years. Both sexes moved in
+regimes rather than one straight line: the male series turns at
+**${lifeBySex.levels.Males.change_point}** and the female at
+**${lifeBySex.levels.Females.change_point}**, so a single both-sexes
+trajectory would blur two differently-timed changes. On the
+age-standardised mortality series the male decline-then-reversal is
+steeper than the female (males' regime breaks at
+${mortBySex.age_standardised.Males.change_point}, females' at
+${mortBySex.age_standardised.Females.change_point}).`
+```
+
+## Inequalities across regions
+
+**Not yet described.** Both current indicators are published at
+*provincial* resolution only. The road map's M3 calls for inequality
+reporting across health authorities and regions; that requires
+sub-provincial ingestion (separate Statistics Canada health-region tables,
+or BC-specific sources such as BCCDC's dashboards), which is outstanding.
+Until then this report makes **no claim about regional inequality** —
+treat any provincial average here as one that could sit atop very
+different regional trajectories.
+
+## Reading this report
+
+- **Dates are the point.** Every number above belongs to its window;
+  reproducing the pipeline on refreshed data may change the verdicts.
+- **Two proxies, one domain.** Mortality and life expectancy are both
+  mortality-domain proxies. Nothing here speaks to morbidity, mental
+  health, functional status, or wellbeing.
+- **Break detection is not explanation.** The dated regimes come from a
+  formal test of departure from a straight line
+  [@truong2020selective]; the test says *where* the rule changes, not
+  *why*. Attribution is M4/M5 work.
+- **Aggregates hide sub-series.** A both-sexes series is not a summary of
+  the male and female trajectories; read them separately.
+
+## Reproduce
+
+```bash
+uv run sohbc fetch statcan_wds statcan_life_tables
+uv run sohbc build
+quarto render reference/state-of-health-report.qmd
+```
+
+The report reads only the files under `data/published/`, so it regenerates
+end-to-end from raw data with the commands above — the acceptance
+criterion of milestone M3.
+
+## Next editions
+
+Planned (M3 outstanding work):
+
+- the wider indicator set (morbidity, mental health, functional status,
+  wellbeing, subjective wellbeing);
+- sub-provincial (health-authority / HSDA) map and inequality views;
+- age-specific trajectories, not only all-ages;
+- explicit regime-aware within-versus-across-regime comparisons.

@@ -181,9 +181,11 @@ selection, a residual-permutation break test, and a Kendall-tau trend
 test, so every series — including the male and female breakdowns — is
 labelled stationary or not over its observed window. The indicators are
 provincial mortality rates (13-10-0710-01) and life expectancy at birth
-(13-10-0837-01). Outstanding: the wider indicator set, sub-provincial
-(map) views and inequality reporting, age-specific trajectories, and the
-descriptive report
+(13-10-0837-01). A first edition of the descriptive report
+("State of health in BC", version 0.1) is published and regenerates
+end-to-end from the published datasets. Outstanding: the wider indicator
+set, sub-provincial (map) views and inequality reporting, age-specific
+trajectories, and regime-aware within-versus-across-regime comparisons
 **Depends on:** M2
 
 ---
