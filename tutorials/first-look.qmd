@@ -2,40 +2,122 @@
 title: "Tutorial: Your first look at BC health data"
 ---
 
-*Status: planned. This tutorial is blocked on milestone M2 (data
-landscape) in the [roadmap](../ROADMAP.md), which is in progress: the
-[data source catalogue](../reference/data-sources.qmd) and the `sohbc`
-acquisition pipeline now exist, but indicator-level ingestion is not yet
-complete. The outline below is the target structure.*
+*Status: available for the two published indicators (mortality rates and
+life expectancy). The regional-comparison step awaits sub-provincial
+ingestion (milestone M3 in the [roadmap](../ROADMAP.md)).*
 
-## Objective
-
-By the end of this tutorial you will have loaded a headline health
-indicator for British Columbia, plotted its trend over time, and compared
-it across health authority regions — using only reproducible, documented
-steps.
+In this tutorial you will fetch a headline health indicator for British
+Columbia, build it from source into a tidy dataset, and look at its
+trajectory — using only reproducible, documented steps. No prior
+familiarity with the project is assumed.
 
 ## Prerequisites
 
-- A working Quarto environment (see [How to contribute](../how-to/contribute.qmd)).
-- The project's data pipeline has been run at least once.
+- A working environment (see [How to contribute](../how-to/contribute.qmd)):
+  Quarto and `uv` installed, `uv sync` run once.
+- No data needs to be present beforehand — we fetch it in step 2.
 
-## Steps (target outline)
+## 1. See what the project knows about
 
-1. **Set up.** Clone the repository and render the site locally with
-   `quarto preview`.
-2. **Fetch an indicator.** Run the ingestion command for one indicator
-   (e.g. life expectancy at birth) and locate the resulting dataset.
-3. **Plot the trend.** Produce a time-series chart of the indicator for
-   BC as a whole.
-4. **Compare regions.** Break the same indicator down by health
-   authority and overlay the regional series.
-5. **Read the caveats.** Open the indicator's reference page and note
-   its provenance, definition, and known limitations.
-6. **Reflect.** Note what the chart does *not* tell you — this is where
-   the [explanation](../explanation/index.qmd) section picks up.
+Lists the indicators the pipeline can build, and the catalogued data
+sources behind them:
+
+```bash
+uv run sohbc indicators
+uv run sohbc list
+```
+
+`indicators` shows two entries — `mortality_rates_bc` and
+`life_expectancy_bc` — each tagged with its measurement-framework domain.
+`list` shows the catalogued sources; only a few are marked `auto` (the
+pipeline can fetch them without a browser).
+
+## 2. Fetch the raw source
+
+Each indicator names a catalogued source. Life expectancy comes from
+Statistics Canada's life tables. Fetch it into the reproducible local
+layout:
+
+```bash
+uv run sohbc fetch statcan_life_tables
+```
+
+The raw response lands in `data/raw/statcan_life_tables/` and a checksum
+is recorded in `data/manifest.json`. Raw data is **not** committed: the
+catalogue and this command are what make it reproducible.
+
+## 3. Build the tidy dataset
+
+Turn the raw table into a published, tidy dataset:
+
+```bash
+uv run sohbc build life_expectancy_bc
+```
+
+This writes `data/published/life_expectancy_bc.csv` plus trend-test JSON.
+Look at the first rows:
+
+```bash
+head -4 data/published/life_expectancy_bc.csv
+```
+
+Every datum carries its reference date, geography, age group, sex, and
+characteristic, so nothing about its resolution is lost (a project rule —
+see the [measurement framework](../reference/measurement-framework.qmd)).
+
+## 4. Look at the trajectory
+
+Load the tidy file and plot the series in the language of your choice. The
+R-and-Python-agnostic view is simply to read the published chart on the
+indicator's [reference page](../reference/indicator-life-expectancy-bc.qmd),
+which is regenerated from the same files on every render.
+
+To make your own view, the two headline characteristics are:
+
+- `Life expectancy (in years) at age x (ex)` with `age_group == "0 years"`
+  — life expectancy at birth.
+- `Number of deaths` and `Mortality rate per 1,000 population` in
+  `data/published/mortality_rates_bc.csv` — the mortality indicator.
+
+Two habits the project expects of any view you build:
+
+1. **Plot the whole window, not one point.** The trajectory JSON alongside
+   each CSV states whether the series is stationary over its window and,
+   if not, where the regimes break. Read the number *and* its window.
+2. **Mark the regimes.** The COVID-19 period (2020–2024) is shaded on the
+   published charts; regime breaks are drawn as dashed lines. A series
+   that moves is not necessarily a series whose *rule* changed — the tests
+   distinguish the two.
+
+## 5. Read the caveats
+
+Open the indicator's reference page and read its provenance table and
+caveats. For life expectancy, the key caveat is that it is a **period**
+measure — the average lifespan of a synthetic cohort under one year's
+death rates [@statcan_life_table] — not anyone's expected lifespan and not
+a statement about the health of the living.
+
+## 6. Reflect
+
+Note what the chart does *not* tell you. Life expectancy at birth says
+nothing about morbidity, functional status, or wellbeing; a rising value
+can coexist with worsening health among the living. This is exactly why
+the project treats every indicator as a **proxy** for a domain, never the
+state of health itself — the [explanation](../explanation/index.qmd)
+section takes this up.
 
 ## What you have learned
 
-How the pipeline, reference pages, and explanation pages fit together:
-the same pattern used by every subsequent analysis in this project.
+The whole project follows the pattern you just walked: a catalogued
+source → a fetch step → a reproducible build into tidy data with its
+resolution recorded → a trajectory view that states its window and
+regimes → a proxy that is read alongside its caveats. Every later
+indicator and analysis reuses it.
+
+## Next steps
+
+- [Add an indicator](../how-to/add-indicator.qmd) of your own.
+- [Ingest a data source](../how-to/ingest-data.qmd) into the catalogue.
+- **Regional comparison** — the roadmap's M3 outstanding work —
+  is where this tutorial's target structure originally pointed; it needs
+  sub-provincial ingestion first.

@@ -134,7 +134,7 @@ published summary statistics.
   nothing": an indicator backed only by published summary statistics
   still qualifies when it passes licence and governance checks.
 
-**Status:** in progress — catalogue of 24 sources (all URLs verified),
+**Status:** in progress — catalogue of 26 sources (all URLs verified),
 including determinant/stratifier sources and microdata access routes; a
 Python acquisition pipeline and a data-quality register are drafted.
 Outstanding: microdata approvals, neighbourhood-level outcomes, and

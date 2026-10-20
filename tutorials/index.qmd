@@ -14,5 +14,7 @@ which assume you already know the basics and just need the steps.
 ### [Your first look at BC health data](first-look.qmd)
 
 A guided walkthrough of exploring a headline health indicator for BC:
-loading it, plotting it over time, and comparing regions. *Planned —
-blocked on the data landscape milestone (M2).*
+fetching it from a catalogued source, building the tidy dataset, reading
+its trajectory and regimes, and reading it alongside its caveats.
+*Available for the two published indicators; regional comparison awaits
+sub-provincial ingestion.*
