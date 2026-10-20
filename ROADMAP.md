@@ -185,11 +185,12 @@ crude and age-standardised (WHO standard) series; life expectancy at birth
 social wellbeing, and access to care) widens the report beyond mortality;
 and a sub-provincial view (13-10-0931-01) reports the age-standardised
 premature-mortality gap across BC's five health authorities and 17 health
-service delivery areas. Edition 0.3 of the descriptive report ("State of
-health in BC") is published and regenerates end-to-end from the published
-datasets. Outstanding: sub-provincial views for the survey and
-life-expectancy indicators, age-specific trajectories, and regime-aware
-within-versus-across-regime comparisons.
+service delivery areas. The mortality indicator is also decomposed by
+five-year age group, each with its own trend and regime summary. Edition
+0.3 of the descriptive report ("State of health in BC") is published and
+regenerates end-to-end from the published datasets. Outstanding:
+sub-provincial views for the survey and life-expectancy indicators, and
+regime-aware within-versus-across-regime comparisons.
 **Depends on:** M2
 
 ---

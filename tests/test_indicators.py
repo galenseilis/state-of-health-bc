@@ -10,6 +10,7 @@ import zipfile
 from sohbc.indicators import (
     DEFAULT_DIMENSIONS,
     INDICATORS,
+    age_group_trends,
     age_label_to_standard,
     age_standardise,
     dispersion,
@@ -453,6 +454,44 @@ class DispersionTests(unittest.TestCase):
     def test_returns_none_when_no_match(self) -> None:
         result = dispersion([], "Premature mortality", "Age-standardized rate", "Males")
         self.assertIsNone(result)
+
+
+class AgeGroupTrendsTests(unittest.TestCase):
+    def test_summarises_each_age_group_for_one_sex(self) -> None:
+        rows = []
+        for group, base in [("young", 1.0), ("old", 20.0)]:
+            for year in range(2000, 2011):
+                rows.append(
+                    {
+                        "ref_date": str(year),
+                        "sex": "Both sexes",
+                        "age_group": group,
+                        "characteristic": "rate",
+                        "value": base + 0.5 * (year - 2000),
+                    }
+                )
+        result = age_group_trends(
+            rows, "rate", ["young", "old"], "Both sexes", n_permutations=99
+        )
+        self.assertEqual(list(result), ["young", "old"])
+        self.assertAlmostEqual(result["young"]["overall"]["slope_per_year"], 0.5, places=6)
+        self.assertAlmostEqual(result["old"]["overall"]["slope_per_year"], 0.5, places=6)
+
+    def test_omits_absent_age_groups(self) -> None:
+        rows = [
+            {
+                "ref_date": str(year),
+                "sex": "Both sexes",
+                "age_group": "young",
+                "characteristic": "rate",
+                "value": float(year),
+            }
+            for year in range(2000, 2011)
+        ]
+        result = age_group_trends(
+            rows, "rate", ["young", "missing"], "Both sexes", n_permutations=99
+        )
+        self.assertEqual(list(result), ["young"])
 
 
 if __name__ == "__main__":

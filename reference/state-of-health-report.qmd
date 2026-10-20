@@ -29,7 +29,7 @@ timeless ([why](../explanation/nonstationarity.qmd)).
 
 | Indicator | Domain | Window | Resolution | Sexes | Source |
 |-----------|--------|--------|------------|-------|--------|
-| [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F | StatCan 13-10-0710-01 |
+| [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F; 20 age groups | StatCan 13-10-0710-01 |
 | [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
 | [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2021/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 |
 | [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
@@ -156,6 +156,11 @@ reversed. The pink band marks the COVID-19 period (2020–2024).`
 The gap between the two lines is the signature of demographic ageing, and
 it is exactly why the project reports both and treats the standardised
 series as the one about risk rather than the one about the age structure.
+The age breakdown makes the mechanism explicit: the decline is real at
+**every** age, but it scales with age (about **9.7** per 1,000 per decade
+at 90 and over against **0.00** at 30–34), so a rising all-ages crude rate
+coexists with falling rates at every age. The full breakdown is on the
+[mortality indicator page](indicator-mortality-rates-bc.qmd#age-breakdown).
 
 ## Life expectancy: two decades of gain, then a stall
 
@@ -405,5 +410,4 @@ Planned (M3 outstanding work):
 
 - sub-provincial views for the survey and life-expectancy indicators, not
   only mortality;
-- age-specific trajectories, not only all-ages and 18-plus;
 - explicit regime-aware within-versus-across-regime comparisons.

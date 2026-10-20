@@ -299,6 +299,61 @@ INDICATORS["mortality_inequality_bc"] = {
     ),
 }
 
+AGE_GROUPS_MORTALITY = [
+    "Age at time of death, under 1 year",
+    "Age at time of death, 1 to 4 years",
+    "Age at time of death, 5 to 9 years",
+    "Age at time of death, 10 to 14 years",
+    "Age at time of death, 15 to 19 years",
+    "Age at time of death, 20 to 24 years",
+    "Age at time of death, 25 to 29 years",
+    "Age at time of death, 30 to 34 years",
+    "Age at time of death, 35 to 39 years",
+    "Age at time of death, 40 to 44 years",
+    "Age at time of death, 45 to 49 years",
+    "Age at time of death, 50 to 54 years",
+    "Age at time of death, 55 to 59 years",
+    "Age at time of death, 60 to 64 years",
+    "Age at time of death, 65 to 69 years",
+    "Age at time of death, 70 to 74 years",
+    "Age at time of death, 75 to 79 years",
+    "Age at time of death, 80 to 84 years",
+    "Age at time of death, 85 to 89 years",
+    "Age at time of death, 90 years and over",
+]
+
+INDICATORS["mortality_age_specific_bc"] = {
+    "title": "Mortality rates by age group, British Columbia",
+    "domain": "Mortality",
+    "mode": "age_specific",
+    "source_key": "statcan_wds",
+    "source_table": "13-10-0710-01",
+    "source_table_url": (
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310071001"
+    ),
+    "geo": "British Columbia, place of residence",
+    "sexes": ["Both sexes", "Males", "Females"],
+    "age_groups": AGE_GROUPS_MORTALITY,
+    "n_permutations": 199,
+    "trajectory_characteristic": "Mortality rate per 1,000 population",
+    "output": PUBLISHED_DIR / "mortality_age_specific_bc_by_age_trend.json",
+    "breakdown_label": "by_age",
+    "definition": (
+        "Crude mortality rate (deaths per 1,000 population) for each "
+        "five-year age group from under 1 to 90 and over, by sex, resident "
+        "in British Columbia, with a formal trend and regime summary per age "
+        "group. Extracted from the same Statistics Canada table "
+        "13-10-0710-01 as the all-ages indicator."
+    ),
+    "caveats": (
+        "Crude rates within broad age bands: the bands themselves are wide "
+        "(the oldest is open-ended), so a within-band age shift is invisible. "
+        "Small counts in young age groups make their rates volatile and their "
+        "regimes weakly identified. Rates are not age-standardised within "
+        "band. Recent years are subject to revision."
+    ),
+}
+
 TIDY_FIELDS = [
     "ref_date",
     "geo",
@@ -649,6 +704,35 @@ def sex_breakdown(
     return breakdown
 
 
+def age_group_trends(
+    rows: list[dict[str, Any]],
+    characteristic: str,
+    age_groups: Sequence[str],
+    sex: str,
+    n_permutations: int = breaks.N_PERMUTATIONS,
+) -> dict[str, Any]:
+    """Trajectory summary per age group for one series and sex.
+
+    Args:
+        rows: Tidy rows as produced by :func:`tidy`.
+        characteristic: The characteristic to summarise.
+        age_groups: Age-group labels to report, in display order.
+        sex: The sex category to hold fixed.
+        n_permutations: Permutation count for the break test; the
+            age-specific mode lowers this for speed across many groups.
+
+    Returns:
+        dict: Age-group label to :func:`trajectory` result, in the order
+        requested; groups absent from the data are omitted.
+    """
+    trends: dict[str, Any] = {}
+    for group in age_groups:
+        points = series_points(rows, characteristic, age_group=group, sex=sex)
+        if points:
+            trends[group] = trajectory(points, n_permutations=n_permutations)
+    return trends
+
+
 def region_level(geo: str) -> str:
     """Classify a health-region geography name for a tidy dataset."""
     name = geo.split(",")[0].strip()
@@ -808,12 +892,59 @@ def build_cross_section(spec: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def build_age_specific(spec: dict[str, Any]) -> dict[str, Any]:
+    """Build age-specific trajectories for a time-series indicator.
+
+    The source already carries every age group; this mode tidies them all
+    and summarises each age group by sex, so the report can show whether
+    the same regime appears at every age or only at some. No separate tidy
+    CSV is published, because the all-ages indicator already publishes the
+    same table; this mode adds only the per-age trend summary.
+    """
+    table_id = spec["source_table"]
+    dimensions = spec.get("dimensions")
+    zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
+    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    chosen = select_rows(
+        rows,
+        spec["geo"],
+        age_group=None,
+        sex=None,
+        dimensions=dimensions,
+        filters=spec.get("filters"),
+    )
+    tidy_rows = tidy(chosen, dimensions=dimensions, measure=spec.get("measure"))
+    if not tidy_rows:
+        raise IndicatorError("age-specific selected no rows")
+
+    sexes: list[str] = list(spec.get("sexes") or ["Both sexes"])
+    groups: list[str] = list(spec.get("age_groups") or [])
+    characteristic = spec["trajectory_characteristic"]
+    n_permutations = spec.get("n_permutations", breaks.N_PERMUTATIONS)
+    breakdown = {
+        sex: age_group_trends(
+            tidy_rows, characteristic, groups, sex, n_permutations=n_permutations
+        )
+        for sex in sexes
+    }
+    output = spec["output"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(breakdown, indent=2) + "\n", encoding="utf-8")
+    return {
+        "indicator": spec["source_table"],
+        "rows": len(tidy_rows),
+        "output": output,
+    }
+
+
 def build(key: str) -> dict[str, Any]:
     if key not in INDICATORS:
         raise IndicatorError(f"unknown indicator: {key}")
     spec = INDICATORS[key]
     if spec.get("mode") == "cross_section":
         return build_cross_section(spec)
+    if spec.get("mode") == "age_specific":
+        return build_age_specific(spec)
     sexes: list[str] = list(spec.get("sexes") or [spec.get("sex")])
     dimensions = spec.get("dimensions")
     table_id = spec["source_table"]
