@@ -105,5 +105,6 @@
       }
     ]
   },
-  "series": "Age-standardised mortality rate per 1,000 population"
+  "series": "Age-standardised mortality rate per 1,000 population",
+  "sex": "Both sexes"
 }

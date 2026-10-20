@@ -87,8 +87,9 @@ entry.
 
 The first end-to-end indicator — provincial
 [mortality rates](indicator-mortality-rates-bc.qmd) from Statistics
-Canada table 13-10-0710-01 — is built by the pipeline. Its known
-limitations (published at provincial resolution only, both sexes, spans
+Canada table 13-10-0710-01 — is built by the pipeline, including
+male/female breakdowns and per-sex age standardisation. Its known
+limitations (provincial resolution only, source sex categories, spans
 the COVID-19 period, subject to revision) are recorded on the indicator
 page and are examples of the kind of entry this register is meant to
 capture. Its regime breaks are dated by the formal tests documented on

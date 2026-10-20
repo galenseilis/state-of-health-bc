@@ -16,7 +16,7 @@ the views below. Each indicator page states its provenance and caveats
 | Field | Value |
 |-------|-------|
 | **Domain** | [Mortality](../reference/measurement-framework.qmd) |
-| **Definition** | Deaths and the mortality rate (deaths per 1,000 population), all ages, both sexes, resident in British Columbia; crude and directly age-standardised (WHO World Standard Population 2000–2025) [@whoStandardPop] |
+| **Definition** | Deaths and the mortality rate (deaths per 1,000 population), all ages, by sex (both sexes, males, females), resident in British Columbia; crude and directly age-standardised per sex (WHO World Standard Population 2000–2025) [@whoStandardPop] |
 | **Source** | Statistics Canada, table 13-10-0710-01, *Mortality rates, by age group* [@statcan_wds_table] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published summary statistics) |
@@ -31,11 +31,14 @@ the views below. Each indicator page states its provenance and caveats
 ```{ojs}
 //| echo: false
 rows = FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
-rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages")
-counts = rows.filter(d => d.characteristic === "Number of deaths")
-asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true})
+rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages" && d.sex === "Both sexes")
+bySexRates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages" && d.sex !== "Both sexes")
+counts = rows.filter(d => d.characteristic === "Number of deaths" && d.sex === "Both sexes")
+asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true}).filter(d => d.sex === "Both sexes")
+bySexAsr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true}).filter(d => d.sex !== "Both sexes")
 trend = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
 asrTrend = FileAttachment("../data/published/mortality_rates_bc_age_standardised_trend.json").json()
+bySexTrend = FileAttachment("../data/published/mortality_rates_bc_by_sex_trend.json").json()
 series = rates.map(d => ({year: d.ref_date, rate: d.value, series: "Crude"}))
   .concat(asr.map(d => ({year: d.ref_date, rate: d.value, series: "Age-standardised"})))
 ```
@@ -138,6 +141,75 @@ segmentation, is in the trend JSON. The permutation test assumes
 exchangeable residuals — autocorrelation is not modelled — so it is a
 test of departure from a linear trend, not a full time-series model.
 
+## Sex breakdown
+
+The source table publishes males and females separately; both are built
+through the same pipeline, including per-sex age standardisation, and
+each carries its own stationarity verdict
+(`data/published/mortality_rates_bc_by_sex_trend.json`).
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Crude mortality rate by sex, British Columbia (per 1,000 population)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Deaths per 1,000 population"},
+  color: {legend: true},
+  marks: [
+    Plot.ruleX(bySexTrend.crude.Males.change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.lineY(bySexRates, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
+    Plot.dot(bySexRates, {x: "ref_date", y: "value", stroke: "sex", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Age-standardised mortality rate by sex, British Columbia (per 1,000 population)",
+  x: {label: "Year", tickFormat: "d"},
+  y: {grid: true, label: "Deaths per 1,000 population"},
+  color: {legend: true},
+  marks: [
+    Plot.ruleX(bySexTrend.age_standardised.Males.change_points, {stroke: "red", strokeDasharray: "4,4"}),
+    Plot.ruleX(bySexTrend.age_standardised.Females.change_points, {stroke: "steelblue", strokeDasharray: "2,3"}),
+    Plot.lineY(bySexAsr, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
+    Plot.dot(bySexAsr, {x: "ref_date", y: "value", stroke: "sex", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+sexRows = ["Males", "Females"].flatMap(sex => [
+  {series: "Crude", sex, ...bySexTrend.crude[sex]},
+  {series: "Age-standardised", sex, ...bySexTrend.age_standardised[sex]}
+]).map(d => ({
+  series: d.series,
+  sex: d.sex,
+  slope_per_decade: d.overall.slope_per_decade,
+  verdict: d.stationarity.verdict,
+  change_points: d.change_points.join(", ") || "—",
+  change_point: d.change_point ?? "—"
+}))
+Inputs.table(sexRows, {
+  columns: ["series", "sex", "slope_per_decade", "verdict", "change_points", "change_point"],
+  header: {series: "series", sex: "sex", slope_per_decade: "slope/decade", verdict: "stationarity", change_points: "regime breaks", change_point: "largest break"}
+})
+```
+
+```{ojs}
+//| echo: false
+md`Every sex-specific series is nonstationary over ${bySexTrend.crude.Males.start}–${bySexTrend.crude.Males.end}.
+Males sit above females on both crude and standardised rates throughout, and
+the standardised decline-then-reversal appears in both sexes, but the
+standardised turnaround is dated **${bySexTrend.age_standardised.Males.change_point}**
+for males and **${bySexTrend.age_standardised.Females.change_point}** for females —
+close to, but not identical with, the both-sexes date of
+${asrTrend.change_point}; the sexes should be read as separate trajectories,
+not one trend disaggregated after the fact.`
+```
+
 ## Caveats
 
 - **Crude vs standardised.** Two series are published: the crude rate
@@ -155,9 +227,12 @@ test of departure from a linear trend, not a full time-series model.
   pipeline dates the change and does not attribute it.
 - **Observation window and regimes.** The series spans 1991–2024 and
   crosses the COVID-19 period (2020–2024), marked on the figure.
-- **Resolution.** Published here at provincial resolution. Age-group and
-  sex breakdowns exist in the source table and can be added without
-  changing the pipeline.
+- **Sex categories are the source's.** The table publishes both sexes,
+  males, and females; the pipeline reports these categories as given and
+  does not model sex or gender beyond them.
+- **Resolution.** Published at provincial resolution, with age-group rows
+  (both sexes) and male/female breakdowns in the tidy file. Age-specific
+  *trajectories* and sub-provincial (map) views are still outstanding.
 - **Revisions.** Statistics Canada may revise recent-year estimates; the
   published files are regenerated from the source on each build.
 
@@ -168,9 +243,12 @@ uv run sohbc fetch statcan_wds
 uv run sohbc build mortality_rates_bc
 ```
 
-The tidy dataset is published at `data/published/mortality_rates_bc.csv`,
-with the age-standardised series at
+The tidy dataset is published at `data/published/mortality_rates_bc.csv`
+(all ages and age groups, by sex), with the age-standardised series — one
+row per year and sex — at
 `data/published/mortality_rates_bc_age_standardised.csv` (standard
-population weights in `data/reference/who_standard_population.csv`) and
-the trend tests at `data/published/mortality_rates_bc_trend.json` and
-`data/published/mortality_rates_bc_age_standardised_trend.json`.
+population weights in `data/reference/who_standard_population.csv`). The
+headline trend tests are at `data/published/mortality_rates_bc_trend.json`
+and `data/published/mortality_rates_bc_age_standardised_trend.json`, and
+the per-sex tests at
+`data/published/mortality_rates_bc_by_sex_trend.json`.

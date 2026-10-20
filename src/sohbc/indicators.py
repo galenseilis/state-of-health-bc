@@ -22,8 +22,7 @@ from .fetch import RAW_DIR, TIMEOUT, USER_AGENT
 PUBLISHED_DIR = ROOT / "data" / "published"
 REFERENCE_DIR = ROOT / "data" / "reference"
 
-STANDARD_FIELDS = ["ref_date", "characteristic", "value", "uom", "standard"]
-REFERENCE_DIR = ROOT / "data" / "reference"
+STANDARD_FIELDS = ["ref_date", "sex", "characteristic", "value", "uom", "standard"]
 
 ALL_AGES = "Age at time of death, all ages"
 
@@ -36,7 +35,7 @@ INDICATORS: dict[str, dict[str, Any]] = {
         "source_table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310071001",
         "geo": "British Columbia, place of residence",
         "age_group": None,
-        "sex": "Both sexes",
+        "sexes": ["Both sexes", "Males", "Females"],
         "all_ages": "Age at time of death, all ages",
         "output": PUBLISHED_DIR / "mortality_rates_bc.csv",
         "standard_population": REFERENCE_DIR / "who_standard_population.csv",
@@ -44,13 +43,15 @@ INDICATORS: dict[str, dict[str, Any]] = {
         "trajectory_characteristic": "Mortality rate per 1,000 population",
         "definition": (
             "Deaths and the crude mortality rate (deaths per 1,000 population), "
-            "all ages, both sexes, resident in British Columbia, plus an "
-            "age-standardised rate using the WHO World Standard Population."
+            "all ages, by sex (both sexes, males, females), resident in "
+            "British Columbia, plus an age-standardised rate per sex using "
+            "the WHO World Standard Population."
         ),
         "caveats": (
             "Crude rate: not adjusted to a standard population, so it reflects "
             "both real change and shifts in the age structure of the population. "
-            "Recent years include the COVID-19 period."
+            "Sex categories are those of the source (both sexes, males, "
+            "females). Recent years include the COVID-19 period."
         ),
     },
 }
@@ -150,7 +151,7 @@ def tidy(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
                 "status": row.get("STATUS", ""),
             }
         )
-    tidy_rows.sort(key=lambda r: (r["ref_date"], r["characteristic"]))
+    tidy_rows.sort(key=lambda r: (r["ref_date"], r["characteristic"], r["sex"]))
     return tidy_rows
 
 
@@ -254,12 +255,15 @@ def series_points(
     rows: list[dict[str, Any]],
     characteristic: str,
     age_group: str | None = None,
+    sex: str | None = None,
 ) -> list[tuple[int, float]]:
     points = []
     for row in rows:
         if row["characteristic"] != characteristic:
             continue
         if age_group is not None and row["age_group"] != age_group:
+            continue
+        if sex is not None and row["sex"] != sex:
             continue
         points.append((int(str(row["ref_date"])[:4]), float(row["value"])))
     return points
@@ -301,19 +305,33 @@ def age_standardise(
     rows: list[dict[str, Any]],
     characteristic: str,
     weights: dict[str, float],
+    sex: str | None = None,
 ) -> list[dict[str, Any]]:
-    """Direct age-standardisation of age-specific rates to a standard population."""
-    by_year: dict[str, dict[str, float]] = {}
+    """Direct age-standardisation of age-specific rates to a standard population.
+
+    Args:
+        rows: Tidy rows as produced by :func:`tidy`.
+        characteristic: The rate characteristic to standardise.
+        weights: Standard-population weights by age-group id.
+        sex: Restrict to one sex category; ``None`` keeps every sex,
+            standardising each separately.
+    """
+    by_year: dict[tuple[str, str], dict[str, float]] = {}
     for row in rows:
         if row["characteristic"] != characteristic:
+            continue
+        row_sex = row.get("sex", "")
+        if sex is not None and row_sex != sex:
             continue
         group = age_label_to_standard(row["age_group"])
         if group is None or group not in weights:
             continue
-        by_year.setdefault(str(row["ref_date"]), {})[group] = float(row["value"])
+        by_year.setdefault((str(row["ref_date"]), row_sex), {})[group] = float(
+            row["value"]
+        )
 
     results: list[dict[str, Any]] = []
-    for ref_date, groups in sorted(by_year.items()):
+    for (ref_date, row_sex), groups in sorted(by_year.items()):
         total_weight = sum(weights[group] for group in groups)
         if total_weight == 0:
             continue
@@ -321,29 +339,60 @@ def age_standardise(
             sum(weights[group] * value for group, value in groups.items())
             / total_weight
         )
-        results.append({"ref_date": ref_date, "value": round(rate, 4)})
+        results.append(
+            {"ref_date": ref_date, "sex": row_sex, "value": round(rate, 4)}
+        )
     return results
+
+
+def sex_breakdown(
+    rows: list[dict[str, Any]],
+    characteristic: str,
+    sexes: Sequence[str],
+    age_group: str | None = None,
+) -> dict[str, Any]:
+    """Trajectory summary per sex category for one series.
+
+    Args:
+        rows: Tidy rows as produced by :func:`tidy`.
+        characteristic: The characteristic to summarise.
+        sexes: Sex categories to report, in display order.
+        age_group: Restrict to one age group; ``None`` keeps all ages.
+
+    Returns:
+        dict: Sex category to :func:`trajectory` result, in the order
+        requested; categories absent from the data are omitted.
+    """
+    breakdown: dict[str, Any] = {}
+    for sex in sexes:
+        points = series_points(rows, characteristic, age_group=age_group, sex=sex)
+        if points:
+            breakdown[sex] = trajectory(points)
+    return breakdown
 
 
 def build(key: str) -> dict[str, Any]:
     if key not in INDICATORS:
         raise IndicatorError(f"unknown indicator: {key}")
     spec = INDICATORS[key]
+    sexes: list[str] = list(spec.get("sexes") or [spec.get("sex")])
     zip_url = wds_zip_url(wds_download_json(spec["source_key"]))
     rows = table_rows(fetch_wds_zip(zip_url), spec["source_table"])
-    chosen = select_rows(rows, spec["geo"], spec.get("age_group"), spec.get("sex"))
+    chosen = select_rows(rows, spec["geo"], spec.get("age_group"), sex=None)
     tidy_rows = tidy(chosen)
     if not tidy_rows:
         raise IndicatorError(f"indicator {key} selected no rows")
     output = write_published(tidy_rows, spec["output"])
 
-    standardised_path = None
     standardised: list[dict[str, Any]] = []
+    standardised_path = None
     if spec.get("standard_population"):
         weights = load_standard_population(spec["standard_population"])
-        standardised = age_standardise(
-            tidy_rows, spec["trajectory_characteristic"], weights
-        )
+        characteristic = spec["trajectory_characteristic"]
+        for sex in sexes:
+            standardised.extend(
+                age_standardise(tidy_rows, characteristic, weights, sex=sex)
+            )
         standardised_path = spec["output"].with_name(
             spec["output"].stem + "_age_standardised.csv"
         )
@@ -354,6 +403,7 @@ def build(key: str) -> dict[str, Any]:
                 writer.writerow(
                     {
                         "ref_date": record["ref_date"],
+                        "sex": record["sex"],
                         "characteristic": (
                             f"Age-standardised {spec['trajectory_characteristic'].lower()}"
                         ),
@@ -364,33 +414,69 @@ def build(key: str) -> dict[str, Any]:
                 )
 
     standardised_trend_path = None
-    if standardised_path is not None:
-        standardised_points = [
-            (int(str(record["ref_date"])[:4]), float(record["value"]))
-            for record in standardised
-        ]
-        standardised_trend = trajectory(standardised_points)
-        standardised_trend["series"] = (
-            f"Age-standardised {spec['trajectory_characteristic'].lower()}"
-        )
-        standardised_trend_path = standardised_path.with_name(
-            standardised_path.stem + "_trend.json"
-        )
-        standardised_trend_path.write_text(
-            json.dumps(standardised_trend, indent=2) + "\n", encoding="utf-8"
-        )
-
+    by_sex_trend_path = None
     trend_path = None
+    headline_sex = sexes[0]
     if spec.get("trajectory_characteristic"):
+        characteristic = spec["trajectory_characteristic"]
+
+        headline_asr = [r for r in standardised if r["sex"] == headline_sex]
+        if headline_asr:
+            standardised_points = [
+                (int(str(record["ref_date"])[:4]), float(record["value"]))
+                for record in headline_asr
+            ]
+            standardised_trend = trajectory(standardised_points)
+            standardised_trend["series"] = (
+                f"Age-standardised {characteristic.lower()}"
+            )
+            standardised_trend["sex"] = headline_sex
+            standardised_trend_path = standardised_path.with_name(
+                standardised_path.stem + "_trend.json"
+            )
+            standardised_trend_path.write_text(
+                json.dumps(standardised_trend, indent=2) + "\n", encoding="utf-8"
+            )
+
         points = series_points(
             tidy_rows,
-            spec["trajectory_characteristic"],
+            characteristic,
             age_group=spec.get("all_ages"),
+            sex=headline_sex,
         )
-        trend = trajectory(points)
-        trend["series"] = spec["trajectory_characteristic"]
-        trend_path = spec["output"].with_name(spec["output"].stem + "_trend.json")
-        trend_path.write_text(json.dumps(trend, indent=2) + "\n", encoding="utf-8")
+        if points:
+            trend = trajectory(points)
+            trend["series"] = characteristic
+            trend["sex"] = headline_sex
+            trend_path = spec["output"].with_name(spec["output"].stem + "_trend.json")
+            trend_path.write_text(
+                json.dumps(trend, indent=2) + "\n", encoding="utf-8"
+            )
+
+        breakdown: dict[str, Any] = {
+            "crude": sex_breakdown(
+                tidy_rows,
+                characteristic,
+                sexes,
+                age_group=spec.get("all_ages"),
+            ),
+            "age_standardised": {},
+        }
+        for sex in sexes:
+            sex_points = [
+                (int(str(record["ref_date"])[:4]), float(record["value"]))
+                for record in standardised
+                if record["sex"] == sex
+            ]
+            if sex_points:
+                breakdown["age_standardised"][sex] = trajectory(sex_points)
+        by_sex_trend_path = spec["output"].with_name(
+            spec["output"].stem + "_by_sex_trend.json"
+        )
+        by_sex_trend_path.write_text(
+            json.dumps(breakdown, indent=2) + "\n", encoding="utf-8"
+        )
+
     return {
         "indicator": key,
         "rows": len(tidy_rows),
@@ -398,4 +484,5 @@ def build(key: str) -> dict[str, Any]:
         "standardised": standardised_path,
         "standardised_trend": standardised_trend_path,
         "trend": trend_path,
+        "by_sex_trend": by_sex_trend_path,
     }

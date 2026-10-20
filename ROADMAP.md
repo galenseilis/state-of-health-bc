@@ -175,13 +175,14 @@ cross-border patient-flow / supply-chain external drivers
 
 **Status:** in progress — the pipeline builds and publishes a first
 end-to-end indicator (provincial mortality rates, Statistics Canada
-13-10-0710-01) with regenerable charts, crude and age-standardised
-(WHO standard) series, and formal regime dating: piecewise-linear
+13-10-0710-01) with regenerable charts, crude and age-standardised (WHO
+standard) series by sex, and formal regime dating: piecewise-linear
 segmentation with BIC selection, a residual-permutation break test, and
-a Kendall-tau trend test, so every series is labelled stationary or not
-over its observed window. Outstanding: the wider indicator set,
-sub-provincial (map) views and inequality reporting, age/sex breakdowns
-of the published indicator, and the descriptive report
+a Kendall-tau trend test, so every series — including the male and
+female breakdowns — is labelled stationary or not over its observed
+window. Outstanding: the wider indicator set, sub-provincial (map) views
+and inequality reporting, age-specific trajectories, and the
+descriptive report
 **Depends on:** M2
 
 ---

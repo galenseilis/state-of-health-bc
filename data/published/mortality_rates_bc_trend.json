@@ -114,5 +114,6 @@
       }
     ]
   },
-  "series": "Mortality rate per 1,000 population"
+  "series": "Mortality rate per 1,000 population",
+  "sex": "Both sexes"
 }

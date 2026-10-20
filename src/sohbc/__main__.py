@@ -109,6 +109,8 @@ def _cmd_build(args: argparse.Namespace) -> int:
             )
         if result["trend"] is not None:
             print(f"      trend -> {result['trend'].relative_to(ROOT)}")
+        if result["by_sex_trend"] is not None:
+            print(f"      by-sex trend -> {result['by_sex_trend'].relative_to(ROOT)}")
     return 0
 
 

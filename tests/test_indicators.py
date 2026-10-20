@@ -12,6 +12,8 @@ from sohbc.indicators import (
     age_standardise,
     ols_slope,
     select_rows,
+    series_points,
+    sex_breakdown,
     table_rows,
     tidy,
     trajectory,
@@ -74,13 +76,33 @@ class SelectRowsTests(unittest.TestCase):
         self.assertEqual(len(out), 1)
         self.assertEqual(out[0]["VALUE"], "7.5")
 
+    def test_sex_none_keeps_every_sex(self) -> None:
+        rows = [
+            _row(
+                "British Columbia, place of residence", "all ages", sex, "rate", value
+            )
+            for sex, value in [
+                ("Both sexes", "7.5"),
+                ("Males", "8.0"),
+                ("Females", "7.0"),
+            ]
+        ]
+        out = select_rows(
+            rows, "British Columbia, place of residence", "all ages", None
+        )
+        self.assertEqual(len(out), 3)
+
 
 class TidyTests(unittest.TestCase):
     def test_converts_values_and_sorts(self) -> None:
         rows = [_row("British Columbia", "all ages", "Both sexes", "rate", "7.5")]
         rows.append({**rows[0], "REF_DATE": "1999", "VALUE": "8"})
+        rows.append({**rows[0], "Sex": "Females", "VALUE": "7.0"})
         out = tidy(rows)
-        self.assertEqual([r["ref_date"] for r in out], ["1999", "2020"])
+        self.assertEqual(
+            [(r["ref_date"], r["sex"]) for r in out],
+            [("1999", "Both sexes"), ("2020", "Both sexes"), ("2020", "Females")],
+        )
         self.assertEqual(out[0]["value"], 8)
         self.assertIsInstance(out[0]["value"], int)
         self.assertEqual(out[1]["value"], 7.5)
@@ -160,12 +182,14 @@ class AgeStandardisationTests(unittest.TestCase):
         rows = [
             {
                 "ref_date": "2020",
+                "sex": "Both sexes",
                 "age_group": "Age at time of death, 5 to 9 years",
                 "characteristic": "Mortality rate per 1,000 population",
                 "value": 10.0,
             },
             {
                 "ref_date": "2020",
+                "sex": "Both sexes",
                 "age_group": "Age at time of death, 65 to 69 years",
                 "characteristic": "Mortality rate per 1,000 population",
                 "value": 100.0,
@@ -173,7 +197,68 @@ class AgeStandardisationTests(unittest.TestCase):
         ]
         weights = {"5-9": 1.0, "65-69": 3.0}
         result = age_standardise(rows, "Mortality rate per 1,000 population", weights)
-        self.assertEqual(result, [{"ref_date": "2020", "value": 77.5}])
+        self.assertEqual(
+            result, [{"ref_date": "2020", "sex": "Both sexes", "value": 77.5}]
+        )
+
+    def test_sex_filter_keeps_one_category(self) -> None:
+        rows = [
+            {
+                "ref_date": "2020",
+                "sex": sex,
+                "age_group": "Age at time of death, 5 to 9 years",
+                "characteristic": "Mortality rate per 1,000 population",
+                "value": value,
+            }
+            for sex, value in [("Males", 2.0), ("Females", 1.0)]
+        ]
+        weights = {"5-9": 1.0}
+        result = age_standardise(
+            rows, "Mortality rate per 1,000 population", weights, sex="Females"
+        )
+        self.assertEqual(result, [{"ref_date": "2020", "sex": "Females", "value": 1.0}])
+
+
+class SeriesPointsTests(unittest.TestCase):
+    def test_filters_by_sex(self) -> None:
+        rows = [
+            {
+                "ref_date": "2020",
+                "sex": sex,
+                "age_group": "Age at time of death, all ages",
+                "characteristic": "rate",
+                "value": value,
+            }
+            for sex, value in [("Both sexes", 7.5), ("Males", 8.0), ("Females", 7.0)]
+        ]
+        self.assertEqual(series_points(rows, "rate", sex="Males"), [(2020, 8.0)])
+        self.assertEqual(len(series_points(rows, "rate")), 3)
+
+
+class SexBreakdownTests(unittest.TestCase):
+    def test_summarises_each_sex_separately(self) -> None:
+        rows = []
+        for sex, base in [("Males", 8.0), ("Females", 7.0)]:
+            for year in range(2000, 2011):
+                rows.append(
+                    {
+                        "ref_date": str(year),
+                        "sex": sex,
+                        "age_group": "Age at time of death, all ages",
+                        "characteristic": "rate",
+                        "value": base + 0.1 * (year - 2000),
+                    }
+                )
+        result = sex_breakdown(
+            rows, "rate", ["Both sexes", "Males", "Females"], age_group=None
+        )
+        self.assertEqual(list(result), ["Males", "Females"])
+        self.assertGreater(result["Males"]["overall"]["slope_per_year"], 0)
+        self.assertAlmostEqual(
+            result["Males"]["overall"]["slope_per_year"],
+            result["Females"]["overall"]["slope_per_year"],
+            places=6,
+        )
 
 
 if __name__ == "__main__":
