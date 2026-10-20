@@ -17,21 +17,30 @@
       "start": 1991,
       "end": 2009,
       "slope_per_year": 0.0104,
-      "slope_per_decade": 0.1035
+      "slope_per_decade": 0.1035,
+      "fitted_start": 7.0068,
+      "fitted_end": 7.1932,
+      "change_within": 0.1863
     },
     {
       "label": "regime 2",
       "start": 2010,
       "end": 2019,
       "slope_per_year": 0.0806,
-      "slope_per_decade": 0.8061
+      "slope_per_decade": 0.8061,
+      "fitted_start": 6.9873,
+      "fitted_end": 7.7127,
+      "change_within": 0.7255
     },
     {
       "label": "regime 3",
       "start": 2020,
       "end": 2024,
       "slope_per_year": -0.08,
-      "slope_per_decade": -0.8
+      "slope_per_decade": -0.8,
+      "fitted_start": 8.36,
+      "fitted_end": 8.04,
+      "change_within": -0.32
     }
   ],
   "break_test": {
@@ -113,6 +122,26 @@
         "bic": -90.486
       }
     ]
+  },
+  "jumps": [
+    {
+      "year": 2010,
+      "previous_level": 7.2035,
+      "next_level": 6.9873,
+      "jump": -0.2162
+    },
+    {
+      "year": 2020,
+      "previous_level": 7.7933,
+      "next_level": 8.36,
+      "jump": 0.5667
+    }
+  ],
+  "decomposition": {
+    "observed_change": 0.7,
+    "within_regime_change": 0.5918,
+    "between_regime_change": 0.3505,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
   },
   "series": "Mortality rate per 1,000 population",
   "sex": "Both sexes"

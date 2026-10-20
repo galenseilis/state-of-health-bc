@@ -92,9 +92,30 @@ segments = trend.segments.length
   ? trend.segments
   : [{label: "whole series", start: trend.start, end: trend.end, ...trend.overall}]
 Inputs.table(segments, {
-  columns: ["label", "start", "end", "slope_per_year", "slope_per_decade"],
-  header: {label: "crude segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade"}
+  columns: ["label", "start", "end", "slope_per_year", "slope_per_decade", "fitted_start", "fitted_end", "change_within"],
+  header: {label: "crude segment", start: "from", end: "to", slope_per_year: "slope/yr", slope_per_decade: "slope/decade", fitted_start: "level at start", fitted_end: "level at end", change_within: "change within"}
 })
+```
+
+```{ojs}
+//| echo: false
+jumpRows = trend.jumps.length
+  ? trend.jumps.map(j => ({year: j.year, previous_level: j.previous_level, next_level: j.next_level, jump: j.jump}))
+  : [{year: "—", previous_level: "—", next_level: "—", jump: 0}]
+Inputs.table(jumpRows, {
+  columns: ["year", "previous_level", "next_level", "jump"],
+  header: {year: "break", previous_level: "level before", next_level: "level after", jump: "level jump"}
+})
+```
+
+```{ojs}
+//| echo: false
+dc = trend.decomposition
+md`The break at **${trend.change_point}** is mostly a change of
+**slope**, not of level: the total change of
+${dc.observed_change.toFixed(2)} decomposes into
+${dc.within_regime_change.toFixed(2)} within the regimes and
+${dc.between_regime_change.toFixed(2)} in level jumps at the breaks.`
 ```
 
 ```{ojs}

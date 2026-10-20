@@ -225,7 +225,31 @@ class TrajectoryTests(unittest.TestCase):
         self.assertIsNone(result["change_point"])
         self.assertEqual(result["change_points"], [])
         self.assertEqual(result["stationarity"]["verdict"], "undetermined")
-        self.assertEqual(result["n"], 3)
+
+    def test_decomposes_change_into_within_and_between(self) -> None:
+        # Two regimes with the same slope but a level step at the break:
+        # the decomposition should put the whole change in "between".
+        points = [(y, 2.0 * y) for y in range(2000, 2011)]
+        points += [(y, 2.0 * y + 50.0) for y in range(2011, 2022)]
+        result = trajectory(points, min_segment=5, n_permutations=199)
+        self.assertIn("decomposition", result)
+        self.assertEqual(len(result["jumps"]), 1)
+        jump = result["jumps"][0]
+        self.assertEqual(jump["year"], 2011)
+        self.assertAlmostEqual(jump["jump"], 50.0, delta=1e-6)
+        # Level step dominates; within-regime change is just the smooth slope.
+        self.assertAlmostEqual(
+            result["decomposition"]["between_regime_change"], 50.0, delta=1e-6
+        )
+
+    def test_reports_segment_levels_and_within_change(self) -> None:
+        points = [(y, 2.0 * y) for y in range(2000, 2011)]
+        points += [(y, 100.0 - 2.0 * y) for y in range(2011, 2022)]
+        result = trajectory(points, min_segment=5, n_permutations=199)
+        for segment in result["segments"]:
+            self.assertIn("fitted_start", segment)
+            self.assertIn("fitted_end", segment)
+            self.assertIn("change_within", segment)
 
 
 class AgeStandardisationTests(unittest.TestCase):

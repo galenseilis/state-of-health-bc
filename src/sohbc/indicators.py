@@ -565,22 +565,60 @@ def trajectory(
     else:
         labels = [f"regime {i + 1}" for i in range(len(starts) - 1)]
     slopes: list[float] = []
+    intercepts: list[float] = []
     for label, (start, end) in zip(labels, itertools.pairwise(starts)):
         segment = points[start:end]
-        segment_slope, _, _ = ols_slope(segment)
+        segment_slope, segment_intercept, _ = ols_slope(segment)
         slopes.append(segment_slope)
+        intercepts.append(segment_intercept)
+        first_year, last_year = segment[0][0], segment[-1][0]
+        fitted_start = segment_intercept + segment_slope * first_year
+        fitted_end = segment_intercept + segment_slope * last_year
         result["segments"].append(
             {
                 "label": label,
-                "start": segment[0][0],
-                "end": segment[-1][0],
+                "start": first_year,
+                "end": last_year,
                 "slope_per_year": round(segment_slope, 4),
                 "slope_per_decade": round(segment_slope * 10, 4),
+                "fitted_start": round(fitted_start, 4),
+                "fitted_end": round(fitted_end, 4),
+                "change_within": round(fitted_end - fitted_start, 4),
             }
         )
     if len(slopes) > 1:
         changes = [abs(slopes[i] - slopes[i - 1]) for i in range(1, len(slopes))]
         result["change_point"] = break_years[changes.index(max(changes))]
+
+    jumps: list[dict[str, Any]] = []
+    for i, year in enumerate(break_years):
+        previous_level = intercepts[i] + slopes[i] * year
+        next_level = intercepts[i + 1] + slopes[i + 1] * year
+        jump = next_level - previous_level
+        jumps.append(
+            {
+                "year": year,
+                "previous_level": round(previous_level, 4),
+                "next_level": round(next_level, 4),
+                "jump": round(jump, 4),
+            }
+        )
+    result["jumps"] = jumps
+
+    within = sum(
+        segment["change_within"] for segment in result["segments"]
+    )
+    between = sum(jump["jump"] for jump in jumps)
+    observed = points[-1][1] - points[0][1]
+    result["decomposition"] = {
+        "observed_change": round(observed, 4),
+        "within_regime_change": round(within, 4),
+        "between_regime_change": round(between, 4),
+        "interpretation": (
+            "within = change from the trend inside each regime; "
+            "between = level jumps at the dated breaks"
+        ),
+    }
     return result
 
 

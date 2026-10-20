@@ -16,7 +16,10 @@
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.3703,
-          "slope_per_decade": 3.703
+          "slope_per_decade": 3.703,
+          "fitted_start": 15.8636,
+          "fitted_end": 19.1964,
+          "change_within": 3.3327
         }
       ],
       "break_test": {
@@ -64,6 +67,13 @@
             "bic": 4.5313
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 4.7,
+        "within_regime_change": 3.3327,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Males": {
@@ -82,7 +92,10 @@
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.5024,
-          "slope_per_decade": 5.0242
+          "slope_per_decade": 5.0242,
+          "fitted_start": 16.9291,
+          "fitted_end": 21.4509,
+          "change_within": 4.5218
         }
       ],
       "break_test": {
@@ -130,6 +143,13 @@
             "bic": 0.3533
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 6.2,
+        "within_regime_change": 4.5218,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Females": {
@@ -148,7 +168,10 @@
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.2388,
-          "slope_per_decade": 2.3879
+          "slope_per_decade": 2.3879,
+          "fitted_start": 14.8455,
+          "fitted_end": 16.9945,
+          "change_within": 2.1491
         }
       ],
       "break_test": {
@@ -196,6 +219,13 @@
             "bic": 12.7845
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 3.3,
+        "within_regime_change": 2.1491,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     }
   }

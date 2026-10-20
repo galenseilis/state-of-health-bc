@@ -16,7 +16,10 @@
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.4703,
-          "slope_per_decade": 4.703
+          "slope_per_decade": 4.703,
+          "fitted_start": 11.5836,
+          "fitted_end": 15.8164,
+          "change_within": 4.2327
         }
       ],
       "break_test": {
@@ -64,6 +67,13 @@
             "bic": 10.9779
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 4.1,
+        "within_regime_change": 4.2327,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Males": {
@@ -84,14 +94,20 @@
           "start": 2015,
           "end": 2019,
           "slope_per_year": -0.23,
-          "slope_per_decade": -2.3
+          "slope_per_decade": -2.3,
+          "fitted_start": 12.44,
+          "fitted_end": 11.52,
+          "change_within": -0.92
         },
         {
           "label": "after",
           "start": 2020,
           "end": 2024,
           "slope_per_year": 0.7,
-          "slope_per_decade": 7.0
+          "slope_per_decade": 7.0,
+          "fitted_start": 13.08,
+          "fitted_end": 15.88,
+          "change_within": 2.8
         }
       ],
       "break_test": {
@@ -141,6 +157,20 @@
             "bic": 2.9962
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2020,
+          "previous_level": 11.29,
+          "next_level": 13.08,
+          "jump": 1.79
+        }
+      ],
+      "decomposition": {
+        "observed_change": 2.7,
+        "within_regime_change": 1.88,
+        "between_regime_change": 1.79,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Females": {
@@ -159,7 +189,10 @@
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.4945,
-          "slope_per_decade": 4.9455
+          "slope_per_decade": 4.9455,
+          "fitted_start": 11.9545,
+          "fitted_end": 16.4055,
+          "change_within": 4.4509
         }
       ],
       "break_test": {
@@ -207,6 +240,13 @@
             "bic": 18.9542
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 5.4,
+        "within_regime_change": 4.4509,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     }
   }

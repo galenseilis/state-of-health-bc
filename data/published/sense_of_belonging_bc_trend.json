@@ -16,14 +16,20 @@
       "start": 2015,
       "end": 2019,
       "slope_per_year": -0.2,
-      "slope_per_decade": -2.0
+      "slope_per_decade": -2.0,
+      "fitted_start": 70.66,
+      "fitted_end": 69.86,
+      "change_within": -0.8
     },
     {
       "label": "after",
       "start": 2020,
       "end": 2024,
       "slope_per_year": -2.3,
-      "slope_per_decade": -23.0
+      "slope_per_decade": -23.0,
+      "fitted_start": 69.88,
+      "fitted_end": 60.68,
+      "change_within": -9.2
     }
   ],
   "break_test": {
@@ -74,6 +80,20 @@
         "bic": 14.4545
       }
     ]
+  },
+  "jumps": [
+    {
+      "year": 2020,
+      "previous_level": 69.66,
+      "next_level": 69.88,
+      "jump": 0.22
+    }
+  ],
+  "decomposition": {
+    "observed_change": -8.5,
+    "within_regime_change": -10.0,
+    "between_regime_change": 0.22,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
   },
   "series": "Percent",
   "sex": "Both sexes"

@@ -14,7 +14,10 @@
       "start": 2015,
       "end": 2024,
       "slope_per_year": 0.0764,
-      "slope_per_decade": 0.7636
+      "slope_per_decade": 0.7636,
+      "fitted_start": 6.2364,
+      "fitted_end": 6.9236,
+      "change_within": 0.6873
     }
   ],
   "break_test": {
@@ -62,6 +65,13 @@
         "bic": -9.4428
       }
     ]
+  },
+  "jumps": [],
+  "decomposition": {
+    "observed_change": 0.5,
+    "within_regime_change": 0.6873,
+    "between_regime_change": 0,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
   },
   "series": "Percent",
   "sex": "Both sexes"

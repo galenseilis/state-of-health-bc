@@ -16,14 +16,20 @@
       "start": 1991,
       "end": 2012,
       "slope_per_year": -0.0764,
-      "slope_per_decade": -0.7638
+      "slope_per_decade": -0.7638,
+      "fitted_start": 4.9888,
+      "fitted_end": 3.3848,
+      "change_within": -1.6041
     },
     {
       "label": "after",
       "start": 2013,
       "end": 2024,
       "slope_per_year": 0.0222,
-      "slope_per_decade": 0.2223
+      "slope_per_decade": 0.2223,
+      "fitted_start": 3.3598,
+      "fitted_end": 3.6044,
+      "change_within": 0.2446
     }
   ],
   "break_test": {
@@ -104,6 +110,20 @@
         "bic": -131.4379
       }
     ]
+  },
+  "jumps": [
+    {
+      "year": 2013,
+      "previous_level": 3.3084,
+      "next_level": 3.3598,
+      "jump": 0.0514
+    }
+  ],
+  "decomposition": {
+    "observed_change": -1.5089,
+    "within_regime_change": -1.3595,
+    "between_regime_change": 0.0514,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
   },
   "series": "Age-standardised mortality rate per 1,000 population",
   "sex": "Both sexes"

@@ -18,14 +18,20 @@
           "start": 1991,
           "end": 2000,
           "slope_per_year": -0.3394,
-          "slope_per_decade": -3.3939
+          "slope_per_decade": -3.3939,
+          "fitted_start": 6.7073,
+          "fitted_end": 3.6527,
+          "change_within": -3.0545
         },
         {
           "label": "after",
           "start": 2001,
           "end": 2024,
           "slope_per_year": -0.042,
-          "slope_per_decade": -0.4204
+          "slope_per_decade": -0.4204,
+          "fitted_start": 4.346,
+          "fitted_end": 3.379,
+          "change_within": -0.967
         }
       ],
       "break_test": {
@@ -106,6 +112,20 @@
             "bic": -56.2243
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2001,
+          "previous_level": 3.3133,
+          "next_level": 4.346,
+          "jump": 1.0327
+        }
+      ],
+      "decomposition": {
+        "observed_change": -3.1,
+        "within_regime_change": -4.0215,
+        "between_regime_change": 1.0327,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -126,14 +146,20 @@
           "start": 1991,
           "end": 2011,
           "slope_per_year": -0.0096,
-          "slope_per_decade": -0.0961
+          "slope_per_decade": -0.0961,
+          "fitted_start": 0.2913,
+          "fitted_end": 0.0991,
+          "change_within": -0.1922
         },
         {
           "label": "after",
           "start": 2012,
           "end": 2024,
           "slope_per_year": -0.0044,
-          "slope_per_decade": -0.044
+          "slope_per_decade": -0.044,
+          "fitted_start": 0.1802,
+          "fitted_end": 0.1275,
+          "change_within": -0.0527
         }
       ],
       "break_test": {
@@ -213,6 +239,20 @@
             "bic": -177.09
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2012,
+          "previous_level": 0.0895,
+          "next_level": 0.1802,
+          "jump": 0.0907
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.2,
+        "within_regime_change": -0.2449,
+        "between_regime_change": 0.0907,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 5 to 9 years": {
@@ -234,21 +274,30 @@
           "start": 1991,
           "end": 1996,
           "slope_per_year": -0.0257,
-          "slope_per_decade": -0.2571
+          "slope_per_decade": -0.2571,
+          "fitted_start": 0.2143,
+          "fitted_end": 0.0857,
+          "change_within": -0.1286
         },
         {
           "label": "regime 2",
           "start": 1997,
           "end": 2001,
           "slope_per_year": -0.02,
-          "slope_per_decade": -0.2
+          "slope_per_decade": -0.2,
+          "fitted_start": 0.16,
+          "fitted_end": 0.08,
+          "change_within": -0.08
         },
         {
           "label": "regime 3",
           "start": 2002,
           "end": 2024,
           "slope_per_year": 0.0,
-          "slope_per_decade": 0.0
+          "slope_per_decade": 0.0,
+          "fitted_start": 0.1,
+          "fitted_end": 0.1,
+          "change_within": 0.0
         }
       ],
       "break_test": {
@@ -330,6 +379,26 @@
             "bic": -237.2095
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1997,
+          "previous_level": 0.06,
+          "next_level": 0.16,
+          "jump": 0.1
+        },
+        {
+          "year": 2002,
+          "previous_level": 0.06,
+          "next_level": 0.1,
+          "jump": 0.04
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.2086,
+        "between_regime_change": 0.14,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 10 to 14 years": {
@@ -350,14 +419,20 @@
           "start": 1991,
           "end": 2002,
           "slope_per_year": -0.001,
-          "slope_per_decade": -0.0105
+          "slope_per_decade": -0.0105,
+          "fitted_start": 0.1808,
+          "fitted_end": 0.1692,
+          "change_within": -0.0115
         },
         {
           "label": "after",
           "start": 2003,
           "end": 2024,
           "slope_per_year": 0.001,
-          "slope_per_decade": 0.0096
+          "slope_per_decade": 0.0096,
+          "fitted_start": 0.0945,
+          "fitted_end": 0.1146,
+          "change_within": 0.0202
         }
       ],
       "break_test": {
@@ -438,6 +513,20 @@
             "bic": -197.0348
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2003,
+          "previous_level": 0.1682,
+          "next_level": 0.0945,
+          "jump": -0.0737
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": 0.0087,
+        "between_regime_change": -0.0737,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -458,14 +547,20 @@
           "start": 1991,
           "end": 2013,
           "slope_per_year": -0.0176,
-          "slope_per_decade": -0.1759
+          "slope_per_decade": -0.1759,
+          "fitted_start": 0.6804,
+          "fitted_end": 0.2935,
+          "change_within": -0.387
         },
         {
           "label": "after",
           "start": 2014,
           "end": 2024,
           "slope_per_year": 0.0018,
-          "slope_per_decade": 0.0182
+          "slope_per_decade": 0.0182,
+          "fitted_start": 0.3818,
+          "fitted_end": 0.4,
+          "change_within": 0.0182
         }
       ],
       "break_test": {
@@ -546,6 +641,20 @@
             "bic": -171.5308
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2014,
+          "previous_level": 0.2759,
+          "next_level": 0.3818,
+          "jump": 0.1059
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.4,
+        "within_regime_change": -0.3688,
+        "between_regime_change": 0.1059,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -566,14 +675,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0178,
-          "slope_per_decade": -0.1785
+          "slope_per_decade": -0.1785,
+          "fitted_start": 0.8982,
+          "fitted_end": 0.4698,
+          "change_within": -0.4283
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": -0.0,
-          "slope_per_decade": -0.0
+          "slope_per_decade": -0.0,
+          "fitted_start": 0.7111,
+          "fitted_end": 0.7111,
+          "change_within": 0.0
         }
       ],
       "break_test": {
@@ -654,6 +769,20 @@
             "bic": -170.4927
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.452,
+          "next_level": 0.7111,
+          "jump": 0.2591
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.3,
+        "within_regime_change": -0.4283,
+        "between_regime_change": 0.2591,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -674,14 +803,20 @@
           "start": 1991,
           "end": 2014,
           "slope_per_year": -0.0195,
-          "slope_per_decade": -0.1952
+          "slope_per_decade": -0.1952,
+          "fitted_start": 0.962,
+          "fitted_end": 0.513,
+          "change_within": -0.449
         },
         {
           "label": "after",
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.0145,
-          "slope_per_decade": 0.1455
+          "slope_per_decade": 0.1455,
+          "fitted_start": 0.8345,
+          "fitted_end": 0.9655,
+          "change_within": 0.1309
         }
       ],
       "break_test": {
@@ -761,6 +896,20 @@
             "bic": -140.8269
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2015,
+          "previous_level": 0.4935,
+          "next_level": 0.8345,
+          "jump": 0.3411
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.3181,
+        "between_regime_change": 0.3411,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -782,21 +931,30 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": -0.019,
-          "slope_per_decade": -0.1905
+          "slope_per_decade": -0.1905,
+          "fitted_start": 1.2167,
+          "fitted_end": 1.0833,
+          "change_within": -0.1333
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2015,
           "slope_per_year": -0.0059,
-          "slope_per_decade": -0.0588
+          "slope_per_decade": -0.0588,
+          "fitted_start": 0.7824,
+          "fitted_end": 0.6882,
+          "change_within": -0.0941
         },
         {
           "label": "regime 3",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0217,
-          "slope_per_decade": 0.2167
+          "slope_per_decade": 0.2167,
+          "fitted_start": 1.0578,
+          "fitted_end": 1.2311,
+          "change_within": 0.1733
         }
       ],
       "break_test": {
@@ -877,6 +1035,26 @@
             "bic": -133.2398
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 1.0643,
+          "next_level": 0.7824,
+          "jump": -0.2819
+        },
+        {
+          "year": 2016,
+          "previous_level": 0.6824,
+          "next_level": 1.0578,
+          "jump": 0.3754
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.0,
+        "within_regime_change": -0.0541,
+        "between_regime_change": 0.0935,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -897,14 +1075,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0294,
-          "slope_per_decade": -0.2938
+          "slope_per_decade": -0.2938,
+          "fitted_start": 1.4686,
+          "fitted_end": 0.7634,
+          "change_within": -0.7052
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0467,
-          "slope_per_decade": 0.4667
+          "slope_per_decade": 0.4667,
+          "fitted_start": 1.2022,
+          "fitted_end": 1.5756,
+          "change_within": 0.3733
         }
       ],
       "break_test": {
@@ -984,6 +1168,20 @@
             "bic": -117.0691
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.734,
+          "next_level": 1.2022,
+          "jump": 0.4682
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.0,
+        "within_regime_change": -0.3319,
+        "between_regime_change": 0.4682,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -1006,28 +1204,40 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.005,
-          "slope_per_decade": -0.05
+          "slope_per_decade": -0.05,
+          "fitted_start": 1.8089,
+          "fitted_end": 1.7689,
+          "change_within": -0.04
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2010,
           "slope_per_year": -0.0082,
-          "slope_per_decade": -0.0818
+          "slope_per_decade": -0.0818,
+          "fitted_start": 1.4773,
+          "fitted_end": 1.3955,
+          "change_within": -0.0818
         },
         {
           "label": "regime 3",
           "start": 2011,
           "end": 2019,
           "slope_per_year": 0.0383,
-          "slope_per_decade": 0.3833
+          "slope_per_decade": 0.3833,
+          "fitted_start": 1.1133,
+          "fitted_end": 1.42,
+          "change_within": 0.3067
         },
         {
           "label": "regime 4",
           "start": 2020,
           "end": 2024,
           "slope_per_year": 0.03,
-          "slope_per_decade": 0.3
+          "slope_per_decade": 0.3,
+          "fitted_start": 1.88,
+          "fitted_end": 2.0,
+          "change_within": 0.12
         }
       ],
       "break_test": {
@@ -1109,6 +1319,32 @@
             "bic": -121.5495
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 1.7639,
+          "next_level": 1.4773,
+          "jump": -0.2866
+        },
+        {
+          "year": 2011,
+          "previous_level": 1.3873,
+          "next_level": 1.1133,
+          "jump": -0.2739
+        },
+        {
+          "year": 2020,
+          "previous_level": 1.4583,
+          "next_level": 1.88,
+          "jump": 0.4217
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.2,
+        "within_regime_change": 0.3049,
+        "between_regime_change": -0.1388,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -1129,14 +1365,20 @@
           "start": 1991,
           "end": 2012,
           "slope_per_year": -0.0313,
-          "slope_per_decade": -0.3134
+          "slope_per_decade": -0.3134,
+          "fitted_start": 2.6063,
+          "fitted_end": 1.9482,
+          "change_within": -0.6581
         },
         {
           "label": "after",
           "start": 2013,
           "end": 2024,
           "slope_per_year": 0.0762,
-          "slope_per_decade": 0.7622
+          "slope_per_decade": 0.7622,
+          "fitted_start": 1.6974,
+          "fitted_end": 2.5359,
+          "change_within": 0.8385
         }
       ],
       "break_test": {
@@ -1217,6 +1459,20 @@
             "bic": -113.5209
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2013,
+          "previous_level": 1.9169,
+          "next_level": 1.6974,
+          "jump": -0.2194
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.0,
+        "within_regime_change": 0.1804,
+        "between_regime_change": -0.2194,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -1237,14 +1493,20 @@
           "start": 1991,
           "end": 2019,
           "slope_per_year": -0.0423,
-          "slope_per_decade": -0.4227
+          "slope_per_decade": -0.4227,
+          "fitted_start": 3.9366,
+          "fitted_end": 2.7531,
+          "change_within": -1.1834
         },
         {
           "label": "after",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -0.06,
-          "slope_per_decade": -0.6
+          "slope_per_decade": -0.6,
+          "fitted_start": 3.56,
+          "fitted_end": 3.32,
+          "change_within": -0.24
         }
       ],
       "break_test": {
@@ -1325,6 +1587,20 @@
             "bic": -85.887
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2020,
+          "previous_level": 2.7108,
+          "next_level": 3.56,
+          "jump": 0.8492
+        }
+      ],
+      "decomposition": {
+        "observed_change": -1.1,
+        "within_regime_change": -1.4234,
+        "between_regime_change": 0.8492,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -1346,21 +1622,30 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": -0.0845,
-          "slope_per_decade": -0.8452
+          "slope_per_decade": -0.8452,
+          "fitted_start": 6.5083,
+          "fitted_end": 5.9167,
+          "change_within": -0.5917
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2019,
           "slope_per_year": -0.0512,
-          "slope_per_decade": -0.5117
+          "slope_per_decade": -0.5117,
+          "fitted_start": 5.3593,
+          "fitted_end": 4.3359,
+          "change_within": -1.0234
         },
         {
           "label": "regime 3",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -0.17,
-          "slope_per_decade": -1.7
+          "slope_per_decade": -1.7,
+          "fitted_start": 5.28,
+          "fitted_end": 4.6,
+          "change_within": -0.68
         }
       ],
       "break_test": {
@@ -1442,6 +1727,26 @@
             "bic": -91.4638
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 5.8321,
+          "next_level": 5.3593,
+          "jump": -0.4728
+        },
+        {
+          "year": 2020,
+          "previous_level": 4.2848,
+          "next_level": 5.28,
+          "jump": 0.9952
+        }
+      ],
+      "decomposition": {
+        "observed_change": -1.9,
+        "within_regime_change": -2.2951,
+        "between_regime_change": 0.5224,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -1462,14 +1767,20 @@
           "start": 1991,
           "end": 2009,
           "slope_per_year": -0.1751,
-          "slope_per_decade": -1.7509
+          "slope_per_decade": -1.7509,
+          "fitted_start": 10.3337,
+          "fitted_end": 7.1821,
+          "change_within": -3.1516
         },
         {
           "label": "after",
           "start": 2010,
           "end": 2024,
           "slope_per_year": 0.035,
-          "slope_per_decade": 0.35
+          "slope_per_decade": 0.35,
+          "fitted_start": 6.675,
+          "fitted_end": 7.165,
+          "change_within": 0.49
         }
       ],
       "break_test": {
@@ -1550,6 +1861,20 @@
             "bic": -59.3968
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2010,
+          "previous_level": 7.007,
+          "next_level": 6.675,
+          "jump": -0.332
+        }
+      ],
+      "decomposition": {
+        "observed_change": -3.3,
+        "within_regime_change": -2.6616,
+        "between_regime_change": -0.332,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -1571,21 +1896,30 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.1967,
-          "slope_per_decade": -1.9667
+          "slope_per_decade": -1.9667,
+          "fitted_start": 16.3644,
+          "fitted_end": 14.7911,
+          "change_within": -1.5733
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2015,
           "slope_per_year": -0.2378,
-          "slope_per_decade": -2.3779
+          "slope_per_decade": -2.3779,
+          "fitted_start": 13.4772,
+          "fitted_end": 9.9103,
+          "change_within": -3.5669
         },
         {
           "label": "regime 3",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.015,
-          "slope_per_decade": 0.15
+          "slope_per_decade": 0.15,
+          "fitted_start": 10.3511,
+          "fitted_end": 10.4711,
+          "change_within": 0.12
         }
       ],
       "break_test": {
@@ -1667,6 +2001,26 @@
             "bic": -38.9445
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 14.5944,
+          "next_level": 13.4772,
+          "jump": -1.1172
+        },
+        {
+          "year": 2016,
+          "previous_level": 9.6725,
+          "next_level": 10.3511,
+          "jump": 0.6786
+        }
+      ],
+      "decomposition": {
+        "observed_change": -5.9,
+        "within_regime_change": -5.0202,
+        "between_regime_change": -0.4386,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -1687,14 +2041,20 @@
           "start": 1991,
           "end": 2008,
           "slope_per_year": -0.4232,
-          "slope_per_decade": -4.2322
+          "slope_per_decade": -4.2322,
+          "fitted_start": 26.1363,
+          "fitted_end": 18.9415,
+          "change_within": -7.1947
         },
         {
           "label": "after",
           "start": 2009,
           "end": 2024,
           "slope_per_year": -0.1063,
-          "slope_per_decade": -1.0632
+          "slope_per_decade": -1.0632,
+          "fitted_start": 17.1287,
+          "fitted_end": 15.5338,
+          "change_within": -1.5949
         }
       ],
       "break_test": {
@@ -1775,6 +2135,20 @@
             "bic": -12.8146
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2009,
+          "previous_level": 18.5183,
+          "next_level": 17.1287,
+          "jump": -1.3896
+        }
+      ],
+      "decomposition": {
+        "observed_change": -10.7,
+        "within_regime_change": -8.7896,
+        "between_regime_change": -1.3896,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -1795,14 +2169,20 @@
           "start": 1991,
           "end": 2009,
           "slope_per_year": -0.6818,
-          "slope_per_decade": -6.8175
+          "slope_per_decade": -6.8175,
+          "fitted_start": 43.2884,
+          "fitted_end": 31.0168,
+          "change_within": -12.2716
         },
         {
           "label": "after",
           "start": 2010,
           "end": 2024,
           "slope_per_year": -0.2096,
-          "slope_per_decade": -2.0964
+          "slope_per_decade": -2.0964,
+          "fitted_start": 28.6808,
+          "fitted_end": 25.7458,
+          "change_within": -2.935
         }
       ],
       "break_test": {
@@ -1883,6 +2263,20 @@
             "bic": 2.1
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2010,
+          "previous_level": 30.3351,
+          "next_level": 28.6808,
+          "jump": -1.6543
+        }
+      ],
+      "decomposition": {
+        "observed_change": -18.0,
+        "within_regime_change": -15.2066,
+        "between_regime_change": -1.6543,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -1904,21 +2298,30 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.41,
-          "slope_per_decade": -4.1
+          "slope_per_decade": -4.1,
+          "fitted_start": 69.84,
+          "fitted_end": 66.56,
+          "change_within": -3.28
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2019,
           "slope_per_year": -0.8777,
-          "slope_per_decade": -8.7767
+          "slope_per_decade": -8.7767,
+          "fitted_start": 61.7129,
+          "fitted_end": 45.0371,
+          "change_within": -16.6757
         },
         {
           "label": "regime 3",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -1.29,
-          "slope_per_decade": -12.9
+          "slope_per_decade": -12.9,
+          "fitted_start": 49.16,
+          "fitted_end": 44.0,
+          "change_within": -5.16
         }
       ],
       "break_test": {
@@ -2000,6 +2403,26 @@
             "bic": 41.5288
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 66.15,
+          "next_level": 61.7129,
+          "jump": -4.4371
+        },
+        {
+          "year": 2020,
+          "previous_level": 44.1595,
+          "next_level": 49.16,
+          "jump": 5.0005
+        }
+      ],
+      "decomposition": {
+        "observed_change": -27.7,
+        "within_regime_change": -25.1157,
+        "between_regime_change": 0.5634,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -2020,14 +2443,20 @@
           "start": 1991,
           "end": 2016,
           "slope_per_year": -1.4152,
-          "slope_per_decade": -14.1521
+          "slope_per_decade": -14.1521,
+          "fitted_start": 121.7863,
+          "fitted_end": 86.406,
+          "change_within": -35.3803
         },
         {
           "label": "after",
           "start": 2017,
           "end": 2024,
           "slope_per_year": -1.1214,
-          "slope_per_decade": -11.2143
+          "slope_per_decade": -11.2143,
+          "fitted_start": 91.275,
+          "fitted_end": 83.425,
+          "change_within": -7.85
         }
       ],
       "break_test": {
@@ -2108,6 +2537,20 @@
             "bic": 81.1372
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2017,
+          "previous_level": 84.9908,
+          "next_level": 91.275,
+          "jump": 6.2842
+        }
+      ],
+      "decomposition": {
+        "observed_change": -39.1,
+        "within_regime_change": -43.2303,
+        "between_regime_change": 6.2842,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 90 years and over": {
@@ -2129,21 +2572,30 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": 1.425,
-          "slope_per_decade": 14.25
+          "slope_per_decade": 14.25,
+          "fitted_start": 210.25,
+          "fitted_end": 220.225,
+          "change_within": 9.975
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2014,
           "slope_per_year": -2.1043,
-          "slope_per_decade": -21.0426
+          "slope_per_decade": -21.0426,
+          "fitted_start": 211.7882,
+          "fitted_end": 180.2243,
+          "change_within": -31.564
         },
         {
           "label": "regime 3",
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.043,
-          "slope_per_decade": 0.4303
+          "slope_per_decade": 0.4303,
+          "fitted_start": 191.5964,
+          "fitted_end": 191.9836,
+          "change_within": 0.3873
         }
       ],
       "break_test": {
@@ -2225,6 +2677,26 @@
             "bic": 125.268
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 221.65,
+          "next_level": 211.7882,
+          "jump": -9.8618
+        },
+        {
+          "year": 2015,
+          "previous_level": 178.12,
+          "next_level": 191.5964,
+          "jump": 13.4764
+        }
+      ],
+      "decomposition": {
+        "observed_change": -22.6,
+        "within_regime_change": -21.2017,
+        "between_regime_change": 3.6146,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     }
   },
@@ -2248,21 +2720,30 @@
           "start": 1991,
           "end": 2000,
           "slope_per_year": -0.4418,
-          "slope_per_decade": -4.4182
+          "slope_per_decade": -4.4182,
+          "fitted_start": 7.7782,
+          "fitted_end": 3.8018,
+          "change_within": -3.9764
         },
         {
           "label": "regime 2",
           "start": 2001,
           "end": 2014,
           "slope_per_year": -0.0635,
-          "slope_per_decade": -0.6352
+          "slope_per_decade": -0.6352,
+          "fitted_start": 4.8486,
+          "fitted_end": 4.0229,
+          "change_within": -0.8257
         },
         {
           "label": "regime 3",
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.1267,
-          "slope_per_decade": 1.2667
+          "slope_per_decade": 1.2667,
+          "fitted_start": 3.04,
+          "fitted_end": 4.18,
+          "change_within": 1.14
         }
       ],
       "break_test": {
@@ -2344,6 +2825,26 @@
             "bic": -21.3754
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2001,
+          "previous_level": 3.36,
+          "next_level": 4.8486,
+          "jump": 1.4886
+        },
+        {
+          "year": 2015,
+          "previous_level": 3.9593,
+          "next_level": 3.04,
+          "jump": -0.9193
+        }
+      ],
+      "decomposition": {
+        "observed_change": -4.2,
+        "within_regime_change": -3.6621,
+        "between_regime_change": 0.5693,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -2364,14 +2865,20 @@
           "start": 1991,
           "end": 2000,
           "slope_per_year": -0.0139,
-          "slope_per_decade": -0.1394
+          "slope_per_decade": -0.1394,
+          "fitted_start": 0.3327,
+          "fitted_end": 0.2073,
+          "change_within": -0.1255
         },
         {
           "label": "after",
           "start": 2001,
           "end": 2024,
           "slope_per_year": -0.0,
-          "slope_per_decade": -0.0
+          "slope_per_decade": -0.0,
+          "fitted_start": 0.15,
+          "fitted_end": 0.15,
+          "change_within": -0.0
         }
       ],
       "break_test": {
@@ -2452,6 +2959,20 @@
             "bic": -164.6695
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2001,
+          "previous_level": 0.1933,
+          "next_level": 0.15,
+          "jump": -0.0433
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.1255,
+        "between_regime_change": -0.0433,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 5 to 9 years": {
@@ -2470,7 +2991,10 @@
           "start": 1991,
           "end": 2024,
           "slope_per_year": -0.0021,
-          "slope_per_decade": -0.0209
+          "slope_per_decade": -0.0209,
+          "fitted_start": 0.1492,
+          "fitted_end": 0.0802,
+          "change_within": -0.0691
         }
       ],
       "break_test": {
@@ -2548,6 +3072,13 @@
             "bic": -187.9003
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 0.0,
+        "within_regime_change": -0.0691,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 10 to 14 years": {
@@ -2568,14 +3099,20 @@
           "start": 1991,
           "end": 2002,
           "slope_per_year": -0.0094,
-          "slope_per_decade": -0.0944
+          "slope_per_decade": -0.0944,
+          "fitted_start": 0.2603,
+          "fitted_end": 0.1564,
+          "change_within": -0.1038
         },
         {
           "label": "after",
           "start": 2003,
           "end": 2024,
           "slope_per_year": -0.0006,
-          "slope_per_decade": -0.0062
+          "slope_per_decade": -0.0062,
+          "fitted_start": 0.1111,
+          "fitted_end": 0.098,
+          "change_within": -0.013
         }
       ],
       "break_test": {
@@ -2655,6 +3192,20 @@
             "bic": -186.4472
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2003,
+          "previous_level": 0.147,
+          "next_level": 0.1111,
+          "jump": -0.0359
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.2,
+        "within_regime_change": -0.1168,
+        "between_regime_change": -0.0359,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -2675,14 +3226,20 @@
           "start": 1991,
           "end": 2000,
           "slope_per_year": -0.0497,
-          "slope_per_decade": -0.497
+          "slope_per_decade": -0.497,
+          "fitted_start": 1.0636,
+          "fitted_end": 0.6164,
+          "change_within": -0.4473
         },
         {
           "label": "after",
           "start": 2001,
           "end": 2024,
           "slope_per_year": -0.0037,
-          "slope_per_decade": -0.0365
+          "slope_per_decade": -0.0365,
+          "fitted_start": 0.5337,
+          "fitted_end": 0.4497,
+          "change_within": -0.084
         }
       ],
       "break_test": {
@@ -2763,6 +3320,20 @@
             "bic": -148.8844
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2001,
+          "previous_level": 0.5667,
+          "next_level": 0.5337,
+          "jump": -0.033
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.6,
+        "within_regime_change": -0.5313,
+        "between_regime_change": -0.033,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -2783,14 +3354,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0281,
-          "slope_per_decade": -0.2808
+          "slope_per_decade": -0.2808,
+          "fitted_start": 1.3329,
+          "fitted_end": 0.6591,
+          "change_within": -0.6738
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": -0.005,
-          "slope_per_decade": -0.05
+          "slope_per_decade": -0.05,
+          "fitted_start": 0.9644,
+          "fitted_end": 0.9244,
+          "change_within": -0.04
         }
       ],
       "break_test": {
@@ -2871,6 +3448,20 @@
             "bic": -125.4701
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.631,
+          "next_level": 0.9644,
+          "jump": 0.3334
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.6,
+        "within_regime_change": -0.7138,
+        "between_regime_change": 0.3334,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -2892,21 +3483,30 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": -0.0321,
-          "slope_per_decade": -0.3214
+          "slope_per_decade": -0.3214,
+          "fitted_start": 1.475,
+          "fitted_end": 1.25,
+          "change_within": -0.225
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2014,
           "slope_per_year": -0.0106,
-          "slope_per_decade": -0.1059
+          "slope_per_decade": -0.1059,
+          "fitted_start": 0.9919,
+          "fitted_end": 0.8331,
+          "change_within": -0.1588
         },
         {
           "label": "regime 3",
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.0048,
-          "slope_per_decade": 0.0485
+          "slope_per_decade": 0.0485,
+          "fitted_start": 1.2782,
+          "fitted_end": 1.3218,
+          "change_within": 0.0436
         }
       ],
       "break_test": {
@@ -2987,6 +3587,26 @@
             "bic": -114.7252
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 1.2179,
+          "next_level": 0.9919,
+          "jump": -0.2259
+        },
+        {
+          "year": 2015,
+          "previous_level": 0.8225,
+          "next_level": 1.2782,
+          "jump": 0.4557
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.2,
+        "within_regime_change": -0.3402,
+        "between_regime_change": 0.2298,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -3008,21 +3628,30 @@
           "start": 1991,
           "end": 1996,
           "slope_per_year": 0.0143,
-          "slope_per_decade": 0.1429
+          "slope_per_decade": 0.1429,
+          "fitted_start": 1.7476,
+          "fitted_end": 1.819,
+          "change_within": 0.0714
         },
         {
           "label": "regime 2",
           "start": 1997,
           "end": 2015,
           "slope_per_year": -0.0186,
-          "slope_per_decade": -0.186
+          "slope_per_decade": -0.186,
+          "fitted_start": 1.1884,
+          "fitted_end": 0.8537,
+          "change_within": -0.3347
         },
         {
           "label": "regime 3",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0217,
-          "slope_per_decade": 0.2167
+          "slope_per_decade": 0.2167,
+          "fitted_start": 1.5244,
+          "fitted_end": 1.6978,
+          "change_within": 0.1733
         }
       ],
       "break_test": {
@@ -3103,6 +3732,26 @@
             "bic": -100.0724
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1997,
+          "previous_level": 1.8333,
+          "next_level": 1.1884,
+          "jump": -0.6449
+        },
+        {
+          "year": 2016,
+          "previous_level": 0.8351,
+          "next_level": 1.5244,
+          "jump": 0.6894
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.3,
+        "within_regime_change": -0.09,
+        "between_regime_change": 0.0445,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -3123,14 +3772,20 @@
           "start": 1991,
           "end": 2011,
           "slope_per_year": -0.0535,
-          "slope_per_decade": -0.5351
+          "slope_per_decade": -0.5351,
+          "fitted_start": 2.1113,
+          "fitted_end": 1.0411,
+          "change_within": -1.0701
         },
         {
           "label": "after",
           "start": 2012,
           "end": 2024,
           "slope_per_year": 0.1049,
-          "slope_per_decade": 1.0495
+          "slope_per_decade": 1.0495,
+          "fitted_start": 1.0549,
+          "fitted_end": 2.3143,
+          "change_within": 1.2593
         }
       ],
       "break_test": {
@@ -3210,6 +3865,20 @@
             "bic": -90.2521
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2012,
+          "previous_level": 0.9876,
+          "next_level": 1.0549,
+          "jump": 0.0673
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.1,
+        "within_regime_change": 0.1892,
+        "between_regime_change": 0.0673,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -3230,14 +3899,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0486,
-          "slope_per_decade": -0.4862
+          "slope_per_decade": -0.4862,
+          "fitted_start": 2.5554,
+          "fitted_end": 1.3886,
+          "change_within": -1.1668
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.1183,
-          "slope_per_decade": 1.1833
+          "slope_per_decade": 1.1833,
+          "fitted_start": 1.86,
+          "fitted_end": 2.8067,
+          "change_within": 0.9467
         }
       ],
       "break_test": {
@@ -3317,6 +3992,20 @@
             "bic": -83.3465
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 1.34,
+          "next_level": 1.86,
+          "jump": 0.52
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.3,
+        "within_regime_change": -0.2201,
+        "between_regime_change": 0.52,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -3337,14 +4026,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0462,
-          "slope_per_decade": -0.4615
+          "slope_per_decade": -0.4615,
+          "fitted_start": 3.3378,
+          "fitted_end": 2.2302,
+          "change_within": -1.1077
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0867,
-          "slope_per_decade": 0.8667
+          "slope_per_decade": 0.8667,
+          "fitted_start": 2.62,
+          "fitted_end": 3.3133,
+          "change_within": 0.6933
         }
       ],
       "break_test": {
@@ -3425,6 +4120,20 @@
             "bic": -84.5697
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 2.184,
+          "next_level": 2.62,
+          "jump": 0.436
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.1,
+        "within_regime_change": -0.4144,
+        "between_regime_change": 0.436,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -3445,14 +4154,20 @@
           "start": 1991,
           "end": 2019,
           "slope_per_year": -0.0463,
-          "slope_per_decade": -0.4631
+          "slope_per_decade": -0.4631,
+          "fitted_start": 4.831,
+          "fitted_end": 3.5345,
+          "change_within": -1.2966
         },
         {
           "label": "after",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -0.08,
-          "slope_per_decade": -0.8
+          "slope_per_decade": -0.8,
+          "fitted_start": 4.86,
+          "fitted_end": 4.54,
+          "change_within": -0.32
         }
       ],
       "break_test": {
@@ -3533,6 +4248,20 @@
             "bic": -56.3903
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2020,
+          "previous_level": 3.4882,
+          "next_level": 4.86,
+          "jump": 1.3718
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.8,
+        "within_regime_change": -1.6166,
+        "between_regime_change": 1.3718,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -3554,21 +4283,30 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": -0.1476,
-          "slope_per_decade": -1.4762
+          "slope_per_decade": -1.4762,
+          "fitted_start": 8.2417,
+          "fitted_end": 7.2083,
+          "change_within": -1.0333
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2019,
           "slope_per_year": -0.0503,
-          "slope_per_decade": -0.5026
+          "slope_per_decade": -0.5026,
+          "fitted_start": 6.555,
+          "fitted_end": 5.5498,
+          "change_within": -1.0052
         },
         {
           "label": "regime 3",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -0.23,
-          "slope_per_decade": -2.3
+          "slope_per_decade": -2.3,
+          "fitted_start": 7.0,
+          "fitted_end": 6.08,
+          "change_within": -0.92
         }
       ],
       "break_test": {
@@ -3650,6 +4388,26 @@
             "bic": -63.3803
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 7.0607,
+          "next_level": 6.555,
+          "jump": -0.5057
+        },
+        {
+          "year": 2020,
+          "previous_level": 5.4995,
+          "next_level": 7.0,
+          "jump": 1.5005
+        }
+      ],
+      "decomposition": {
+        "observed_change": -2.2,
+        "within_regime_change": -2.9585,
+        "between_regime_change": 0.9948,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -3672,28 +4430,40 @@
           "start": 1991,
           "end": 1996,
           "slope_per_year": -0.2143,
-          "slope_per_decade": -2.1429
+          "slope_per_decade": -2.1429,
+          "fitted_start": 13.3857,
+          "fitted_end": 12.3143,
+          "change_within": -1.0714
         },
         {
           "label": "regime 2",
           "start": 1997,
           "end": 2008,
           "slope_per_year": -0.1661,
-          "slope_per_decade": -1.6608
+          "slope_per_decade": -1.6608,
+          "fitted_start": 11.1218,
+          "fitted_end": 9.2949,
+          "change_within": -1.8269
         },
         {
           "label": "regime 3",
           "start": 2009,
           "end": 2019,
           "slope_per_year": 0.0173,
-          "slope_per_decade": 0.1727
+          "slope_per_decade": 0.1727,
+          "fitted_start": 8.4409,
+          "fitted_end": 8.6136,
+          "change_within": 0.1727
         },
         {
           "label": "regime 4",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -0.18,
-          "slope_per_decade": -1.8
+          "slope_per_decade": -1.8,
+          "fitted_start": 9.9,
+          "fitted_end": 9.18,
+          "change_within": -0.72
         }
       ],
       "break_test": {
@@ -3776,6 +4546,32 @@
             "bic": -33.4916
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1997,
+          "previous_level": 12.1,
+          "next_level": 11.1218,
+          "jump": -0.9782
+        },
+        {
+          "year": 2009,
+          "previous_level": 9.1288,
+          "next_level": 8.4409,
+          "jump": -0.6879
+        },
+        {
+          "year": 2020,
+          "previous_level": 8.6309,
+          "next_level": 9.9,
+          "jump": 1.2691
+        }
+      ],
+      "decomposition": {
+        "observed_change": -4.3,
+        "within_regime_change": -3.4456,
+        "between_regime_change": -0.397,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -3797,21 +4593,30 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.3233,
-          "slope_per_decade": -3.2333
+          "slope_per_decade": -3.2333,
+          "fitted_start": 21.1711,
+          "fitted_end": 18.5844,
+          "change_within": -2.5867
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2009,
           "slope_per_year": -0.2679,
-          "slope_per_decade": -2.6788
+          "slope_per_decade": -2.6788,
+          "fitted_start": 16.4855,
+          "fitted_end": 14.0745,
+          "change_within": -2.4109
         },
         {
           "label": "regime 3",
           "start": 2010,
           "end": 2024,
           "slope_per_year": 0.0668,
-          "slope_per_decade": 0.6679
+          "slope_per_decade": 0.6679,
+          "fitted_start": 12.5858,
+          "fitted_end": 13.5208,
+          "change_within": 0.935
         }
       ],
       "break_test": {
@@ -3893,6 +4698,26 @@
             "bic": -4.9162
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 18.2611,
+          "next_level": 16.4855,
+          "jump": -1.7757
+        },
+        {
+          "year": 2010,
+          "previous_level": 13.8067,
+          "next_level": 12.5858,
+          "jump": -1.2208
+        }
+      ],
+      "decomposition": {
+        "observed_change": -8.4,
+        "within_regime_change": -4.0626,
+        "between_regime_change": -2.9965,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -3913,14 +4738,20 @@
           "start": 1991,
           "end": 2008,
           "slope_per_year": -0.7088,
-          "slope_per_decade": -7.0877
+          "slope_per_decade": -7.0877,
+          "fitted_start": 34.7246,
+          "fitted_end": 22.6754,
+          "change_within": -12.0491
         },
         {
           "label": "after",
           "start": 2009,
           "end": 2024,
           "slope_per_year": -0.0682,
-          "slope_per_decade": -0.6824
+          "slope_per_decade": -0.6824,
+          "fitted_start": 20.4743,
+          "fitted_end": 19.4507,
+          "change_within": -1.0235
         }
       ],
       "break_test": {
@@ -4001,6 +4832,20 @@
             "bic": 11.9723
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2009,
+          "previous_level": 21.9667,
+          "next_level": 20.4743,
+          "jump": -1.4924
+        }
+      ],
+      "decomposition": {
+        "observed_change": -14.9,
+        "within_regime_change": -13.0726,
+        "between_regime_change": -1.4924,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -4021,14 +4866,20 @@
           "start": 1991,
           "end": 2010,
           "slope_per_year": -1.0891,
-          "slope_per_decade": -10.891
+          "slope_per_decade": -10.891,
+          "fitted_start": 56.9314,
+          "fitted_end": 36.2386,
+          "change_within": -20.6929
         },
         {
           "label": "after",
           "start": 2011,
           "end": 2024,
           "slope_per_year": -0.2209,
-          "slope_per_decade": -2.2088
+          "slope_per_decade": -2.2088,
+          "fitted_start": 33.9429,
+          "fitted_end": 31.0714,
+          "change_within": -2.8714
         }
       ],
       "break_test": {
@@ -4109,6 +4960,20 @@
             "bic": 18.0877
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2011,
+          "previous_level": 35.1495,
+          "next_level": 33.9429,
+          "jump": -1.2066
+        }
+      ],
+      "decomposition": {
+        "observed_change": -26.4,
+        "within_regime_change": -23.5643,
+        "between_regime_change": -1.2066,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -4130,21 +4995,30 @@
           "start": 1991,
           "end": 2001,
           "slope_per_year": -1.0209,
-          "slope_per_decade": -10.2091
+          "slope_per_decade": -10.2091,
+          "fitted_start": 91.1773,
+          "fitted_end": 80.9682,
+          "change_within": -10.2091
         },
         {
           "label": "regime 2",
           "start": 2002,
           "end": 2019,
           "slope_per_year": -1.1544,
-          "slope_per_decade": -11.5439
+          "slope_per_decade": -11.5439,
+          "fitted_start": 72.8456,
+          "fitted_end": 53.2211,
+          "change_within": -19.6246
         },
         {
           "label": "regime 3",
           "start": 2020,
           "end": 2024,
           "slope_per_year": -2.12,
-          "slope_per_decade": -21.2
+          "slope_per_decade": -21.2,
+          "fitted_start": 59.96,
+          "fitted_end": 51.48,
+          "change_within": -8.48
         }
       ],
       "break_test": {
@@ -4226,6 +5100,26 @@
             "bic": 75.3409
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2002,
+          "previous_level": 79.9473,
+          "next_level": 72.8456,
+          "jump": -7.1017
+        },
+        {
+          "year": 2020,
+          "previous_level": 52.0667,
+          "next_level": 59.96,
+          "jump": 7.8933
+        }
+      ],
+      "decomposition": {
+        "observed_change": -42.1,
+        "within_regime_change": -38.3137,
+        "between_regime_change": 0.7916,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -4247,21 +5141,30 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.5233,
-          "slope_per_decade": -5.2333
+          "slope_per_decade": -5.2333,
+          "fitted_start": 147.7156,
+          "fitted_end": 143.5289,
+          "change_within": -4.1867
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2016,
           "slope_per_year": -1.788,
-          "slope_per_decade": -17.8799
+          "slope_per_decade": -17.8799,
+          "fitted_start": 130.9098,
+          "fitted_end": 102.302,
+          "change_within": -28.6078
         },
         {
           "label": "regime 3",
           "start": 2017,
           "end": 2024,
           "slope_per_year": -1.5631,
-          "slope_per_decade": -15.631
+          "slope_per_decade": -15.631,
+          "fitted_start": 109.1833,
+          "fitted_end": 98.2417,
+          "change_within": -10.9417
         }
       ],
       "break_test": {
@@ -4343,6 +5246,26 @@
             "bic": 116.2754
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 143.0056,
+          "next_level": 130.9098,
+          "jump": -12.0958
+        },
+        {
+          "year": 2017,
+          "previous_level": 100.514,
+          "next_level": 109.1833,
+          "jump": 8.6694
+        }
+      ],
+      "decomposition": {
+        "observed_change": -54.2,
+        "within_regime_change": -43.7362,
+        "between_regime_change": -3.4264,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 90 years and over": {
@@ -4364,21 +5287,30 @@
           "start": 1991,
           "end": 2001,
           "slope_per_year": 1.0264,
-          "slope_per_decade": 10.2636
+          "slope_per_decade": 10.2636,
+          "fitted_start": 235.1773,
+          "fitted_end": 245.4409,
+          "change_within": 10.2636
         },
         {
           "label": "regime 2",
           "start": 2002,
           "end": 2010,
           "slope_per_year": -0.8017,
-          "slope_per_decade": -8.0167
+          "slope_per_decade": -8.0167,
+          "fitted_start": 227.8844,
+          "fitted_end": 221.4711,
+          "change_within": -6.4133
         },
         {
           "label": "regime 3",
           "start": 2011,
           "end": 2024,
           "slope_per_year": 0.8187,
-          "slope_per_decade": 8.1868
+          "slope_per_decade": 8.1868,
+          "fitted_start": 205.6857,
+          "fitted_end": 216.3286,
+          "change_within": 10.6429
         }
       ],
       "break_test": {
@@ -4460,6 +5392,26 @@
             "bic": 161.2959
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2002,
+          "previous_level": 246.4673,
+          "next_level": 227.8844,
+          "jump": -18.5828
+        },
+        {
+          "year": 2011,
+          "previous_level": 220.6694,
+          "next_level": 205.6857,
+          "jump": -14.9837
+        }
+      ],
+      "decomposition": {
+        "observed_change": -28.2,
+        "within_regime_change": 14.4932,
+        "between_regime_change": -33.5665,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     }
   },
@@ -4482,14 +5434,20 @@
           "start": 1991,
           "end": 1995,
           "slope_per_year": 0.15,
-          "slope_per_decade": 1.5
+          "slope_per_decade": 1.5,
+          "fitted_start": 4.96,
+          "fitted_end": 5.56,
+          "change_within": 0.6
         },
         {
           "label": "after",
           "start": 1996,
           "end": 2024,
           "slope_per_year": -0.0253,
-          "slope_per_decade": -0.2527
+          "slope_per_decade": -0.2527,
+          "fitted_start": 4.0124,
+          "fitted_end": 3.3048,
+          "change_within": -0.7076
         }
       ],
       "break_test": {
@@ -4570,6 +5528,20 @@
             "bic": -35.7506
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1996,
+          "previous_level": 5.71,
+          "next_level": 4.0124,
+          "jump": -1.6976
+        }
+      ],
+      "decomposition": {
+        "observed_change": -2.1,
+        "within_regime_change": -0.1076,
+        "between_regime_change": -1.6976,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -4588,7 +5560,10 @@
           "start": 1991,
           "end": 2024,
           "slope_per_year": -0.0026,
-          "slope_per_decade": -0.0258
+          "slope_per_decade": -0.0258,
+          "fitted_start": 0.2044,
+          "fitted_end": 0.1192,
+          "change_within": -0.0852
         }
       ],
       "break_test": {
@@ -4666,6 +5641,13 @@
             "bic": -171.033
           }
         ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.0852,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 5 to 9 years": {
@@ -4686,14 +5668,20 @@
           "start": 1991,
           "end": 2011,
           "slope_per_year": -0.0056,
-          "slope_per_decade": -0.0558
+          "slope_per_decade": -0.0558,
+          "fitted_start": 0.1511,
+          "fitted_end": 0.0394,
+          "change_within": -0.1117
         },
         {
           "label": "after",
           "start": 2012,
           "end": 2024,
           "slope_per_year": 0.0,
-          "slope_per_decade": 0.0
+          "slope_per_decade": 0.0,
+          "fitted_start": 0.1,
+          "fitted_end": 0.1,
+          "change_within": 0.0
         }
       ],
       "break_test": {
@@ -4773,6 +5761,20 @@
             "bic": -188.4271
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2012,
+          "previous_level": 0.0338,
+          "next_level": 0.1,
+          "jump": 0.0662
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.1117,
+        "between_regime_change": 0.0662,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 10 to 14 years": {
@@ -4793,14 +5795,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.006,
-          "slope_per_decade": -0.06
+          "slope_per_decade": -0.06,
+          "fitted_start": 0.184,
+          "fitted_end": 0.04,
+          "change_within": -0.144
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0,
-          "slope_per_decade": 0.0
+          "slope_per_decade": 0.0,
+          "fitted_start": 0.1,
+          "fitted_end": 0.1,
+          "change_within": 0.0
         }
       ],
       "break_test": {
@@ -4881,6 +5889,20 @@
             "bic": -202.657
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.034,
+          "next_level": 0.1,
+          "jump": 0.066
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.144,
+        "between_regime_change": 0.066,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -4901,14 +5923,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0093,
-          "slope_per_decade": -0.0931
+          "slope_per_decade": -0.0931,
+          "fitted_start": 0.4157,
+          "fitted_end": 0.1923,
+          "change_within": -0.2234
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": -0.0033,
-          "slope_per_decade": -0.0333
+          "slope_per_decade": -0.0333,
+          "fitted_start": 0.3244,
+          "fitted_end": 0.2978,
+          "change_within": -0.0267
         }
       ],
       "break_test": {
@@ -4989,6 +6017,20 @@
             "bic": -152.1675
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.183,
+          "next_level": 0.3244,
+          "jump": 0.1414
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.2,
+        "within_regime_change": -0.2501,
+        "between_regime_change": 0.1414,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -5009,14 +6051,20 @@
           "start": 1991,
           "end": 1996,
           "slope_per_year": -0.0143,
-          "slope_per_decade": -0.1429
+          "slope_per_decade": -0.1429,
+          "fitted_start": 0.4857,
+          "fitted_end": 0.4143,
+          "change_within": -0.0714
         },
         {
           "label": "after",
           "start": 1997,
           "end": 2024,
           "slope_per_year": 0.0044,
-          "slope_per_decade": 0.0435
+          "slope_per_decade": 0.0435,
+          "fitted_start": 0.3091,
+          "fitted_end": 0.4266,
+          "change_within": 0.1175
         }
       ],
       "break_test": {
@@ -5096,6 +6144,20 @@
             "bic": -157.3043
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1997,
+          "previous_level": 0.4,
+          "next_level": 0.3091,
+          "jump": -0.0909
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.1,
+        "within_regime_change": 0.0461,
+        "between_regime_change": -0.0909,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -5117,21 +6179,30 @@
           "start": 1991,
           "end": 1995,
           "slope_per_year": 0.0,
-          "slope_per_decade": 0.0
+          "slope_per_decade": 0.0,
+          "fitted_start": 0.5,
+          "fitted_end": 0.5,
+          "change_within": 0.0
         },
         {
           "label": "regime 2",
           "start": 1996,
           "end": 2016,
           "slope_per_year": -0.0019,
-          "slope_per_decade": -0.0195
+          "slope_per_decade": -0.0195,
+          "fitted_start": 0.3861,
+          "fitted_end": 0.3472,
+          "change_within": -0.039
         },
         {
           "label": "regime 3",
           "start": 2017,
           "end": 2024,
           "slope_per_year": 0.0095,
-          "slope_per_decade": 0.0952
+          "slope_per_decade": 0.0952,
+          "fitted_start": 0.4917,
+          "fitted_end": 0.5583,
+          "change_within": 0.0667
         }
       ],
       "break_test": {
@@ -5212,6 +6283,26 @@
             "bic": -175.8506
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1996,
+          "previous_level": 0.5,
+          "next_level": 0.3861,
+          "jump": -0.1139
+        },
+        {
+          "year": 2017,
+          "previous_level": 0.3452,
+          "next_level": 0.4917,
+          "jump": 0.1464
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.0,
+        "within_regime_change": 0.0277,
+        "between_regime_change": 0.0325,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -5232,14 +6323,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0063,
-          "slope_per_decade": -0.0631
+          "slope_per_decade": -0.0631,
+          "fitted_start": 0.5837,
+          "fitted_end": 0.4323,
+          "change_within": -0.1514
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.03,
-          "slope_per_decade": 0.3
+          "slope_per_decade": 0.3,
+          "fitted_start": 0.5244,
+          "fitted_end": 0.7644,
+          "change_within": 0.24
         }
       ],
       "break_test": {
@@ -5319,6 +6416,20 @@
             "bic": -145.5117
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.426,
+          "next_level": 0.5244,
+          "jump": 0.0984
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.3,
+        "within_regime_change": 0.0886,
+        "between_regime_change": 0.0984,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -5339,14 +6450,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0148,
-          "slope_per_decade": -0.1477
+          "slope_per_decade": -0.1477,
+          "fitted_start": 0.8972,
+          "fitted_end": 0.5428,
+          "change_within": -0.3545
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": 0.0283,
-          "slope_per_decade": 0.2833
+          "slope_per_decade": 0.2833,
+          "fitted_start": 0.7533,
+          "fitted_end": 0.98,
+          "change_within": 0.2267
         }
       ],
       "break_test": {
@@ -5426,6 +6543,20 @@
             "bic": -139.0521
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 0.528,
+          "next_level": 0.7533,
+          "jump": 0.2253
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.1,
+        "within_regime_change": -0.1278,
+        "between_regime_change": 0.2253,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -5449,35 +6580,50 @@
           "start": 1991,
           "end": 1995,
           "slope_per_year": 0.01,
-          "slope_per_decade": 0.1
+          "slope_per_decade": 0.1,
+          "fitted_start": 1.1,
+          "fitted_end": 1.14,
+          "change_within": 0.04
         },
         {
           "label": "regime 2",
           "start": 1996,
           "end": 2004,
           "slope_per_year": -0.0533,
-          "slope_per_decade": -0.5333
+          "slope_per_decade": -0.5333,
+          "fitted_start": 1.3467,
+          "fitted_end": 0.92,
+          "change_within": -0.4267
         },
         {
           "label": "regime 3",
           "start": 2005,
           "end": 2009,
           "slope_per_year": -0.04,
-          "slope_per_decade": -0.4
+          "slope_per_decade": -0.4,
+          "fitted_start": 1.18,
+          "fitted_end": 1.02,
+          "change_within": -0.16
         },
         {
           "label": "regime 4",
           "start": 2010,
           "end": 2014,
           "slope_per_year": 0.03,
-          "slope_per_decade": 0.3
+          "slope_per_decade": 0.3,
+          "fitted_start": 0.84,
+          "fitted_end": 0.96,
+          "change_within": 0.12
         },
         {
           "label": "regime 5",
           "start": 2015,
           "end": 2024,
           "slope_per_year": 0.0594,
-          "slope_per_decade": 0.5939
+          "slope_per_decade": 0.5939,
+          "fitted_start": 0.7527,
+          "fitted_end": 1.2873,
+          "change_within": 0.5345
         }
       ],
       "break_test": {
@@ -5561,6 +6707,38 @@
             "bic": -168.3454
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1996,
+          "previous_level": 1.15,
+          "next_level": 1.3467,
+          "jump": 0.1967
+        },
+        {
+          "year": 2005,
+          "previous_level": 0.8667,
+          "next_level": 1.18,
+          "jump": 0.3133
+        },
+        {
+          "year": 2010,
+          "previous_level": 0.98,
+          "next_level": 0.84,
+          "jump": -0.14
+        },
+        {
+          "year": 2015,
+          "previous_level": 0.99,
+          "next_level": 0.7527,
+          "jump": -0.2373
+        }
+      ],
+      "decomposition": {
+        "observed_change": 0.2,
+        "within_regime_change": 0.1078,
+        "between_regime_change": 0.1327,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -5581,14 +6759,20 @@
           "start": 1991,
           "end": 2012,
           "slope_per_year": -0.0174,
-          "slope_per_decade": -0.1739
+          "slope_per_decade": -0.1739,
+          "fitted_start": 1.8917,
+          "fitted_end": 1.5265,
+          "change_within": -0.3652
         },
         {
           "label": "after",
           "start": 2013,
           "end": 2024,
           "slope_per_year": 0.0399,
-          "slope_per_decade": 0.3986
+          "slope_per_decade": 0.3986,
+          "fitted_start": 1.2474,
+          "fitted_end": 1.6859,
+          "change_within": 0.4385
         }
       ],
       "break_test": {
@@ -5669,6 +6853,20 @@
             "bic": -107.1948
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2013,
+          "previous_level": 1.5091,
+          "next_level": 1.2474,
+          "jump": -0.2617
+        }
+      ],
+      "decomposition": {
+        "observed_change": -0.2,
+        "within_regime_change": 0.0733,
+        "between_regime_change": -0.2617,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -5690,21 +6888,30 @@
           "start": 1991,
           "end": 2007,
           "slope_per_year": -0.0451,
-          "slope_per_decade": -0.451
+          "slope_per_decade": -0.451,
+          "fitted_start": 3.0902,
+          "fitted_end": 2.3686,
+          "change_within": -0.7216
         },
         {
           "label": "regime 2",
           "start": 2008,
           "end": 2015,
           "slope_per_year": -0.1071,
-          "slope_per_decade": -1.0714
+          "slope_per_decade": -1.0714,
+          "fitted_start": 2.675,
+          "fitted_end": 1.925,
+          "change_within": -0.75
         },
         {
           "label": "regime 3",
           "start": 2016,
           "end": 2024,
           "slope_per_year": -0.0067,
-          "slope_per_decade": -0.0667
+          "slope_per_decade": -0.0667,
+          "fitted_start": 2.2378,
+          "fitted_end": 2.1844,
+          "change_within": -0.0533
         }
       ],
       "break_test": {
@@ -5785,6 +6992,26 @@
             "bic": -101.0329
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2008,
+          "previous_level": 2.3235,
+          "next_level": 2.675,
+          "jump": 0.3515
+        },
+        {
+          "year": 2016,
+          "previous_level": 1.8179,
+          "next_level": 2.2378,
+          "jump": 0.4199
+        }
+      ],
+      "decomposition": {
+        "observed_change": -1.4,
+        "within_regime_change": -1.5249,
+        "between_regime_change": 0.7714,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -5805,14 +7032,20 @@
           "start": 1991,
           "end": 2015,
           "slope_per_year": -0.0698,
-          "slope_per_decade": -0.6977
+          "slope_per_decade": -0.6977,
+          "fitted_start": 4.8692,
+          "fitted_end": 3.1948,
+          "change_within": -1.6745
         },
         {
           "label": "after",
           "start": 2016,
           "end": 2024,
           "slope_per_year": -0.015,
-          "slope_per_decade": -0.15
+          "slope_per_decade": -0.15,
+          "fitted_start": 3.4489,
+          "fitted_end": 3.3289,
+          "change_within": -0.12
         }
       ],
       "break_test": {
@@ -5893,6 +7126,20 @@
             "bic": -81.5925
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2016,
+          "previous_level": 3.125,
+          "next_level": 3.4489,
+          "jump": 0.3239
+        }
+      ],
+      "decomposition": {
+        "observed_change": -1.6,
+        "within_regime_change": -1.7945,
+        "between_regime_change": 0.3239,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -5913,14 +7160,20 @@
           "start": 1991,
           "end": 2010,
           "slope_per_year": -0.0947,
-          "slope_per_decade": -0.9474
+          "slope_per_decade": -0.9474,
+          "fitted_start": 7.41,
+          "fitted_end": 5.61,
+          "change_within": -1.8
         },
         {
           "label": "after",
           "start": 2011,
           "end": 2024,
           "slope_per_year": -0.0057,
-          "slope_per_decade": -0.0571
+          "slope_per_decade": -0.0571,
+          "fitted_start": 5.08,
+          "fitted_end": 5.0057,
+          "change_within": -0.0743
         }
       ],
       "break_test": {
@@ -6001,6 +7254,20 @@
             "bic": -45.005
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2011,
+          "previous_level": 5.5153,
+          "next_level": 5.08,
+          "jump": -0.4353
+        }
+      ],
+      "decomposition": {
+        "observed_change": -2.3,
+        "within_regime_change": -1.8743,
+        "between_regime_change": -0.4353,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -6022,21 +7289,30 @@
           "start": 1991,
           "end": 1996,
           "slope_per_year": 0.0371,
-          "slope_per_decade": 0.3714
+          "slope_per_decade": 0.3714,
+          "fitted_start": 11.7905,
+          "fitted_end": 11.9762,
+          "change_within": 0.1857
         },
         {
           "label": "regime 2",
           "start": 1997,
           "end": 2019,
           "slope_per_year": -0.1726,
-          "slope_per_decade": -1.7263
+          "slope_per_decade": -1.7263,
+          "fitted_start": 11.025,
+          "fitted_end": 7.2272,
+          "change_within": -3.7978
         },
         {
           "label": "regime 3",
           "start": 2020,
           "end": 2024,
           "slope_per_year": 0.03,
-          "slope_per_decade": 0.3
+          "slope_per_decade": 0.3,
+          "fitted_start": 7.68,
+          "fitted_end": 7.8,
+          "change_within": 0.12
         }
       ],
       "break_test": {
@@ -6118,6 +7394,26 @@
             "bic": -54.4961
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1997,
+          "previous_level": 12.0133,
+          "next_level": 11.025,
+          "jump": -0.9883
+        },
+        {
+          "year": 2020,
+          "previous_level": 7.0545,
+          "next_level": 7.68,
+          "jump": 0.6255
+        }
+      ],
+      "decomposition": {
+        "observed_change": -3.9,
+        "within_regime_change": -3.4921,
+        "between_regime_change": -0.3628,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -6138,14 +7434,20 @@
           "start": 1991,
           "end": 2011,
           "slope_per_year": -0.2586,
-          "slope_per_decade": -2.5857
+          "slope_per_decade": -2.5857,
+          "fitted_start": 19.3476,
+          "fitted_end": 14.1762,
+          "change_within": -5.1714
         },
         {
           "label": "after",
           "start": 2012,
           "end": 2024,
           "slope_per_year": -0.0896,
-          "slope_per_decade": -0.8956
+          "slope_per_decade": -0.8956,
+          "fitted_start": 13.1681,
+          "fitted_end": 12.0934,
+          "change_within": -1.0747
         }
       ],
       "break_test": {
@@ -6226,6 +7528,20 @@
             "bic": -14.7718
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2012,
+          "previous_level": 13.9176,
+          "next_level": 13.1681,
+          "jump": -0.7495
+        }
+      ],
+      "decomposition": {
+        "observed_change": -7.8,
+        "within_regime_change": -6.2461,
+        "between_regime_change": -0.7495,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -6246,14 +7562,20 @@
           "start": 1991,
           "end": 2006,
           "slope_per_year": -0.4022,
-          "slope_per_decade": -4.0221
+          "slope_per_decade": -4.0221,
+          "fitted_start": 33.2728,
+          "fitted_end": 27.2397,
+          "change_within": -6.0331
         },
         {
           "label": "after",
           "start": 2007,
           "end": 2024,
           "slope_per_year": -0.223,
-          "slope_per_decade": -2.2301
+          "slope_per_decade": -2.2301,
+          "fitted_start": 24.5345,
+          "fitted_end": 20.7433,
+          "change_within": -3.7912
         }
       ],
       "break_test": {
@@ -6334,6 +7656,20 @@
             "bic": 20.0941
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2007,
+          "previous_level": 26.8375,
+          "next_level": 24.5345,
+          "jump": -2.303
+        }
+      ],
+      "decomposition": {
+        "observed_change": -12.5,
+        "within_regime_change": -9.8243,
+        "between_regime_change": -2.303,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -6355,21 +7691,30 @@
           "start": 1991,
           "end": 1999,
           "slope_per_year": -0.22,
-          "slope_per_decade": -2.2
+          "slope_per_decade": -2.2,
+          "fitted_start": 56.6356,
+          "fitted_end": 54.8756,
+          "change_within": -1.76
         },
         {
           "label": "regime 2",
           "start": 2000,
           "end": 2009,
           "slope_per_year": -0.5315,
-          "slope_per_decade": -5.3152
+          "slope_per_decade": -5.3152,
+          "fitted_start": 51.4218,
+          "fitted_end": 46.6382,
+          "change_within": -4.7836
         },
         {
           "label": "regime 3",
           "start": 2010,
           "end": 2024,
           "slope_per_year": -0.3646,
-          "slope_per_decade": -3.6464
+          "slope_per_decade": -3.6464,
+          "fitted_start": 42.8458,
+          "fitted_end": 37.7408,
+          "change_within": -5.105
         }
       ],
       "break_test": {
@@ -6451,6 +7796,26 @@
             "bic": 34.5001
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2000,
+          "previous_level": 54.6556,
+          "next_level": 51.4218,
+          "jump": -3.2337
+        },
+        {
+          "year": 2010,
+          "previous_level": 46.1067,
+          "next_level": 42.8458,
+          "jump": -3.2608
+        }
+      ],
+      "decomposition": {
+        "observed_change": -19.8,
+        "within_regime_change": -11.6486,
+        "between_regime_change": -6.4945,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -6471,14 +7836,20 @@
           "start": 1991,
           "end": 2008,
           "slope_per_year": -0.9234,
-          "slope_per_decade": -9.2343
+          "slope_per_decade": -9.2343,
+          "fitted_start": 104.3825,
+          "fitted_end": 88.6842,
+          "change_within": -15.6982
         },
         {
           "label": "after",
           "start": 2009,
           "end": 2024,
           "slope_per_year": -0.6518,
-          "slope_per_decade": -6.5176
+          "slope_per_decade": -6.5176,
+          "fitted_start": 82.3132,
+          "fitted_end": 72.5368,
+          "change_within": -9.7765
         }
       ],
       "break_test": {
@@ -6559,6 +7930,20 @@
             "bic": 67.4382
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 2009,
+          "previous_level": 87.7608,
+          "next_level": 82.3132,
+          "jump": -5.4475
+        }
+      ],
+      "decomposition": {
+        "observed_change": -33.1,
+        "within_regime_change": -25.4747,
+        "between_regime_change": -5.4475,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     },
     "Age at time of death, 90 years and over": {
@@ -6581,28 +7966,40 @@
           "start": 1991,
           "end": 1998,
           "slope_per_year": 1.5274,
-          "slope_per_decade": 15.2738
+          "slope_per_decade": 15.2738,
+          "fitted_start": 200.2917,
+          "fitted_end": 210.9833,
+          "change_within": 10.6917
         },
         {
           "label": "regime 2",
           "start": 1999,
           "end": 2009,
           "slope_per_year": -1.4227,
-          "slope_per_decade": -14.2273
+          "slope_per_decade": -14.2273,
+          "fitted_start": 197.7227,
+          "fitted_end": 183.4955,
+          "change_within": -14.2273
         },
         {
           "label": "regime 3",
           "start": 2010,
           "end": 2016,
           "slope_per_year": 0.7179,
-          "slope_per_decade": 7.1786
+          "slope_per_decade": 7.1786,
+          "fitted_start": 171.7036,
+          "fitted_end": 176.0107,
+          "change_within": 4.3071
         },
         {
           "label": "regime 4",
           "start": 2017,
           "end": 2024,
           "slope_per_year": -1.3238,
-          "slope_per_decade": -13.2381
+          "slope_per_decade": -13.2381,
+          "fitted_start": 186.3583,
+          "fitted_end": 177.0917,
+          "change_within": -9.2667
         }
       ],
       "break_test": {
@@ -6685,6 +8082,32 @@
             "bic": 123.3107
           }
         ]
+      },
+      "jumps": [
+        {
+          "year": 1999,
+          "previous_level": 212.5107,
+          "next_level": 197.7227,
+          "jump": -14.788
+        },
+        {
+          "year": 2010,
+          "previous_level": 182.0727,
+          "next_level": 171.7036,
+          "jump": -10.3692
+        },
+        {
+          "year": 2017,
+          "previous_level": 176.7286,
+          "next_level": 186.3583,
+          "jump": 9.6298
+        }
+      ],
+      "decomposition": {
+        "observed_change": -23.6,
+        "within_regime_change": -8.4952,
+        "between_regime_change": -15.5274,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
       }
     }
   }

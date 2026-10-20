@@ -5,7 +5,7 @@ title: "State of health in BC: a descriptive report"
 ::: {.callout-note}
 ## Version and observation window
 
-**Report version 0.3** · observation windows: mortality **1991–2024**,
+**Report version 0.4** · observation windows: mortality **1991–2024**,
 life expectancy **1980–2024**, survey indicators **2015–2024**,
 sub-provincial mortality **2021/2023** · generated from the published
 datasets by `quarto render`. Regenerate the underlying data with
@@ -111,6 +111,61 @@ finding:
 3. **The change is not one slope.** Many series carry a regime break
    beyond a straight line, several dated to 2020; the breaks are the
    story, not noise.
+
+## Regimes are slope changes, not level shifts
+
+A regime break can mean two different things: the series **steps** to a new
+level, or it keeps its level but changes its **rate** of movement. The
+pipeline now separates the two, and for almost every indicator it is the
+second.
+
+```{ojs}
+//| echo: false
+decomp = [
+  {series: "Mortality rate (crude)", d: mort},
+  {series: "Life expectancy at birth", d: life},
+  {series: "Life satisfaction", d: tLifeSat},
+  {series: "Sense of belonging", d: tBelong},
+  {series: "Anxiety disorder", d: tAnx},
+  {series: "Mood disorder", d: tMood},
+  {series: "Perceived mental health, fair or poor", d: tMentH},
+  {series: "Perceived health, fair or poor", d: tPhyH},
+  {series: "Daily smoker", d: tSmoke},
+  {series: "High blood pressure", d: tBp},
+  {series: "Diabetes", d: tDiab},
+  {series: "Has a regular provider", d: tProv}
+].map(({series, d}) => ({
+  series,
+  observed: d.decomposition.observed_change,
+  within: d.decomposition.within_regime_change,
+  between: d.decomposition.between_regime_change,
+  share_between: d.decomposition.observed_change !== 0
+    ? Math.abs(d.decomposition.between_regime_change) / (Math.abs(d.decomposition.within_regime_change) + Math.abs(d.decomposition.between_regime_change))
+    : 0,
+  jumps: d.jumps.map(j => `${j.year}: ${j.jump.toFixed(2)}`).join("; ") || "—"
+}))
+Inputs.table(decomp, {
+  columns: ["series", "observed", "within", "between", "jumps"],
+  header: {series: "series", observed: "total change", within: "within-regime", between: "between-regime (jumps)", jumps: "jumps (year: level shift)"},
+  width: {jumps: 200}
+})
+```
+
+```{ojs}
+//| echo: false
+biggest = decomp.filter(d => d.jumps !== "—").sort((a, b) => Math.abs(b.between) - Math.abs(a.between))
+top = biggest[0]
+md`The "between-regime" column is nearly zero for all but one series. The
+largest level shift anywhere is life expectancy at 2015
+(**${life.jumps[0].jump.toFixed(2)}** years), and even there the bulk of the
+change is within-regime (${life.decomposition.within_regime_change.toFixed(2)}
+of ${life.decomposition.observed_change.toFixed(2)}). For the survey series
+the jumps are fractions of a point. So when this report says a series'
+"rules change", it means the **slope** changes: the direction and pace of
+movement turn, but the series does not lurch discontinuously to a new
+level. That is the more common — and more policy-relevant — kind of
+nonstationarity.`
+```
 
 ## Mortality: an ageing population masks a turning point
 
