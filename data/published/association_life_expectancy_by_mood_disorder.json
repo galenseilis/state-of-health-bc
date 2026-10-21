@@ -1,0 +1,72 @@
+{
+  "pooled": {
+    "window": {
+      "start": 2015,
+      "end": 2024,
+      "n": 10
+    },
+    "pearson": {
+      "r": -0.229,
+      "p_value": 0.524443
+    },
+    "spearman": {
+      "rho": -0.3526,
+      "p_value": 0.317662
+    },
+    "ols": {
+      "slope": -0.051917,
+      "intercept": 82.726186,
+      "std_error": 0.078011,
+      "t_statistic": -0.6655,
+      "p_value": 0.524443,
+      "significant": false
+    }
+  },
+  "subperiods": [],
+  "rolling": [
+    {
+      "start": 2015,
+      "end": 2022,
+      "n": 8,
+      "slope": -0.214785,
+      "p_value": 0.091594
+    },
+    {
+      "start": 2016,
+      "end": 2023,
+      "n": 8,
+      "slope": -0.131883,
+      "p_value": 0.167032
+    },
+    {
+      "start": 2017,
+      "end": 2024,
+      "n": 8,
+      "slope": -0.026488,
+      "p_value": 0.774197
+    }
+  ],
+  "rolling_window": 8,
+  "stability": {
+    "stable": false,
+    "tolerance": 0.5,
+    "verdict": "undetermined",
+    "reasons": [
+      "series too short to split into two testable subperiods"
+    ],
+    "interpretation": "stable = one pooled estimate is defensible over the window; time-varying = report the subperiod/rolling estimates instead; undetermined = too few points to test stability"
+  },
+  "key": "life_expectancy_by_mood_disorder",
+  "domain": "mental_health",
+  "title": "Life expectancy at birth vs mood-disorder prevalence",
+  "caveat": "Ecological, annual, province-level; not individual-level.",
+  "outcome": {
+    "file": "life_expectancy_bc.csv",
+    "characteristic": "Life expectancy (in years) at age x (ex)",
+    "age_group": "0 years"
+  },
+  "determinant": {
+    "file": "mood_disorder_bc.csv",
+    "measure": "Mood disorder"
+  }
+}

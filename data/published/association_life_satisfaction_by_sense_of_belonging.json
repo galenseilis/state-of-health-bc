@@ -1,0 +1,78 @@
+{
+  "pooled": {
+    "window": {
+      "start": 2015,
+      "end": 2025,
+      "n": 11
+    },
+    "pearson": {
+      "r": 0.9656,
+      "p_value": 1e-06
+    },
+    "spearman": {
+      "rho": 0.621,
+      "p_value": 0.041439
+    },
+    "ols": {
+      "slope": 1.061569,
+      "intercept": 17.454621,
+      "std_error": 0.095317,
+      "t_statistic": 11.1373,
+      "p_value": 1e-06,
+      "significant": true
+    }
+  },
+  "subperiods": [],
+  "rolling": [
+    {
+      "start": 2015,
+      "end": 2022,
+      "n": 8,
+      "slope": 1.028184,
+      "p_value": 0.005613
+    },
+    {
+      "start": 2016,
+      "end": 2023,
+      "n": 8,
+      "slope": 0.981883,
+      "p_value": 0.000411
+    },
+    {
+      "start": 2017,
+      "end": 2024,
+      "n": 8,
+      "slope": 1.144404,
+      "p_value": 7e-05
+    },
+    {
+      "start": 2018,
+      "end": 2025,
+      "n": 8,
+      "slope": 1.16218,
+      "p_value": 2.7e-05
+    }
+  ],
+  "rolling_window": 8,
+  "stability": {
+    "stable": false,
+    "tolerance": 0.5,
+    "verdict": "undetermined",
+    "reasons": [
+      "series too short to split into two testable subperiods"
+    ],
+    "interpretation": "stable = one pooled estimate is defensible over the window; time-varying = report the subperiod/rolling estimates instead; undetermined = too few points to test stability"
+  },
+  "key": "life_satisfaction_by_sense_of_belonging",
+  "domain": "social",
+  "title": "Life satisfaction vs sense of community belonging",
+  "caveat": "Ecological, annual, province-level; not individual-level.",
+  "outcome": {
+    "file": "life_satisfaction_bc.csv",
+    "measure": "Life satisfaction, satisfied or very satisfied"
+  },
+  "determinant": {
+    "file": "sense_of_belonging_bc.csv",
+    "measure": "Sense of belonging to local community, somewhat strong or very strong"
+  }
+}

@@ -129,6 +129,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -224,12 +225,20 @@ div.csl-indent {
  <span class="dropdown-text">Descriptive report</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../reference/association-methods.html">
+ <span class="dropdown-text">Association and stability methods</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../reference/indicator-mortality-rates-bc.html">
  <span class="dropdown-text">Indicator: Mortality rates</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../reference/indicator-life-expectancy-bc.html">
  <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../reference/indicator-life-expectancy-regions-bc.html">
+ <span class="dropdown-text">Indicator: Regional life expectancy</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../reference/indicator-mortality-inequality-bc.html">
@@ -307,6 +316,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#sohbc.breaks.select_breaks" id="toc-sohbc.breaks.select_breaks" class="nav-link" data-scroll-target="#sohbc.breaks.select_breaks">select_breaks</a></li>
   <li><a href="#sohbc.breaks.single_break_test" id="toc-sohbc.breaks.single_break_test" class="nav-link" data-scroll-target="#sohbc.breaks.single_break_test">single_break_test</a></li>
+  <li><a href="#sohbc.breaks.slope_change_test" id="toc-sohbc.breaks.slope_change_test" class="nav-link" data-scroll-target="#sohbc.breaks.slope_change_test">slope_change_test</a></li>
   <li><a href="#sohbc.breaks.summarise" id="toc-sohbc.breaks.summarise" class="nav-link" data-scroll-target="#sohbc.breaks.summarise">summarise</a></li>
   <li><a href="#sohbc.breaks.trend_test" id="toc-sohbc.breaks.trend_test" class="nav-link" data-scroll-target="#sohbc.breaks.trend_test">trend_test</a></li>
   </ul></li>
@@ -376,10 +386,14 @@ div.csl-indent {
 <td>Permutation test of “a straight line, no break” against one break.</td>
 </tr>
 <tr class="odd">
+<td><a href="#sohbc.breaks.slope_change_test">slope_change_test</a></td>
+<td>Chow-style F-test of equal slopes either side of a change point.</td>
+</tr>
+<tr class="even">
 <td><a href="#sohbc.breaks.summarise">summarise</a></td>
 <td>Test a series for breaks and trend, and state its stationarity.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.breaks.trend_test">trend_test</a></td>
 <td>Kendall’s tau test for a monotone trend in the series.</td>
 </tr>
@@ -405,22 +419,31 @@ div.csl-indent {
 <p>Args: points: <code>(x, y)</code> pairs, typically <code>(year, value)</code>. min_segment: Minimum points per side of the split. n_permutations: Number of residual resamples. seed: Seed for the resampling, so results are reproducible.</p>
 <p>Returns: dict: The observed statistic, the p-value, and the year of the best split.</p>
 </section>
+<section id="sohbc.breaks.slope_change_test" class="level3">
+<h3 class="anchored" data-anchor-id="sohbc.breaks.slope_change_test">slope_change_test</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>breaks.slope_change_test(points, change_point)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Chow-style F-test of equal slopes either side of a change point.</p>
+<p>The unrestricted model fits a separate straight line to each side of <code>change_point</code>; the restricted model fits one straight line to the whole series. The F statistic compares the residual sums of squares: <code>F = ((SSE_r - SSE_u) / 1) / (SSE_u / (n - 4))</code>, with 1 and <code>n - 4</code> degrees of freedom — one slope difference, four estimated parameters (two intercepts, two slopes).</p>
+<p>This turns the descriptive within-versus-across decomposition into a test: the within-regime <em>rates</em> differ when this F is significant, so the break changed the pace of movement rather than the level.</p>
+<p>Args: points: <code>(x, y)</code> pairs, typically <code>(year, value)</code>. change_point: The year separating the two regimes; the first regime is <code>x &lt; change_point</code>, the second <code>x &gt;= change_point</code>.</p>
+<p>Returns: dict: The F statistic, its p-value, degrees of freedom, both residual sums of squares, and whether the slope change is significant.</p>
+</section>
 <section id="sohbc.breaks.summarise" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.breaks.summarise">summarise</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>breaks.summarise(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    points</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    min_segment<span class="op">=</span>MIN_SEGMENT</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    max_breaks<span class="op">=</span>MAX_BREAKS</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    n_permutations<span class="op">=</span>N_PERMUTATIONS</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>breaks.summarise(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    points</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    min_segment<span class="op">=</span>MIN_SEGMENT</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    max_breaks<span class="op">=</span>MAX_BREAKS</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    n_permutations<span class="op">=</span>N_PERMUTATIONS</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Test a series for breaks and trend, and state its stationarity.</p>
 <p>Args: points: <code>(x, y)</code> pairs, typically <code>(year, value)</code>. min_segment: Minimum points per regime. max_breaks: Largest number of breaks to consider. n_permutations: Number of residual resamples in the break test. seed: Seed for the resampling, so results are reproducible.</p>
 <p>Returns: dict: <code>breaks</code>, <code>break_test</code>, <code>trend_test</code>, and a <code>stationarity</code> verdict with its reasons.</p>
 </section>
 <section id="sohbc.breaks.trend_test" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.breaks.trend_test">trend_test</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>breaks.trend_test(points)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>breaks.trend_test(points)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Kendall’s tau test for a monotone trend in the series.</p>
 <p>Args: points: <code>(x, y)</code> pairs, typically <code>(year, value)</code>.</p>
 <p>Returns: dict: Tau, its p-value, and whether the trend is significant.</p>

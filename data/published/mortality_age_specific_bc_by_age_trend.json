@@ -34,6 +34,21 @@
           "change_within": -0.967
         }
       ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2001,
+          "f_statistic": 66.0367,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 10.168422,
+          "sse_unrestricted": 3.176418,
+          "p_value": 0.0,
+          "significant": true
+        }
+      ],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 6.992004,
@@ -125,7 +140,8 @@
         "observed_change": -3.1,
         "within_regime_change": -4.0215,
         "between_regime_change": 1.0327,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -160,6 +176,21 @@
           "fitted_start": 0.1802,
           "fitted_end": 0.1275,
           "change_within": -0.0527
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2012,
+          "f_statistic": 13.2922,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.096972,
+          "sse_unrestricted": 0.067198,
+          "p_value": 0.001,
+          "significant": true
         }
       ],
       "break_test": {
@@ -252,7 +283,8 @@
         "observed_change": -0.2,
         "within_regime_change": -0.2449,
         "between_regime_change": 0.0907,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 5 to 9 years": {
@@ -298,6 +330,34 @@
           "fitted_start": 0.1,
           "fitted_end": 0.1,
           "change_within": 0.0
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1997,
+          "f_statistic": 33.0267,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.025366,
+          "sse_unrestricted": 0.012074,
+          "p_value": 3e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2002,
+          "f_statistic": 22.6463,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.025366,
+          "sse_unrestricted": 0.014455,
+          "p_value": 4.6e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -398,7 +458,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.2086,
         "between_regime_change": 0.14,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 10 to 14 years": {
@@ -433,6 +494,21 @@
           "fitted_start": 0.0945,
           "fitted_end": 0.1146,
           "change_within": 0.0202
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2003,
+          "f_statistic": 16.3319,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.047988,
+          "sse_unrestricted": 0.031072,
+          "p_value": 0.000341,
+          "significant": true
         }
       ],
       "break_test": {
@@ -526,7 +602,8 @@
         "observed_change": -0.1,
         "within_regime_change": 0.0087,
         "between_regime_change": -0.0737,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -561,6 +638,21 @@
           "fitted_start": 0.3818,
           "fitted_end": 0.4,
           "change_within": 0.0182
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2014,
+          "f_statistic": 40.9774,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.193369,
+          "sse_unrestricted": 0.081731,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -654,7 +746,8 @@
         "observed_change": -0.4,
         "within_regime_change": -0.3688,
         "between_regime_change": 0.1059,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -689,6 +782,21 @@
           "fitted_start": 0.7111,
           "fitted_end": 0.7111,
           "change_within": 0.0
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 99.9876,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.383282,
+          "sse_unrestricted": 0.088458,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -782,7 +890,8 @@
         "observed_change": -0.3,
         "within_regime_change": -0.4283,
         "between_regime_change": 0.2591,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -817,6 +926,21 @@
           "fitted_start": 0.8345,
           "fitted_end": 0.9655,
           "change_within": 0.1309
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2015,
+          "f_statistic": 79.9699,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.881711,
+          "sse_unrestricted": 0.240532,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -909,7 +1033,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.3181,
         "between_regime_change": 0.3411,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -955,6 +1080,34 @@
           "fitted_start": 1.0578,
           "fitted_end": 1.2311,
           "change_within": 0.1733
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 50.7377,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.742047,
+          "sse_unrestricted": 0.647299,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 86.1301,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.742047,
+          "sse_unrestricted": 0.450025,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1054,7 +1207,8 @@
         "observed_change": 0.0,
         "within_regime_change": -0.0541,
         "between_regime_change": 0.0935,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -1089,6 +1243,21 @@
           "fitted_start": 1.2022,
           "fitted_end": 1.5756,
           "change_within": 0.3733
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 127.4679,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.148544,
+          "sse_unrestricted": 0.40933,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1181,7 +1350,8 @@
         "observed_change": 0.0,
         "within_regime_change": -0.3319,
         "between_regime_change": 0.4682,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -1238,6 +1408,47 @@
           "fitted_start": 1.88,
           "fitted_end": 2.0,
           "change_within": 0.12
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 20.2416,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.429109,
+          "sse_unrestricted": 1.450458,
+          "p_value": 9.5e-05,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2011,
+          "f_statistic": 112.6498,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.429109,
+          "sse_unrestricted": 0.510854,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 94.8293,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.429109,
+          "sse_unrestricted": 0.583783,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1344,7 +1555,8 @@
         "observed_change": 0.2,
         "within_regime_change": 0.3049,
         "between_regime_change": -0.1388,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -1379,6 +1591,21 @@
           "fitted_start": 1.6974,
           "fitted_end": 2.5359,
           "change_within": 0.8385
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2013,
+          "f_statistic": 110.8086,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.853173,
+          "sse_unrestricted": 0.394828,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1472,7 +1699,8 @@
         "observed_change": 0.0,
         "within_regime_change": 0.1804,
         "between_regime_change": -0.2194,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -1507,6 +1735,21 @@
           "fitted_start": 3.56,
           "fitted_end": 3.32,
           "change_within": -0.24
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 42.093,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 3.031031,
+          "sse_unrestricted": 1.2613,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1600,7 +1843,8 @@
         "observed_change": -1.1,
         "within_regime_change": -1.4234,
         "between_regime_change": 0.8492,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -1646,6 +1890,34 @@
           "fitted_start": 5.28,
           "fitted_end": 4.6,
           "change_within": -0.68
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 34.2909,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.519722,
+          "sse_unrestricted": 2.109032,
+          "p_value": 2e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 58.0035,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.519722,
+          "sse_unrestricted": 1.540754,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1746,7 +2018,8 @@
         "observed_change": -1.9,
         "within_regime_change": -2.2951,
         "between_regime_change": 0.5224,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -1781,6 +2054,21 @@
           "fitted_start": 6.675,
           "fitted_end": 7.165,
           "change_within": 0.49
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 100.549,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 10.764031,
+          "sse_unrestricted": 2.473561,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -1874,7 +2162,8 @@
         "observed_change": -3.3,
         "within_regime_change": -2.6616,
         "between_regime_change": -0.332,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -1920,6 +2209,34 @@
           "fitted_start": 10.3511,
           "fitted_end": 10.4711,
           "change_within": 0.12
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 36.6893,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 21.324828,
+          "sse_unrestricted": 9.592912,
+          "p_value": 1e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 85.6278,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 21.324828,
+          "sse_unrestricted": 5.532797,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2020,7 +2337,8 @@
         "observed_change": -5.9,
         "within_regime_change": -5.0202,
         "between_regime_change": -0.4386,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -2055,6 +2373,21 @@
           "fitted_start": 17.1287,
           "fitted_end": 15.5338,
           "change_within": -1.5949
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2009,
+          "f_statistic": 79.5559,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 32.1084,
+          "sse_unrestricted": 8.792334,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2148,7 +2481,8 @@
         "observed_change": -10.7,
         "within_regime_change": -8.7896,
         "between_regime_change": -1.3896,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -2183,6 +2517,21 @@
           "fitted_start": 28.6808,
           "fitted_end": 25.7458,
           "change_within": -2.935
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 90.6016,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 58.567804,
+          "sse_unrestricted": 14.568912,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2276,7 +2625,8 @@
         "observed_change": -18.0,
         "within_regime_change": -15.2066,
         "between_regime_change": -1.6543,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -2322,6 +2672,34 @@
           "fitted_start": 49.16,
           "fitted_end": 44.0,
           "change_within": -5.16
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 20.7547,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 130.60125,
+          "sse_unrestricted": 77.195531,
+          "p_value": 8.1e-05,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 29.6457,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 130.60125,
+          "sse_unrestricted": 65.688552,
+          "p_value": 7e-06,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2422,7 +2800,8 @@
         "observed_change": -27.7,
         "within_regime_change": -25.1157,
         "between_regime_change": 0.5634,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -2457,6 +2836,21 @@
           "fitted_start": 91.275,
           "fitted_end": 83.425,
           "change_within": -7.85
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2017,
+          "f_statistic": 33.774,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 279.907887,
+          "sse_unrestricted": 131.671825,
+          "p_value": 2e-06,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2550,7 +2944,8 @@
         "observed_change": -39.1,
         "within_regime_change": -43.2303,
         "between_regime_change": 6.2842,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 90 years and over": {
@@ -2596,6 +2991,34 @@
           "fitted_start": 191.5964,
           "fitted_end": 191.9836,
           "change_within": 0.3873
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 10.4619,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1742.704663,
+          "sse_unrestricted": 1292.108473,
+          "p_value": 0.002963,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2015,
+          "f_statistic": 28.1756,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1742.704663,
+          "sse_unrestricted": 898.677437,
+          "p_value": 1e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2696,7 +3119,8 @@
         "observed_change": -22.6,
         "within_regime_change": -21.2017,
         "between_regime_change": 3.6146,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     }
   },
@@ -2744,6 +3168,34 @@
           "fitted_start": 3.04,
           "fitted_end": 4.18,
           "change_within": 1.14
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2001,
+          "f_statistic": 41.4278,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 20.528299,
+          "sse_unrestricted": 8.621982,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2015,
+          "f_statistic": 11.0956,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 20.528299,
+          "sse_unrestricted": 14.985777,
+          "p_value": 0.002305,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2844,7 +3296,8 @@
         "observed_change": -4.2,
         "within_regime_change": -3.6621,
         "between_regime_change": 0.5693,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -2879,6 +3332,21 @@
           "fitted_start": 0.15,
           "fitted_end": 0.15,
           "change_within": -0.0
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2001,
+          "f_statistic": 15.4601,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.128758,
+          "sse_unrestricted": 0.08497,
+          "p_value": 0.00046,
+          "significant": true
         }
       ],
       "break_test": {
@@ -2972,7 +3440,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.1255,
         "between_regime_change": -0.0433,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 5 to 9 years": {
@@ -2997,6 +3466,7 @@
           "change_within": -0.0691
         }
       ],
+      "slope_change_tests": [],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 0.003107,
@@ -3115,6 +3585,21 @@
           "change_within": -0.013
         }
       ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2003,
+          "f_statistic": 14.7036,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.067988,
+          "sse_unrestricted": 0.045626,
+          "p_value": 0.0006,
+          "significant": true
+        }
+      ],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 0.022362,
@@ -3205,7 +3690,8 @@
         "observed_change": -0.2,
         "within_regime_change": -0.1168,
         "between_regime_change": -0.0359,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -3240,6 +3726,21 @@
           "fitted_start": 0.5337,
           "fitted_end": 0.4497,
           "change_within": -0.084
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2001,
+          "f_statistic": 50.5226,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.491823,
+          "sse_unrestricted": 0.183237,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -3333,7 +3834,8 @@
         "observed_change": -0.6,
         "within_regime_change": -0.5313,
         "between_regime_change": -0.033,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -3368,6 +3870,21 @@
           "fitted_start": 0.9644,
           "fitted_end": 0.9244,
           "change_within": -0.04
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 48.0516,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.794863,
+          "sse_unrestricted": 0.305515,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -3461,7 +3978,8 @@
         "observed_change": -0.6,
         "within_regime_change": -0.7138,
         "between_regime_change": 0.3334,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -3507,6 +4025,34 @@
           "fitted_start": 1.2782,
           "fitted_end": 1.3218,
           "change_within": 0.0436
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 38.6466,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.987224,
+          "sse_unrestricted": 0.868458,
+          "p_value": 1e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2015,
+          "f_statistic": 68.7324,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.987224,
+          "sse_unrestricted": 0.603821,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -3606,7 +4152,8 @@
         "observed_change": -0.2,
         "within_regime_change": -0.3402,
         "between_regime_change": 0.2298,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -3652,6 +4199,34 @@
           "fitted_start": 1.5244,
           "fitted_end": 1.6978,
           "change_within": 0.1733
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1997,
+          "f_statistic": 37.2208,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.581577,
+          "sse_unrestricted": 2.044715,
+          "p_value": 1e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 80.5033,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.581577,
+          "sse_unrestricted": 1.24383,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -3751,7 +4326,8 @@
         "observed_change": -0.3,
         "within_regime_change": -0.09,
         "between_regime_change": 0.0445,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -3786,6 +4362,21 @@
           "fitted_start": 1.0549,
           "fitted_end": 2.3143,
           "change_within": 1.2593
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2012,
+          "f_statistic": 138.8735,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 5.213128,
+          "sse_unrestricted": 0.9261,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -3878,7 +4469,8 @@
         "observed_change": 0.1,
         "within_regime_change": 0.1892,
         "between_regime_change": 0.0673,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -3913,6 +4505,21 @@
           "fitted_start": 1.86,
           "fitted_end": 2.8067,
           "change_within": 0.9467
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 119.8157,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 5.88147,
+          "sse_unrestricted": 1.177741,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4005,7 +4612,8 @@
         "observed_change": 0.3,
         "within_regime_change": -0.2201,
         "between_regime_change": 0.52,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -4040,6 +4648,21 @@
           "fitted_start": 2.62,
           "fitted_end": 3.3133,
           "change_within": 0.6933
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 86.1202,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.155951,
+          "sse_unrestricted": 1.073703,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4133,7 +4756,8 @@
         "observed_change": 0.1,
         "within_regime_change": -0.4144,
         "between_regime_change": 0.436,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -4168,6 +4792,21 @@
           "fitted_start": 4.86,
           "fitted_end": 4.54,
           "change_within": -0.32
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 44.0084,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 7.659056,
+          "sse_unrestricted": 3.10467,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4261,7 +4900,8 @@
         "observed_change": -0.8,
         "within_regime_change": -1.6166,
         "between_regime_change": 1.3718,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -4307,6 +4947,34 @@
           "fitted_start": 7.0,
           "fitted_end": 6.08,
           "change_within": -0.92
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 35.217,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 10.7004,
+          "sse_unrestricted": 4.922217,
+          "p_value": 2e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 54.8141,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 10.7004,
+          "sse_unrestricted": 3.784892,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4407,7 +5075,8 @@
         "observed_change": -2.2,
         "within_regime_change": -2.9585,
         "between_regime_change": 0.9948,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -4464,6 +5133,47 @@
           "fitted_start": 9.9,
           "fitted_end": 9.18,
           "change_within": -0.72
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1997,
+          "f_statistic": 28.346,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 28.955587,
+          "sse_unrestricted": 14.888221,
+          "p_value": 9e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2009,
+          "f_statistic": 107.5288,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 28.955587,
+          "sse_unrestricted": 6.316258,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 45.051,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 28.955587,
+          "sse_unrestricted": 11.57436,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4571,7 +5281,8 @@
         "observed_change": -4.3,
         "within_regime_change": -3.4456,
         "between_regime_change": -0.397,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -4617,6 +5328,34 @@
           "fitted_start": 12.5858,
           "fitted_end": 13.5208,
           "change_within": 0.935
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 47.6617,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 60.288736,
+          "sse_unrestricted": 23.288981,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 111.4714,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 60.288736,
+          "sse_unrestricted": 12.784651,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4717,7 +5456,8 @@
         "observed_change": -8.4,
         "within_regime_change": -4.0626,
         "between_regime_change": -2.9965,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -4752,6 +5492,21 @@
           "fitted_start": 20.4743,
           "fitted_end": 19.4507,
           "change_within": -1.0235
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2009,
+          "f_statistic": 144.2713,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 102.600232,
+          "sse_unrestricted": 17.66216,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4845,7 +5600,8 @@
         "observed_change": -14.9,
         "within_regime_change": -13.0726,
         "between_regime_change": -1.4924,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -4880,6 +5636,21 @@
           "fitted_start": 33.9429,
           "fitted_end": 31.0714,
           "change_within": -2.8714
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2011,
+          "f_statistic": 182.1204,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 150.015551,
+          "sse_unrestricted": 21.216569,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -4973,7 +5744,8 @@
         "observed_change": -26.4,
         "within_regime_change": -23.5643,
         "between_regime_change": -1.2066,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -5019,6 +5791,34 @@
           "fitted_start": 59.96,
           "fitted_end": 51.48,
           "change_within": -8.48
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2002,
+          "f_statistic": 33.7998,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 405.615111,
+          "sse_unrestricted": 190.728826,
+          "p_value": 2e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 31.2505,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 405.615111,
+          "sse_unrestricted": 198.66703,
+          "p_value": 4e-06,
+          "significant": true
         }
       ],
       "break_test": {
@@ -5119,7 +5919,8 @@
         "observed_change": -42.1,
         "within_regime_change": -38.3137,
         "between_regime_change": 0.7916,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -5165,6 +5966,34 @@
           "fitted_start": 109.1833,
           "fitted_end": 98.2417,
           "change_within": -10.9417
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 27.7421,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 873.389613,
+          "sse_unrestricted": 453.770881,
+          "p_value": 1.1e-05,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2017,
+          "f_statistic": 23.1195,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 873.389613,
+          "sse_unrestricted": 493.258994,
+          "p_value": 4e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -5265,7 +6094,8 @@
         "observed_change": -54.2,
         "within_regime_change": -43.7362,
         "between_regime_change": -3.4264,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 90 years and over": {
@@ -5311,6 +6141,34 @@
           "fitted_start": 205.6857,
           "fitted_end": 216.3286,
           "change_within": 10.6429
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2002,
+          "f_statistic": 13.0858,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2807.003838,
+          "sse_unrestricted": 1954.47563,
+          "p_value": 0.00108,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2011,
+          "f_statistic": 15.1673,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2807.003838,
+          "sse_unrestricted": 1864.402725,
+          "p_value": 0.00051,
+          "significant": true
         }
       ],
       "break_test": {
@@ -5411,7 +6269,8 @@
         "observed_change": -28.2,
         "within_regime_change": 14.4932,
         "between_regime_change": -33.5665,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     }
   },
@@ -5448,6 +6307,21 @@
           "fitted_start": 4.0124,
           "fitted_end": 3.3048,
           "change_within": -0.7076
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1996,
+          "f_statistic": 23.8047,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 9.148492,
+          "sse_unrestricted": 5.100946,
+          "p_value": 3.3e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -5541,7 +6415,8 @@
         "observed_change": -2.1,
         "within_regime_change": -0.1076,
         "between_regime_change": -1.6976,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 1 to 4 years": {
@@ -5566,6 +6441,7 @@
           "change_within": -0.0852
         }
       ],
+      "slope_change_tests": [],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 0.014481,
@@ -5684,6 +6560,21 @@
           "change_within": 0.0
         }
       ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2012,
+          "f_statistic": 13.2654,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.065635,
+          "sse_unrestricted": 0.045511,
+          "p_value": 0.00101,
+          "significant": true
+        }
+      ],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 0.020124,
@@ -5774,7 +6665,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.1117,
         "between_regime_change": 0.0662,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 10 to 14 years": {
@@ -5809,6 +6701,21 @@
           "fitted_start": 0.1,
           "fitted_end": 0.1,
           "change_within": 0.0
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 16.7949,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.061769,
+          "sse_unrestricted": 0.0396,
+          "p_value": 0.000291,
+          "significant": true
         }
       ],
       "break_test": {
@@ -5902,7 +6809,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.144,
         "between_regime_change": 0.066,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 15 to 19 years": {
@@ -5937,6 +6845,21 @@
           "fitted_start": 0.3244,
           "fitted_end": 0.2978,
           "change_within": -0.0267
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 17.5429,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.198411,
+          "sse_unrestricted": 0.125199,
+          "p_value": 0.000227,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6030,7 +6953,8 @@
         "observed_change": -0.2,
         "within_regime_change": -0.2501,
         "between_regime_change": 0.1414,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 20 to 24 years": {
@@ -6065,6 +6989,21 @@
           "fitted_start": 0.3091,
           "fitted_end": 0.4266,
           "change_within": 0.1175
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1997,
+          "f_statistic": 15.5126,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.209216,
+          "sse_unrestricted": 0.137906,
+          "p_value": 0.000452,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6157,7 +7096,8 @@
         "observed_change": 0.1,
         "within_regime_change": 0.0461,
         "between_regime_change": -0.0909,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 25 to 29 years": {
@@ -6203,6 +7143,34 @@
           "fitted_start": 0.4917,
           "fitted_end": 0.5583,
           "change_within": 0.0667
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1996,
+          "f_statistic": 21.9362,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.231248,
+          "sse_unrestricted": 0.133576,
+          "p_value": 5.7e-05,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2017,
+          "f_statistic": 56.4476,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.231248,
+          "sse_unrestricted": 0.08025,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6302,7 +7270,8 @@
         "observed_change": 0.0,
         "within_regime_change": 0.0277,
         "between_regime_change": 0.0325,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 30 to 34 years": {
@@ -6337,6 +7306,21 @@
           "fitted_start": 0.5244,
           "fitted_end": 0.7644,
           "change_within": 0.24
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 39.5961,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.359346,
+          "sse_unrestricted": 0.154899,
+          "p_value": 1e-06,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6429,7 +7413,8 @@
         "observed_change": 0.3,
         "within_regime_change": 0.0886,
         "between_regime_change": 0.0984,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 35 to 39 years": {
@@ -6464,6 +7449,21 @@
           "fitted_start": 0.7533,
           "fitted_end": 0.98,
           "change_within": 0.2267
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 68.2475,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.682047,
+          "sse_unrestricted": 0.208264,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6556,7 +7556,8 @@
         "observed_change": -0.1,
         "within_regime_change": -0.1278,
         "between_regime_change": 0.2253,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 40 to 44 years": {
@@ -6624,6 +7625,60 @@
           "fitted_start": 0.7527,
           "fitted_end": 1.2873,
           "change_within": 0.5345
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1996,
+          "f_statistic": 0.1472,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.683144,
+          "sse_unrestricted": 0.679808,
+          "p_value": 0.703893,
+          "significant": false
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2005,
+          "f_statistic": 4.4018,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.683144,
+          "sse_unrestricted": 0.595734,
+          "p_value": 0.044427,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 33.1588,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.683144,
+          "sse_unrestricted": 0.324489,
+          "p_value": 3e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2015,
+          "f_statistic": 46.0016,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.683144,
+          "sse_unrestricted": 0.269657,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6738,7 +7793,8 @@
         "observed_change": 0.2,
         "within_regime_change": 0.1078,
         "between_regime_change": 0.1327,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 45 to 49 years": {
@@ -6773,6 +7829,21 @@
           "fitted_start": 1.2474,
           "fitted_end": 1.6859,
           "change_within": 0.4385
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2013,
+          "f_statistic": 24.7142,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.929812,
+          "sse_unrestricted": 0.50982,
+          "p_value": 2.5e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -6866,7 +7937,8 @@
         "observed_change": -0.2,
         "within_regime_change": 0.0733,
         "between_regime_change": -0.2617,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 50 to 54 years": {
@@ -6912,6 +7984,34 @@
           "fitted_start": 2.2378,
           "fitted_end": 2.1844,
           "change_within": -0.0533
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2008,
+          "f_statistic": 4.8069,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.029164,
+          "sse_unrestricted": 0.887034,
+          "p_value": 0.036239,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 10.8067,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.029164,
+          "sse_unrestricted": 0.756615,
+          "p_value": 0.002583,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7011,7 +8111,8 @@
         "observed_change": -1.4,
         "within_regime_change": -1.5249,
         "between_regime_change": 0.7714,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 55 to 59 years": {
@@ -7046,6 +8147,21 @@
           "fitted_start": 3.4489,
           "fitted_end": 3.3289,
           "change_within": -0.12
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2016,
+          "f_statistic": 23.9838,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.946512,
+          "sse_unrestricted": 1.08172,
+          "p_value": 3.1e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7139,7 +8255,8 @@
         "observed_change": -1.6,
         "within_regime_change": -1.7945,
         "between_regime_change": 0.3239,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 60 to 64 years": {
@@ -7174,6 +8291,21 @@
           "fitted_start": 5.08,
           "fitted_end": 5.0057,
           "change_within": -0.0743
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2011,
+          "f_statistic": 17.313,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.031752,
+          "sse_unrestricted": 2.556436,
+          "p_value": 0.000245,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7267,7 +8399,8 @@
         "observed_change": -2.3,
         "within_regime_change": -1.8743,
         "between_regime_change": -0.4353,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 65 to 69 years": {
@@ -7313,6 +8446,34 @@
           "fitted_start": 7.68,
           "fitted_end": 7.8,
           "change_within": 0.12
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1997,
+          "f_statistic": 10.5965,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 6.835077,
+          "sse_unrestricted": 5.050989,
+          "p_value": 0.002808,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 31.8361,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 6.835077,
+          "sse_unrestricted": 3.316059,
+          "p_value": 4e-06,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7413,7 +8574,8 @@
         "observed_change": -3.9,
         "within_regime_change": -3.4921,
         "between_regime_change": -0.3628,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 70 to 74 years": {
@@ -7448,6 +8610,21 @@
           "fitted_start": 13.1681,
           "fitted_end": 12.0934,
           "change_within": -1.0747
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2012,
+          "f_statistic": 18.2692,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 11.610041,
+          "sse_unrestricted": 7.21581,
+          "p_value": 0.000179,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7541,7 +8718,8 @@
         "observed_change": -7.8,
         "within_regime_change": -6.2461,
         "between_regime_change": -0.7495,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 75 to 79 years": {
@@ -7576,6 +8754,21 @@
           "fitted_start": 24.5345,
           "fitted_end": 20.7433,
           "change_within": -3.7912
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2007,
+          "f_statistic": 24.5695,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 45.554426,
+          "sse_unrestricted": 25.043899,
+          "p_value": 2.6e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7669,7 +8862,8 @@
         "observed_change": -12.5,
         "within_regime_change": -9.8243,
         "between_regime_change": -2.303,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 80 to 84 years": {
@@ -7715,6 +8909,34 @@
           "fitted_start": 42.8458,
           "fitted_end": 37.7408,
           "change_within": -5.105
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 10.0053,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 71.154576,
+          "sse_unrestricted": 53.358899,
+          "p_value": 0.003561,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 20.686,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 71.154576,
+          "sse_unrestricted": 42.114929,
+          "p_value": 8.3e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7815,7 +9037,8 @@
         "observed_change": -19.8,
         "within_regime_change": -11.6486,
         "between_regime_change": -6.4945,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 85 to 89 years": {
@@ -7850,6 +9073,21 @@
           "fitted_start": 82.3132,
           "fitted_end": 72.5368,
           "change_within": -9.7765
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2009,
+          "f_statistic": 23.4546,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 170.979951,
+          "sse_unrestricted": 95.958054,
+          "p_value": 3.6e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -7943,7 +9181,8 @@
         "observed_change": -33.1,
         "within_regime_change": -25.4747,
         "between_regime_change": -5.4475,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Age at time of death, 90 years and over": {
@@ -8000,6 +9239,47 @@
           "fitted_start": 186.3583,
           "fitted_end": 177.0917,
           "change_within": -9.2667
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 1999,
+          "f_statistic": 15.0018,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1739.248758,
+          "sse_unrestricted": 1159.451662,
+          "p_value": 0.00054,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 29.3698,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1739.248758,
+          "sse_unrestricted": 878.855018,
+          "p_value": 7e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2017,
+          "f_statistic": 28.0264,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1739.248758,
+          "sse_unrestricted": 899.202206,
+          "p_value": 1e-05,
+          "significant": true
         }
       ],
       "break_test": {
@@ -8107,7 +9387,8 @@
         "observed_change": -23.6,
         "within_regime_change": -8.4952,
         "between_regime_change": -15.5274,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     }
   }

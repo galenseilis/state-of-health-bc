@@ -1,10 +1,10 @@
 {
   "start": 2015,
-  "end": 2024,
-  "n": 10,
+  "end": 2025,
+  "n": 11,
   "overall": {
-    "slope_per_year": 0.4703,
-    "slope_per_decade": 4.703
+    "slope_per_year": 0.43,
+    "slope_per_decade": 4.3
   },
   "change_point": null,
   "change_points": [],
@@ -12,33 +12,34 @@
     {
       "label": "regime 1",
       "start": 2015,
-      "end": 2024,
-      "slope_per_year": 0.4703,
-      "slope_per_decade": 4.703,
-      "fitted_start": 11.5836,
-      "fitted_end": 15.8164,
-      "change_within": 4.2327
+      "end": 2025,
+      "slope_per_year": 0.43,
+      "slope_per_decade": 4.3,
+      "fitted_start": 11.7045,
+      "fitted_end": 16.0045,
+      "change_within": 4.3
     }
   ],
+  "slope_change_tests": [],
   "break_test": {
     "method": "residual-permutation test (H0: one straight line)",
-    "statistic_sse_reduction": 3.833242,
+    "statistic_sse_reduction": 2.762225,
     "n_permutations": 1999,
     "seed": 20241018,
-    "p_value": 0.302,
+    "p_value": 0.571,
     "significant": false,
-    "change_point": 2020
+    "change_point": 2021
   },
   "trend_test": {
     "method": "Kendall tau (rank-based monotone trend)",
-    "tau": 0.5111,
-    "p_value": 0.046623,
+    "tau": 0.4909,
+    "p_value": 0.040532,
     "significant": true
   },
   "stationarity": {
     "verdict": "nonstationary",
     "reasons": [
-      "monotone trend (Kendall tau=0.5111, p=0.046623)"
+      "monotone trend (Kendall tau=0.4909, p=0.040532)"
     ]
   },
   "regime_selection": {
@@ -47,29 +48,29 @@
     "max_breaks_considered": 1,
     "n_breaks": 0,
     "years": [],
-    "sse": 13.312242,
-    "bic": 7.4662,
+    "sse": 13.848273,
+    "bic": 7.3287,
     "candidates": [
       {
         "n_breaks": 0,
         "years": [],
-        "sse": 13.312242,
-        "bic": 7.4662
+        "sse": 13.848273,
+        "bic": 7.3287
       },
       {
         "n_breaks": 1,
         "years": [
-          2020
+          2021
         ],
-        "sse": 9.479,
-        "bic": 10.9779
+        "sse": 11.086048,
+        "bic": 12.0752
       }
     ]
   },
   "jumps": [],
   "decomposition": {
-    "observed_change": 4.1,
-    "within_regime_change": 4.2327,
+    "observed_change": 3.7,
+    "within_regime_change": 4.3,
     "between_regime_change": 0,
     "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
   },

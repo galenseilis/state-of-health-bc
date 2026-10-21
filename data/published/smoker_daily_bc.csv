@@ -29,3 +29,6 @@ ref_date,geo,age_group,sex,characteristic,measure,value,uom,status
 2024,British Columbia,"Total, 18 years and over",Both sexes,Percent,"Current smoker, daily",5.6,Percent,
 2024,British Columbia,"Total, 18 years and over",Females,Percent,"Current smoker, daily",4.5,Percent,
 2024,British Columbia,"Total, 18 years and over",Males,Percent,"Current smoker, daily",6.8,Percent,
+2025,British Columbia,"Total, 18 years and over",Both sexes,Percent,"Current smoker, daily",5.2,Percent,
+2025,British Columbia,"Total, 18 years and over",Females,Percent,"Current smoker, daily",4.5,Percent,
+2025,British Columbia,"Total, 18 years and over",Males,Percent,"Current smoker, daily",5.9,Percent,

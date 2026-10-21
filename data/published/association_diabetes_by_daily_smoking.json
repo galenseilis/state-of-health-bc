@@ -1,0 +1,78 @@
+{
+  "pooled": {
+    "window": {
+      "start": 2015,
+      "end": 2025,
+      "n": 11
+    },
+    "pearson": {
+      "r": -0.4333,
+      "p_value": 0.183123
+    },
+    "spearman": {
+      "rho": -0.357,
+      "p_value": 0.281163
+    },
+    "ols": {
+      "slope": -0.146462,
+      "intercept": 7.717517,
+      "std_error": 0.101554,
+      "t_statistic": -1.4422,
+      "p_value": 0.183123,
+      "significant": false
+    }
+  },
+  "subperiods": [],
+  "rolling": [
+    {
+      "start": 2015,
+      "end": 2022,
+      "n": 8,
+      "slope": -0.062009,
+      "p_value": 0.700478
+    },
+    {
+      "start": 2016,
+      "end": 2023,
+      "n": 8,
+      "slope": -0.116264,
+      "p_value": 0.526762
+    },
+    {
+      "start": 2017,
+      "end": 2024,
+      "n": 8,
+      "slope": -0.130181,
+      "p_value": 0.565865
+    },
+    {
+      "start": 2018,
+      "end": 2025,
+      "n": 8,
+      "slope": -0.181593,
+      "p_value": 0.525345
+    }
+  ],
+  "rolling_window": 8,
+  "stability": {
+    "stable": false,
+    "tolerance": 0.5,
+    "verdict": "undetermined",
+    "reasons": [
+      "series too short to split into two testable subperiods"
+    ],
+    "interpretation": "stable = one pooled estimate is defensible over the window; time-varying = report the subperiod/rolling estimates instead; undetermined = too few points to test stability"
+  },
+  "key": "diabetes_by_daily_smoking",
+  "domain": "behavioural",
+  "title": "Diabetes prevalence vs daily smoking prevalence",
+  "caveat": "Ecological, annual, province-level; not individual-level.",
+  "outcome": {
+    "file": "diabetes_bc.csv",
+    "measure": "Diabetes"
+  },
+  "determinant": {
+    "file": "smoker_daily_bc.csv",
+    "measure": "Current smoker, daily"
+  }
+}

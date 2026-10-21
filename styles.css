@@ -1,0 +1,8 @@
+/* Observable Plot draws its own canvas with a white background
+   (`.plot-xxxx { background: white }`). On the dark theme the plot's text
+   uses `currentColor`, so it inherits the page's light colour and becomes
+   unreadable against that white canvas. Make the canvas transparent so the
+   plot inherits the theme background instead. */
+.observablehq svg[class^="plot-"] {
+  background: transparent;
+}

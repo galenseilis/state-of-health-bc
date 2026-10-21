@@ -1,56 +1,72 @@
 {
   "start": 2015,
-  "end": 2024,
-  "n": 10,
+  "end": 2025,
+  "n": 11,
   "overall": {
-    "slope_per_year": -0.44,
-    "slope_per_decade": -4.4
+    "slope_per_year": -0.4391,
+    "slope_per_decade": -4.3909
   },
-  "change_point": 2020,
+  "change_point": 2021,
   "change_points": [
-    2020
+    2021
   ],
   "segments": [
     {
       "label": "before",
       "start": 2015,
-      "end": 2019,
-      "slope_per_year": -0.73,
-      "slope_per_decade": -7.3,
-      "fitted_start": 10.18,
-      "fitted_end": 7.26,
-      "change_within": -2.92
+      "end": 2020,
+      "slope_per_year": -0.7771,
+      "slope_per_decade": -7.7714,
+      "fitted_start": 10.2429,
+      "fitted_end": 6.3571,
+      "change_within": -3.8857
     },
     {
       "label": "after",
-      "start": 2020,
-      "end": 2024,
-      "slope_per_year": -0.1,
-      "slope_per_decade": -1.0,
-      "fitted_start": 6.68,
-      "fitted_end": 6.28,
-      "change_within": -0.4
+      "start": 2021,
+      "end": 2025,
+      "slope_per_year": -0.44,
+      "slope_per_decade": -4.4,
+      "fitted_start": 7.16,
+      "fitted_end": 5.4,
+      "change_within": -1.76
+    }
+  ],
+  "slope_change_tests": [
+    {
+      "method": "Chow-style F-test for a slope change at a known break",
+      "change_point": 2021,
+      "f_statistic": 11.7669,
+      "df": [
+        1,
+        7
+      ],
+      "sse_restricted": 3.868273,
+      "sse_unrestricted": 1.442857,
+      "p_value": 0.010981,
+      "significant": true
     }
   ],
   "break_test": {
     "method": "residual-permutation test (H0: one straight line)",
-    "statistic_sse_reduction": 2.001,
+    "statistic_sse_reduction": 2.425416,
     "n_permutations": 1999,
     "seed": 20241018,
-    "p_value": 0.0745,
-    "significant": false,
-    "change_point": 2020
+    "p_value": 0.0325,
+    "significant": true,
+    "change_point": 2021
   },
   "trend_test": {
     "method": "Kendall tau (rank-based monotone trend)",
-    "tau": -0.7191,
-    "p_value": 0.004057,
+    "tau": -0.7707,
+    "p_value": 0.001039,
     "significant": true
   },
   "stationarity": {
     "verdict": "nonstationary",
     "reasons": [
-      "monotone trend (Kendall tau=-0.7191, p=0.004057)"
+      "monotone trend (Kendall tau=-0.7707, p=0.001039)",
+      "break beyond a straight line (permutation test, p=0.0325)"
     ]
   },
   "regime_selection": {
@@ -59,40 +75,41 @@
     "max_breaks_considered": 1,
     "n_breaks": 1,
     "years": [
-      2020
+      2021
     ],
-    "sse": 1.867,
-    "bic": -5.2696,
+    "sse": 1.442857,
+    "bic": -10.3545,
     "candidates": [
       {
         "n_breaks": 0,
         "years": [],
-        "sse": 3.868,
-        "bic": -4.8933
+        "sse": 3.868273,
+        "bic": -6.7002
       },
       {
         "n_breaks": 1,
         "years": [
-          2020
+          2021
         ],
-        "sse": 1.867,
-        "bic": -5.2696
+        "sse": 1.442857,
+        "bic": -10.3545
       }
     ]
   },
   "jumps": [
     {
-      "year": 2020,
-      "previous_level": 6.53,
-      "next_level": 6.68,
-      "jump": 0.15
+      "year": 2021,
+      "previous_level": 5.58,
+      "next_level": 7.16,
+      "jump": 1.58
     }
   ],
   "decomposition": {
-    "observed_change": -4.1,
-    "within_regime_change": -3.32,
-    "between_regime_change": 0.15,
-    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+    "observed_change": -4.5,
+    "within_regime_change": -5.6457,
+    "between_regime_change": 1.58,
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+    "slope_change_significant": true
   },
   "series": "Percent",
   "sex": "Both sexes"

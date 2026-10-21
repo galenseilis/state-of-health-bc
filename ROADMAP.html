@@ -94,6 +94,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -189,12 +190,20 @@ div.csl-indent {
  <span class="dropdown-text">Descriptive report</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./reference/association-methods.html">
+ <span class="dropdown-text">Association and stability methods</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./reference/indicator-mortality-rates-bc.html">
  <span class="dropdown-text">Indicator: Mortality rates</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./reference/indicator-life-expectancy-bc.html">
  <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reference/indicator-life-expectancy-regions-bc.html">
+ <span class="dropdown-text">Indicator: Regional life expectancy</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./reference/indicator-mortality-inequality-bc.html">
@@ -364,7 +373,7 @@ div.csl-indent {
 <li>Each indicator page states its provenance and known limitations.</li>
 <li>Every indicator’s page states whether the series is stationary over the covered window; nonstationary series carry their trend/regime interpretation, not a single summary value.</li>
 </ul>
-<p><strong>Status:</strong> in progress — the pipeline builds and publishes indicators from catalogued Statistics Canada tables, each with regenerable charts and formal regime dating: piecewise-linear segmentation with BIC selection, a residual-permutation break test, and a Kendall-tau trend test, so every series — including the sex breakdowns — is labelled stationary or not over its observed window. The mortality indicator (13-10-0710-01) carries crude and age-standardised (WHO standard) series; life expectancy at birth (13-10-0837-01) carries annual levels by sex; a survey family (13-10-0905-01, ten series across morbidity, mental health, subjective and social wellbeing, and access to care) widens the report beyond mortality; and a sub-provincial view (13-10-0931-01) reports the age-standardised premature-mortality gap across BC’s five health authorities and 17 health service delivery areas. The mortality indicator is also decomposed by five-year age group, each with its own trend and regime summary. Edition 0.3 of the descriptive report (“State of health in BC”) is published and regenerates end-to-end from the published datasets. Outstanding: sub-provincial views for the survey and life-expectancy indicators, and regime-aware within-versus-across-regime comparisons. <strong>Depends on:</strong> M2</p>
+<p><strong>Status:</strong> complete — the pipeline builds and publishes indicators from catalogued Statistics Canada tables, each with regenerable charts and formal regime dating: piecewise-linear segmentation with BIC selection, a residual-permutation break test, and a Kendall-tau trend test, so every series — including the sex breakdowns — is labelled stationary or not over its observed window. The mortality indicator (13-10-0710-01) carries crude and age-standardised (WHO standard) series; life expectancy at birth (13-10-0837-01) carries annual levels by sex; a survey family (13-10-0905-01, ten series across morbidity, mental health, subjective and social wellbeing, and access to care) widens the report beyond mortality; and a sub-provincial view (13-10-0931-01) reports the age-standardised premature-mortality gap across BC’s five health authorities and 17 health service delivery areas. Sub-provincial views now extend beyond mortality: regional life expectancy (13-10-0389-01, health authorities and 16 service delivery areas, 2006/2008–2015/2017) with per-region trajectories and a widening regional gap, and the survey family at service-delivery-area resolution (13-10-0972-01, nine measures over five pooled two-year periods), each with honest pooling caveats. The mortality indicator is also decomposed by five-year age group, each with its own trend and regime summary. Edition 0.5 of the descriptive report (“State of health in BC”) is published and regenerates end-to-end from the published datasets. The within-versus-across-regime split is now inferential: every dated break carries a Chow-style F-test of equal slopes either side of the break, so a “rules change” means a significant change in pace, not merely level. Remaining follow-up (external): replace the pre-pandemic regional life-expectancy table if Statistics Canada republishes it on current boundaries; the reporting path is ready for the newer table. <strong>Depends on:</strong> M2</p>
 <hr>
 </section>
 <section id="m4-statistical-dependence" class="level2">
@@ -383,7 +392,7 @@ div.csl-indent {
 <li>Analyses are reproducible from the M2 pipeline.</li>
 <li>Every reported association states the time window it was estimated on and whether the relationship was found stable within that window.</li>
 </ul>
-<p><strong>Status:</strong> not started <strong>Depends on:</strong> M3</p>
+<p><strong>Status:</strong> in progress — the association scaffold exists: the <code>associations</code> module measures Pearson/Spearman correlation and an OLS slope with its standard error and p-value, and applies the <strong>stability-before-pooling</strong> rule M4 requires (contiguous subperiods and rolling windows; a pooled estimate is reported only when subperiod estimates agree in sign and stay within a stated tolerance of the pooled slope). Regime-aware estimation re-runs the association inside each dated break. The <code>associate</code> CLI lists and builds candidate pairs drawn from the published indicator family. <strong>Known limitation:</strong> the annual survey and life-expectancy series are too short (10–11 points) to form two testable subperiods, so their stability verdict is honestly <code>undetermined</code> — a pooled number is not yet defensible. The next step is to bring in longer determinant series (economic, environmental, health-system) from the catalogue so the stability machinery has windows wide enough to resolve. <strong>Depends on:</strong> M3</p>
 <hr>
 </section>
 <section id="m5-causal-structures" class="level2">

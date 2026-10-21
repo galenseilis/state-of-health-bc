@@ -131,6 +131,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -226,12 +227,20 @@ div.csl-indent {
  <span class="dropdown-text">Descriptive report</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reference/association-methods.html">
+ <span class="dropdown-text">Association and stability methods</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reference/indicator-mortality-rates-bc.html">
  <span class="dropdown-text">Indicator: Mortality rates</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reference/indicator-life-expectancy-bc.html">
  <span class="dropdown-text">Indicator: Life expectancy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/indicator-life-expectancy-regions-bc.html">
+ <span class="dropdown-text">Indicator: Regional life expectancy</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reference/indicator-mortality-inequality-bc.html">
@@ -300,6 +309,10 @@ div.csl-indent {
   <ul>
   <li><a href="#provenance" id="toc-provenance" class="nav-link active" data-scroll-target="#provenance">Provenance</a></li>
   <li><a href="#the-family" id="toc-the-family" class="nav-link" data-scroll-target="#the-family">The family</a></li>
+  <li><a href="#what-the-family-shows" id="toc-what-the-family-shows" class="nav-link" data-scroll-target="#what-the-family-shows">What the family shows</a></li>
+  <li><a href="#the-regional-view" id="toc-the-regional-view" class="nav-link" data-scroll-target="#the-regional-view">The regional view</a></li>
+  <li><a href="#caveats" id="toc-caveats" class="nav-link" data-scroll-target="#caveats">Caveats</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/galenseilis/state-of-health-bc/edit/main/reference/indicator-wellbeing-cchs-bc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/galenseilis/state-of-health-bc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -343,11 +356,11 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td><strong>Definition</strong></td>
-<td>Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2024 <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.</a>)</span></td>
+<td>Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2024 <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span></td>
 </tr>
 <tr class="odd">
 <td><strong>Source</strong></td>
-<td>Statistics Canada, table 13-10-0905-01, <em>Health indicator statistics, annual estimates</em> (Canadian Community Health Survey) <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.</a>)</span></td>
+<td>Statistics Canada, table 13-10-0905-01, <em>Health indicator statistics, annual estimates</em> (Canadian Community Health Survey) <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span></td>
 </tr>
 <tr class="even">
 <td><strong>Access</strong></td>
@@ -359,7 +372,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td><strong>Geography</strong></td>
-<td>British Columbia (no sub-provincial rows in this table)</td>
+<td>British Columbia (this table has no sub-provincial rows; the <a href="#the-regional-view">regional view</a> uses table 13-10-0972-01)</td>
 </tr>
 <tr class="odd">
 <td><strong>Coverage</strong></td>
@@ -383,16 +396,16 @@ div.csl-indent {
 <section id="the-family" class="level2">
 <h2 class="anchored" data-anchor-id="the-family">The family</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="35" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>tLife <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/life_satisfaction_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>tPhyH <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/perceived_health_fair_poor_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>tMentH <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/perceived_mental_health_fair_poor_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>tBelong <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/sense_of_belonging_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>tAnx <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/anxiety_disorder_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>tMood <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/mood_disorder_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>tDiab <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/diabetes_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>tBp <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/high_blood_pressure_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>tProv <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/has_regular_provider_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>tSmoke <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/smoker_daily_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="35" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>tLife <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/life_satisfaction_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>tPhyH <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/perceived_health_fair_poor_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>tMentH <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/perceived_mental_health_fair_poor_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>tBelong <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/sense_of_belonging_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>tAnx <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/anxiety_disorder_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>tMood <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/mood_disorder_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>tDiab <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/diabetes_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>tBp <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/high_blood_pressure_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>tProv <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/has_regular_provider_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>tSmoke <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/smoker_daily_bc_trend.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -523,86 +536,111 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<pre><code>direction: s.direction,
-slope_per_decade: t.overall.slope_per_decade,
-verdict: t.stationarity.verdict,
-change_point: cp,
-segments: segs</code></pre>
-<p>} }) Inputs.table(family, { columns: [“label”, “domain”, “direction”, “slope_per_decade”, “verdict”, “change_point”, “segments”], header: { label: “series”, domain: “domain”, direction: “better if…”, slope_per_decade: “slope/decade (pp)”, verdict: “stationarity”, change_point: “largest break”, segments: “regimes (pp/decade)” }, width: {label: 210, segments: 240} })</p>
-<pre><code>
-Each slope is in percentage points per decade over 2015–2024, for both
-sexes; a positive slope is not automatically good or bad — the *better
-if…* column states the direction that the measurement treats as
-favourable. `stationarity` is the pipeline's label from the formal tests
-(stationary, nonstationary, or undetermined where the series is too short
-for the test to have power); `largest break` is the BIC-selected change
-point, where one exists.
+<p>Each slope is in percentage points per decade over 2015–2024, for both sexes; a positive slope is not automatically good or bad — the <em>better if…</em> column states the direction that the measurement treats as favourable. <code>stationarity</code> is the pipeline’s label from the formal tests (stationary, nonstationary, or undetermined where the series is too short for the test to have power); <code>largest break</code> is the BIC-selected change point, where one exists.</p>
+</section>
+<section id="what-the-family-shows" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-family-shows">What the family shows</h2>
+<p>The series are not all moving the same way, and the direction of movement follows the direction of the measurement:</p>
+<ul>
+<li><strong>Wellbeing is falling.</strong> Life satisfaction (<code>-11.5</code> pp/decade; break at 2020) and sense of belonging (<code>-10.6</code> pp/decade; break at
+<ol start="2020" type="1">
+<li>both fell sharply, and both are dated to 2020 by the pipeline.</li>
+</ol></li>
+<li><strong>Poor self-rated state is rising.</strong> Perceived mental health fair or poor rose <code>+13.9</code> pp/decade and perceived health fair or poor <code>+4.7</code> pp/decade; both are nonstationary.</li>
+<li><strong>Mental-health conditions are rising.</strong> Anxiety (<code>+8.4</code> pp/decade) and mood disorders (<code>+5.5</code> pp/decade, break at 2020) both increased.</li>
+<li><strong>Some behaviours improve.</strong> Daily smoking fell <code>-4.4</code> pp/decade, though the regime split at 2020 shows the decline flattening after 2020 (<code>-7.3</code> before, <code>-1.0</code> after).</li>
+<li><strong>Two series are flat.</strong> Diabetes (<code>+0.8</code>) and having a regular healthcare provider (<code>-2.1</code>) are labelled <strong>stationary</strong> over the window — no evidence of a trend beyond year-to-year noise.</li>
+</ul>
+<p>Read together, the family is a picture of rising self-reported distress and falling life evaluation over a decade, with the clearest breaks coinciding with 2020. The pipeline dates those breaks; this page does not claim they are caused by the pandemic.</p>
+</section>
+<section id="the-regional-view" class="level2">
+<h2 class="anchored" data-anchor-id="the-regional-view">The regional view</h2>
+<p>The same nine measures (all but <em>has a regular healthcare provider</em>, which the table does not carry) are published for BC’s 16 health service delivery areas from Statistics Canada table 13-10-0972-01 <span class="citation" data-cites="statcan_health_regions_cchs">(<a href="#ref-statcan_health_regions_cchs" role="doc-biblioref">Statistics Canada, n.d.-a</a>)</span>, as five pooled two-year periods over the same 2015–2024 window.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="130" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 129;"><span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/cchs_bc_regions_summary.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>shortRegion <span class="op">=</span> n <span class="kw">=&gt;</span> n<span class="op">.</span><span class="fu">replace</span>(<span class="st">" Health Service Delivery Area"</span><span class="op">,</span> <span class="st">""</span>)</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>regRows <span class="op">=</span> reg<span class="op">.</span><span class="at">series</span><span class="op">.</span><span class="fu">map</span>(s <span class="kw">=&gt;</span> {</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> spread <span class="op">=</span> s<span class="op">.</span><span class="at">spread</span><span class="op">.</span><span class="at">health_service_delivery_area</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> period <span class="op">=</span> reg<span class="op">.</span><span class="at">reference_periods</span>[reg<span class="op">.</span><span class="at">reference_periods</span><span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> key <span class="op">=</span> spread[period] <span class="op">?</span> period <span class="op">:</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(spread)<span class="op">.</span><span class="fu">sort</span>()<span class="op">.</span><span class="fu">pop</span>()</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> d <span class="op">=</span> spread[key]</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>    <span class="dt">indicator</span><span class="op">:</span> s<span class="op">.</span><span class="at">indicator</span><span class="op">.</span><span class="fu">replace</span>(<span class="st">", satisfied or very satisfied"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", somewhat strong or very strong"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", fair or poor"</span><span class="op">,</span> <span class="st">" (fair/poor)"</span>)<span class="op">,</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>    <span class="dt">period</span><span class="op">:</span> key<span class="op">,</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">lowest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">highest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ratio</span><span class="op">:</span> d<span class="op">.</span><span class="at">ratio</span><span class="op">,</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>    <span class="dt">range</span><span class="op">:</span> d<span class="op">.</span><span class="at">range</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(regRows<span class="op">,</span> {</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>  <span class="dt">columns</span><span class="op">:</span> [<span class="st">"indicator"</span><span class="op">,</span> <span class="st">"period"</span><span class="op">,</span> <span class="st">"lowest"</span><span class="op">,</span> <span class="st">"highest"</span><span class="op">,</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="st">"range"</span>]<span class="op">,</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>  <span class="dt">header</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="st">"series"</span><span class="op">,</span> <span class="dt">period</span><span class="op">:</span> <span class="st">"period"</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="st">"lowest area"</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="st">"highest area"</span><span class="op">,</span> <span class="dt">ratio</span><span class="op">:</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="dt">range</span><span class="op">:</span> <span class="st">"range (pp)"</span>}<span class="op">,</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="dv">190</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="dv">170</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="dv">170</span>}</span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
 
-## What the family shows
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
 
-The series are not all moving the same way, and the direction of movement
-follows the direction of the measurement:
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-3" data-nodetype="declaration">
 
-- **Wellbeing is falling.** Life satisfaction (`-11.5` pp/decade;
-  break at 2020) and sense of belonging (`-10.6` pp/decade; break at
-  2020) both fell sharply, and both are dated to 2020 by the pipeline.
-- **Poor self-rated state is rising.** Perceived mental health fair or
-  poor rose `+13.9` pp/decade and perceived health fair or poor `+4.7`
-  pp/decade; both are nonstationary.
-- **Mental-health conditions are rising.** Anxiety (`+8.4` pp/decade) and
-  mood disorders (`+5.5` pp/decade, break at 2020) both increased.
-- **Some behaviours improve.** Daily smoking fell `-4.4` pp/decade, though
-  the regime split at 2020 shows the decline flattening after 2020
-  (`-7.3` before, `-1.0` after).
-- **Two series are flat.** Diabetes (`+0.8`) and having a regular
-  healthcare provider (`-2.1`) are labelled **stationary** over the
-  window — no evidence of a trend beyond year-to-year noise.
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-4" data-nodetype="expression">
 
-Read together, the family is a picture of rising self-reported distress
-and falling life evaluation over a decade, with the clearest breaks
-coinciding with 2020. The pipeline dates those breaks; this page does not
-claim they are caused by the pandemic.
-
-## Caveats
-
-- **Survey estimate.** Every series is self-reported on a national survey,
-  carrying sampling error and a coefficient-of-variation release policy;
-  some cells are suppressed or flagged. Plotted values are published point
-  estimates.
-- **Measurement, not only change.** The CCHS collection frame changed over
-  2015–2024 and 2020–2021 collection was disrupted by the pandemic. A
-  step in a series may be a step in the measurement. Direction of the
-  breaks is dated, not attributed.
-- **Short window.** Ten annual points is a short series; the
-  stationarity test has limited power, which is why some series are
-  labelled *undetermined* rather than stationary.
-- **Self-report and definition drift.** "Percent" mixes reported
-  behaviour, diagnosed conditions, and self-rated state; each has a
-  different relationship to health, and a survey question that changes
-  wording does not change meaninglessly.
-- **No sub-provincial rows.** Provincial only; regional survey series are
-  separate products.
-- **Revisions.** Statistics Canada may revise estimates; the published
-  files are regenerated from the source on each build.
-
-## Reproduce
-
-```bash
-uv run sohbc fetch statcan_health_indicators
-uv run sohbc build</code></pre>
-<p>Every series publishes <code>data/published/&lt;key&gt;.csv</code>, <code>data/published/&lt;key&gt;_trend.json</code>, and <code>data/published/&lt;key&gt;_by_sex_trend.json</code>. The selection and definitions are in <code>src/sohbc/indicators.py</code>; add or remove a series there and rebuild.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The regional gap is wide and it does not simply mirror the provincial level: daily smoking varies about <strong>3×</strong> across areas (from 3.7% in North Shore/Coast Garibaldi to 11.5% in Thompson/Cariboo, 2023/2024), diabetes <strong>2.5×</strong>, and mood disorder <strong>2.2×</strong>, while life satisfaction — the flattest regional distribution — still spans 9 percentage points. Areas do not rank the same way on every series: Vancouver-metro areas sit lowest on smoking and diabetes but also lowest on sense of belonging.</p>
+<p>Each area’s slope over the five pooled periods is published in the summary file, but with five points the stationarity verdict is <strong>undetermined</strong> for every regional series — the trend test has no power here, and the regional view reports levels and gaps, not dated regimes. Anxiety disorder is absent from the 2023/2024 period entirely, so its regional spread stops at 2021/2022. Cells flagged <em>too unreliable to publish</em> are kept in the tidy file with their status and excluded from the summaries.</p>
+</section>
+<section id="caveats" class="level2">
+<h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
+<ul>
+<li><strong>Survey estimate.</strong> Every series is self-reported on a national survey, carrying sampling error and a coefficient-of-variation release policy; some cells are suppressed or flagged. Plotted values are published point estimates.</li>
+<li><strong>Measurement, not only change.</strong> The CCHS collection frame changed over 2015–2024 and 2020–2021 collection was disrupted by the pandemic. A step in a series may be a step in the measurement. Direction of the breaks is dated, not attributed.</li>
+<li><strong>Short window.</strong> Ten annual points is a short series; the stationarity test has limited power, which is why some series are labelled <em>undetermined</em> rather than stationary.</li>
+<li><strong>Self-report and definition drift.</strong> “Percent” mixes reported behaviour, diagnosed conditions, and self-rated state; each has a different relationship to health, and a survey question that changes wording does not change meaninglessly.</li>
+<li><strong>Provincial table, separate regional product.</strong> Table 13-10-0905-01 is provincial only. The <a href="#the-regional-view">regional view</a> comes from a different table (13-10-0972-01) of pooled two-year periods with narrower indicator coverage and heavier suppression — a distinct product, not a disaggregation of the annual series.</li>
+<li><strong>Revisions.</strong> Statistics Canada may revise estimates; the published files are regenerated from the source on each build.</li>
+</ul>
+</section>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch statcan_health_indicators statcan_health_regions_cchs</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Every series publishes <code>data/published/&lt;key&gt;.csv</code>, <code>data/published/&lt;key&gt;_trend.json</code>, and <code>data/published/&lt;key&gt;_by_sex_trend.json</code>. The regional view publishes <code>data/published/cchs_bc_regions.csv</code> and <code>data/published/cchs_bc_regions_summary.json</code>. The selection and definitions are in <code>src/sohbc/indicators.py</code>; add or remove a series there and rebuild.</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-statcan_health_regions_cchs" class="csl-entry" role="listitem">
+Statistics Canada. n.d.-a. <em>Health Characteristics, Two-Year Period Estimates (Table 13-10-0972-01)</em>. Accessed October 20, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097201">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097201</a>.
+</div>
 <div id="ref-statcan_health_indicators" class="csl-entry" role="listitem">
-Statistics Canada. n.d. <em>Health Indicator Statistics, Annual Estimates (Table 13-10-0905-01)</em>. Accessed October 19, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501</a>.
+Statistics Canada. n.d.-b. <em>Health Indicator Statistics, Annual Estimates (Table 13-10-0905-01)</em>. Accessed October 19, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InRMaWZlID0gRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9saWZlX3NhdGlzZmFjdGlvbl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudFBoeUggPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL3BlcmNlaXZlZF9oZWFsdGhfZmFpcl9wb29yX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50TWVudEggPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL3BlcmNlaXZlZF9tZW50YWxfaGVhbHRoX2ZhaXJfcG9vcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudEJlbG9uZyA9IEZpbGVBdHRhY2htZW50KFwiLi4vZGF0YS9wdWJsaXNoZWQvc2Vuc2Vfb2ZfYmVsb25naW5nX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50QW54ID0gRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9hbnhpZXR5X2Rpc29yZGVyX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50TW9vZCA9IEZpbGVBdHRhY2htZW50KFwiLi4vZGF0YS9wdWJsaXNoZWQvbW9vZF9kaXNvcmRlcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudERpYWIgPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2RpYWJldGVzX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50QnAgPSBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2hpZ2hfYmxvb2RfcHJlc3N1cmVfYmNfdHJlbmQuanNvblwiKS5qc29uKClcbnRQcm92ID0gRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9oYXNfcmVndWxhcl9wcm92aWRlcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudFNtb2tlID0gRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9zbW9rZXJfZGFpbHlfYmNfdHJlbmQuanNvblwiKS5qc29uKClcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InNlcmllcyA9IFtcbiAge2tleTogXCJsaWZlX3NhdGlzZmFjdGlvbl9iY1wiLCBsYWJlbDogXCJMaWZlIHNhdGlzZmFjdGlvblwiLCBkb21haW46IFwiU3ViamVjdGl2ZSB3ZWxsYmVpbmdcIiwgZGlyZWN0aW9uOiBcImhpZ2hlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRMaWZlfSxcbiAge2tleTogXCJwZXJjZWl2ZWRfaGVhbHRoX2ZhaXJfcG9vcl9iY1wiLCBsYWJlbDogXCJQZXJjZWl2ZWQgaGVhbHRoLCBmYWlyIG9yIHBvb3JcIiwgZG9tYWluOiBcIlN1YmplY3RpdmUgd2VsbGJlaW5nXCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRQaHlIfSxcbiAge2tleTogXCJwZXJjZWl2ZWRfbWVudGFsX2hlYWx0aF9mYWlyX3Bvb3JfYmNcIiwgbGFiZWw6IFwiUGVyY2VpdmVkIG1lbnRhbCBoZWFsdGgsIGZhaXIgb3IgcG9vclwiLCBkb21haW46IFwiTWVudGFsIGhlYWx0aFwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0TWVudEh9LFxuICB7a2V5OiBcInNlbnNlX29mX2JlbG9uZ2luZ19iY1wiLCBsYWJlbDogXCJTZW5zZSBvZiBiZWxvbmdpbmcgdG8gbG9jYWwgY29tbXVuaXR5XCIsIGRvbWFpbjogXCJTb2NpYWwgd2VsbGJlaW5nXCIsIGRpcmVjdGlvbjogXCJoaWdoZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0QmVsb25nfSxcbiAge2tleTogXCJhbnhpZXR5X2Rpc29yZGVyX2JjXCIsIGxhYmVsOiBcIkFueGlldHkgZGlzb3JkZXJcIiwgZG9tYWluOiBcIk1lbnRhbCBoZWFsdGhcIiwgZGlyZWN0aW9uOiBcImxvd2VyIGlzIGJldHRlclwiLCB0cmVuZDogdEFueH0sXG4gIHtrZXk6IFwibW9vZF9kaXNvcmRlcl9iY1wiLCBsYWJlbDogXCJNb29kIGRpc29yZGVyXCIsIGRvbWFpbjogXCJNZW50YWwgaGVhbHRoXCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRNb29kfSxcbiAge2tleTogXCJkaWFiZXRlc19iY1wiLCBsYWJlbDogXCJEaWFiZXRlc1wiLCBkb21haW46IFwiUGh5c2ljYWwgbW9yYmlkaXR5XCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHREaWFifSxcbiAge2tleTogXCJoaWdoX2Jsb29kX3ByZXNzdXJlX2JjXCIsIGxhYmVsOiBcIkhpZ2ggYmxvb2QgcHJlc3N1cmVcIiwgZG9tYWluOiBcIlBoeXNpY2FsIG1vcmJpZGl0eVwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0QnB9LFxuICB7a2V5OiBcImhhc19yZWd1bGFyX3Byb3ZpZGVyX2JjXCIsIGxhYmVsOiBcIkhhcyBhIHJlZ3VsYXIgaGVhbHRoY2FyZSBwcm92aWRlclwiLCBkb21haW46IFwiQWNjZXNzIHRvIGNhcmVcIiwgZGlyZWN0aW9uOiBcImhpZ2hlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRQcm92fSxcbiAge2tleTogXCJzbW9rZXJfZGFpbHlfYmNcIiwgbGFiZWw6IFwiQ3VycmVudCBkYWlseSBzbW9rZXJcIiwgZG9tYWluOiBcIlBoeXNpY2FsIG1vcmJpZGl0eVwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0U21va2V9XG5dXG5mYW1pbHkgPSBzZXJpZXMubWFwKHMgPT4ge1xuICBjb25zdCB0ID0gcy50cmVuZFxuICBjb25zdCBzZWdzID0gdC5zZWdtZW50cy5sZW5ndGggPiAxXG4gICAgPyB0LnNlZ21lbnRzLm1hcChnID0+IGAke2cuc2xvcGVfcGVyX2RlY2FkZS50b0ZpeGVkKDEpfSAoJHtnLnN0YXJ0feKAkyR7Zy5lbmR9KWApLmpvaW4oXCI7IFwiKVxuICAgIDogXCJzaW5nbGUgcmVnaW1lXCJcbiAgcmV0dXJuIHtcbiAgICBsYWJlbDogcy5sYWJlbCxcbiAgICBkb21haW46IHMuZG9tYWluLFxuICAgIGRpcmVjdGlvbjogcy5kaXJlY3Rpb24sXG4gICAgc2xvcGVfcGVyX2RlY2FkZTogdC5vdmVyYWxsLnNsb3BlX3Blcl9kZWNhZGUsXG4gICAgdmVyZGljdDogdC5zdGF0aW9uYXJpdHkudmVyZGljdCxcbiAgICBjaGFuZ2VfcG9pbnQ6IHQuY2hhbmdlX3BvaW50ID8/IFwi4oCUXCIsXG4gICAgc2VnbWVudHM6IHNlZ3NcbiAgfVxufSlcbklucHV0cy50YWJsZShmYW1pbHksIHtcbiAgY29sdW1uczogW1wibGFiZWxcIiwgXCJkb21haW5cIiwgXCJkaXJlY3Rpb25cIiwgXCJzbG9wZV9wZXJfZGVjYWRlXCIsIFwidmVyZGljdFwiLCBcImNoYW5nZV9wb2ludFwiLCBcInNlZ21lbnRzXCJdLFxuICBoZWFkZXI6IHtcbiAgICBsYWJlbDogXCJzZXJpZXNcIiwgZG9tYWluOiBcImRvbWFpblwiLCBkaXJlY3Rpb246IFwiYmV0dGVyIGlm4oCmXCIsXG4gICAgc2xvcGVfcGVyX2RlY2FkZTogXCJzbG9wZS9kZWNhZGUgKHBwKVwiLCB2ZXJkaWN0OiBcInN0YXRpb25hcml0eVwiLFxuICAgIGNoYW5nZV9wb2ludDogXCJsYXJnZXN0IGJyZWFrXCIsIHNlZ21lbnRzOiBcInJlZ2ltZXMgKHBwL2RlY2FkZSlcIlxuICB9LFxuICB3aWR0aDoge2xhYmVsOiAyMTAsIHNlZ21lbnRzOiAyNDB9XG59KVxuIn1dfQ==
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InRMaWZlID0gYXdhaXQgRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9saWZlX3NhdGlzZmFjdGlvbl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudFBoeUggPSBhd2FpdCBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL3BlcmNlaXZlZF9oZWFsdGhfZmFpcl9wb29yX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50TWVudEggPSBhd2FpdCBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL3BlcmNlaXZlZF9tZW50YWxfaGVhbHRoX2ZhaXJfcG9vcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudEJlbG9uZyA9IGF3YWl0IEZpbGVBdHRhY2htZW50KFwiLi4vZGF0YS9wdWJsaXNoZWQvc2Vuc2Vfb2ZfYmVsb25naW5nX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50QW54ID0gYXdhaXQgRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9hbnhpZXR5X2Rpc29yZGVyX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50TW9vZCA9IGF3YWl0IEZpbGVBdHRhY2htZW50KFwiLi4vZGF0YS9wdWJsaXNoZWQvbW9vZF9kaXNvcmRlcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudERpYWIgPSBhd2FpdCBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2RpYWJldGVzX2JjX3RyZW5kLmpzb25cIikuanNvbigpXG50QnAgPSBhd2FpdCBGaWxlQXR0YWNobWVudChcIi4uL2RhdGEvcHVibGlzaGVkL2hpZ2hfYmxvb2RfcHJlc3N1cmVfYmNfdHJlbmQuanNvblwiKS5qc29uKClcbnRQcm92ID0gYXdhaXQgRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9oYXNfcmVndWxhcl9wcm92aWRlcl9iY190cmVuZC5qc29uXCIpLmpzb24oKVxudFNtb2tlID0gYXdhaXQgRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9zbW9rZXJfZGFpbHlfYmNfdHJlbmQuanNvblwiKS5qc29uKClcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InNlcmllcyA9IFtcbiAge2tleTogXCJsaWZlX3NhdGlzZmFjdGlvbl9iY1wiLCBsYWJlbDogXCJMaWZlIHNhdGlzZmFjdGlvblwiLCBkb21haW46IFwiU3ViamVjdGl2ZSB3ZWxsYmVpbmdcIiwgZGlyZWN0aW9uOiBcImhpZ2hlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRMaWZlfSxcbiAge2tleTogXCJwZXJjZWl2ZWRfaGVhbHRoX2ZhaXJfcG9vcl9iY1wiLCBsYWJlbDogXCJQZXJjZWl2ZWQgaGVhbHRoLCBmYWlyIG9yIHBvb3JcIiwgZG9tYWluOiBcIlN1YmplY3RpdmUgd2VsbGJlaW5nXCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRQaHlIfSxcbiAge2tleTogXCJwZXJjZWl2ZWRfbWVudGFsX2hlYWx0aF9mYWlyX3Bvb3JfYmNcIiwgbGFiZWw6IFwiUGVyY2VpdmVkIG1lbnRhbCBoZWFsdGgsIGZhaXIgb3IgcG9vclwiLCBkb21haW46IFwiTWVudGFsIGhlYWx0aFwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0TWVudEh9LFxuICB7a2V5OiBcInNlbnNlX29mX2JlbG9uZ2luZ19iY1wiLCBsYWJlbDogXCJTZW5zZSBvZiBiZWxvbmdpbmcgdG8gbG9jYWwgY29tbXVuaXR5XCIsIGRvbWFpbjogXCJTb2NpYWwgd2VsbGJlaW5nXCIsIGRpcmVjdGlvbjogXCJoaWdoZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0QmVsb25nfSxcbiAge2tleTogXCJhbnhpZXR5X2Rpc29yZGVyX2JjXCIsIGxhYmVsOiBcIkFueGlldHkgZGlzb3JkZXJcIiwgZG9tYWluOiBcIk1lbnRhbCBoZWFsdGhcIiwgZGlyZWN0aW9uOiBcImxvd2VyIGlzIGJldHRlclwiLCB0cmVuZDogdEFueH0sXG4gIHtrZXk6IFwibW9vZF9kaXNvcmRlcl9iY1wiLCBsYWJlbDogXCJNb29kIGRpc29yZGVyXCIsIGRvbWFpbjogXCJNZW50YWwgaGVhbHRoXCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRNb29kfSxcbiAge2tleTogXCJkaWFiZXRlc19iY1wiLCBsYWJlbDogXCJEaWFiZXRlc1wiLCBkb21haW46IFwiUGh5c2ljYWwgbW9yYmlkaXR5XCIsIGRpcmVjdGlvbjogXCJsb3dlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHREaWFifSxcbiAge2tleTogXCJoaWdoX2Jsb29kX3ByZXNzdXJlX2JjXCIsIGxhYmVsOiBcIkhpZ2ggYmxvb2QgcHJlc3N1cmVcIiwgZG9tYWluOiBcIlBoeXNpY2FsIG1vcmJpZGl0eVwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0QnB9LFxuICB7a2V5OiBcImhhc19yZWd1bGFyX3Byb3ZpZGVyX2JjXCIsIGxhYmVsOiBcIkhhcyBhIHJlZ3VsYXIgaGVhbHRoY2FyZSBwcm92aWRlclwiLCBkb21haW46IFwiQWNjZXNzIHRvIGNhcmVcIiwgZGlyZWN0aW9uOiBcImhpZ2hlciBpcyBiZXR0ZXJcIiwgdHJlbmQ6IHRQcm92fSxcbiAge2tleTogXCJzbW9rZXJfZGFpbHlfYmNcIiwgbGFiZWw6IFwiQ3VycmVudCBkYWlseSBzbW9rZXJcIiwgZG9tYWluOiBcIlBoeXNpY2FsIG1vcmJpZGl0eVwiLCBkaXJlY3Rpb246IFwibG93ZXIgaXMgYmV0dGVyXCIsIHRyZW5kOiB0U21va2V9XG5dXG5mYW1pbHkgPSBzZXJpZXMubWFwKHMgPT4ge1xuICBjb25zdCB0ID0gcy50cmVuZFxuICBjb25zdCBzZWdzID0gdC5zZWdtZW50cy5sZW5ndGggPiAxXG4gICAgPyB0LnNlZ21lbnRzLm1hcChnID0+IGAke2cuc2xvcGVfcGVyX2RlY2FkZS50b0ZpeGVkKDEpfSAoJHtnLnN0YXJ0feKAkyR7Zy5lbmR9KWApLmpvaW4oXCI7IFwiKVxuICAgIDogXCJzaW5nbGUgcmVnaW1lXCJcbiAgcmV0dXJuIHtcbiAgICBsYWJlbDogcy5sYWJlbCxcbiAgICBkb21haW46IHMuZG9tYWluLFxuICAgIGRpcmVjdGlvbjogcy5kaXJlY3Rpb24sXG4gICAgc2xvcGVfcGVyX2RlY2FkZTogdC5vdmVyYWxsLnNsb3BlX3Blcl9kZWNhZGUsXG4gICAgdmVyZGljdDogdC5zdGF0aW9uYXJpdHkudmVyZGljdCxcbiAgICBjaGFuZ2VfcG9pbnQ6IHQuY2hhbmdlX3BvaW50ID8/IFwi4oCUXCIsXG4gICAgc2VnbWVudHM6IHNlZ3NcbiAgfVxufSlcbklucHV0cy50YWJsZShmYW1pbHksIHtcbiAgY29sdW1uczogW1wibGFiZWxcIiwgXCJkb21haW5cIiwgXCJkaXJlY3Rpb25cIiwgXCJzbG9wZV9wZXJfZGVjYWRlXCIsIFwidmVyZGljdFwiLCBcImNoYW5nZV9wb2ludFwiLCBcInNlZ21lbnRzXCJdLFxuICBoZWFkZXI6IHtcbiAgICBsYWJlbDogXCJzZXJpZXNcIiwgZG9tYWluOiBcImRvbWFpblwiLCBkaXJlY3Rpb246IFwiYmV0dGVyIGlm4oCmXCIsXG4gICAgc2xvcGVfcGVyX2RlY2FkZTogXCJzbG9wZS9kZWNhZGUgKHBwKVwiLCB2ZXJkaWN0OiBcInN0YXRpb25hcml0eVwiLFxuICAgIGNoYW5nZV9wb2ludDogXCJsYXJnZXN0IGJyZWFrXCIsIHNlZ21lbnRzOiBcInJlZ2ltZXMgKHBwL2RlY2FkZSlcIlxuICB9LFxuICB3aWR0aDoge2xhYmVsOiAyMTAsIHNlZ21lbnRzOiAyNDB9XG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicmVnID0gYXdhaXQgRmlsZUF0dGFjaG1lbnQoXCIuLi9kYXRhL3B1Ymxpc2hlZC9jY2hzX2JjX3JlZ2lvbnNfc3VtbWFyeS5qc29uXCIpLmpzb24oKVxuc2hvcnRSZWdpb24gPSBuID0+IG4ucmVwbGFjZShcIiBIZWFsdGggU2VydmljZSBEZWxpdmVyeSBBcmVhXCIsIFwiXCIpXG5yZWdSb3dzID0gcmVnLnNlcmllcy5tYXAocyA9PiB7XG4gIGNvbnN0IHNwcmVhZCA9IHMuc3ByZWFkLmhlYWx0aF9zZXJ2aWNlX2RlbGl2ZXJ5X2FyZWFcbiAgY29uc3QgcGVyaW9kID0gcmVnLnJlZmVyZW5jZV9wZXJpb2RzW3JlZy5yZWZlcmVuY2VfcGVyaW9kcy5sZW5ndGggLSAxXVxuICBjb25zdCBrZXkgPSBzcHJlYWRbcGVyaW9kXSA/IHBlcmlvZCA6IE9iamVjdC5rZXlzKHNwcmVhZCkuc29ydCgpLnBvcCgpXG4gIGNvbnN0IGQgPSBzcHJlYWRba2V5XVxuICByZXR1cm4ge1xuICAgIGluZGljYXRvcjogcy5pbmRpY2F0b3IucmVwbGFjZShcIiwgc2F0aXNmaWVkIG9yIHZlcnkgc2F0aXNmaWVkXCIsIFwiXCIpLnJlcGxhY2UoXCIsIHNvbWV3aGF0IHN0cm9uZyBvciB2ZXJ5IHN0cm9uZ1wiLCBcIlwiKS5yZXBsYWNlKFwiLCBmYWlyIG9yIHBvb3JcIiwgXCIgKGZhaXIvcG9vcilcIiksXG4gICAgcGVyaW9kOiBrZXksXG4gICAgbG93ZXN0OiBgJHtkLmxvd2VzdC52YWx1ZS50b0ZpeGVkKDEpfSAoJHtzaG9ydFJlZ2lvbihkLmxvd2VzdC5yZWdpb24pfSlgLFxuICAgIGhpZ2hlc3Q6IGAke2QuaGlnaGVzdC52YWx1ZS50b0ZpeGVkKDEpfSAoJHtzaG9ydFJlZ2lvbihkLmhpZ2hlc3QucmVnaW9uKX0pYCxcbiAgICByYXRpbzogZC5yYXRpbyxcbiAgICByYW5nZTogZC5yYW5nZVxuICB9XG59KVxuSW5wdXRzLnRhYmxlKHJlZ1Jvd3MsIHtcbiAgY29sdW1uczogW1wiaW5kaWNhdG9yXCIsIFwicGVyaW9kXCIsIFwibG93ZXN0XCIsIFwiaGlnaGVzdFwiLCBcInJhdGlvXCIsIFwicmFuZ2VcIl0sXG4gIGhlYWRlcjoge2luZGljYXRvcjogXCJzZXJpZXNcIiwgcGVyaW9kOiBcInBlcmlvZFwiLCBsb3dlc3Q6IFwibG93ZXN0IGFyZWFcIiwgaGlnaGVzdDogXCJoaWdoZXN0IGFyZWFcIiwgcmF0aW86IFwicmF0aW9cIiwgcmFuZ2U6IFwicmFuZ2UgKHBwKVwifSxcbiAgd2lkdGg6IHtpbmRpY2F0b3I6IDE5MCwgbG93ZXN0OiAxNzAsIGhpZ2hlc3Q6IDE3MH1cbn0pXG4ifV19
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
