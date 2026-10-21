@@ -5,11 +5,13 @@ title: "State of health in BC: a descriptive report"
 ::: {.callout-note}
 ## Version and observation window
 
-**Report version 0.4** · observation windows: mortality **1991–2024**,
+**Report version 0.5** · observation windows: mortality **1991–2024**,
 life expectancy **1980–2024**, survey indicators **2015–2024**,
-sub-provincial mortality **2021/2023** · generated from the published
-datasets by `quarto render`. Regenerate the underlying data with
-`uv run sohbc build` before re-rendering (see [Reproduce](#reproduce)).
+sub-provincial mortality **2020/2023**, sub-provincial life expectancy
+**2006–2017**, sub-provincial survey **2015/2016–2023/2024** · generated
+from the published datasets by `quarto render`. Regenerate the underlying
+data with `uv run sohbc build` before re-rendering (see
+[Reproduce](#reproduce)).
 
 Numbers in this report are **regenerated on every build** from the files
 under `data/published/`; nothing here is typed in by hand. If a figure and
@@ -21,9 +23,9 @@ report (deliverable of milestone M3 in the [roadmap](../ROADMAP.md)). It
 describes what the currently-ingested indicators show — **not** the state
 of health in full. The indicator set now spans mortality and survey-based
 morbidity, mental health, and wellbeing, and reaches **below the province**
-to the regional mortality gap; the report will keep widening, and each
-edition carries its observation window because the numbers are dated, not
-timeless ([why](../explanation/nonstationarity.qmd)).
+to regional mortality, life expectancy, and survey gaps; the report will
+keep widening, and each edition carries its observation window because the
+numbers are dated, not timeless ([why](../explanation/nonstationarity.qmd)).
 
 ## What is covered
 
@@ -31,23 +33,25 @@ timeless ([why](../explanation/nonstationarity.qmd)).
 |-----------|--------|--------|------------|-------|--------|
 | [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F; 20 age groups | StatCan 13-10-0710-01 |
 | [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
-| [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2021/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 |
+| [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2020/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 |
+| [Regional life expectancy](indicator-life-expectancy-regions-bc.qmd) | Mortality | 2006/2008–2015/2017 | health authority, HSDA | both, M, F | StatCan 13-10-0389-01 |
 | [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
 | [Ten survey indicators](indicator-wellbeing-cchs-bc.qmd) | Morbidity, mental health, wellbeing, access to care | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
+| [Survey indicators across regions](indicator-wellbeing-cchs-bc.qmd#the-regional-view) | Morbidity, mental health, wellbeing | 2015/2016–2023/2024 | HSDA | both, M, F | StatCan 13-10-0972-01 |
 
-All are **proxies** for their domains, not the state of health itself. One
-indicator now reaches sub-provincial resolution; the rest remain
+All are **proxies** for their domains, not the state of health itself. Four
+indicators now reach sub-provincial resolution; the rest remain
 provincial (see [Next editions](#next-editions)).
 
 ## The headline: every series moves, and the rules change
 
 ```{ojs}
 //| echo: false
-mort = FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
-mortAsr = FileAttachment("../data/published/mortality_rates_bc_age_standardised_trend.json").json()
-life = FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
-lifeBySex = FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
-mortBySex = FileAttachment("../data/published/mortality_rates_bc_by_sex_trend.json").json()
+mort = await FileAttachment("../data/published/mortality_rates_bc_trend.json").json()
+mortAsr = await FileAttachment("../data/published/mortality_rates_bc_age_standardised_trend.json").json()
+life = await FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
+lifeBySex = await FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
+mortBySex = await FileAttachment("../data/published/mortality_rates_bc_by_sex_trend.json").json()
 
 surveyKeys = [
   ["Life satisfaction", "life_satisfaction_bc"],
@@ -61,16 +65,16 @@ surveyKeys = [
   ["Has a regular provider", "has_regular_provider_bc"],
   ["Daily smoker", "smoker_daily_bc"]
 ]
-tLifeSat = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
-tPhyH = FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
-tMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
-tBelong = FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
-tAnx = FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
-tMood = FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
-tDiab = FileAttachment("../data/published/diabetes_bc_trend.json").json()
-tBp = FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
-tProv = FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
-tSmoke = FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
+tLifeSat = await FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+tPhyH = await FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
+tMentH = await FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
+tBelong = await FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
+tAnx = await FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
+tMood = await FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
+tDiab = await FileAttachment("../data/published/diabetes_bc_trend.json").json()
+tBp = await FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
+tProv = await FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
+tSmoke = await FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
 survey = [
   {label: "Life satisfaction", t: tLifeSat},
   {label: "Perceived health, fair or poor", t: tPhyH},
@@ -134,36 +138,57 @@ decomp = [
   {series: "High blood pressure", d: tBp},
   {series: "Diabetes", d: tDiab},
   {series: "Has a regular provider", d: tProv}
-].map(({series, d}) => ({
-  series,
-  observed: d.decomposition.observed_change,
-  within: d.decomposition.within_regime_change,
-  between: d.decomposition.between_regime_change,
-  share_between: d.decomposition.observed_change !== 0
-    ? Math.abs(d.decomposition.between_regime_change) / (Math.abs(d.decomposition.within_regime_change) + Math.abs(d.decomposition.between_regime_change))
-    : 0,
-  jumps: d.jumps.map(j => `${j.year}: ${j.jump.toFixed(2)}`).join("; ") || "—"
-}))
+].map(({series, d}) => {
+  const dc = d.decomposition || {}
+  const jumps = d.jumps || []
+  const segs = d.segments || []
+  // Within-regime rates in points per decade, side by side, so a
+  // slope-change break reads as "the pace changed", not "the level moved".
+  const regimeRates = segs.map(g => `${g.slope_per_decade.toFixed(1)} (${g.start}–${g.end})`)
+  const tests = d.slope_change_tests || []
+  const slopeTest = tests.length
+    ? tests.map(t => `${t.change_point}: ${t.significant ? "yes" : "no"} (p=${t.p_value.toFixed(3)})`).join("; ")
+    : "—"
+  return {
+    series,
+    observed: dc.observed_change ?? "—",
+    within: dc.within_regime_change ?? "—",
+    between: dc.between_regime_change ?? "—",
+    share_between: dc.observed_change
+      ? Math.abs(dc.between_regime_change) / (Math.abs(dc.within_regime_change) + Math.abs(dc.between_regime_change))
+      : 0,
+    regimes: regimeRates.length > 1 ? regimeRates.join(" → ") : "single regime",
+    slope_change: slopeTest,
+    jumps: jumps.map(j => `${j.year}: ${j.jump.toFixed(2)}`).join("; ") || "—"
+  }
+})
 Inputs.table(decomp, {
-  columns: ["series", "observed", "within", "between", "jumps"],
-  header: {series: "series", observed: "total change", within: "within-regime", between: "between-regime (jumps)", jumps: "jumps (year: level shift)"},
-  width: {jumps: 200}
+  columns: ["series", "observed", "within", "between", "regimes", "slope_change", "jumps"],
+  header: {
+    series: "series", observed: "total change", within: "within-regime",
+    between: "between-regime (jumps)", regimes: "within-regime rate/decade",
+    slope_change: "slope-change F-test", jumps: "jumps (year: level shift)"
+  },
+  width: {regimes: 200, slope_change: 200, jumps: 150}
 })
 ```
 
 ```{ojs}
 //| echo: false
-biggest = decomp.filter(d => d.jumps !== "—").sort((a, b) => Math.abs(b.between) - Math.abs(a.between))
-top = biggest[0]
+tested = decomp.filter(d => d.slope_change !== "—")
+allSig = tested.every(d => !d.slope_change.includes("no ("))
 md`The "between-regime" column is nearly zero for all but one series. The
 largest level shift anywhere is life expectancy at 2015
 (**${life.jumps[0].jump.toFixed(2)}** years), and even there the bulk of the
 change is within-regime (${life.decomposition.within_regime_change.toFixed(2)}
 of ${life.decomposition.observed_change.toFixed(2)}). For the survey series
-the jumps are fractions of a point. So when this report says a series'
-"rules change", it means the **slope** changes: the direction and pace of
-movement turn, but the series does not lurch discontinuously to a new
-level. That is the more common — and more policy-relevant — kind of
+the jumps are fractions of a point. The **within-regime rate** column makes
+the point directly, and the **slope-change F-test** confirms it: at every
+dated break the two regimes' slopes differ significantly
+(${allSig ? "all" : "most"} p < 0.05). So when this report says a series'
+"rules change", it means the slope changes — the pace and direction of
+movement turn, while the series does not lurch discontinuously to a new
+level. That is the more common and more policy-relevant kind of
 nonstationarity.`
 ```
 
@@ -171,9 +196,9 @@ nonstationarity.`
 
 ```{ojs}
 //| echo: false
-rows = FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
+rows = await FileAttachment("../data/published/mortality_rates_bc.csv").csv({typed: true})
 rates = rows.filter(d => d.characteristic === "Mortality rate per 1,000 population" && d.age_group === "Age at time of death, all ages" && d.sex === "Both sexes")
-asr = FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true}).filter(d => d.sex === "Both sexes")
+asr = (await FileAttachment("../data/published/mortality_rates_bc_age_standardised.csv").csv({typed: true})).filter(d => d.sex === "Both sexes")
 series = rates.map(d => ({year: d.ref_date, rate: d.value, series: "Crude"}))
   .concat(asr.map(d => ({year: d.ref_date, rate: d.value, series: "Age-standardised"})))
 ```
@@ -221,7 +246,7 @@ coexists with falling rates at every age. The full breakdown is on the
 
 ```{ojs}
 //| echo: false
-lifeRows = FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true}).filter(d => d.characteristic === "Life expectancy (in years) at age x (ex)" && d.age_group === "0 years" && d.sex !== "Both sexes")
+lifeRows = (await FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})).filter(d => d.characteristic === "Life expectancy (in years) at age x (ex)" && d.age_group === "0 years" && d.sex !== "Both sexes")
 ```
 
 ```{ojs}
@@ -268,12 +293,12 @@ several breaks land on 2020.
 
 ```{ojs}
 //| echo: false
-cLifeSat = FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
-cBelong = FileAttachment("../data/published/sense_of_belonging_bc.csv").csv({typed: true})
-cMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc.csv").csv({typed: true})
-cAnx = FileAttachment("../data/published/anxiety_disorder_bc.csv").csv({typed: true})
-cMood = FileAttachment("../data/published/mood_disorder_bc.csv").csv({typed: true})
-cSmoke = FileAttachment("../data/published/smoker_daily_bc.csv").csv({typed: true})
+cLifeSat = await FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
+cBelong = await FileAttachment("../data/published/sense_of_belonging_bc.csv").csv({typed: true})
+cMentH = await FileAttachment("../data/published/perceived_mental_health_fair_poor_bc.csv").csv({typed: true})
+cAnx = await FileAttachment("../data/published/anxiety_disorder_bc.csv").csv({typed: true})
+cMood = await FileAttachment("../data/published/mood_disorder_bc.csv").csv({typed: true})
+cSmoke = await FileAttachment("../data/published/smoker_daily_bc.csv").csv({typed: true})
 surveyChart = [
   ["Life satisfaction", cLifeSat],
   ["Sense of belonging", cBelong],
@@ -309,7 +334,7 @@ ls = survey.find(s => s.label === "Life satisfaction").t
 sb = survey.find(s => s.label === "Sense of belonging").t
 pmh = survey.find(s => s.label === "Perceived mental health, fair or poor").t
 anx = survey.find(s => s.label === "Anxiety disorder").t
-md = survey.find(s => s.label === "Mood disorder").t
+moodTrend = survey.find(s => s.label === "Mood disorder").t
 smk = survey.find(s => s.label === "Daily smoker").t
 md`Over ${ls.start}–${ls.end} life satisfaction fell
 **${ls.overall.slope_per_decade.toFixed(1)}** points per decade and sense
@@ -317,8 +342,8 @@ of belonging **${sb.overall.slope_per_decade.toFixed(1)}**; both break at
 **${ls.change_point}**. In the same window, perceived *poor* mental health
 rose **${pmh.overall.slope_per_decade.toFixed(1)}**, anxiety disorder
 **${anx.overall.slope_per_decade.toFixed(1)}**, and mood disorder
-**${md.overall.slope_per_decade.toFixed(1)}** points per decade (mood
-disorder also breaks at **${md.change_point}**). Daily smoking *fell*
+**${moodTrend.overall.slope_per_decade.toFixed(1)}** points per decade (mood
+disorder also breaks at **${moodTrend.change_point}**). Daily smoking *fell*
 **${smk.overall.slope_per_decade.toFixed(1)}**, but its regimes split at
 2020 too: **${smk.segments[0].slope_per_decade.toFixed(1)}**/decade before,
 **${smk.segments[1].slope_per_decade.toFixed(1)}**/decade after. All are
@@ -356,10 +381,10 @@ Inputs.table(sexRows, {
 
 ```{ojs}
 //| echo: false
-lifeFull = FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})
-finalYear = String(lifeBySex.levels.Females.end)
-finalFemale = lifeFull.find(d => d.ref_date === finalYear && d.age_group === "0 years" && d.sex === "Females" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
-finalMale = lifeFull.find(d => d.ref_date === finalYear && d.age_group === "0 years" && d.sex === "Males" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
+lifeFull = await FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})
+finalYear = lifeBySex.levels.Females.end
+finalFemale = lifeFull.find(d => Number(d.ref_date) === finalYear && d.age_group === "0 years" && d.sex === "Females" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
+finalMale = lifeFull.find(d => Number(d.ref_date) === finalYear && d.age_group === "0 years" && d.sex === "Males" && d.characteristic === "Life expectancy (in years) at age x (ex)").value
 md`In ${finalYear}, life expectancy at birth was **${finalFemale.toFixed(1)}**
 years for females versus **${finalMale.toFixed(1)}** for males, a gap of
 about ${(finalFemale - finalMale).toFixed(1)} years. Both sexes moved in
@@ -375,14 +400,15 @@ ${mortBySex.age_standardised.Females.change_point}).`
 
 ## Inequalities across regions
 
-The sub-provincial view is now published for mortality. Using Statistics
-Canada table 13-10-0931-01 (three-year averages, 2021/2023), the
-age-standardised premature-mortality rate varies widely across BC's health
-service delivery areas.
+The sub-provincial view is published for mortality, life expectancy, and
+the survey family. The newest of the three, using Statistics Canada table
+13-10-0931-01 (three-year averages, 2021/2023), shows the age-standardised
+premature-mortality rate varying widely across BC's health service
+delivery areas.
 
 ```{ojs}
 //| echo: false
-disp = FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
+disp = await FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
 prem = disp.dispersion["Premature mortality"]["Both sexes"]
 avoid = disp.dispersion["Potentially avoidable mortality"]["Both sexes"]
 regions = prem.regions.map(r => ({region: r.region.replace(" Health Service Delivery Area", ""), value: r.value}))
@@ -428,6 +454,68 @@ extremes is. **No causal claim** is made here: the regional pattern
 co-moves with age structure, remoteness, and service access, which are
 M4/M5 questions.
 
+### Life expectancy across regions
+
+The sub-provincial view now extends to life expectancy
+([indicator page](indicator-life-expectancy-regions-bc.qmd)). The only
+published source, table 13-10-0389-01, ends at 2015/2017 on 2018
+boundaries — a pre-pandemic baseline, not the current picture.
+
+```{ojs}
+//| echo: false
+leReg = await FileAttachment("../data/published/life_expectancy_bc_regions_summary.json").json()
+leBirth = leReg.series.find(s => s.age_group === "At birth")
+leLatest = leReg.reference_periods[leReg.reference_periods.length - 1]
+leSpread = leBirth.spread.health_authority[leLatest]
+leProv = leBirth.trajectories.province["British Columbia"]
+leShort = n => n.replace(" Health Authority", "")
+```
+
+```{ojs}
+//| echo: false
+leRows = leSpread.regions.map(r => ({region: leShort(r.region), value: r.value}))
+Plot.plot({
+  title: `Life expectancy at birth by health authority, ${leLatest} (years)`,
+  marginLeft: 130,
+  x: {grid: true, label: "Years"},
+  y: {label: null, domain: leRows.map(d => d.region)},
+  marks: [Plot.barX(leRows, {y: "region", x: "value", fill: "value", tip: true})],
+  color: {scheme: "Teals", legend: false}
+})
+```
+
+```{ojs}
+//| echo: false
+le65 = leReg.series.find(s => s.age_group === "At age 65")
+le65First = le65.spread.health_authority[leReg.reference_periods[0]]
+le65Latest = le65.spread.health_authority[leLatest]
+md`Northern Health Authority sits lowest on life expectancy at birth in
+every period, and the authority gap **widened** over
+${leReg.reference_periods[0]}–${leLatest}: from
+${leBirth.spread.health_authority[leReg.reference_periods[0]].range.toFixed(1)}
+to **${leSpread.range.toFixed(1)} years** at birth, and at age 65 from
+${le65First.range.toFixed(1)} to ${le65Latest.range.toFixed(1)} years.
+The provincial trajectory itself turns at **${leProv.change_point}** —
+a fast rise to 2011, flat after. This table stops at ${leLatest}, so
+nothing here reflects the pandemic; it is a baseline for the regional
+story, not its end.`
+```
+
+### Survey indicators across regions
+
+The survey family also has a regional view
+([indicator page](indicator-wellbeing-cchs-bc.qmd#the-regional-view)),
+from table 13-10-0972-01: the same nine measures across BC's 16 health
+service delivery areas, as five pooled two-year periods over 2015–2024.
+The regional gap is wide — daily smoking varies about **3×** across
+areas, diabetes **2.5×** — and areas do not rank the same way on every
+series. With five pooled periods per area the stationarity verdict is
+*undetermined* throughout, so this view reports levels and gaps, not
+dated regional regimes. Together with the mortality-inequality view, the
+report no longer speaks of one BC: the regional spread is real, it
+differs by domain, and a provincial average is a summary of unequal
+parts.
+
 ## Reading this report
 
 - **Dates are the point.** Every number above belongs to its window;
@@ -439,18 +527,24 @@ M4/M5 questions.
 - **Break detection is not explanation.** The dated regimes come from a
   formal test of departure from a straight line
   [@truong2020selective]; the test says *where* the rule changes, not
-  *why*. Attribution is M4/M5 work.
+  *why*. The within-versus-across split is backed by a Chow-style F-test
+  of equal slopes either side of each break [@chow1960], which says the
+  *pace* changed, not just the level. Attribution is M4/M5 work.
 - **Aggregates hide sub-series.** A both-sexes series is not a summary of
   the male and female trajectories; read them separately.
 - **Survey versus administrative.** The mortality series are
   administrative (complete counts), the survey series are samples: the
   latter carry sampling error, suppression, and a mid-series collection
   change, so a survey step may be measurement, not change.
+- **Resolution comes with its own limits.** A sub-provincial number is
+  not a better provincial one: the regional series are pooled averages on
+  their own boundary vintages, so they date differently and never pool
+  with the provincial series or with each other across boundary sets.
 
 ## Reproduce
 
 ```bash
-uv run sohbc fetch statcan_wds statcan_life_tables statcan_health_indicators statcan_health_regions
+uv run sohbc fetch statcan_wds statcan_life_tables statcan_health_indicators statcan_health_regions statcan_life_tables_regions statcan_health_regions_cchs
 uv run sohbc build
 quarto render reference/state-of-health-report.qmd
 ```
@@ -463,6 +557,8 @@ criterion of milestone M3.
 
 Planned (M3 outstanding work):
 
-- sub-provincial views for the survey and life-expectancy indicators, not
-  only mortality;
-- explicit regime-aware within-versus-across-regime comparisons.
+- regime-aware comparisons for the sub-provincial series once longer
+  pooled windows are available (the current regional tables are too short
+  for the break machinery);
+- replacing the pre-pandemic regional life-expectancy table if Statistics
+  Canada republishes it on current boundaries.

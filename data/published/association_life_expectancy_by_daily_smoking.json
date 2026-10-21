@@ -1,0 +1,72 @@
+{
+  "pooled": {
+    "window": {
+      "start": 2015,
+      "end": 2024,
+      "n": 10
+    },
+    "pearson": {
+      "r": 0.2513,
+      "p_value": 0.483715
+    },
+    "spearman": {
+      "rho": 0.3161,
+      "p_value": 0.373561
+    },
+    "ols": {
+      "slope": 0.079688,
+      "intercept": 81.533375,
+      "std_error": 0.108518,
+      "t_statistic": 0.7343,
+      "p_value": 0.483715,
+      "significant": false
+    }
+  },
+  "subperiods": [],
+  "rolling": [
+    {
+      "start": 2015,
+      "end": 2022,
+      "n": 8,
+      "slope": 0.166775,
+      "p_value": 0.227665
+    },
+    {
+      "start": 2016,
+      "end": 2023,
+      "n": 8,
+      "slope": 0.126118,
+      "p_value": 0.391774
+    },
+    {
+      "start": 2017,
+      "end": 2024,
+      "n": 8,
+      "slope": -0.041904,
+      "p_value": 0.831143
+    }
+  ],
+  "rolling_window": 8,
+  "stability": {
+    "stable": false,
+    "tolerance": 0.5,
+    "verdict": "undetermined",
+    "reasons": [
+      "series too short to split into two testable subperiods"
+    ],
+    "interpretation": "stable = one pooled estimate is defensible over the window; time-varying = report the subperiod/rolling estimates instead; undetermined = too few points to test stability"
+  },
+  "key": "life_expectancy_by_daily_smoking",
+  "domain": "behavioural",
+  "title": "Life expectancy at birth vs daily smoking prevalence",
+  "caveat": "Ecological, annual, province-level; not individual-level.",
+  "outcome": {
+    "file": "life_expectancy_bc.csv",
+    "characteristic": "Life expectancy (in years) at age x (ex)",
+    "age_group": "0 years"
+  },
+  "determinant": {
+    "file": "smoker_daily_bc.csv",
+    "measure": "Current smoker, daily"
+  }
+}

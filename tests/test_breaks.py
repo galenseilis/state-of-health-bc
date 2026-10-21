@@ -9,6 +9,7 @@ from sohbc.breaks import (
     BreakError,
     select_breaks,
     single_break_test,
+    slope_change_test,
     summarise,
     trend_test,
 )
@@ -68,6 +69,36 @@ class SingleBreakTestTests(unittest.TestCase):
     def test_rejects_a_non_positive_permutation_count(self) -> None:
         with self.assertRaises(BreakError):
             single_break_test(_piecewise_linear(), n_permutations=0)
+
+
+class SlopeChangeTestTests(unittest.TestCase):
+    def test_flags_differing_slopes_either_side(self) -> None:
+        result = slope_change_test(_piecewise_linear(), 2011)
+        self.assertTrue(result["significant"])
+        self.assertLess(result["p_value"], 0.05)
+        self.assertEqual(result["df"], [1, 18])
+
+    def test_does_not_flag_a_constant_slope(self) -> None:
+        line = [(float(2000 + i), 3.0 + 0.5 * i) for i in range(20)]
+        result = slope_change_test(line, 2010)
+        self.assertFalse(result["significant"])
+        self.assertGreater(result["p_value"], 0.05)
+
+    def test_finds_a_slope_change_a_level_test_would_miss(self) -> None:
+        # Same slope magnitude, opposite sign: the level is continuous at
+        # the break, so a level-shift test sees nothing, but the pace flips.
+        rising = [(float(y), 2.0 * y) for y in range(2000, 2011)]
+        falling = [(float(y), 4.0 * 2010 - 2.0 * y) for y in range(2011, 2022)]
+        result = slope_change_test(rising + falling, 2011)
+        self.assertTrue(result["significant"])
+
+    def test_rejects_an_empty_regime(self) -> None:
+        with self.assertRaises(BreakError):
+            slope_change_test(_piecewise_linear(), 1999)
+
+    def test_rejects_too_few_points(self) -> None:
+        with self.assertRaises(BreakError):
+            slope_change_test([(2000.0, 1.0), (2001.0, 1.1)], 2001)
 
 
 class TrendTestTests(unittest.TestCase):

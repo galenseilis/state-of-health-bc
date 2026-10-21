@@ -31,11 +31,11 @@ described on the [CCHS indicator page](indicator-wellbeing-cchs-bc.qmd).
 
 ```{ojs}
 //| echo: false
-rows = FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
+rows = await FileAttachment("../data/published/life_satisfaction_bc.csv").csv({typed: true})
 bySex = rows.filter(d => d.sex !== "Both sexes")
 headline = rows.filter(d => d.sex === "Both sexes")
-trend = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
-bySexTrend = FileAttachment("../data/published/life_satisfaction_bc_by_sex_trend.json").json()
+trend = await FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+bySexTrend = await FileAttachment("../data/published/life_satisfaction_bc_by_sex_trend.json").json()
 ```
 
 ```{ojs}

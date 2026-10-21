@@ -32,7 +32,7 @@ year-by-year trajectory.
 
 ```{ojs}
 //| echo: false
-disp = FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
+disp = await FileAttachment("../data/published/mortality_inequality_bc_dispersion.json").json()
 prem = disp.dispersion["Premature mortality"]["Both sexes"]
 avoid = disp.dispersion["Potentially avoidable mortality"]["Both sexes"]
 rows = prem.regions.map(r => ({region: r.region.replace(" Health Service Delivery Area", ""), value: r.value}))

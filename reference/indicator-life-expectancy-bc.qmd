@@ -30,12 +30,12 @@ provenance and caveats (see the [roadmap](../ROADMAP.md), milestone M3).
 
 ```{ojs}
 //| echo: false
-rows = FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})
+rows = await FileAttachment("../data/published/life_expectancy_bc.csv").csv({typed: true})
 e0 = rows.filter(d => d.characteristic === "Life expectancy (in years) at age x (ex)" && d.age_group === "0 years")
 bySex = e0.filter(d => d.sex !== "Both sexes")
 headline = e0.filter(d => d.sex === "Both sexes")
-trend = FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
-bySexTrend = FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
+trend = await FileAttachment("../data/published/life_expectancy_bc_trend.json").json()
+bySexTrend = await FileAttachment("../data/published/life_expectancy_bc_by_sex_trend.json").json()
 ```
 
 ```{ojs}

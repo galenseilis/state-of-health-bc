@@ -299,6 +299,95 @@ INDICATORS["mortality_inequality_bc"] = {
     ),
 }
 
+INDICATORS["life_expectancy_bc_regions"] = {
+    "title": "Life expectancy across BC health regions",
+    "domain": "Mortality",
+    "mode": "regional_timeseries",
+    "source_key": "statcan_life_tables_regions",
+    "source_table": "13-10-0389-01",
+    "source_table_url": (
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310038901"
+    ),
+    "province": "British Columbia",
+    "sexes": ["Both sexes", "Males", "Females"],
+    "age_groups": ["At birth", "At age 65"],
+    "characteristics": ["Life expectancy"],
+    "headline_sex": "Both sexes",
+    "output": PUBLISHED_DIR / "life_expectancy_bc_regions.csv",
+    "breakdown_label": "by_region",
+    "definition": (
+        "Life expectancy at birth and at age 65, in years, by sex, for BC's "
+        "five health authorities and 16 health service delivery areas, with "
+        "a trend summary per region, from Statistics Canada table "
+        "13-10-0389-01. The published view compares regional levels and "
+        "trajectories across the five three-year periods the table covers."
+    ),
+    "caveats": (
+        "Overlapping three-year averages ending at 2015/2017, on 2018 "
+        "health-region boundaries: this is the only sub-provincial life "
+        "expectancy for BC, but it predates the pandemic and the 2023 "
+        "boundary set used by the mortality-inequality indicator, so the "
+        "two regional views are not like-for-like. Each period shares two "
+        "of its three years with the next, so the ten points are strongly "
+        "autocorrelated and the trend and break tests are overpowered — a "
+        "'nonstationary' label here means a real rise over the window, "
+        "not independent annual evidence. Small-area estimates carry wide "
+        "confidence intervals."
+    ),
+}
+
+CCHS_REGIONAL_MEASURES = [
+    "Life satisfaction, satisfied or very satisfied",
+    "Perceived health, fair or poor",
+    "Perceived mental health, fair or poor",
+    "Sense of belonging to local community, somewhat strong or very strong",
+    "Anxiety disorder",
+    "Mood disorder",
+    "Diabetes",
+    "High blood pressure",
+    "Current smoker, daily",
+]
+
+INDICATORS["cchs_bc_regions"] = {
+    "title": "Health survey indicators across BC health service delivery areas",
+    "domain": "Mixed domains",
+    "mode": "regional_timeseries",
+    "source_key": "statcan_health_regions_cchs",
+    "source_table": "13-10-0972-01",
+    "source_table_url": (
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097201"
+    ),
+    "province": "British Columbia",
+    "sexes": ["Both sexes", "Males", "Females"],
+    "age_groups": ["Total, 18 years and over"],
+    "characteristics": ["Percent"],
+    "indicators": CCHS_REGIONAL_MEASURES,
+    "headline_sex": "Both sexes",
+    "output": PUBLISHED_DIR / "cchs_bc_regions.csv",
+    "breakdown_label": "by_region",
+    "definition": (
+        "Percent of the population aged 18 and over reporting each measured "
+        "characteristic, for BC's 16 health service delivery areas, by sex, "
+        "with a trend summary per area, from Statistics Canada table "
+        "13-10-0972-01 (Canadian Community Health Survey). The nine measures "
+        "mirror the provincial survey family, minus 'has a regular "
+        "healthcare provider', which the table does not carry."
+    ),
+    "caveats": (
+        "Survey estimates at health-region level carry sampling error and a "
+        "coefficient-of-variation based release policy, so some cells are "
+        "suppressed and cells flagged 'E' (too unreliable to publish) are "
+        "kept in the tidy file but excluded from the published summaries; "
+        "published as pooled two-year periods, so the five "
+        "periods over 2015-2024 support a slope but not regime dating — the "
+        "stationarity label is normally 'undetermined'. The pandemic-"
+        "disrupted 2020/2021 collection falls inside the window as one "
+        "pooled period. Health-authority rows are not published in this "
+        "table; the BC geography is health service delivery areas only, "
+        "and anxiety disorder is absent from the 2023/2024 period."
+    ),
+}
+
 AGE_GROUPS_MORTALITY = [
     "Age at time of death, under 1 year",
     "Age at time of death, 1 to 4 years",
@@ -540,6 +629,7 @@ def trajectory(
         "change_point": None,
         "change_points": [],
         "segments": [],
+        "slope_change_tests": [],
     }
     tested = breaks.summarise(
         [(float(x), float(y)) for x, y in points],
@@ -619,6 +709,22 @@ def trajectory(
             "between = level jumps at the dated breaks"
         ),
     }
+
+    slope_tests: list[dict[str, Any]] = []
+    for year in break_years:
+        try:
+            slope_tests.append(
+                breaks.slope_change_test(
+                    [(float(x), float(y)) for x, y in points], float(year)
+                )
+            )
+        except breaks.BreakError:
+            continue
+    result["slope_change_tests"] = slope_tests
+    if slope_tests:
+        result["decomposition"]["slope_change_significant"] = any(
+            test["significant"] for test in slope_tests
+        )
     return result
 
 
@@ -876,6 +982,286 @@ def dispersion(
     }
 
 
+REGIONAL_TIMESERIES_FIELDS = [
+    "ref_date",
+    "region",
+    "region_level",
+    "sex",
+    "indicator",
+    "age_group",
+    "characteristic",
+    "value",
+    "uom",
+    "status",
+]
+
+
+def tidy_regional_timeseries(
+    rows: list[dict[str, str]],
+    province: str,
+    sexes: Sequence[str],
+    indicators: Sequence[str] | None = None,
+    age_groups: Sequence[str] | None = None,
+    characteristics: Sequence[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Tidy sub-provincial multi-period rows, keeping the province row.
+
+    Unlike :func:`tidy_regions`, the province's own row is kept (labelled
+    at province level) so regional trajectories can be compared against
+    the provincial series, and each region contributes one row per
+    reference period.
+
+    Args:
+        rows: Raw rows as read from a WDS table CSV.
+        province: Province name; rows whose geography is the province or
+            ends with ``", <province>"`` are kept.
+        sexes: Sex categories to keep, in display order.
+        indicators: Indicator names to keep (from the table's
+            ``Indicators`` dimension); ``None`` keeps all.
+        age_groups: Age-group labels to keep; ``None`` keeps all.
+        characteristics: Characteristic labels to keep; ``None`` keeps all.
+    """
+    keep_indicators = set(indicators) if indicators else None
+    keep_ages = set(age_groups) if age_groups else None
+    keep_characteristics = set(characteristics) if characteristics else None
+    keep_sexes = set(sexes)
+    tidy_rows: list[dict[str, Any]] = []
+    for row in rows:
+        geo = row.get("GEO", "")
+        name = geo.split(",")[0].strip()
+        if geo != province and not geo.endswith(f", {province}"):
+            continue
+        if row.get("Sex") not in keep_sexes:
+            continue
+        indicator = row.get("Indicators", "")
+        if keep_indicators is not None and indicator not in keep_indicators:
+            continue
+        age_group = row.get("Age group", "")
+        if keep_ages is not None and age_group not in keep_ages:
+            continue
+        characteristic = row.get("Characteristics", "")
+        if keep_characteristics is not None and characteristic not in keep_characteristics:
+            continue
+        value_raw = row.get("VALUE")
+        if not value_raw:
+            continue
+        value = float(value_raw)
+        if value.is_integer():
+            value = int(value)
+        tidy_rows.append(
+            {
+                "ref_date": row.get("REF_DATE", ""),
+                "region": name,
+                "region_level": region_level(geo),
+                "sex": row.get("Sex", ""),
+                "indicator": indicator,
+                "age_group": age_group,
+                "characteristic": characteristic,
+                "value": value,
+                "uom": row.get("UOM", ""),
+                "status": row.get("STATUS", ""),
+            }
+        )
+    tidy_rows.sort(
+        key=lambda r: (
+            r["ref_date"],
+            r["indicator"],
+            r["age_group"],
+            r["sex"],
+            r["region"],
+        )
+    )
+    return tidy_rows
+
+
+def _regional_match(
+    row: dict[str, Any],
+    level: str,
+    sex: str,
+    indicator: str | None,
+    age_group: str | None,
+) -> bool:
+    # Estimates flagged too unreliable to publish never feed a summary.
+    if row.get("status") == "E":
+        return False
+    if row["region_level"] != level or row["sex"] != sex:
+        return False
+    if indicator is not None and row["indicator"] != indicator:
+        return False
+    return not (age_group is not None and row["age_group"] != age_group)
+
+
+def regional_spread(
+    rows: list[dict[str, Any]],
+    level: str,
+    sex: str,
+    indicator: str | None = None,
+    age_group: str | None = None,
+) -> dict[str, Any]:
+    """Spread of one series slice across regions, per reference period.
+
+    Like :func:`dispersion` but for multi-period regional series: returns
+    a dict keyed by reference period, each entry holding the sorted
+    regional values, the extremes, the ratio, the range, and the mean at
+    the given region level. Province rows are never counted.
+    """
+    by_period: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        if row["region_level"] == "province":
+            continue
+        if not _regional_match(row, level, sex, indicator, age_group):
+            continue
+        by_period.setdefault(str(row["ref_date"]), []).append(row)
+    spread: dict[str, Any] = {}
+    for period, period_rows in sorted(by_period.items()):
+        values = sorted(
+            ((r["region"], float(r["value"])) for r in period_rows),
+            key=lambda item: item[1],
+        )
+        if not values:
+            continue
+        low_region, low_value = values[0]
+        high_region, high_value = values[-1]
+        mean = sum(v for _, v in values) / len(values)
+        spread[period] = {
+            "n_regions": len(values),
+            "regions": [{"region": name, "value": value} for name, value in values],
+            "lowest": {"region": low_region, "value": low_value},
+            "highest": {"region": high_region, "value": high_value},
+            "ratio": round(high_value / low_value, 3) if low_value else None,
+            "range": round(high_value - low_value, 3),
+            "mean": round(mean, 3),
+        }
+    return spread
+
+
+def regional_trajectories(
+    rows: list[dict[str, Any]],
+    level: str,
+    sex: str,
+    indicator: str | None = None,
+    age_group: str | None = None,
+) -> dict[str, Any]:
+    """Trajectory summary per region for one slice of a regional series.
+
+    Args:
+        rows: Tidy rows as produced by :func:`tidy_regional_timeseries`.
+        level: Region level whose regions to summarise.
+        sex: The sex category to hold fixed.
+        indicator: Indicator name to hold fixed; ``None`` keeps rows with
+            no indicator dimension.
+        age_group: Age group to hold fixed; ``None`` keeps all.
+
+    Returns:
+        dict: Region name to :func:`trajectory` result, in sorted order;
+        regions absent from the data are omitted. Pooled multi-year
+        periods usually give five points, so the trajectory carries the
+        overall slope and the stationarity verdict (normally
+        ``undetermined``), not dated regimes.
+    """
+    by_region: dict[str, list[tuple[int, float]]] = {}
+    for row in rows:
+        if not _regional_match(row, level, sex, indicator, age_group):
+            continue
+        year = int(str(row["ref_date"])[:4])
+        by_region.setdefault(row["region"], []).append((year, float(row["value"])))
+    return {
+        region: trajectory(points) for region, points in sorted(by_region.items())
+    }
+
+
+def build_regional_timeseries(spec: dict[str, Any]) -> dict[str, Any]:
+    """Build a sub-provincial multi-period regional indicator.
+
+    Unlike the cross-section mode, each region contributes a row per
+    reference period and gets a trajectory summary; unlike the provincial
+    time-series modes, the periods are pooled averages (two- or
+    three-year), so regime dating is left to the stationarity machinery,
+    which reports ``undetermined`` when the series is too short.
+
+    The summary JSON holds, for every series slice (each indicator and
+    age group at the headline sex), the across-region spread per period
+    and the per-region trajectories, at every region level present plus
+    the province.
+    """
+    table_id = spec["source_table"]
+    zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
+    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    sexes: list[str] = list(spec.get("sexes") or ["Both sexes"])
+    tidy_rows = tidy_regional_timeseries(
+        rows,
+        spec["province"],
+        sexes,
+        indicators=spec.get("indicators"),
+        age_groups=spec.get("age_groups"),
+        characteristics=spec.get("characteristics"),
+    )
+    if not tidy_rows:
+        raise IndicatorError("regional time-series selected no rows")
+    output = spec["output"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=REGIONAL_TIMESERIES_FIELDS)
+        writer.writeheader()
+        writer.writerows(tidy_rows)
+
+    headline_sex = spec.get("headline_sex", sexes[0])
+    levels = sorted({r["region_level"] for r in tidy_rows} - {"province"})
+    ages: list[str | None] = list(spec.get("age_groups") or [None])
+    slices: list[dict[str, Any]] = []
+    for indicator in spec.get("indicators") or [None]:
+        for age_group in ages:
+            slices.append({"indicator": indicator, "age_group": age_group})
+
+    series = [
+        {
+            **key,
+            "sex": headline_sex,
+            "spread": {
+                level: regional_spread(
+                    tidy_rows,
+                    level,
+                    headline_sex,
+                    indicator=key["indicator"],
+                    age_group=key["age_group"],
+                )
+                for level in levels
+            },
+            "trajectories": {
+                level: regional_trajectories(
+                    tidy_rows,
+                    level,
+                    headline_sex,
+                    indicator=key["indicator"],
+                    age_group=key["age_group"],
+                )
+                for level in [*levels, "province"]
+            },
+        }
+        for key in slices
+    ]
+
+    summary: dict[str, Any] = {
+        "source": spec["title"],
+        "source_table": spec["source_table"],
+        "reference_periods": sorted({str(r["ref_date"]) for r in tidy_rows}),
+        "sexes": sexes,
+        "headline_sex": headline_sex,
+        "levels": levels,
+        "indicators": spec.get("indicators", []),
+        "age_groups": spec.get("age_groups", []),
+        "series": series,
+    }
+    summary_path = output.with_name(output.stem + "_summary.json")
+    summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    return {
+        "indicator": spec["source_table"],
+        "rows": len(tidy_rows),
+        "output": output,
+        "summary": summary_path,
+    }
+
+
 def build_cross_section(spec: dict[str, Any]) -> dict[str, Any]:
     """Build a sub-provincial cross-sectional indicator.
 
@@ -983,6 +1369,8 @@ def build(key: str) -> dict[str, Any]:
         return build_cross_section(spec)
     if spec.get("mode") == "age_specific":
         return build_age_specific(spec)
+    if spec.get("mode") == "regional_timeseries":
+        return build_regional_timeseries(spec)
     sexes: list[str] = list(spec.get("sexes") or [spec.get("sex")])
     dimensions = spec.get("dimensions")
     table_id = spec["source_table"]

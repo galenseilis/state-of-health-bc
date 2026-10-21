@@ -22,7 +22,7 @@ worked page.
 | **Source** | Statistics Canada, table 13-10-0905-01, *Health indicator statistics, annual estimates* (Canadian Community Health Survey) [@statcan_health_indicators] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published survey summary statistics) |
-| **Geography** | British Columbia (no sub-provincial rows in this table) |
+| **Geography** | British Columbia (this table has no sub-provincial rows; the [regional view](#the-regional-view) uses table 13-10-0972-01) |
 | **Coverage** | 2015–2024 (annual); observation window shown on each figure |
 | **Frequency / refresh** | annual |
 | **Licence** | Statistics Canada Open Licence |
@@ -32,16 +32,16 @@ worked page.
 
 ```{ojs}
 //| echo: false
-tLife = FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
-tPhyH = FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
-tMentH = FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
-tBelong = FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
-tAnx = FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
-tMood = FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
-tDiab = FileAttachment("../data/published/diabetes_bc_trend.json").json()
-tBp = FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
-tProv = FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
-tSmoke = FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
+tLife = await FileAttachment("../data/published/life_satisfaction_bc_trend.json").json()
+tPhyH = await FileAttachment("../data/published/perceived_health_fair_poor_bc_trend.json").json()
+tMentH = await FileAttachment("../data/published/perceived_mental_health_fair_poor_bc_trend.json").json()
+tBelong = await FileAttachment("../data/published/sense_of_belonging_bc_trend.json").json()
+tAnx = await FileAttachment("../data/published/anxiety_disorder_bc_trend.json").json()
+tMood = await FileAttachment("../data/published/mood_disorder_bc_trend.json").json()
+tDiab = await FileAttachment("../data/published/diabetes_bc_trend.json").json()
+tBp = await FileAttachment("../data/published/high_blood_pressure_bc_trend.json").json()
+tProv = await FileAttachment("../data/published/has_regular_provider_bc_trend.json").json()
+tSmoke = await FileAttachment("../data/published/smoker_daily_bc_trend.json").json()
 ```
 
 ```{ojs}
@@ -70,23 +70,6 @@ family = series.map(s => {
     slope_per_decade: t.overall.slope_per_decade,
     verdict: t.stationarity.verdict,
     change_point: t.change_point ?? "—",
-    segments: segs
-  }
-})
-Inputs.table(family, {
-  columns: ["label", "domain", "direction", "slope_per_decade", "verdict", "change_point", "segments"],
-  header: {
-    label: "series", domain: "domain", direction: "better if…",
-    slope_per_decade: "slope/decade (pp)", verdict: "stationarity",
-    change_point: "largest break", segments: "regimes (pp/decade)"
-  },
-  width: {label: 210, segments: 240}
-})
-```
-    direction: s.direction,
-    slope_per_decade: t.overall.slope_per_decade,
-    verdict: t.stationarity.verdict,
-    change_point: cp,
     segments: segs
   }
 })
@@ -134,6 +117,56 @@ and falling life evaluation over a decade, with the clearest breaks
 coinciding with 2020. The pipeline dates those breaks; this page does not
 claim they are caused by the pandemic.
 
+## The regional view
+
+The same nine measures (all but *has a regular healthcare provider*,
+which the table does not carry) are published for BC's 16 health service
+delivery areas from Statistics Canada table 13-10-0972-01
+[@statcan_health_regions_cchs], as five pooled two-year periods over the
+same 2015–2024 window.
+
+```{ojs}
+//| echo: false
+reg = await FileAttachment("../data/published/cchs_bc_regions_summary.json").json()
+shortRegion = n => n.replace(" Health Service Delivery Area", "")
+regRows = reg.series.map(s => {
+  const spread = s.spread.health_service_delivery_area
+  const period = reg.reference_periods[reg.reference_periods.length - 1]
+  const key = spread[period] ? period : Object.keys(spread).sort().pop()
+  const d = spread[key]
+  return {
+    indicator: s.indicator.replace(", satisfied or very satisfied", "").replace(", somewhat strong or very strong", "").replace(", fair or poor", " (fair/poor)"),
+    period: key,
+    lowest: `${d.lowest.value.toFixed(1)} (${shortRegion(d.lowest.region)})`,
+    highest: `${d.highest.value.toFixed(1)} (${shortRegion(d.highest.region)})`,
+    ratio: d.ratio,
+    range: d.range
+  }
+})
+Inputs.table(regRows, {
+  columns: ["indicator", "period", "lowest", "highest", "ratio", "range"],
+  header: {indicator: "series", period: "period", lowest: "lowest area", highest: "highest area", ratio: "ratio", range: "range (pp)"},
+  width: {indicator: 190, lowest: 170, highest: 170}
+})
+```
+
+The regional gap is wide and it does not simply mirror the provincial
+level: daily smoking varies about **3×** across areas (from 3.7% in
+North Shore/Coast Garibaldi to 11.5% in Thompson/Cariboo, 2023/2024),
+diabetes **2.5×**, and mood disorder **2.2×**, while life satisfaction —
+the flattest regional distribution — still spans 9 percentage points.
+Areas do not rank the same way on every series: Vancouver-metro areas sit
+lowest on smoking and diabetes but also lowest on sense of belonging.
+
+Each area's slope over the five pooled periods is published in the
+summary file, but with five points the stationarity verdict is
+**undetermined** for every regional series — the trend test has no power
+here, and the regional view reports levels and gaps, not dated regimes.
+Anxiety disorder is absent from the 2023/2024 period entirely, so its
+regional spread stops at 2021/2022. Cells flagged *too unreliable to
+publish* are kept in the tidy file with their status and excluded from
+the summaries.
+
 ## Caveats
 
 - **Survey estimate.** Every series is self-reported on a national survey,
@@ -151,19 +184,25 @@ claim they are caused by the pandemic.
   behaviour, diagnosed conditions, and self-rated state; each has a
   different relationship to health, and a survey question that changes
   wording does not change meaninglessly.
-- **No sub-provincial rows.** Provincial only; regional survey series are
-  separate products.
+- **Provincial table, separate regional product.** Table 13-10-0905-01
+  is provincial only. The [regional view](#the-regional-view) comes from
+  a different table (13-10-0972-01) of pooled two-year periods with
+  narrower indicator coverage and heavier suppression — a distinct
+  product, not a disaggregation of the annual series.
 - **Revisions.** Statistics Canada may revise estimates; the published
   files are regenerated from the source on each build.
 
 ## Reproduce
 
 ```bash
-uv run sohbc fetch statcan_health_indicators
+uv run sohbc fetch statcan_health_indicators statcan_health_regions_cchs
 uv run sohbc build
 ```
 
 Every series publishes `data/published/<key>.csv`,
 `data/published/<key>_trend.json`, and
-`data/published/<key>_by_sex_trend.json`. The selection and definitions
-are in `src/sohbc/indicators.py`; add or remove a series there and rebuild.
+`data/published/<key>_by_sex_trend.json`. The regional view publishes
+`data/published/cchs_bc_regions.csv` and
+`data/published/cchs_bc_regions_summary.json`. The selection and
+definitions are in `src/sohbc/indicators.py`; add or remove a series
+there and rebuild.

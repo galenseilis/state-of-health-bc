@@ -60,10 +60,14 @@ website:
             text: Data quality
           - href: reference/state-of-health-report.qmd
             text: "Descriptive report"
+          - href: reference/association-methods.qmd
+            text: "Association and stability methods"
           - href: reference/indicator-mortality-rates-bc.qmd
             text: "Indicator: Mortality rates"
           - href: reference/indicator-life-expectancy-bc.qmd
             text: "Indicator: Life expectancy"
+          - href: reference/indicator-life-expectancy-regions-bc.qmd
+            text: "Indicator: Regional life expectancy"
           - href: reference/indicator-mortality-inequality-bc.qmd
             text: "Indicator: Regional mortality inequality"
           - href: reference/indicator-life-satisfaction-bc.qmd
@@ -92,5 +96,6 @@ format:
     theme:
       - cosmo
       - darkly
+    css: styles.css
     toc: true
     link-external-newwindow: true

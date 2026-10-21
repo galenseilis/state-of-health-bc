@@ -241,6 +241,66 @@ def single_break_test(
     }
 
 
+def slope_change_test(
+    points: list[tuple[float, float]],
+    change_point: float,
+) -> dict[str, Any]:
+    """Chow-style F-test of equal slopes either side of a change point.
+
+    The unrestricted model fits a separate straight line to each side of
+    ``change_point``; the restricted model fits one straight line to the
+    whole series. The F statistic compares the residual sums of squares:
+    ``F = ((SSE_r - SSE_u) / 1) / (SSE_u / (n - 4))``, with 1 and ``n - 4``
+    degrees of freedom — one slope difference, four estimated parameters
+    (two intercepts, two slopes).
+
+    This turns the descriptive within-versus-across decomposition into a
+    test: the within-regime *rates* differ when this F is significant, so
+    the break changed the pace of movement rather than the level.
+
+    Args:
+        points: ``(x, y)`` pairs, typically ``(year, value)``.
+        change_point: The year separating the two regimes; the first
+            regime is ``x < change_point``, the second ``x >= change_point``.
+
+    Returns:
+        dict: The F statistic, its p-value, degrees of freedom, both
+        residual sums of squares, and whether the slope change is
+        significant.
+    """
+    x, y = _arrays(points)
+    if np.all(x < change_point) or np.all(x >= change_point):
+        raise BreakError("change point leaves one regime empty")
+    first = x < change_point
+    second = ~first
+    if first.sum() < 2 or second.sum() < 2:
+        raise BreakError("need at least two points on each side of the break")
+    sse_restricted = _sse(y, x)
+    sse_unrestricted = _sse(y[first], x[first]) + _sse(y[second], x[second])
+    n = len(x)
+    df_residual = n - 4
+    if df_residual <= 0:
+        raise BreakError("need at least five points to test a slope change")
+    numerator = (sse_restricted - sse_unrestricted) / 1
+    denominator = sse_unrestricted / df_residual
+    if denominator == 0:
+        f_statistic = float("inf") if numerator > 0 else 0.0
+        p_value = 0.0 if numerator > 0 else 1.0
+    else:
+        f_statistic = float(numerator / denominator)
+        p_value = float(stats.f.sf(f_statistic, 1, df_residual))
+    return {
+        "method": "Chow-style F-test for a slope change at a known break",
+        "change_point": int(change_point),
+        "f_statistic": round(f_statistic, 4),
+        "df": [1, df_residual],
+        "sse_restricted": round(sse_restricted, 6),
+        "sse_unrestricted": round(sse_unrestricted, 6),
+        "p_value": round(p_value, 6),
+        "significant": bool(p_value < SIGNIFICANCE),
+    }
+
+
 def trend_test(points: list[tuple[float, float]]) -> dict[str, Any]:
     """Kendall's tau test for a monotone trend in the series.
 

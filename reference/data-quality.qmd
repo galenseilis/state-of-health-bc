@@ -65,6 +65,14 @@ permutation test for a break beyond a linear trend); the table below
 records the *known causes* behind such breaks, which the statistical
 test can locate but cannot name.
 
+The within-versus-across-regime split in the report is made inferential
+with a Chow-style F-test of equal slopes either side of each dated break
+[@chow1960]. It assumes the piecewise-linear form holds and that the
+residuals are homoscedastic and independent — plausible for smooth annual
+series, less so for the short pooled survey windows, which is why the
+test is reported only where a break was actually selected. A significant
+F means the *pace* of movement changed at the break, not merely the level.
+
 | Break | Affected sources | Implication |
 |-------|------------------|-------------|
 | Cause-of-death coding revisions (ICD revisions) | Vital Statistics; national mortality | Cause-specific mortality series are not directly comparable across the revision boundary |
@@ -78,7 +86,9 @@ test can locate but cannot name.
 As part of M2, every catalogued URL was checked for reachability with
 `uv run sohbc check --all`. All catalogued landing pages and the
 automated download endpoints returned HTTP 200 at the time of checking
-(28 sources). The federal publisher's own portal was unreachable from the
+(28 sources; the catalogue has since grown to 30 with the two regional
+survey and life-expectancy tables). The federal publisher's own portal was
+unreachable from the
 verification environment, so federal open data is reached through the
 Open Government portal record instead; this is noted on that catalogue
 entry.
@@ -118,6 +128,24 @@ caveat classes of its own — health-region boundaries that change across
 table vintages, and rates published only as overlapping **three-year
 averages**, so the source supports a regional snapshot but not a regional
 trajectory; the trend machinery is therefore not applied to it.
+
+Sub-provincial coverage then widened to two more sources. Statistics
+Canada table 13-10-0389-01 gives [regional life
+expectancy](indicator-life-expectancy-regions-bc.qmd) for the five
+authorities and 16 service delivery areas, but only to the 2015/2017
+period and on the 2018 boundary set: it is a **pre-pandemic baseline** on
+**different boundaries** from the mortality-inequality view, so the two
+never pool. It also publishes **overlapping** three-year periods (ten
+points sharing two years each), which makes the trend and break tests
+overpowered — a caveat worth remembering whenever a pooled series is fed
+to tests that assume independent observations. Statistics Canada table
+13-10-0972-01 gives the survey family at service-delivery-area resolution
+as **five pooled two-year periods** with heavier suppression than the
+provincial table; with five points the stationarity verdict is
+*undetermined* throughout, cells flagged *too unreliable to publish* are
+kept in the tidy file but dropped from summaries, the indicator
+*has a regular healthcare provider* is absent, and anxiety disorder is
+missing from the most recent period.
 
 ## Governance
 

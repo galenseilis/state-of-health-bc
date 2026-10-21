@@ -1,0 +1,158 @@
+---
+title: "Indicator: Life expectancy across BC health regions"
+---
+
+*Status: a published sub-provincial indicator (milestone M3 in progress).
+Regenerate with `uv run sohbc build life_expectancy_bc_regions`.*
+
+This indicator carries the sub-provincial view beyond mortality: life
+expectancy at birth and at age 65 for BC's five health authorities and 16
+health service delivery areas, from Statistics Canada table 13-10-0389-01
+[@statcan_life_tables_regions]. It is the only published sub-provincial
+life expectancy for British Columbia — but its window **ends at 2015/2017**
+and its boundaries are the 2018 set, so it is deliberately read alongside,
+not merged with, the newer [mortality-inequality](indicator-mortality-inequality-bc.qmd)
+indicator (2023 boundaries, 2020–2023 periods).
+
+## Provenance
+
+| Field | Value |
+|-------|-------|
+| **Domain** | [Mortality](../reference/measurement-framework.qmd) |
+| **Definition** | Life expectancy at birth and at age 65, in years, by sex, for BC health authorities and health service delivery areas, with a trend summary per region [@statcan_life_tables_regions] |
+| **Source** | Statistics Canada, table 13-10-0389-01, *Life expectancy, at birth and at age 65, by sex, three-year average, Canada, provinces, territories, health regions and peer groups (2018 boundaries and names)* [@statcan_life_tables_regions] |
+| **Access** | Statistics Canada Web Data Service (automated full-table download) |
+| **Form** | indicator table (published summary statistics) |
+| **Geography** | British Columbia: 5 health authorities and 16 health service delivery areas (2018 boundaries) |
+| **Coverage** | 2006/2008–2015/2017 (overlapping three-year periods) |
+| **Frequency / refresh** | published annually; the table has not been updated since 2015/2017 |
+| **Licence** | Statistics Canada Open Licence |
+| **Proxy note** | A proxy for the mortality domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
+
+## The regional gap
+
+```{ojs}
+//| echo: false
+summary = await FileAttachment("../data/published/life_expectancy_bc_regions_summary.json").json()
+rows = await FileAttachment("../data/published/life_expectancy_bc_regions.csv").csv({typed: true})
+atBirth = summary.series.find(s => s.age_group === "At birth")
+at65 = summary.series.find(s => s.age_group === "At age 65")
+latestPeriod = summary.reference_periods[summary.reference_periods.length - 1]
+haSpread = atBirth.spread.health_authority[latestPeriod]
+short = n => n.replace(" Health Authority", "").replace(" Health Service Delivery Area", "")
+haRows = haSpread.regions.map(r => ({region: short(r.region), value: r.value}))
+prov = atBirth.trajectories.province["British Columbia"]
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: `Life expectancy at birth by health authority, ${latestPeriod} (years)`,
+  marginLeft: 140,
+  x: {grid: true, label: "Years"},
+  y: {label: null, domain: haRows.map(d => d.region)},
+  marks: [
+    Plot.barX(haRows, {y: "region", x: "value", fill: "value", tip: true})
+  ],
+  color: {scheme: "Teals", legend: false}
+})
+```
+
+## Trajectories
+
+```{ojs}
+//| echo: false
+haLines = rows.filter(d =>
+  d.age_group === "At birth" && d.sex === "Both sexes" &&
+  d.region.endsWith("Health Authority") && d.characteristic === "Life expectancy"
+).map(d => ({year: Number(String(d.ref_date).slice(0, 4)), value: d.value, region: short(d.region)}))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: "Life expectancy at birth by health authority, both sexes",
+  y: {grid: true, label: "Years", domain: [77, 86]},
+  x: {label: "first year of three-year period"},
+  color: {legend: true},
+  marks: [
+    Plot.line(haLines, {x: "year", y: "value", stroke: "region", tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+trajRows = ["At birth", "At age 65"].flatMap(age => {
+  const s = age === "At birth" ? atBirth : at65
+  return Object.entries(s.trajectories.health_authority).map(([region, t]) => ({
+    age,
+    region: short(region),
+    slope_per_decade: t.overall.slope_per_decade,
+    verdict: t.stationarity.verdict
+  }))
+})
+Inputs.table(trajRows, {
+  columns: ["age", "region", "slope_per_decade", "verdict"],
+  header: {age: "measure", region: "health authority", slope_per_decade: "slope/decade (years)", verdict: "stationarity"},
+  width: {region: 200}
+})
+```
+
+```{ojs}
+//| echo: false
+birthRange0 = atBirth.spread.health_authority[summary.reference_periods[0]].range
+birthRange1 = haSpread.range
+at65Spread0 = at65.spread.health_authority[summary.reference_periods[0]]
+at65Spread1 = at65.spread.health_authority[latestPeriod]
+hsdaLatest = atBirth.spread.health_service_delivery_area[latestPeriod]
+md`Every health authority gained life expectancy over the window, but
+unequally: the authority gap at birth **widened from ${birthRange0.toFixed(1)}
+to ${birthRange1.toFixed(1)} years** across
+${summary.reference_periods[0]}–${latestPeriod}, and at age 65 from
+${at65Spread0.range.toFixed(1)} to ${at65Spread1.range.toFixed(1)} years.
+Northern Health Authority sits lowest throughout. At the finer
+service-delivery-area level the ${latestPeriod} gap is
+**${hsdaLatest.range.toFixed(1)} years**, from
+${short(hsdaLatest.lowest.region)} (${hsdaLatest.lowest.value.toFixed(1)}) to
+${short(hsdaLatest.highest.region)} (${hsdaLatest.highest.value.toFixed(1)}).
+The provincial trajectory turns at **${prov.change_point}**: a fast rise
+before, flat after.`
+```
+
+## Caveats
+
+- **Ends before the pandemic.** The table stops at 2015/2017, so nothing
+  here reflects COVID-19 mortality or the post-2020 reversal the
+  provincial [life-expectancy](indicator-life-expectancy-bc.qmd) series
+  carries. It is a baseline, not the current regional picture.
+- **Overlapping periods inflate the tests.** Each three-year period
+  shares two years with its neighbour, so the ten points are strongly
+  autocorrelated; the permutation break test and the trend test treat
+  them as independent and are correspondingly overpowered. A
+  *nonstationary* label here means a real rise over the window, not ten
+  independent annual votes.
+- **Boundaries differ.** This table uses 2018 health-region boundaries;
+  the [mortality-inequality](indicator-mortality-inequality-bc.qmd)
+  indicator uses the 2023 set. The two regional views are not
+  like-for-like and are never pooled.
+- **Wide small-area intervals.** Every estimate carries a 95% confidence
+  interval, wide at the service-delivery-area level; the ordering of
+  neighbouring areas is soft, the authority-level pattern is not.
+- **Period measure.** Life expectancy is what a synthetic cohort would
+  live under the period's death rates; it reports nothing about the
+  health of people then alive, at any resolution.
+- **No causal claim.** The regional gap co-moves with remoteness, income,
+  and service access; attribution is M4/M5 work.
+
+## Reproduce
+
+```bash
+uv run sohbc fetch statcan_life_tables_regions
+uv run sohbc build life_expectancy_bc_regions
+```
+
+The tidy dataset is published at
+`data/published/life_expectancy_bc_regions.csv` (all regions, sexes, ages,
+periods) and the summary — per-period spread and per-region trajectories —
+at `data/published/life_expectancy_bc_regions_summary.json`.

@@ -20,6 +20,7 @@
       "change_within": -1.92
     }
   ],
+  "slope_change_tests": [],
   "break_test": {
     "method": "residual-permutation test (H0: one straight line)",
     "statistic_sse_reduction": 0.895333,

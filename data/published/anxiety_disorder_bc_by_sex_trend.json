@@ -2,81 +2,234 @@
   "levels": {
     "Both sexes": {
       "start": 2015,
-      "end": 2024,
-      "n": 9,
+      "end": 2025,
+      "n": 10,
       "overall": {
-        "slope_per_year": 0.8368,
-        "slope_per_decade": 8.3677
+        "slope_per_year": 0.6206,
+        "slope_per_decade": 6.2058
       },
       "change_point": null,
       "change_points": [],
-      "segments": [],
-      "break_test": null,
+      "segments": [
+        {
+          "label": "regime 1",
+          "start": 2015,
+          "end": 2025,
+          "slope_per_year": 0.6206,
+          "slope_per_decade": 6.2058,
+          "fitted_start": 7.7233,
+          "fitted_end": 13.9291,
+          "change_within": 6.2058
+        }
+      ],
+      "slope_change_tests": [],
+      "break_test": {
+        "method": "residual-permutation test (H0: one straight line)",
+        "statistic_sse_reduction": 1.783746,
+        "n_permutations": 1999,
+        "seed": 20241018,
+        "p_value": 0.8265,
+        "significant": false,
+        "change_point": 2020
+      },
       "trend_test": {
         "method": "Kendall tau (rank-based monotone trend)",
-        "tau": 0.6111,
-        "p_value": 0.024741,
+        "tau": 0.6,
+        "p_value": 0.016666,
         "significant": true
       },
       "stationarity": {
-        "verdict": "undetermined",
+        "verdict": "nonstationary",
         "reasons": [
-          "series has 9 points; at least 10 are needed for two regimes"
+          "monotone trend (Kendall tau=0.6, p=0.016666)"
         ]
       },
-      "regime_selection": null
+      "regime_selection": {
+        "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+        "min_segment": 5,
+        "max_breaks_considered": 1,
+        "n_breaks": 0,
+        "years": [],
+        "sse": 32.733606,
+        "bic": 16.4633,
+        "candidates": [
+          {
+            "n_breaks": 0,
+            "years": [],
+            "sse": 32.733606,
+            "bic": 16.4633
+          },
+          {
+            "n_breaks": 1,
+            "years": [
+              2020
+            ],
+            "sse": 30.94986,
+            "bic": 22.8108
+          }
+        ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 4.1,
+        "within_regime_change": 6.2058,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+      }
     },
     "Males": {
       "start": 2015,
-      "end": 2024,
-      "n": 9,
+      "end": 2025,
+      "n": 10,
       "overall": {
-        "slope_per_year": 0.6235,
-        "slope_per_decade": 6.2355
+        "slope_per_year": 0.4056,
+        "slope_per_decade": 4.0559
       },
       "change_point": null,
       "change_points": [],
-      "segments": [],
-      "break_test": null,
+      "segments": [
+        {
+          "label": "regime 1",
+          "start": 2015,
+          "end": 2025,
+          "slope_per_year": 0.4056,
+          "slope_per_decade": 4.0559,
+          "fitted_start": 5.4937,
+          "fitted_end": 9.5497,
+          "change_within": 4.0559
+        }
+      ],
+      "slope_change_tests": [],
+      "break_test": {
+        "method": "residual-permutation test (H0: one straight line)",
+        "statistic_sse_reduction": 0.129169,
+        "n_permutations": 1999,
+        "seed": 20241018,
+        "p_value": 0.9835,
+        "significant": false,
+        "change_point": 2020
+      },
       "trend_test": {
         "method": "Kendall tau (rank-based monotone trend)",
-        "tau": 0.5916,
-        "p_value": 0.027708,
-        "significant": true
+        "tau": 0.4495,
+        "p_value": 0.072486,
+        "significant": false
       },
       "stationarity": {
-        "verdict": "undetermined",
+        "verdict": "stationary",
         "reasons": [
-          "series has 9 points; at least 10 are needed for two regimes"
+          "no significant trend or break over the observed window"
         ]
       },
-      "regime_selection": null
+      "regime_selection": {
+        "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+        "min_segment": 5,
+        "max_breaks_considered": 1,
+        "n_breaks": 0,
+        "years": [],
+        "sse": 22.912867,
+        "bic": 12.8963,
+        "candidates": [
+          {
+            "n_breaks": 0,
+            "years": [],
+            "sse": 22.912867,
+            "bic": 12.8963
+          },
+          {
+            "n_breaks": 1,
+            "years": [
+              2020
+            ],
+            "sse": 22.783698,
+            "bic": 19.7475
+          }
+        ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 3.0,
+        "within_regime_change": 4.0559,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+      }
     },
     "Females": {
       "start": 2015,
-      "end": 2024,
-      "n": 9,
+      "end": 2025,
+      "n": 10,
       "overall": {
-        "slope_per_year": 1.0387,
-        "slope_per_decade": 10.3871
+        "slope_per_year": 0.829,
+        "slope_per_decade": 8.2897
       },
       "change_point": null,
       "change_points": [],
-      "segments": [],
-      "break_test": null,
+      "segments": [
+        {
+          "label": "regime 1",
+          "start": 2015,
+          "end": 2025,
+          "slope_per_year": 0.829,
+          "slope_per_decade": 8.2897,
+          "fitted_start": 9.8638,
+          "fitted_end": 18.1535,
+          "change_within": 8.2897
+        }
+      ],
+      "slope_change_tests": [],
+      "break_test": {
+        "method": "residual-permutation test (H0: one straight line)",
+        "statistic_sse_reduction": 7.55131,
+        "n_permutations": 1999,
+        "seed": 20241018,
+        "p_value": 0.5795,
+        "significant": false,
+        "change_point": 2020
+      },
       "trend_test": {
         "method": "Kendall tau (rank-based monotone trend)",
         "tau": 0.5556,
-        "p_value": 0.044615,
+        "p_value": 0.028609,
         "significant": true
       },
       "stationarity": {
-        "verdict": "undetermined",
+        "verdict": "nonstationary",
         "reasons": [
-          "series has 9 points; at least 10 are needed for two regimes"
+          "monotone trend (Kendall tau=0.5556, p=0.028609)"
         ]
       },
-      "regime_selection": null
+      "regime_selection": {
+        "method": "piecewise-linear segmentation (ruptures Dynp), BIC over K",
+        "min_segment": 5,
+        "max_breaks_considered": 1,
+        "n_breaks": 0,
+        "years": [],
+        "sse": 52.575984,
+        "bic": 21.2019,
+        "candidates": [
+          {
+            "n_breaks": 0,
+            "years": [],
+            "sse": 52.575984,
+            "bic": 21.2019
+          },
+          {
+            "n_breaks": 1,
+            "years": [
+              2020
+            ],
+            "sse": 45.024674,
+            "bic": 26.5592
+          }
+        ]
+      },
+      "jumps": [],
+      "decomposition": {
+        "observed_change": 5.2,
+        "within_regime_change": 8.2897,
+        "between_regime_change": 0,
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+      }
     }
   }
 }

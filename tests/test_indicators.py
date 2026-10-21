@@ -8,7 +8,6 @@ import unittest
 import zipfile
 
 from sohbc.indicators import (
-    DEFAULT_DIMENSIONS,
     INDICATORS,
     age_group_trends,
     age_label_to_standard,
@@ -16,11 +15,14 @@ from sohbc.indicators import (
     dispersion,
     ols_slope,
     region_level,
+    regional_spread,
+    regional_trajectories,
     select_rows,
     series_points,
     sex_breakdown,
     table_rows,
     tidy,
+    tidy_regional_timeseries,
     tidy_regions,
     trajectory,
     wds_download_json,
@@ -250,6 +252,20 @@ class TrajectoryTests(unittest.TestCase):
             self.assertIn("fitted_start", segment)
             self.assertIn("fitted_end", segment)
             self.assertIn("change_within", segment)
+
+    def test_reports_a_significant_slope_change(self) -> None:
+        points = [(y, 2.0 * y) for y in range(2000, 2011)]
+        points += [(y, 100.0 - 2.0 * y) for y in range(2011, 2022)]
+        result = trajectory(points, min_segment=5, n_permutations=199)
+        self.assertEqual(len(result["slope_change_tests"]), 1)
+        test = result["slope_change_tests"][0]
+        self.assertEqual(test["change_point"], 2011)
+        self.assertTrue(test["significant"])
+        self.assertTrue(result["decomposition"]["slope_change_significant"])
+
+    def test_short_series_has_no_slope_change_tests(self) -> None:
+        result = trajectory([(2000, 1.0), (2001, 1.1), (2002, 1.2)], min_segment=5)
+        self.assertEqual(result["slope_change_tests"], [])
 
 
 class AgeStandardisationTests(unittest.TestCase):
@@ -516,6 +532,264 @@ class AgeGroupTrendsTests(unittest.TestCase):
             rows, "rate", ["young", "missing"], "Both sexes", n_permutations=99
         )
         self.assertEqual(list(result), ["young"])
+
+
+class TidyRegionalTimeseriesTests(unittest.TestCase):
+    def _row(
+        self,
+        geo: str,
+        period: str,
+        sex: str,
+        value: str,
+        indicator: str = "Life satisfaction, satisfied or very satisfied",
+        age: str = "Total, 18 years and over",
+        characteristic: str = "Percent",
+    ) -> dict[str, str]:
+        return {
+            "REF_DATE": period,
+            "GEO": geo,
+            "Sex": sex,
+            "Indicators": indicator,
+            "Age group": age,
+            "Characteristics": characteristic,
+            "UOM": "Percent",
+            "VALUE": value,
+            "STATUS": "",
+        }
+
+    def test_keeps_province_and_regions_with_levels(self) -> None:
+        rows = [
+            self._row("British Columbia", "2015/2016", "Both sexes", "62.4"),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "70.1",
+            ),
+            self._row(
+                "Fraser Health Authority, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "60.0",
+            ),
+        ]
+        result = tidy_regional_timeseries(
+            rows, "British Columbia", ["Both sexes"]
+        )
+        self.assertEqual(len(result), 3)
+        levels = {r["region"]: r["region_level"] for r in result}
+        self.assertEqual(levels["British Columbia"], "province")
+        self.assertEqual(
+            levels["Richmond Health Service Delivery Area"],
+            "health_service_delivery_area",
+        )
+        self.assertEqual(levels["Fraser Health Authority"], "health_authority")
+
+    def test_filters_indicator_age_characteristic_and_sex(self) -> None:
+        rows = [
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "70.1",
+            ),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Males",
+                "68.0",
+            ),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "5.2",
+                indicator="Anxiety disorder",
+            ),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "71.0",
+                characteristic="High 95% confidence interval, percent",
+            ),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "65.5",
+                age="18 to 34 years",
+            ),
+        ]
+        result = tidy_regional_timeseries(
+            rows,
+            "British Columbia",
+            ["Both sexes"],
+            indicators=["Life satisfaction, satisfied or very satisfied"],
+            age_groups=["Total, 18 years and over"],
+            characteristics=["Percent"],
+        )
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["value"], 70.1)
+
+    def test_skips_empty_values_and_sorts(self) -> None:
+        rows = [
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2017/2018",
+                "Both sexes",
+                "71.2",
+            ),
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "",
+            ),
+            self._row(
+                "Northwest Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "55.0",
+            ),
+        ]
+        result = tidy_regional_timeseries(
+            rows, "British Columbia", ["Both sexes"]
+        )
+        self.assertEqual(
+            [(r["ref_date"], r["region"]) for r in result],
+            [
+                ("2015/2016", "Northwest Health Service Delivery Area"),
+                ("2017/2018", "Richmond Health Service Delivery Area"),
+            ],
+        )
+
+    def test_indicators_outside_the_list_are_dropped(self) -> None:
+        rows = [
+            self._row(
+                "Richmond Health Service Delivery Area, British Columbia",
+                "2015/2016",
+                "Both sexes",
+                "82.0",
+                indicator="Has a regular healthcare provider",
+            )
+        ]
+        result = tidy_regional_timeseries(
+            rows, "British Columbia", ["Both sexes"], indicators=["Diabetes"]
+        )
+        self.assertEqual(result, [])
+
+
+class RegionalSpreadTests(unittest.TestCase):
+    def _tidy(
+        self, region: str, level: str, period: str, value: float
+    ) -> dict:
+        return {
+            "ref_date": period,
+            "region": region,
+            "region_level": level,
+            "sex": "Both sexes",
+            "indicator": "Diabetes",
+            "age_group": "Total, 18 years and over",
+            "characteristic": "Percent",
+            "value": value,
+        }
+
+    def test_reports_spread_per_period_and_excludes_province(self) -> None:
+        rows = [
+            self._tidy("Richmond", "health_service_delivery_area", "2015/2016", 6.0),
+            self._tidy("Northwest", "health_service_delivery_area", "2015/2016", 9.0),
+            self._tidy("Richmond", "health_service_delivery_area", "2017/2018", 7.0),
+            self._tidy("Northwest", "health_service_delivery_area", "2017/2018", 10.5),
+            self._tidy("British Columbia", "province", "2017/2018", 8.0),
+        ]
+        result = regional_spread(
+            rows,
+            "health_service_delivery_area",
+            "Both sexes",
+            indicator="Diabetes",
+            age_group="Total, 18 years and over",
+        )
+        self.assertEqual(sorted(result), ["2015/2016", "2017/2018"])
+        first = result["2015/2016"]
+        self.assertEqual(first["n_regions"], 2)
+        self.assertEqual(first["lowest"]["region"], "Richmond")
+        self.assertEqual(first["highest"]["region"], "Northwest")
+        self.assertAlmostEqual(first["ratio"], round(9.0 / 6.0, 3))
+        self.assertAlmostEqual(first["range"], 3.0)
+
+    def test_returns_empty_when_no_match(self) -> None:
+        self.assertEqual(regional_spread([], "health_authority", "Males"), {})
+
+    def test_excludes_unreliable_estimates(self) -> None:
+        rows = [
+            self._tidy("Richmond", "health_service_delivery_area", "2015/2016", 6.0),
+            self._tidy("Northwest", "health_service_delivery_area", "2015/2016", 99.0),
+        ]
+        rows[1]["status"] = "E"
+        result = regional_spread(
+            rows,
+            "health_service_delivery_area",
+            "Both sexes",
+            indicator="Diabetes",
+            age_group="Total, 18 years and over",
+        )
+        self.assertEqual(result["2015/2016"]["n_regions"], 1)
+        self.assertEqual(result["2015/2016"]["highest"]["region"], "Richmond")
+
+
+class RegionalTrajectoriesTests(unittest.TestCase):
+    def test_summarises_each_region_for_the_slice(self) -> None:
+        rows = []
+        for region, base in [("Region A", 80.0), ("Region B", 76.0)]:
+            for year in range(2006, 2011):
+                rows.append(
+                    {
+                        "ref_date": f"{year}/{year + 2}",
+                        "region": region,
+                        "region_level": "health_authority",
+                        "sex": "Both sexes",
+                        "indicator": "",
+                        "age_group": "At birth",
+                        "characteristic": "Life expectancy",
+                        "value": base + 0.1 * (year - 2006),
+                    }
+                )
+        rows.append(
+            {
+                "ref_date": "2006/2008",
+                "region": "British Columbia",
+                "region_level": "province",
+                "sex": "Both sexes",
+                "indicator": "",
+                "age_group": "At birth",
+                "characteristic": "Life expectancy",
+                "value": 81.0,
+            }
+        )
+        result = regional_trajectories(
+            rows,
+            "health_authority",
+            "Both sexes",
+            indicator="",
+            age_group="At birth",
+        )
+        self.assertEqual(list(result), ["Region A", "Region B"])
+        self.assertAlmostEqual(result["Region A"]["overall"]["slope_per_year"], 0.1)
+        self.assertAlmostEqual(result["Region B"]["overall"]["slope_per_year"], 0.1)
+        self.assertEqual(result["Region A"]["start"], 2006)
+        self.assertEqual(result["Region A"]["end"], 2010)
+        # Five pooled periods: too few for regime dating.
+        self.assertEqual(result["Region A"]["stationarity"]["verdict"], "undetermined")
+
+
+class RegionalIndicatorSpecTests(unittest.TestCase):
+    def test_new_specs_are_registered_with_regional_mode(self) -> None:
+        for key in ("life_expectancy_bc_regions", "cchs_bc_regions"):
+            self.assertIn(key, INDICATORS)
+            self.assertEqual(INDICATORS[key]["mode"], "regional_timeseries")
+            self.assertIn("definition", INDICATORS[key])
+            self.assertIn("caveats", INDICATORS[key])
 
 
 if __name__ == "__main__":

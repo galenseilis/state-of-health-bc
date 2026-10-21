@@ -173,7 +173,7 @@ cross-border patient-flow / supply-chain external drivers
   the covered window; nonstationary series carry their trend/regime
   interpretation, not a single summary value.
 
-**Status:** in progress — the pipeline builds and publishes indicators
+**Status:** complete — the pipeline builds and publishes indicators
 from catalogued Statistics Canada tables, each with regenerable charts and
 formal regime dating: piecewise-linear segmentation with BIC selection, a
 residual-permutation break test, and a Kendall-tau trend test, so every
@@ -185,12 +185,21 @@ crude and age-standardised (WHO standard) series; life expectancy at birth
 social wellbeing, and access to care) widens the report beyond mortality;
 and a sub-provincial view (13-10-0931-01) reports the age-standardised
 premature-mortality gap across BC's five health authorities and 17 health
-service delivery areas. The mortality indicator is also decomposed by
-five-year age group, each with its own trend and regime summary. Edition
-0.3 of the descriptive report ("State of health in BC") is published and
-regenerates end-to-end from the published datasets. Outstanding:
-sub-provincial views for the survey and life-expectancy indicators, and
-regime-aware within-versus-across-regime comparisons.
+service delivery areas. Sub-provincial views now extend beyond mortality:
+regional life expectancy (13-10-0389-01, health authorities and 16 service
+delivery areas, 2006/2008–2015/2017) with per-region trajectories and a
+widening regional gap, and the survey family at service-delivery-area
+resolution (13-10-0972-01, nine measures over five pooled two-year
+periods), each with honest pooling caveats. The mortality indicator is
+also decomposed by five-year age group, each with its own trend and regime
+summary. Edition 0.5 of the descriptive report ("State of health in BC")
+is published and regenerates end-to-end from the published datasets. The
+within-versus-across-regime split is now inferential: every dated break
+carries a Chow-style F-test of equal slopes either side of the break, so a
+"rules change" means a significant change in pace, not merely level.
+Remaining follow-up (external): replace the pre-pandemic regional
+life-expectancy table if Statistics Canada republishes it on current
+boundaries; the reporting path is ready for the newer table.
 **Depends on:** M2
 
 ---
@@ -223,7 +232,21 @@ health outcomes in BC.
 - Every reported association states the time window it was estimated on
   and whether the relationship was found stable within that window.
 
-**Status:** not started
+**Status:** in progress — the association scaffold exists: the
+`associations` module measures Pearson/Spearman correlation and an OLS
+slope with its standard error and p-value, and applies the
+**stability-before-pooling** rule M4 requires (contiguous subperiods and
+rolling windows; a pooled estimate is reported only when subperiod
+estimates agree in sign and stay within a stated tolerance of the pooled
+slope). Regime-aware estimation re-runs the association inside each dated
+break. The `associate` CLI lists and builds candidate pairs drawn from
+the published indicator family.
+**Known limitation:** the annual survey and life-expectancy series are
+too short (10–11 points) to form two testable subperiods, so their
+stability verdict is honestly `undetermined` — a pooled number is not yet
+defensible. The next step is to bring in longer determinant series
+(economic, environmental, health-system) from the catalogue so the
+stability machinery has windows wide enough to resolve.
 **Depends on:** M3
 
 ---

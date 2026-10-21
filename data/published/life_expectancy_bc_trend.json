@@ -32,6 +32,21 @@
       "change_within": -0.5122
     }
   ],
+  "slope_change_tests": [
+    {
+      "method": "Chow-style F-test for a slope change at a known break",
+      "change_point": 2015,
+      "f_statistic": 181.5114,
+      "df": [
+        1,
+        41
+      ],
+      "sse_restricted": 17.409044,
+      "sse_unrestricted": 3.207795,
+      "p_value": 0.0,
+      "significant": true
+    }
+  ],
   "break_test": {
     "method": "residual-permutation test (H0: one straight line)",
     "statistic_sse_reduction": 14.201249,
@@ -123,7 +138,8 @@
     "observed_change": 6.6,
     "within_regime_change": 6.1159,
     "between_regime_change": -0.5528,
-    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+    "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+    "slope_change_significant": true
   },
   "series": "Life expectancy (in years) at age x (ex)",
   "sex": "Both sexes"

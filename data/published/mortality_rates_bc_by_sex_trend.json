@@ -45,6 +45,34 @@
           "change_within": -0.32
         }
       ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 36.2642,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.627089,
+          "sse_unrestricted": 1.18937,
+          "p_value": 1e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 37.8616,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 2.627089,
+          "sse_unrestricted": 1.161374,
+          "p_value": 1e-06,
+          "significant": true
+        }
+      ],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 1.465715,
@@ -143,7 +171,8 @@
         "observed_change": 0.7,
         "within_regime_change": 0.5918,
         "between_regime_change": 0.3505,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Males": {
@@ -200,6 +229,47 @@
           "fitted_start": 9.24,
           "fitted_end": 8.8,
           "change_within": -0.44
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2000,
+          "f_statistic": 29.9386,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 7.618439,
+          "sse_unrestricted": 3.813122,
+          "p_value": 6e-06,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 69.7893,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 7.618439,
+          "sse_unrestricted": 2.290358,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 45.7816,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 7.618439,
+          "sse_unrestricted": 3.015946,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -307,7 +377,8 @@
         "observed_change": 0.7,
         "within_regime_change": 0.594,
         "between_regime_change": 0.2402,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Females": {
@@ -332,6 +403,7 @@
           "change_within": 0.9469
         }
       ],
+      "slope_change_tests": [],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 0.191288,
@@ -452,6 +524,21 @@
           "change_within": 0.2446
         }
       ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2013,
+          "f_statistic": 150.879,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 1.816145,
+          "sse_unrestricted": 0.30122,
+          "p_value": 0.0,
+          "significant": true
+        }
+      ],
       "break_test": {
         "method": "residual-permutation test (H0: one straight line)",
         "statistic_sse_reduction": 1.514925,
@@ -543,7 +630,8 @@
         "observed_change": -1.5089,
         "within_regime_change": -1.3595,
         "between_regime_change": 0.0514,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Males": {
@@ -589,6 +677,34 @@
           "fitted_start": 4.697,
           "fitted_end": 4.3279,
           "change_within": -0.3691
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2012,
+          "f_statistic": 170.8273,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.530716,
+          "sse_unrestricted": 0.676808,
+          "p_value": 0.0,
+          "significant": true
+        },
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2020,
+          "f_statistic": 54.7963,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 4.530716,
+          "sse_unrestricted": 1.602917,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -689,7 +805,8 @@
         "observed_change": -2.09,
         "within_regime_change": -2.4309,
         "between_regime_change": 0.4389,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     },
     "Females": {
@@ -724,6 +841,21 @@
           "fitted_start": 2.7608,
           "fitted_end": 2.7154,
           "change_within": -0.0454
+        }
+      ],
+      "slope_change_tests": [
+        {
+          "method": "Chow-style F-test for a slope change at a known break",
+          "change_point": 2010,
+          "f_statistic": 96.3716,
+          "df": [
+            1,
+            30
+          ],
+          "sse_restricted": 0.494171,
+          "sse_unrestricted": 0.117314,
+          "p_value": 0.0,
+          "significant": true
         }
       ],
       "break_test": {
@@ -817,7 +949,8 @@
         "observed_change": -1.1009,
         "within_regime_change": -0.8786,
         "between_regime_change": -0.1756,
-        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks"
+        "interpretation": "within = change from the trend inside each regime; between = level jumps at the dated breaks",
+        "slope_change_significant": true
       }
     }
   }

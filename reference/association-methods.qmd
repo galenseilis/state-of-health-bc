@@ -1,0 +1,91 @@
+---
+title: "Association and stability methods"
+---
+
+*This page documents how milestone M4 characterises statistical
+dependence between candidate variables and BC health outcomes. It exists
+so that every published association can be traced to a stated method, an
+estimation window, and a stability verdict.*
+
+## Why stability comes before pooling
+
+Milestone M3 established that BC's health is nonstationary — levels
+drift, trend slopes turn, and the data-generating process itself changes
+(see [Health is not stationary](../explanation/nonstationarity.qmd)). The
+same logic applies to *relationships*. A variable associated with a
+health outcome in one decade need not be associated in the next. A single
+pooled correlation across a long window can therefore describe no actual
+period well.
+
+M4's rule is therefore: **estimate the association over a stated window,
+and test it for stability before reporting any pooled number.** When the
+relationship is stable, one pooled estimate is defensible; when it is
+not, the time-varying estimates *are* the result.
+
+## Association measures
+
+For a paired health outcome and candidate determinant with at least five
+shared periods:
+
+| Measure | What it captures | Reported as |
+|---------|------------------|-------------|
+| Pearson correlation | Linear association | `r`, with p-value |
+| Spearman correlation | Monotone association, rank-based | `rho`, with p-value |
+| OLS slope | Change in the outcome per unit of the determinant | `slope`, standard error, t p-value |
+
+The slope carries units and is the quantity compared against the
+estimation window; the correlations are scale-free summaries. All
+measures are computed on the shared periods only — series are aligned,
+never padded.
+
+## Stability analysis
+
+The relationship is re-estimated two ways:
+
+- **Subperiods.** The window is split into contiguous runs (by default
+  three). Each run needs at least five points to be testable.
+- **Rolling windows.** A fixed-width window (by default eight periods)
+  slides across the series, giving one estimate per position.
+
+A pooled estimate is labelled **stable** only when there are at least two
+testable subperiods, every subperiod estimate agrees in sign with the
+pooled slope, and no subperiod slope strays beyond a stated tolerance
+(half the pooled magnitude) from it. Otherwise:
+
+- **time-varying** — subperiod estimates disagree in sign or in
+  magnitude; report the subperiod/rolling estimates instead;
+- **undetermined** — the series is too short to form two testable
+  subperiods, so stability cannot be assessed and no pooled number is
+  claimed.
+
+## Regime-aware estimation
+
+Where a series carries dated breaks from the M3 change-point machinery
+(see [Data quality](../reference/data-quality.qmd)), the association is
+re-estimated separately inside each regime, so a pooled number is never
+reported across a known rule change.
+
+## Reproducing the results
+
+List the candidate pairs, then build one or more:
+
+```bash
+uv run sohbc associate
+uv run sohbc associate life_satisfaction_by_sense_of_belonging
+```
+
+Each build writes `data/published/association_<key>.json`, stating the
+pooled estimate, its window, the subperiod and rolling estimates, and the
+stability verdict with its reasons.
+
+## Caveats
+
+- Every current candidate pair is **ecological**: annual, province-level
+  aggregates, not individuals. An association between two provincial
+  series is not evidence about any person's risk.
+- The annual survey and life-expectancy series span only ten to eleven
+  points, so their stability verdict is `undetermined` — the method is
+  built for longer determinant series (economic, environmental,
+  health-system) as those join the catalogue.
+- Correlation is not causation; M4 states dependence, and M5 addresses
+  causal structure.

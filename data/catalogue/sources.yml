@@ -550,6 +550,56 @@ sources:
       url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100931/en"
       filename: "13100931-download.json"
 
+  - key: statcan_health_regions_cchs
+    title: "Health characteristics by health region, two-year period estimates (Web Data Service)"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097201"
+    citation: statcan
+    form: indicator_table
+    domains: [Physical morbidity, Mental health, Subjective wellbeing, Social wellbeing]
+    indicators: ["Self-rated health and mental health, chronic conditions, health behaviours, life satisfaction, and sense of belonging, by health region (table 13-10-0972-01, Canadian Community Health Survey)"]
+    resolution: [provincial, health_service_delivery_area]
+    geography: "Canada, provinces, territories and health regions; British Columbia appears as 16 health service delivery areas"
+    coverage: "2015/2016 to 2023/2024 (two-year periods)"
+    frequency: biennial
+    refresh: "annual (rolling two-year periods)"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC health service delivery area rows within the national table"
+    temporal_behaviour: trending
+    quality_notes: "Survey estimates carry sampling error and a coefficient-of-variation based release policy; suppressed or flagged cells are common at the health-region level. Published as pooled two-year periods (not annual), so sub-provincial trajectories have five points over 2015-2024 — enough for a slope, not for regime dating. 'Has a regular healthcare provider' is not among the table's indicators, so the regional survey family is narrower than the provincial one. The BC geography is health service delivery areas only; health-authority rows are not published in this table."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100972/en"
+      filename: "13100972-download.json"
+
+  - key: statcan_life_tables_regions
+    title: "Life expectancy by health region, three-year period estimates (Web Data Service)"
+    publisher: "Statistics Canada"
+    url: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310038901"
+    citation: statcan
+    form: indicator_table
+    domains: [Mortality]
+    indicators: ["Life expectancy at birth and at age 65, by sex, three-year average, by health region (table 13-10-0389-01)"]
+    resolution: [provincial, health_authority, health_service_delivery_area]
+    geography: "Canada, provinces, territories, health regions and peer groups (2018 boundaries and names); British Columbia appears as 5 health authorities and 16 health service delivery areas"
+    coverage: "2006/2008 to 2015/2017 (three-year periods)"
+    frequency: annual
+    refresh: "none known; the table has not been updated since 2015/2017"
+    licence: "Statistics Canada Open Licence"
+    access: public
+    form_of_access: "REST API; getFullTableDownloadCSV returns a full-table CSV archive (zip) per table id"
+    origin: canada
+    reaches_bc_via: "BC health authority and health service delivery area rows within the national table"
+    temporal_behaviour: trending
+    quality_notes: "The only published sub-provincial life expectancy for BC, but it ends at the 2015/2017 period and uses 2018 health-region boundaries, so it predates the pandemic and the 2023 boundary set used by table 13-10-0931-01. Published as overlapping three-year averages, so the five periods are strongly autocorrelated; treat the series as a slow-moving trajectory, not annual change. Small-area estimates carry wide confidence intervals."
+    download:
+      kind: api_json
+      url: "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/13100389/en"
+      filename: "13100389-download.json"
+
   - key: bcstats_economy
     title: "Economy"
     publisher: "BC Stats, Government of British Columbia"

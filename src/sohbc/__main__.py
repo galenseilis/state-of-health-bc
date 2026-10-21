@@ -6,6 +6,11 @@ import argparse
 import sys
 
 from . import __version__
+from .associations import (
+    CANDIDATE_PAIRS,
+    AssociationError,
+    build_association,
+)
 from .catalogue import ROOT, CatalogueError, load
 from .fetch import check_source, run_fetch
 from .indicators import INDICATORS, IndicatorError, build
@@ -102,6 +107,8 @@ def _cmd_build(args: argparse.Namespace) -> int:
         )
         if result.get("dispersion") is not None:
             print(f"      dispersion -> {result['dispersion'].relative_to(ROOT)}")
+        if result.get("summary") is not None:
+            print(f"      summary -> {result['summary'].relative_to(ROOT)}")
         if result.get("standardised") is not None:
             print(f"      standardised -> {result['standardised'].relative_to(ROOT)}")
         if result.get("standardised_trend") is not None:
@@ -113,6 +120,32 @@ def _cmd_build(args: argparse.Namespace) -> int:
             print(f"      trend -> {result['trend'].relative_to(ROOT)}")
         if result.get("by_sex_trend") is not None:
             print(f"      by-sex trend -> {result['by_sex_trend'].relative_to(ROOT)}")
+    return 0
+
+
+def _cmd_associate(args: argparse.Namespace) -> int:
+    if not args.keys:
+        width = max(len(k) for k in CANDIDATE_PAIRS)
+        for key, spec in CANDIDATE_PAIRS.items():
+            print(f"{key.ljust(width)}  {spec['domain']:<12}  {spec['title']}")
+        print(f"\n{len(CANDIDATE_PAIRS)} candidate associations")
+        return 0
+    for key in args.keys:
+        try:
+            built = build_association(key)
+        except AssociationError as exc:
+            print(f"FAIL  {key}: {exc}", file=sys.stderr)
+            return 1
+        result = built["result"]
+        verdict = result["stability"]["verdict"]
+        pooled = result["pooled"]
+        print(
+            f"assoc {key:<40} {verdict:<12} "
+            f"r={pooled['pearson']['r']:+.3f} "
+            f"slope={pooled['ols']['slope']:+.4f} "
+            f"window={pooled['window']['start']}-{pooled['window']['end']} -> "
+            f"{built['output'].relative_to(ROOT)}"
+        )
     return 0
 
 
@@ -156,6 +189,15 @@ def build_parser() -> argparse.ArgumentParser:
     build_parser.add_argument("keys", nargs="*", help="indicator keys (default: all)")
     build_parser.set_defaults(func=_cmd_build)
 
+    associate = sub.add_parser(
+        "associate",
+        help="estimate candidate associations with a stability check (M4)",
+    )
+    associate.add_argument(
+        "keys", nargs="*", help="candidate keys (default: list them)"
+    )
+    associate.set_defaults(func=_cmd_associate)
+
     return parser
 
 
@@ -164,7 +206,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
-    except (CatalogueError, IndicatorError) as exc:
+    except (CatalogueError, IndicatorError, AssociationError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
