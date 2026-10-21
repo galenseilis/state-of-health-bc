@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-145b6edafbe96e11a8fd05f34d290dac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -245,6 +245,10 @@ div.csl-indent {
  <span class="dropdown-text">Health is not stationary</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./explanation/dependence.html">
+ <span class="dropdown-text">When do things move together?</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./explanation/why-bc.html">
  <span class="dropdown-text">Why BC only?</span></a>
   </li>  
@@ -392,7 +396,11 @@ div.csl-indent {
 <li>Analyses are reproducible from the M2 pipeline.</li>
 <li>Every reported association states the time window it was estimated on and whether the relationship was found stable within that window.</li>
 </ul>
-<p><strong>Status:</strong> in progress — the association scaffold exists: the <code>associations</code> module measures Pearson/Spearman correlation and an OLS slope with its standard error and p-value, and applies the <strong>stability-before-pooling</strong> rule M4 requires (contiguous subperiods and rolling windows; a pooled estimate is reported only when subperiod estimates agree in sign and stay within a stated tolerance of the pooled slope). Regime-aware estimation re-runs the association inside each dated break. The <code>associate</code> CLI lists and builds candidate pairs drawn from the published indicator family. <strong>Known limitation:</strong> the annual survey and life-expectancy series are too short (10–11 points) to form two testable subperiods, so their stability verdict is honestly <code>undetermined</code> — a pooled number is not yet defensible. The next step is to bring in longer determinant series (economic, environmental, health-system) from the catalogue so the stability machinery has windows wide enough to resolve. <strong>Depends on:</strong> M3</p>
+<p><strong>Status:</strong> in progress — the association scaffold exists and has run on real data. The <code>associations</code> module measures Pearson/Spearman correlation and an OLS slope with its standard error and p-value, and applies the <strong>stability-before-pooling</strong> rule M4 requires (contiguous subperiods and rolling windows; a pooled estimate is reported only when subperiod estimates agree in sign and stay within a stated tolerance of the pooled slope). Regime-aware estimation re-runs the association inside each dated break from M3. The <code>associate</code> CLI lists and builds candidate pairs drawn from the published indicator family.</p>
+<p>Three methodological pieces were added to make the estimates defensible: a <strong>transform</strong> step (<code>levels</code>, <code>first_differences</code>, <code>log_first_differences</code>) so trending series are not correlated merely for both trending; an <strong>“undetermined”</strong> verdict when a series is too short to split into two testable subperiods, so short series report no pooled number at all; and <strong>regime-aware</strong> re-estimation using the M3 dated breaks.</p>
+<p><strong>Determinants.</strong> The BC Economic Accounts (BCEA, BC Stats) are now a catalogued, automatable source (annual from 1981): GDP at market prices and household disposable income are published as indicator series, giving the stability engine windows long enough to resolve. These are determinants, not health outcomes.</p>
+<p><strong>Headline result.</strong> For all three long pairs (life expectancy vs GDP, life expectancy vs household income, age-standardised mortality vs household income) the level correlations are large (r = +0.85, +0.85, −0.78) but are almost entirely a shared-trend artefact; on year-to-year changes the relationships are weak (r = −0.23, −0.17, +0.05) and <strong>time-varying</strong> — subperiod estimates disagree in sign for two of the three, and the mortality–income relationship flips sign across the 2013 break. No pooled estimate is published for them. The four survey-based pairs are too short and return <code>undetermined</code>.</p>
+<p><strong>Next:</strong> sub-provincial determinants to multiply the sample; quarterly or monthly economic series for finer stability resolution; individual-level data via microdata to replace ecological inference. <strong>Depends on:</strong> M3</p>
 <hr>
 </section>
 <section id="m5-causal-structures" class="level2">

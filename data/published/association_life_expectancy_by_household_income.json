@@ -1,0 +1,399 @@
+{
+  "pooled": {
+    "transform": "log_first_differences",
+    "window": {
+      "start": 1983,
+      "end": 2024,
+      "n": 42
+    },
+    "pearson": {
+      "r": -0.1668,
+      "p_value": 0.291103
+    },
+    "spearman": {
+      "rho": -0.1305,
+      "p_value": 0.409938
+    },
+    "ols": {
+      "slope": -0.028017,
+      "intercept": 0.003342,
+      "std_error": 0.026188,
+      "t_statistic": -1.0698,
+      "p_value": 0.291103,
+      "significant": false
+    }
+  },
+  "subperiods": [
+    {
+      "start": 1983,
+      "end": 1996,
+      "n": 14,
+      "slope": -0.048146,
+      "p_value": 0.159399
+    },
+    {
+      "start": 1997,
+      "end": 2010,
+      "n": 14,
+      "slope": -0.050171,
+      "p_value": 0.14185
+    },
+    {
+      "start": 2011,
+      "end": 2024,
+      "n": 14,
+      "slope": 0.020814,
+      "p_value": 0.763494
+    }
+  ],
+  "rolling": [
+    {
+      "start": 1983,
+      "end": 1990,
+      "n": 8,
+      "slope": -0.101421,
+      "p_value": 0.033087
+    },
+    {
+      "start": 1984,
+      "end": 1991,
+      "n": 8,
+      "slope": -0.029786,
+      "p_value": 0.362171
+    },
+    {
+      "start": 1985,
+      "end": 1992,
+      "n": 8,
+      "slope": -0.031746,
+      "p_value": 0.227422
+    },
+    {
+      "start": 1986,
+      "end": 1993,
+      "n": 8,
+      "slope": -0.006074,
+      "p_value": 0.85773
+    },
+    {
+      "start": 1987,
+      "end": 1994,
+      "n": 8,
+      "slope": -0.006338,
+      "p_value": 0.831958
+    },
+    {
+      "start": 1988,
+      "end": 1995,
+      "n": 8,
+      "slope": -0.016045,
+      "p_value": 0.592105
+    },
+    {
+      "start": 1989,
+      "end": 1996,
+      "n": 8,
+      "slope": 0.010052,
+      "p_value": 0.727561
+    },
+    {
+      "start": 1990,
+      "end": 1997,
+      "n": 8,
+      "slope": 0.01828,
+      "p_value": 0.781561
+    },
+    {
+      "start": 1991,
+      "end": 1998,
+      "n": 8,
+      "slope": -0.004912,
+      "p_value": 0.958869
+    },
+    {
+      "start": 1992,
+      "end": 1999,
+      "n": 8,
+      "slope": 0.032213,
+      "p_value": 0.736508
+    },
+    {
+      "start": 1993,
+      "end": 2000,
+      "n": 8,
+      "slope": 0.06646,
+      "p_value": 0.56421
+    },
+    {
+      "start": 1994,
+      "end": 2001,
+      "n": 8,
+      "slope": 0.015684,
+      "p_value": 0.855411
+    },
+    {
+      "start": 1995,
+      "end": 2002,
+      "n": 8,
+      "slope": -0.013359,
+      "p_value": 0.854397
+    },
+    {
+      "start": 1996,
+      "end": 2003,
+      "n": 8,
+      "slope": -0.007209,
+      "p_value": 0.916543
+    },
+    {
+      "start": 1997,
+      "end": 2004,
+      "n": 8,
+      "slope": -0.067109,
+      "p_value": 0.316582
+    },
+    {
+      "start": 1998,
+      "end": 2005,
+      "n": 8,
+      "slope": -0.055622,
+      "p_value": 0.388152
+    },
+    {
+      "start": 1999,
+      "end": 2006,
+      "n": 8,
+      "slope": -0.018319,
+      "p_value": 0.715933
+    },
+    {
+      "start": 2000,
+      "end": 2007,
+      "n": 8,
+      "slope": -0.022637,
+      "p_value": 0.607058
+    },
+    {
+      "start": 2001,
+      "end": 2008,
+      "n": 8,
+      "slope": 0.011499,
+      "p_value": 0.638237
+    },
+    {
+      "start": 2002,
+      "end": 2009,
+      "n": 8,
+      "slope": -0.037897,
+      "p_value": 0.300051
+    },
+    {
+      "start": 2003,
+      "end": 2010,
+      "n": 8,
+      "slope": -0.036549,
+      "p_value": 0.339873
+    },
+    {
+      "start": 2004,
+      "end": 2011,
+      "n": 8,
+      "slope": -0.034564,
+      "p_value": 0.401451
+    },
+    {
+      "start": 2005,
+      "end": 2012,
+      "n": 8,
+      "slope": -0.031939,
+      "p_value": 0.415282
+    },
+    {
+      "start": 2006,
+      "end": 2013,
+      "n": 8,
+      "slope": -0.038708,
+      "p_value": 0.355015
+    },
+    {
+      "start": 2007,
+      "end": 2014,
+      "n": 8,
+      "slope": -0.111907,
+      "p_value": 0.045625
+    },
+    {
+      "start": 2008,
+      "end": 2015,
+      "n": 8,
+      "slope": -0.157276,
+      "p_value": 0.030479
+    },
+    {
+      "start": 2009,
+      "end": 2016,
+      "n": 8,
+      "slope": -0.102389,
+      "p_value": 0.323328
+    },
+    {
+      "start": 2010,
+      "end": 2017,
+      "n": 8,
+      "slope": -0.069378,
+      "p_value": 0.444782
+    },
+    {
+      "start": 2011,
+      "end": 2018,
+      "n": 8,
+      "slope": -0.082679,
+      "p_value": 0.193675
+    },
+    {
+      "start": 2012,
+      "end": 2019,
+      "n": 8,
+      "slope": 0.022045,
+      "p_value": 0.785615
+    },
+    {
+      "start": 2013,
+      "end": 2020,
+      "n": 8,
+      "slope": -0.068194,
+      "p_value": 0.369306
+    },
+    {
+      "start": 2014,
+      "end": 2021,
+      "n": 8,
+      "slope": -0.040055,
+      "p_value": 0.664498
+    },
+    {
+      "start": 2015,
+      "end": 2022,
+      "n": 8,
+      "slope": -0.037296,
+      "p_value": 0.689359
+    },
+    {
+      "start": 2016,
+      "end": 2023,
+      "n": 8,
+      "slope": 0.014679,
+      "p_value": 0.881287
+    },
+    {
+      "start": 2017,
+      "end": 2024,
+      "n": 8,
+      "slope": 0.026844,
+      "p_value": 0.813756
+    }
+  ],
+  "rolling_window": 8,
+  "stability": {
+    "stable": false,
+    "tolerance": 0.5,
+    "verdict": "time-varying",
+    "reasons": [
+      "subperiod estimates disagree in sign",
+      "subperiod slopes stray up to 1.74 of the pooled slope"
+    ],
+    "interpretation": "stable = one pooled estimate is defensible over the window; time-varying = report the subperiod/rolling estimates instead; undetermined = too few points to test stability"
+  },
+  "key": "life_expectancy_by_household_income",
+  "domain": "economic",
+  "title": "Life expectancy at birth vs BC household disposable income",
+  "caveat": "Ecological and annual. Both series trend, so the association is estimated on proportional year-on-year changes. Provincial aggregate: says nothing about the income gradient within BC.",
+  "outcome": {
+    "file": "life_expectancy_bc.csv",
+    "characteristic": "Life expectancy (in years) at age x (ex)",
+    "age_group": "0 years"
+  },
+  "determinant": {
+    "file": "household_income_bc.csv",
+    "characteristic": "Household disposable income"
+  },
+  "levels_contrast": {
+    "transform": "levels",
+    "window": {
+      "start": 1982,
+      "end": 2024,
+      "n": 43
+    },
+    "pearson": {
+      "r": 0.8506,
+      "p_value": 0.0
+    },
+    "spearman": {
+      "rho": 0.9367,
+      "p_value": 0.0
+    },
+    "ols": {
+      "slope": 2.7e-05,
+      "intercept": 77.373308,
+      "std_error": 3e-06,
+      "t_statistic": 10.36,
+      "p_value": 0.0,
+      "significant": true
+    }
+  },
+  "regime_years": [
+    2015
+  ],
+  "within_regime": [
+    {
+      "transform": "log_first_differences",
+      "window": {
+        "start": 1983,
+        "end": 2014,
+        "n": 32
+      },
+      "pearson": {
+        "r": -0.3828,
+        "p_value": 0.030593
+      },
+      "spearman": {
+        "rho": -0.3614,
+        "p_value": 0.042099
+      },
+      "ols": {
+        "slope": -0.045133,
+        "intercept": 0.004819,
+        "std_error": 0.019887,
+        "t_statistic": -2.2694,
+        "p_value": 0.030593,
+        "significant": true
+      },
+      "regime": 1
+    },
+    {
+      "transform": "log_first_differences",
+      "window": {
+        "start": 2016,
+        "end": 2024,
+        "n": 9
+      },
+      "pearson": {
+        "r": 0.1619,
+        "p_value": 0.677251
+      },
+      "spearman": {
+        "rho": 0.1333,
+        "p_value": 0.732368
+      },
+      "ols": {
+        "slope": 0.040841,
+        "intercept": -0.00233,
+        "std_error": 0.094073,
+        "t_statistic": 0.4341,
+        "p_value": 0.677251,
+        "significant": false
+      },
+      "regime": 2
+    }
+  ]
+}

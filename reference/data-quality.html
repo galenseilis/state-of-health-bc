@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-145b6edafbe96e11a8fd05f34d290dac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -245,6 +245,10 @@ div.csl-indent {
  <span class="dropdown-text">Health is not stationary</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../explanation/dependence.html">
+ <span class="dropdown-text">When do things move together?</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../explanation/why-bc.html">
  <span class="dropdown-text">Why BC only?</span></a>
   </li>  
@@ -382,7 +386,9 @@ div.csl-indent {
 </section>
 <section id="url-verification" class="level2">
 <h2 class="anchored" data-anchor-id="url-verification">URL verification</h2>
-<p>As part of M2, every catalogued URL was checked for reachability with <code>uv run sohbc check --all</code>. All catalogued landing pages and the automated download endpoints returned HTTP 200 at the time of checking (28 sources; the catalogue has since grown to 30 with the two regional survey and life-expectancy tables). The federal publisher’s own portal was unreachable from the verification environment, so federal open data is reached through the Open Government portal record instead; this is noted on that catalogue entry.</p>
+<p>As part of M2, every catalogued URL was checked for reachability with <code>uv run sohbc check --all</code>. All catalogued landing pages and the automated download endpoints returned HTTP 200 at the time of checking (28 sources; the catalogue has since grown to 31 with the two regional survey and life-expectancy tables and the BC Economic Accounts). The federal publisher’s own portal was unreachable from the verification environment, so federal open data is reached through the Open Government portal record instead; this is noted on that catalogue entry.</p>
+<p><strong>Reachability is not the same as availability.</strong> A status code alone is not evidence that a source works: Statistics Canada answers HTTP 200 with an outage notice when its site is down. The checker therefore inspects the body of HTML responses for known outage markers and reports such a source as unreachable. This was added after a full StatCan outage was observed to pass the check as “reachable” — the published statistics Canada serves for the health tables are unaffected, because they are already downloaded, but a rebuild during an outage would have failed late and noisily instead of at the verification step.</p>
+<p><strong>Outages are recorded, not hidden.</strong> At the time of the M4 increment the Statistics Canada web and data distribution sites were serving an outage notice to all requests, including table downloads. The catalogue entries, the published datasets, and the rebuild procedure are unaffected: the health tables are already downloaded and the new determinant source is the BC Economic Accounts, hosted by BC Stats.</p>
 </section>
 <section id="first-published-indicator" class="level2">
 <h2 class="anchored" data-anchor-id="first-published-indicator">First published indicator</h2>

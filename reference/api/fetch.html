@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-145b6edafbe96e11a8fd05f34d290dac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -261,6 +261,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Health is not stationary</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../explanation/dependence.html">
+ <span class="dropdown-text">When do things move together?</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../explanation/why-bc.html">
  <span class="dropdown-text">Why BC only?</span></a>
   </li>  
@@ -347,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>fetch.check_url(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Return reachability information for a URL (follows redirects).</p>
 <p>Args: url: URL to check.</p>
-<p>Returns: dict[str, Any]: Result including status, final_url, reachable.</p>
+<p>Returns: dict: Result including status, final_url, reachable, and a <code>detail</code> explaining any soft failure.</p>
 </section>
 <section id="sohbc.fetch.fetch_source" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.fetch.fetch_source">fetch_source</h3>
