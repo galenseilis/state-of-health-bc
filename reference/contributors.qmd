@@ -1,0 +1,18 @@
+---
+title: "Contributors"
+---
+
+State-of-Health BC is built by the people listed below. The list is
+generated from the repository's GitHub contributors graph, so it credits
+everyone who has contributed commits — code, documentation, data, and
+review — to the project.
+
+{{< include _contributors-list.md >}}
+
+GitHub counts a contribution as one commit to the repository; the numbers
+above are therefore commit counts, not a measure of how much time or
+expertise went into the work. Contributions that arrive through pull
+requests opened from a fork are credited to the fork's account.
+
+Want to join them? See [how to contribute](../how-to/contribute.qmd) —
+open an issue before starting non-trivial work.
