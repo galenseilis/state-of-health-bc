@@ -1,6 +1,5 @@
 {
   "pooled": {
-    "transform": "levels",
     "window": {
       "start": 2015,
       "end": 2024,

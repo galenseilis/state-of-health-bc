@@ -261,10 +261,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Health is not stationary</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../explanation/dependence.html">
- <span class="dropdown-text">When do things move together?</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../explanation/why-bc.html">
  <span class="dropdown-text">Why BC only?</span></a>
   </li>  
@@ -292,10 +288,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#why-stability-comes-before-pooling" id="toc-why-stability-comes-before-pooling" class="nav-link active" data-scroll-target="#why-stability-comes-before-pooling">Why stability comes before pooling</a></li>
   <li><a href="#association-measures" id="toc-association-measures" class="nav-link" data-scroll-target="#association-measures">Association measures</a></li>
-  <li><a href="#transforming-before-correlating" id="toc-transforming-before-correlating" class="nav-link" data-scroll-target="#transforming-before-correlating">Transforming before correlating</a></li>
   <li><a href="#stability-analysis" id="toc-stability-analysis" class="nav-link" data-scroll-target="#stability-analysis">Stability analysis</a></li>
   <li><a href="#regime-aware-estimation" id="toc-regime-aware-estimation" class="nav-link" data-scroll-target="#regime-aware-estimation">Regime-aware estimation</a></li>
-  <li><a href="#determinant-data" id="toc-determinant-data" class="nav-link" data-scroll-target="#determinant-data">Determinant data</a></li>
   <li><a href="#reproducing-the-results" id="toc-reproducing-the-results" class="nav-link" data-scroll-target="#reproducing-the-results">Reproducing the results</a></li>
   <li><a href="#caveats" id="toc-caveats" class="nav-link" data-scroll-target="#caveats">Caveats</a></li>
   </ul>
@@ -365,35 +359,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>The slope carries units and is the quantity compared against the estimation window; the correlations are scale-free summaries. All measures are computed on the shared periods only — series are aligned, never padded.</p>
 </section>
-<section id="transforming-before-correlating" class="level2">
-<h2 class="anchored" data-anchor-id="transforming-before-correlating">Transforming before correlating</h2>
-<p>Two series that both trend will be strongly correlated in levels even when nothing links them: the classic spurious regression. Since almost every candidate determinant and every health outcome in this project trends upward over the observation window, the level correlation between them is mostly a statement about the passage of time.</p>
-<p>The module therefore supports three transforms, applied before anything is estimated:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Transform</th>
-<th>What it relates</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>levels</code></td>
-<td>The series as they stand</td>
-</tr>
-<tr class="even">
-<td><code>first_differences</code></td>
-<td>Year-on-year changes</td>
-</tr>
-<tr class="odd">
-<td><code>log_first_differences</code></td>
-<td>Proportional year-on-year changes</td>
-</tr>
-</tbody>
-</table>
-<p>For determinants, <code>log_first_differences</code> is the default in this project’s candidate pairs: it is the natural scale for series with very different units, and it asks the question that matters — <em>do health outcomes move with economic conditions?</em> — rather than <em>are they both high at the same time?</em></p>
-<p>Where a difference transform is used, the level association is reported alongside it as <code>levels_contrast</code>, so the effect of the transform is visible rather than hidden.</p>
-</section>
 <section id="stability-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="stability-analysis">Stability analysis</h2>
 <p>The relationship is re-estimated two ways:</p>
@@ -409,31 +374,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="regime-aware-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="regime-aware-estimation">Regime-aware estimation</h2>
-<p>Where a series carries dated breaks from the M3 change-point machinery (see <a href="../reference/data-quality.html">Data quality</a>), the association is re-estimated separately inside each regime, so a pooled number is never reported across a known rule change. The published record names the regime years it used and the estimate for each regime.</p>
-</section>
-<section id="determinant-data" class="level2">
-<h2 class="anchored" data-anchor-id="determinant-data">Determinant data</h2>
-<p>The candidate determinants currently built are economic series from the BC Economic Accounts (BCEA), published by BC Stats: gross domestic product at market prices and household disposable income, both annual from the early 1980s. They are long enough for the stability machinery to resolve, and they overlap the health series’ observation window.</p>
-<p>They are <strong>detominants, not health outcomes</strong>: they describe the conditions under which health is produced, and they are never counted as health evidence in their own right.</p>
+<p>Where a series carries dated breaks from the M3 change-point machinery (see <a href="../reference/data-quality.html">Data quality</a>), the association is re-estimated separately inside each regime, so a pooled number is never reported across a known rule change.</p>
 </section>
 <section id="reproducing-the-results" class="level2">
 <h2 class="anchored" data-anchor-id="reproducing-the-results">Reproducing the results</h2>
 <p>List the candidate pairs, then build one or more:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc associate</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc associate life_expectancy_by_gdp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Each build writes <code>data/published/association_&lt;key&gt;.json</code>, stating the pooled estimate, its window, the transform used, the subperiod and rolling estimates, the stability verdict with its reasons, and the within-regime estimates where a break was dated.</p>
-<p>The determinants themselves are built like any other indicator:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc fetch bcstats_bcea</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc build gdp_bc household_income_bc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run sohbc associate life_satisfaction_by_sense_of_belonging</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each build writes <code>data/published/association_&lt;key&gt;.json</code>, stating the pooled estimate, its window, the subperiod and rolling estimates, and the stability verdict with its reasons.</p>
 </section>
 <section id="caveats" class="level2">
 <h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
 <ul>
 <li>Every current candidate pair is <strong>ecological</strong>: annual, province-level aggregates, not individuals. An association between two provincial series is not evidence about any person’s risk.</li>
-<li>The annual survey series span only ten to eleven points, so their stability verdict is <code>undetermined</code> — the method is built for longer determinant series, and the verdict is reported honestly rather than defaulting to “stable”.</li>
-<li>A difference transform removes the shared trend, but it also removes the level information: a relationship that is real in levels and absent in differences would be missed. Both are reported.</li>
+<li>The annual survey and life-expectancy series span only ten to eleven points, so their stability verdict is <code>undetermined</code> — the method is built for longer determinant series (economic, environmental, health-system) as those join the catalogue.</li>
 <li>Correlation is not causation; M4 states dependence, and M5 addresses causal structure.</li>
-<li>Where a determinant swings hard in a recession while a health outcome moves slowly, the difference-transformed slope is dominated by the determinant’s own volatility, and its sign should not be read as a causal effect.</li>
 </ul>
 
 

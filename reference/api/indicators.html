@@ -261,10 +261,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Health is not stationary</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../explanation/dependence.html">
- <span class="dropdown-text">When do things move together?</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../../explanation/why-bc.html">
  <span class="dropdown-text">Why BC only?</span></a>
   </li>  
@@ -303,7 +299,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sohbc.indicators.age_standardise" id="toc-sohbc.indicators.age_standardise" class="nav-link" data-scroll-target="#sohbc.indicators.age_standardise">age_standardise</a></li>
   <li><a href="#sohbc.indicators.build_age_specific" id="toc-sohbc.indicators.build_age_specific" class="nav-link" data-scroll-target="#sohbc.indicators.build_age_specific">build_age_specific</a></li>
   <li><a href="#sohbc.indicators.build_cross_section" id="toc-sohbc.indicators.build_cross_section" class="nav-link" data-scroll-target="#sohbc.indicators.build_cross_section">build_cross_section</a></li>
-  <li><a href="#sohbc.indicators.build_economic_accounts" id="toc-sohbc.indicators.build_economic_accounts" class="nav-link" data-scroll-target="#sohbc.indicators.build_economic_accounts">build_economic_accounts</a></li>
   <li><a href="#sohbc.indicators.build_regional_timeseries" id="toc-sohbc.indicators.build_regional_timeseries" class="nav-link" data-scroll-target="#sohbc.indicators.build_regional_timeseries">build_regional_timeseries</a></li>
   <li><a href="#sohbc.indicators.dispersion" id="toc-sohbc.indicators.dispersion" class="nav-link" data-scroll-target="#sohbc.indicators.dispersion">dispersion</a></li>
   <li><a href="#sohbc.indicators.ols_slope" id="toc-sohbc.indicators.ols_slope" class="nav-link" data-scroll-target="#sohbc.indicators.ols_slope">ols_slope</a></li>
@@ -385,58 +380,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Build a sub-provincial cross-sectional indicator.</td>
 </tr>
 <tr class="even">
-<td><a href="#sohbc.indicators.build_economic_accounts">build_economic_accounts</a></td>
-<td>Build a determinant series from the BC Economic Accounts workbook.</td>
-</tr>
-<tr class="odd">
 <td><a href="#sohbc.indicators.build_regional_timeseries">build_regional_timeseries</a></td>
 <td>Build a sub-provincial multi-period regional indicator.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.dispersion">dispersion</a></td>
 <td>Summarise the spread of one cross-sectional indicator across regions.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.ols_slope">ols_slope</a></td>
 <td>Ordinary least squares for y = a + b x; return (slope, intercept, sse).</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.region_level">region_level</a></td>
 <td>Classify a health-region geography name for a tidy dataset.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.regional_spread">regional_spread</a></td>
 <td>Spread of one series slice across regions, per reference period.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.regional_trajectories">regional_trajectories</a></td>
 <td>Trajectory summary per region for one slice of a regional series.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.sex_breakdown">sex_breakdown</a></td>
 <td>Trajectory summary per sex category for one series.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.table_rows">table_rows</a></td>
 <td>Return rows from the data CSV inside a WDS full-table zip.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.tidy_regional_timeseries">tidy_regional_timeseries</a></td>
 <td>Tidy sub-provincial multi-period rows, keeping the province row.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.tidy_regions">tidy_regions</a></td>
 <td>Tidy sub-provincial health-region rows, keeping the geography name.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.trajectory">trajectory</a></td>
 <td>Summarise a series: overall slope, formally tested regimes, trend.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#sohbc.indicators.wds_download_json">wds_download_json</a></td>
 <td>Path to a WDS download manifest for a source (and optional table).</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#sohbc.indicators.wds_zip_url">wds_zip_url</a></td>
 <td>Read a WDS download JSON and return the full-table zip URL.</td>
 </tr>
@@ -478,114 +469,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Build a sub-provincial cross-sectional indicator.</p>
 <p>Unlike the time-series indicators this does not run regime tests: the source is published as overlapping three-year averages, so the value it adds is the spread across regions in a single period, not a trajectory.</p>
 </section>
-<section id="sohbc.indicators.build_economic_accounts" class="level3">
-<h3 class="anchored" data-anchor-id="sohbc.indicators.build_economic_accounts">build_economic_accounts</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>indicators.build_economic_accounts(spec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Build a determinant series from the BC Economic Accounts workbook.</p>
-<p>These are economic series, not health outcomes: they exist so that milestone M4 can ask whether health outcomes move with economic conditions. The build extracts one worksheet, one geography (British Columbia by default), and writes a tidy series with a stated unit.</p>
-<p>Args: spec: The indicator specification.</p>
-<p>Returns: dict: The build summary, including the written paths.</p>
-</section>
 <section id="sohbc.indicators.build_regional_timeseries" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.build_regional_timeseries">build_regional_timeseries</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>indicators.build_regional_timeseries(spec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>indicators.build_regional_timeseries(spec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Build a sub-provincial multi-period regional indicator.</p>
 <p>Unlike the cross-section mode, each region contributes a row per reference period and gets a trajectory summary; unlike the provincial time-series modes, the periods are pooled averages (two- or three-year), so regime dating is left to the stationarity machinery, which reports <code>undetermined</code> when the series is too short.</p>
 <p>The summary JSON holds, for every series slice (each indicator and age group at the headline sex), the across-region spread per period and the per-region trajectories, at every region level present plus the province.</p>
 </section>
 <section id="sohbc.indicators.dispersion" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.dispersion">dispersion</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>indicators.dispersion(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    cause</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    characteristic</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    sex</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    indicator<span class="op">=</span><span class="st">'Mortality'</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span><span class="st">'health_service_delivery_area'</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>indicators.dispersion(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    cause</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    characteristic</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    sex</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    indicator<span class="op">=</span><span class="st">'Mortality'</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span><span class="st">'health_service_delivery_area'</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Summarise the spread of one cross-sectional indicator across regions.</p>
 <p>Returns the sorted regional values for the most recent reference period, with the highest and lowest regions, their ratio, and the range. Only regions at <code>level</code> are compared, so authorities are not double-counted alongside the service delivery areas they contain.</p>
 </section>
 <section id="sohbc.indicators.ols_slope" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.ols_slope">ols_slope</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>indicators.ols_slope(points)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>indicators.ols_slope(points)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ordinary least squares for y = a + b x; return (slope, intercept, sse).</p>
 </section>
 <section id="sohbc.indicators.region_level" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.region_level">region_level</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>indicators.region_level(geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>indicators.region_level(geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Classify a health-region geography name for a tidy dataset.</p>
 </section>
 <section id="sohbc.indicators.regional_spread" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.regional_spread">regional_spread</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>indicators.regional_spread(rows, level, sex, indicator<span class="op">=</span><span class="va">None</span>, age_group<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>indicators.regional_spread(rows, level, sex, indicator<span class="op">=</span><span class="va">None</span>, age_group<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Spread of one series slice across regions, per reference period.</p>
 <p>Like :func:<code>dispersion</code> but for multi-period regional series: returns a dict keyed by reference period, each entry holding the sorted regional values, the extremes, the ratio, the range, and the mean at the given region level. Province rows are never counted.</p>
 </section>
 <section id="sohbc.indicators.regional_trajectories" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.regional_trajectories">regional_trajectories</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>indicators.regional_trajectories(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    level</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    sex</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    indicator<span class="op">=</span><span class="va">None</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    age_group<span class="op">=</span><span class="va">None</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>indicators.regional_trajectories(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    level</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    sex</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    indicator<span class="op">=</span><span class="va">None</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    age_group<span class="op">=</span><span class="va">None</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Trajectory summary per region for one slice of a regional series.</p>
 <p>Args: rows: Tidy rows as produced by :func:<code>tidy_regional_timeseries</code>. level: Region level whose regions to summarise. sex: The sex category to hold fixed. indicator: Indicator name to hold fixed; <code>None</code> keeps rows with no indicator dimension. age_group: Age group to hold fixed; <code>None</code> keeps all.</p>
 <p>Returns: dict: Region name to :func:<code>trajectory</code> result, in sorted order; regions absent from the data are omitted. Pooled multi-year periods usually give five points, so the trajectory carries the overall slope and the stationarity verdict (normally <code>undetermined</code>), not dated regimes.</p>
 </section>
 <section id="sohbc.indicators.sex_breakdown" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.sex_breakdown">sex_breakdown</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>indicators.sex_breakdown(rows, characteristic, sexes, age_group<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>indicators.sex_breakdown(rows, characteristic, sexes, age_group<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Trajectory summary per sex category for one series.</p>
 <p>Args: rows: Tidy rows as produced by :func:<code>tidy</code>. characteristic: The characteristic to summarise. sexes: Sex categories to report, in display order. age_group: Restrict to one age group; <code>None</code> keeps all ages.</p>
 <p>Returns: dict: Sex category to :func:<code>trajectory</code> result, in the order requested; categories absent from the data are omitted.</p>
 </section>
 <section id="sohbc.indicators.table_rows" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.table_rows">table_rows</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>indicators.table_rows(zip_bytes, table_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>indicators.table_rows(zip_bytes, table_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Return rows from the data CSV inside a WDS full-table zip.</p>
 </section>
 <section id="sohbc.indicators.tidy_regional_timeseries" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.tidy_regional_timeseries">tidy_regional_timeseries</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>indicators.tidy_regional_timeseries(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    province</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    sexes</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    indicators<span class="op">=</span><span class="va">None</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    age_groups<span class="op">=</span><span class="va">None</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    characteristics<span class="op">=</span><span class="va">None</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>indicators.tidy_regional_timeseries(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    rows</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    province</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    sexes</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    indicators<span class="op">=</span><span class="va">None</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    age_groups<span class="op">=</span><span class="va">None</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    characteristics<span class="op">=</span><span class="va">None</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Tidy sub-provincial multi-period rows, keeping the province row.</p>
 <p>Unlike :func:<code>tidy_regions</code>, the province’s own row is kept (labelled at province level) so regional trajectories can be compared against the provincial series, and each region contributes one row per reference period.</p>
 <p>Args: rows: Raw rows as read from a WDS table CSV. province: Province name; rows whose geography is the province or ends with <code>", &lt;province&gt;"</code> are kept. sexes: Sex categories to keep, in display order. indicators: Indicator names to keep (from the table’s <code>Indicators</code> dimension); <code>None</code> keeps all. age_groups: Age-group labels to keep; <code>None</code> keeps all. characteristics: Characteristic labels to keep; <code>None</code> keeps all.</p>
 </section>
 <section id="sohbc.indicators.tidy_regions" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.tidy_regions">tidy_regions</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>indicators.tidy_regions(rows, province, sexes, indicators<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>indicators.tidy_regions(rows, province, sexes, indicators<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Tidy sub-provincial health-region rows, keeping the geography name.</p>
 </section>
 <section id="sohbc.indicators.trajectory" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.trajectory">trajectory</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>indicators.trajectory(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    points</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    min_segment<span class="op">=</span><span class="dv">5</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    n_permutations<span class="op">=</span>breaks.N_PERMUTATIONS</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>breaks.SEED</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>indicators.trajectory(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    points</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    min_segment<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    n_permutations<span class="op">=</span>breaks.N_PERMUTATIONS</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>breaks.SEED</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Summarise a series: overall slope, formally tested regimes, trend.</p>
 <p>The regime dating and the tests behind it come from :mod:<code>sohbc.breaks</code>; this function only selects the headline break and the segment slopes for reporting.</p>
 </section>
 <section id="sohbc.indicators.wds_download_json" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.wds_download_json">wds_download_json</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>indicators.wds_download_json(source_key, table_id<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>indicators.wds_download_json(source_key, table_id<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Path to a WDS download manifest for a source (and optional table).</p>
 <p>Args: source_key: Catalogue key of the WDS source. table_id: Table id used to name the manifest file; when omitted, the single <code>*-download.json</code> manifest in the directory is used (the layout of a single-table source).</p>
 </section>
 <section id="sohbc.indicators.wds_zip_url" class="level3">
 <h3 class="anchored" data-anchor-id="sohbc.indicators.wds_zip_url">wds_zip_url</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>indicators.wds_zip_url(manifest_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>indicators.wds_zip_url(manifest_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Read a WDS download JSON and return the full-table zip URL.</p>
 
 
