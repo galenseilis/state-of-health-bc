@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-145b6edafbe96e11a8fd05f34d290dac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -218,6 +218,10 @@ div.csl-indent {
  <span class="dropdown-text">Indicator family: Health survey</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reference/contributors.html">
+ <span class="dropdown-text">Contributors</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reference/project-structure.html">
  <span class="dropdown-text">Project structure</span></a>
   </li>  
@@ -325,7 +329,7 @@ div.csl-indent {
 <li><strong>Substance-use mortality</strong> is published provisionally and revised upward as investigations conclude <span class="citation" data-cites="bccdcDrugs">(<a href="#ref-bccdcDrugs" role="doc-biblioref">BC Centre for Disease Control, n.d.</a>)</span>. Preliminary and final figures must never be pooled without noting the vintage.</li>
 <li><strong>Cancer statistics</strong> for the most recent years are typically incomplete because of registration lag <span class="citation" data-cites="bcCancer">(<a href="#ref-bcCancer" role="doc-biblioref">BC Cancer, Provincial Health Services Authority, n.d.</a>)</span>.</li>
 <li><strong>Population estimates</strong> at sub-provincial levels are revised as administrative sources update; rates computed on them inherit the revision.</li>
-<li><strong>National survey estimates</strong> carry sampling error and are occasionally revised after release <span class="citation" data-cites="statcan">(<a href="#ref-statcan" role="doc-biblioref">Statistics Canada, n.d.</a>)</span>.</li>
+<li><strong>National survey estimates</strong> carry sampling error and are occasionally revised after release <span class="citation" data-cites="statcan">(<a href="#ref-statcan" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span>.</li>
 </ul>
 </section>
 <section id="suppression" class="level2">
@@ -355,27 +359,27 @@ div.csl-indent {
 <tr class="odd">
 <td>Cause-of-death coding revisions (ICD revisions)</td>
 <td>Vital Statistics; national mortality</td>
-<td>Cause-specific mortality series are not directly comparable across the revision boundary</td>
+<td>Cause-specific mortality series are not directly comparable across the revision boundary <span class="citation" data-cites="whoIcd">(<a href="#ref-whoIcd" role="doc-biblioref">World Health Organization, n.d.</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Declared public-health emergency (2016)</td>
 <td>BCCDC substance-use dashboard; overdose response</td>
-<td>Surveillance expanded at the emergency; counts before and after reflect different detection intensity</td>
+<td>Surveillance expanded at the emergency; counts before and after reflect different detection intensity <span class="citation" data-cites="bcOverdoseEmergency2016">(<a href="#ref-bcOverdoseEmergency2016" role="doc-biblioref">Government of British Columbia, Ministry of Health 2016</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>COVID-19 pandemic (2020–)</td>
 <td>mortality, morbidity, mental health</td>
-<td>Both a real shock and a measurement shock (care disruption, coding changes)</td>
+<td>Both a real shock and a measurement shock (care disruption, coding changes) <span class="citation" data-cites="bcCovidEmergency whocovid">(<a href="#ref-bcCovidEmergency" role="doc-biblioref">EmergencyInfoBC, Government of British Columbia 2020</a>; <a href="#ref-whocovid" role="doc-biblioref">World Health Organization 2023</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Survey redesigns (e.g.&nbsp;Canadian Community Health Survey)</td>
 <td>Statistics Canada health series</td>
-<td>Break in trend; pre- and post-redesign estimates differ</td>
+<td>Break in trend; pre- and post-redesign estimates differ <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-a</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>Indicator-definition updates</td>
 <td>CIHI indicators</td>
-<td>Rebased or redefined indicators reset their own series</td>
+<td>Rebased or redefined indicators reset their own series <span class="citation" data-cites="cihi">(<a href="#ref-cihi" role="doc-biblioref">Canadian Institute for Health Information, n.d.</a>)</span></td>
 </tr>
 </tbody>
 </table>
@@ -389,7 +393,7 @@ div.csl-indent {
 <p>The first end-to-end indicator — provincial <a href="../reference/indicator-mortality-rates-bc.html">mortality rates</a> from Statistics Canada table 13-10-0710-01 — is built by the pipeline, including male/female breakdowns and per-sex age standardisation. Its known limitations (provincial resolution only, source sex categories, spans the COVID-19 period, subject to revision) are recorded on the indicator page and are examples of the kind of entry this register is meant to capture. Its regime breaks are dated by the formal tests documented on that page rather than read off by eye.</p>
 <p>A second indicator, <a href="../reference/indicator-life-expectancy-bc.html">life expectancy at birth</a> by sex (Statistics Canada table 13-10-0837-01), is now built through the same pipeline; it shares the mortality domain and the same caveat classes (period measure, revision of recent years, COVID-19 period, source sex categories). The source table has no sub-provincial rows.</p>
 <p>A third source, Statistics Canada table 13-10-0905-01, supplies a family of survey indicators that widen the framework beyond mortality: <a href="../reference/indicator-life-satisfaction-bc.html">life satisfaction</a> and <a href="../reference/indicator-wellbeing-cchs-bc.html">mental health</a> series among them. Survey estimates bring caveat classes the administrative tables did not: sampling error, coefficient-of-variation suppression (flagged cells), and a collection-frame change mid-series, so a step in the series may be a step in the measurement. These are recorded on the indicator pages.</p>
-<p>A fourth source takes the project below the province: Statistics Canada table 13-10-0931-01 supplies <a href="../reference/indicator-mortality-inequality-bc.html">age-standardised premature and potentially avoidable mortality</a> for BC’s five health authorities and 17 health service delivery areas. It adds two caveat classes of its own — health-region boundaries that change across table vintages, and rates published only as overlapping <strong>three-year averages</strong>, so the source supports a regional snapshot but not a regional trajectory; the trend machinery is therefore not applied to it.</p>
+<p>A fourth source takes the project below the province: Statistics Canada table 13-10-0931-01 supplies <a href="../reference/indicator-mortality-inequality-bc.html">age-standardised premature and potentially avoidable mortality</a> for BC’s five health authorities and 16 health service delivery areas. It adds two caveat classes of its own — health-region boundaries that change across table vintages, and rates published only as overlapping <strong>three-year averages</strong>, so the source supports a regional snapshot but not a regional trajectory; the trend machinery is therefore not applied to it.</p>
 <p>Sub-provincial coverage then widened to two more sources. Statistics Canada table 13-10-0389-01 gives <a href="../reference/indicator-life-expectancy-regions-bc.html">regional life expectancy</a> for the five authorities and 16 service delivery areas, but only to the 2015/2017 period and on the 2018 boundary set: it is a <strong>pre-pandemic baseline</strong> on <strong>different boundaries</strong> from the mortality-inequality view, so the two never pool. It also publishes <strong>overlapping</strong> three-year periods (ten points sharing two years each), which makes the trend and break tests overpowered — a caveat worth remembering whenever a pooled series is fed to tests that assume independent observations. Statistics Canada table 13-10-0972-01 gives the survey family at service-delivery-area resolution as <strong>five pooled two-year periods</strong> with heavier suppression than the provincial table; with five points the stationarity verdict is <em>undetermined</em> throughout, cells flagged <em>too unreliable to publish</em> are kept in the tidy file but dropped from summaries, the indicator <em>has a regular healthcare provider</em> is absent, and anxiety disorder is missing from the most recent period.</p>
 </section>
 <section id="governance" class="level2">
@@ -419,14 +423,32 @@ BC Centre for Disease Control. n.d. <em>Unregulated Drug Poisoning Emergency Das
 <div id="ref-bcStatsVital" class="csl-entry" role="listitem">
 BC Stats, Government of British Columbia. n.d. <em>Vital Statistics</em>. Accessed October 18, 2026. <a href="https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/vital-statistics">https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population/vital-statistics</a>.
 </div>
+<div id="ref-cihi" class="csl-entry" role="listitem">
+Canadian Institute for Health Information. n.d. <em>Canadian Institute for Health Information (<span>CIHI</span>)</em>. Accessed October 18, 2026. <a href="https://www.cihi.ca">https://www.cihi.ca</a>.
+</div>
 <div id="ref-chow1960" class="csl-entry" role="listitem">
 Chow, Gregory C. 1960. <span>“Tests of Equality Between Sets of Coefficients in Two Linear Regressions.”</span> <em>Econometrica</em> 28 (3): 591–605. <a href="https://doi.org/10.2307/1910133">https://doi.org/10.2307/1910133</a>.
+</div>
+<div id="ref-bcCovidEmergency" class="csl-entry" role="listitem">
+EmergencyInfoBC, Government of British Columbia. 2020. <em><span>COVID-19</span>: Public Health Emergency</em>. <a href="https://www.emergencyinfobc.gov.bc.ca/covid-19-public-health-emergency">https://www.emergencyinfobc.gov.bc.ca/covid-19-public-health-emergency</a>.
 </div>
 <div id="ref-fnigcOcap" class="csl-entry" role="listitem">
 First Nations Information Governance Centre. n.d. <em>The First Nations Principles of <span>OCAP®</span></em>. Accessed October 18, 2026. <a href="https://fnigc.ca/ocap-training/">https://fnigc.ca/ocap-training/</a>.
 </div>
+<div id="ref-bcOverdoseEmergency2016" class="csl-entry" role="listitem">
+Government of British Columbia, Ministry of Health. 2016. <em>Provincial Health Officer Declares Public Health Emergency</em>. <a href="https://archive.news.gov.bc.ca/releases/news_releases_2013-2017/2016HLTH0026-000568.htm">https://archive.news.gov.bc.ca/releases/news_releases_2013-2017/2016HLTH0026-000568.htm</a>.
+</div>
+<div id="ref-statcan_health_indicators" class="csl-entry" role="listitem">
+Statistics Canada. n.d.-a. <em>Health Indicator Statistics, Annual Estimates (Table 13-10-0905-01)</em>. Accessed October 19, 2026. <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501">https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310090501</a>.
+</div>
 <div id="ref-statcan" class="csl-entry" role="listitem">
-Statistics Canada. n.d. <em>Statistics Canada: Canada’s National Statistical Agency</em>. Accessed October 18, 2026. <a href="https://www.statcan.gc.ca">https://www.statcan.gc.ca</a>.
+Statistics Canada. n.d.-b. <em>Statistics Canada: Canada’s National Statistical Agency</em>. Accessed October 18, 2026. <a href="https://www.statcan.gc.ca">https://www.statcan.gc.ca</a>.
+</div>
+<div id="ref-whocovid" class="csl-entry" role="listitem">
+World Health Organization. 2023. <em>WHO Coronavirus (<span>COVID-19</span>) Dashboard</em>. <a href="https://data.who.int/dashboards/covid19">https://data.who.int/dashboards/covid19</a>.
+</div>
+<div id="ref-whoIcd" class="csl-entry" role="listitem">
+World Health Organization. n.d. <em>International Classification of Diseases (<span>ICD</span>)</em>. Accessed October 21, 2026. <a href="https://www.who.int/standards/classifications/classification-of-diseases">https://www.who.int/standards/classifications/classification-of-diseases</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-145b6edafbe96e11a8fd05f34d290dac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8b5a95ee55e1135b9d814d3eb503f5f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -255,6 +255,10 @@ div.csl-indent {
  <span class="dropdown-text">Indicator family: Health survey</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reference/contributors.html">
+ <span class="dropdown-text">Contributors</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reference/project-structure.html">
  <span class="dropdown-text">Project structure</span></a>
   </li>  
@@ -356,7 +360,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td><strong>Definition</strong></td>
-<td>Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2024 <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span></td>
+<td>Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2025 <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span></td>
 </tr>
 <tr class="odd">
 <td><strong>Source</strong></td>
@@ -376,7 +380,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td><strong>Coverage</strong></td>
-<td>2015–2024 (annual); observation window shown on each figure</td>
+<td>2015–2025 (annual); observation window shown on each figure</td>
 </tr>
 <tr class="even">
 <td><strong>Frequency / refresh</strong></td>
@@ -536,20 +540,20 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Each slope is in percentage points per decade over 2015–2024, for both sexes; a positive slope is not automatically good or bad — the <em>better if…</em> column states the direction that the measurement treats as favourable. <code>stationarity</code> is the pipeline’s label from the formal tests (stationary, nonstationary, or undetermined where the series is too short for the test to have power); <code>largest break</code> is the BIC-selected change point, where one exists.</p>
+<p>Each slope is in percentage points per decade over 2015–2025, for both sexes; a positive slope is not automatically good or bad — the <em>better if…</em> column states the direction that the measurement treats as favourable. <code>stationarity</code> is the pipeline’s label from the formal tests (stationary, nonstationary, or undetermined where the series is too short for the test to have power); <code>largest break</code> is the BIC-selected change point, where one exists.</p>
 </section>
 <section id="what-the-family-shows" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-family-shows">What the family shows</h2>
 <p>The series are not all moving the same way, and the direction of movement follows the direction of the measurement:</p>
 <ul>
-<li><strong>Wellbeing is falling.</strong> Life satisfaction (<code>-11.5</code> pp/decade; break at 2020) and sense of belonging (<code>-10.6</code> pp/decade; break at
-<ol start="2020" type="1">
-<li>both fell sharply, and both are dated to 2020 by the pipeline.</li>
+<li><strong>Wellbeing is falling.</strong> Life satisfaction (<code>-11.4</code> pp/decade; break at 2021) and sense of belonging (<code>-10.9</code> pp/decade; break at
+<ol start="2021" type="1">
+<li>both fell sharply.</li>
 </ol></li>
-<li><strong>Poor self-rated state is rising.</strong> Perceived mental health fair or poor rose <code>+13.9</code> pp/decade and perceived health fair or poor <code>+4.7</code> pp/decade; both are nonstationary.</li>
-<li><strong>Mental-health conditions are rising.</strong> Anxiety (<code>+8.4</code> pp/decade) and mood disorders (<code>+5.5</code> pp/decade, break at 2020) both increased.</li>
-<li><strong>Some behaviours improve.</strong> Daily smoking fell <code>-4.4</code> pp/decade, though the regime split at 2020 shows the decline flattening after 2020 (<code>-7.3</code> before, <code>-1.0</code> after).</li>
-<li><strong>Two series are flat.</strong> Diabetes (<code>+0.8</code>) and having a regular healthcare provider (<code>-2.1</code>) are labelled <strong>stationary</strong> over the window — no evidence of a trend beyond year-to-year noise.</li>
+<li><strong>Poor self-rated state is rising.</strong> Perceived mental health fair or poor rose <code>+12.7</code> pp/decade and perceived health fair or poor <code>+4.3</code> pp/decade; both are nonstationary (perceived health has no dated break).</li>
+<li><strong>Mental-health conditions are rising.</strong> Anxiety (<code>+6.2</code> pp/decade) and mood disorders (<code>+3.0</code> pp/decade) both increased; neither carries a dated break in the current build.</li>
+<li><strong>Some behaviours improve.</strong> Daily smoking fell <code>-4.4</code> pp/decade, though the regime split at 2021 shows the decline flattening after 2021 (<code>-7.8</code> before, <code>-4.4</code> after).</li>
+<li><strong>Three series are flat.</strong> Diabetes (<code>+0.9</code>), high blood pressure (<code>+2.6</code>), and having a regular healthcare provider (<code>-2.1</code>) are labelled <strong>stationary</strong> over their short windows — no evidence of a trend beyond year-to-year noise.</li>
 </ul>
 <p>Read together, the family is a picture of rising self-reported distress and falling life evaluation over a decade, with the clearest breaks coinciding with 2020. The pipeline dates those breaks; this page does not claim they are caused by the pandemic.</p>
 </section>
@@ -557,27 +561,27 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="the-regional-view">The regional view</h2>
 <p>The same nine measures (all but <em>has a regular healthcare provider</em>, which the table does not carry) are published for BC’s 16 health service delivery areas from Statistics Canada table 13-10-0972-01 <span class="citation" data-cites="statcan_health_regions_cchs">(<a href="#ref-statcan_health_regions_cchs" role="doc-biblioref">Statistics Canada, n.d.-a</a>)</span>, as five pooled two-year periods over the same 2015–2024 window.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="130" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 129;"><span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/cchs_bc_regions_summary.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>shortRegion <span class="op">=</span> n <span class="kw">=&gt;</span> n<span class="op">.</span><span class="fu">replace</span>(<span class="st">" Health Service Delivery Area"</span><span class="op">,</span> <span class="st">""</span>)</span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>regRows <span class="op">=</span> reg<span class="op">.</span><span class="at">series</span><span class="op">.</span><span class="fu">map</span>(s <span class="kw">=&gt;</span> {</span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> spread <span class="op">=</span> s<span class="op">.</span><span class="at">spread</span><span class="op">.</span><span class="at">health_service_delivery_area</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> period <span class="op">=</span> reg<span class="op">.</span><span class="at">reference_periods</span>[reg<span class="op">.</span><span class="at">reference_periods</span><span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> key <span class="op">=</span> spread[period] <span class="op">?</span> period <span class="op">:</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(spread)<span class="op">.</span><span class="fu">sort</span>()<span class="op">.</span><span class="fu">pop</span>()</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> d <span class="op">=</span> spread[key]</span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>    <span class="dt">indicator</span><span class="op">:</span> s<span class="op">.</span><span class="at">indicator</span><span class="op">.</span><span class="fu">replace</span>(<span class="st">", satisfied or very satisfied"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", somewhat strong or very strong"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", fair or poor"</span><span class="op">,</span> <span class="st">" (fair/poor)"</span>)<span class="op">,</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>    <span class="dt">period</span><span class="op">:</span> key<span class="op">,</span></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">lowest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">highest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ratio</span><span class="op">:</span> d<span class="op">.</span><span class="at">ratio</span><span class="op">,</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>    <span class="dt">range</span><span class="op">:</span> d<span class="op">.</span><span class="at">range</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(regRows<span class="op">,</span> {</span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>  <span class="dt">columns</span><span class="op">:</span> [<span class="st">"indicator"</span><span class="op">,</span> <span class="st">"period"</span><span class="op">,</span> <span class="st">"lowest"</span><span class="op">,</span> <span class="st">"highest"</span><span class="op">,</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="st">"range"</span>]<span class="op">,</span></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>  <span class="dt">header</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="st">"series"</span><span class="op">,</span> <span class="dt">period</span><span class="op">:</span> <span class="st">"period"</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="st">"lowest area"</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="st">"highest area"</span><span class="op">,</span> <span class="dt">ratio</span><span class="op">:</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="dt">range</span><span class="op">:</span> <span class="st">"range (pp)"</span>}<span class="op">,</span></span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="dv">190</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="dv">170</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="dv">170</span>}</span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="132" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 131;"><span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"../data/published/cchs_bc_regions_summary.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>shortRegion <span class="op">=</span> n <span class="kw">=&gt;</span> n<span class="op">.</span><span class="fu">replace</span>(<span class="st">" Health Service Delivery Area"</span><span class="op">,</span> <span class="st">""</span>)</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>regRows <span class="op">=</span> reg<span class="op">.</span><span class="at">series</span><span class="op">.</span><span class="fu">map</span>(s <span class="kw">=&gt;</span> {</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> spread <span class="op">=</span> s<span class="op">.</span><span class="at">spread</span><span class="op">.</span><span class="at">health_service_delivery_area</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> period <span class="op">=</span> reg<span class="op">.</span><span class="at">reference_periods</span>[reg<span class="op">.</span><span class="at">reference_periods</span><span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> key <span class="op">=</span> spread[period] <span class="op">?</span> period <span class="op">:</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(spread)<span class="op">.</span><span class="fu">sort</span>()<span class="op">.</span><span class="fu">pop</span>()</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> d <span class="op">=</span> spread[key]</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">indicator</span><span class="op">:</span> s<span class="op">.</span><span class="at">indicator</span><span class="op">.</span><span class="fu">replace</span>(<span class="st">", satisfied or very satisfied"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", somewhat strong or very strong"</span><span class="op">,</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">replace</span>(<span class="st">", fair or poor"</span><span class="op">,</span> <span class="st">" (fair/poor)"</span>)<span class="op">,</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">period</span><span class="op">:</span> key<span class="op">,</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">lowest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">lowest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>    <span class="dt">highest</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span><span class="fu">shortRegion</span>(d<span class="op">.</span><span class="at">highest</span><span class="op">.</span><span class="at">region</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ratio</span><span class="op">:</span> d<span class="op">.</span><span class="at">ratio</span><span class="op">,</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>    <span class="dt">range</span><span class="op">:</span> d<span class="op">.</span><span class="at">range</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(regRows<span class="op">,</span> {</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>  <span class="dt">columns</span><span class="op">:</span> [<span class="st">"indicator"</span><span class="op">,</span> <span class="st">"period"</span><span class="op">,</span> <span class="st">"lowest"</span><span class="op">,</span> <span class="st">"highest"</span><span class="op">,</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="st">"range"</span>]<span class="op">,</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>  <span class="dt">header</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="st">"series"</span><span class="op">,</span> <span class="dt">period</span><span class="op">:</span> <span class="st">"period"</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="st">"lowest area"</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="st">"highest area"</span><span class="op">,</span> <span class="dt">ratio</span><span class="op">:</span> <span class="st">"ratio"</span><span class="op">,</span> <span class="dt">range</span><span class="op">:</span> <span class="st">"range (pp)"</span>}<span class="op">,</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> {<span class="dt">indicator</span><span class="op">:</span> <span class="dv">190</span><span class="op">,</span> <span class="dt">lowest</span><span class="op">:</span> <span class="dv">170</span><span class="op">,</span> <span class="dt">highest</span><span class="op">:</span> <span class="dv">170</span>}</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="declaration">
@@ -607,14 +611,14 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>The regional gap is wide and it does not simply mirror the provincial level: daily smoking varies about <strong>3×</strong> across areas (from 3.7% in North Shore/Coast Garibaldi to 11.5% in Thompson/Cariboo, 2023/2024), diabetes <strong>2.5×</strong>, and mood disorder <strong>2.2×</strong>, while life satisfaction — the flattest regional distribution — still spans 9 percentage points. Areas do not rank the same way on every series: Vancouver-metro areas sit lowest on smoking and diabetes but also lowest on sense of belonging.</p>
+<p>The regional gap is wide and it does not simply mirror the provincial level: daily smoking varies about <strong>3×</strong> across areas, diabetes <strong>2.5×</strong>, and mood disorder <strong>2.2×</strong>, while life satisfaction — the flattest regional distribution — still spans 9 percentage points. Areas do not rank the same way on every series: Vancouver-metro areas sit lowest on smoking and diabetes but also lowest on sense of belonging.</p>
 <p>Each area’s slope over the five pooled periods is published in the summary file, but with five points the stationarity verdict is <strong>undetermined</strong> for every regional series — the trend test has no power here, and the regional view reports levels and gaps, not dated regimes. Anxiety disorder is absent from the 2023/2024 period entirely, so its regional spread stops at 2021/2022. Cells flagged <em>too unreliable to publish</em> are kept in the tidy file with their status and excluded from the summaries.</p>
 </section>
 <section id="caveats" class="level2">
 <h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
 <ul>
 <li><strong>Survey estimate.</strong> Every series is self-reported on a national survey, carrying sampling error and a coefficient-of-variation release policy; some cells are suppressed or flagged. Plotted values are published point estimates.</li>
-<li><strong>Measurement, not only change.</strong> The CCHS collection frame changed over 2015–2024 and 2020–2021 collection was disrupted by the pandemic. A step in a series may be a step in the measurement. Direction of the breaks is dated, not attributed.</li>
+<li><strong>Measurement, not only change.</strong> The CCHS collection frame changed over the series and 2020–2021 collection was disrupted by the pandemic <span class="citation" data-cites="statcan_health_indicators">(<a href="#ref-statcan_health_indicators" role="doc-biblioref">Statistics Canada, n.d.-b</a>)</span>. A step in a series may be a step in the measurement. Direction of the breaks is dated, not attributed.</li>
 <li><strong>Short window.</strong> Ten annual points is a short series; the stationarity test has limited power, which is why some series are labelled <em>undetermined</em> rather than stationary.</li>
 <li><strong>Self-report and definition drift.</strong> “Percent” mixes reported behaviour, diagnosed conditions, and self-rated state; each has a different relationship to health, and a survey question that changes wording does not change meaninglessly.</li>
 <li><strong>Provincial table, separate regional product.</strong> Table 13-10-0905-01 is provincial only. The <a href="#the-regional-view">regional view</a> comes from a different table (13-10-0972-01) of pooled two-year periods with narrower indicator coverage and heavier suppression — a distinct product, not a disaggregation of the annual series.</li>
