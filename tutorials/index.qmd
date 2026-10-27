@@ -16,5 +16,5 @@ which assume you already know the basics and just need the steps.
 A guided walkthrough of exploring a headline health indicator for BC:
 fetching it from a catalogued source, building the tidy dataset, reading
 its trajectory and regimes, and reading it alongside its caveats.
-*Available for the two published indicators; regional comparison awaits
-sub-provincial ingestion.*
+*Covers mortality rates, life expectancy, and the survey family, with
+references to regional indicators.*

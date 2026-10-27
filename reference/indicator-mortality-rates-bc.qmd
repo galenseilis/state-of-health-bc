@@ -21,7 +21,7 @@ the views below. Each indicator page states its provenance and caveats
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published summary statistics) |
 | **Geography** | British Columbia, place of residence |
-| **Coverage** | 1991–present (annual); observation window shown on each figure |
+| **Coverage** | 1991–2024 (annual); observation window shown on each figure |
 | **Frequency / refresh** | annual |
 | **Licence** | Statistics Canada Open Licence |
 | **Proxy note** | A proxy for the mortality domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
@@ -51,7 +51,7 @@ Plot.plot({
   y: {grid: true, label: "Deaths per 1,000 population"},
   color: {legend: true},
   marks: [
-    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
     Plot.ruleX(trend.change_points, {stroke: "red", strokeDasharray: "4,4"}),
     Plot.ruleX(asrTrend.change_points, {stroke: "steelblue", strokeDasharray: "2,3"}),
     Plot.lineY(series, {x: "year", y: "rate", stroke: "series", tip: true}),

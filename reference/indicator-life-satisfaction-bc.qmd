@@ -17,12 +17,12 @@ described on the [CCHS indicator page](indicator-wellbeing-cchs-bc.qmd).
 | Field | Value |
 |-------|-------|
 | **Domain** | [Subjective wellbeing](../reference/measurement-framework.qmd) |
-| **Definition** | Percent of British Columbians aged 18 and over who report being satisfied or very satisfied with life, annual 2015–2024 [@statcan_health_indicators] |
+| **Definition** | Percent of British Columbians aged 18 and over who report being satisfied or very satisfied with life, annual 2015–2025 [@statcan_health_indicators] |
 | **Source** | Statistics Canada, table 13-10-0905-01, *Health indicator statistics, annual estimates* (Canadian Community Health Survey) [@statcan_health_indicators] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published survey summary statistics) |
 | **Geography** | British Columbia (no sub-provincial rows in this table) |
-| **Coverage** | 2015–2024 (annual); observation window shown on each figure |
+| **Coverage** | 2015–2025 (annual); observation window shown on each figure |
 | **Frequency / refresh** | annual |
 | **Licence** | Statistics Canada Open Licence |
 | **Proxy note** | A self-reported proxy in the wellbeing domain, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
@@ -46,7 +46,7 @@ Plot.plot({
   y: {grid: true, label: "% of adults aged 18+", domain: [70, 100]},
   color: {legend: true},
   marks: [
-    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
     Plot.ruleX(bySexTrend.levels["Both sexes"].change_points, {stroke: "red", strokeDasharray: "4,4"}),
     Plot.lineY(bySex, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
     Plot.dot(bySex, {x: "ref_date", y: "value", stroke: "sex", tip: true}),
@@ -57,7 +57,7 @@ Plot.plot({
 ```
 
 The black line is both sexes, the coloured lines are the source's sex
-categories. The grey band marks the COVID-19 period (2020–2024); the red
+categories. The grey band marks the COVID-19 period (2020–2025); the red
 dashed line is the regime break dated by the pipeline.
 
 ## Trajectory and regimes
@@ -116,10 +116,10 @@ test of departure from a linear trend, not a full time-series model.
   policy, so individual cells may be suppressed or flagged. The plotted
   series are the published point estimates.
 - **Measurement, not only change.** The CCHS collection frame changed over
-  2015–2024 and 2020–2021 collection was disrupted by the pandemic. Part
-  of the 2020 break may be a change in *how* the series was measured, not
-  only in how people answered. The pipeline dates the break; it does not
-  attribute it.
+  the series and 2020–2021 collection was disrupted by the pandemic
+  [@statcan_health_indicators]. Part of any break may be a change in *how*
+  the series was measured, not only in how people answered. The pipeline
+  dates the break; it does not attribute it.
 - **Break detection, not explanation.** The regimes are dated by a formal
   test (above); the test says a break beyond a single straight line
   exists, not what caused it.

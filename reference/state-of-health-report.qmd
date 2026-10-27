@@ -6,7 +6,7 @@ title: "State of health in BC: a descriptive report"
 ## Version and observation window
 
 **Report version 0.5** · observation windows: mortality **1991–2024**,
-life expectancy **1980–2024**, survey indicators **2015–2024**,
+life expectancy **1980–2024**, survey indicators **2015–2025**,
 sub-provincial mortality **2020/2023**, sub-provincial life expectancy
 **2006–2017**, sub-provincial survey **2015/2016–2023/2024** · generated
 from the published datasets by `quarto render`. Regenerate the underlying
@@ -31,16 +31,16 @@ numbers are dated, not timeless ([why](../explanation/nonstationarity.qmd)).
 
 | Indicator | Domain | Window | Resolution | Sexes | Source |
 |-----------|--------|--------|------------|-------|--------|
-| [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F; 20 age groups | StatCan 13-10-0710-01 |
-| [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 |
-| [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2020/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 |
-| [Regional life expectancy](indicator-life-expectancy-regions-bc.qmd) | Mortality | 2006/2008–2015/2017 | health authority, HSDA | both, M, F | StatCan 13-10-0389-01 |
-| [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
-| [Ten survey indicators](indicator-wellbeing-cchs-bc.qmd) | Morbidity, mental health, wellbeing, access to care | 2015–2024 | provincial | both, M, F | StatCan 13-10-0905-01 |
-| [Survey indicators across regions](indicator-wellbeing-cchs-bc.qmd#the-regional-view) | Morbidity, mental health, wellbeing | 2015/2016–2023/2024 | HSDA | both, M, F | StatCan 13-10-0972-01 |
+| [Mortality rates](indicator-mortality-rates-bc.qmd) | Mortality | 1991–2024 | provincial | both, M, F; 20 age groups | StatCan 13-10-0710-01 [@statcan_wds_table] |
+| [Life expectancy at birth](indicator-life-expectancy-bc.qmd) | Mortality | 1980–2024 | provincial | both, M, F | StatCan 13-10-0837-01 [@statcan_life_table] |
+| [Regional mortality inequality](indicator-mortality-inequality-bc.qmd) | Mortality | 2020/2023 | health authority, HSDA | both, M, F | StatCan 13-10-0931-01 [@statcan_health_regions] |
+| [Regional life expectancy](indicator-life-expectancy-regions-bc.qmd) | Mortality | 2006/2008–2015/2017 | health authority, HSDA | both, M, F | StatCan 13-10-0389-01 [@statcan_life_tables_regions] |
+| [Life satisfaction](indicator-life-satisfaction-bc.qmd) | Subjective wellbeing | 2015–2025 | provincial | both, M, F | StatCan 13-10-0905-01 [@statcan_health_indicators] |
+| [Ten survey indicators](indicator-wellbeing-cchs-bc.qmd) | Morbidity, mental health, wellbeing, access to care | 2015–2025 | provincial | both, M, F | StatCan 13-10-0905-01 [@statcan_health_indicators] |
+| [Survey indicators across regions](indicator-wellbeing-cchs-bc.qmd#the-regional-view) | Morbidity, mental health, wellbeing | 2015/2016–2023/2024 | HSDA | both, M, F | StatCan 13-10-0972-01 [@statcan_health_regions_cchs] |
 
-All are **proxies** for their domains, not the state of health itself. Four
-indicators now reach sub-provincial resolution; the rest remain
+All are **proxies** for their domains, not the state of health itself. Three
+of the seven now reach sub-provincial resolution; the rest remain
 provincial (see [Next editions](#next-editions)).
 
 ## The headline: every series moves, and the rules change
@@ -105,16 +105,17 @@ finding:
 
 1. **Almost nothing is stationary.** Nearly every series changes over its
    window; a single summary value would be false to almost all of them.
-   Two — diabetes and having a regular provider — are labelled stationary
-   over their short window, so absence of evidence is reported as such.
+   Three — diabetes, high blood pressure, and having a regular provider —
+   are labelled stationary over their short windows, so absence of evidence
+   is reported as such.
 2. **Direction differs by measure.** The crude mortality rate and life
    expectancy trend in opposite senses, because crude mortality is not
    age-adjusted while life expectancy already integrates the age pattern
    of death; the survey series likewise split, with wellbeing falling
    while self-reported poor health and mental-health conditions rise.
 3. **The change is not one slope.** Many series carry a regime break
-   beyond a straight line, several dated to 2020; the breaks are the
-   story, not noise.
+   beyond a straight line, with several dated to 2021 in the survey family
+   and others to different years; the breaks are the story, not noise.
 
 ## Regimes are slope changes, not level shifts
 
@@ -177,11 +178,13 @@ Inputs.table(decomp, {
 //| echo: false
 tested = decomp.filter(d => d.slope_change !== "—")
 allSig = tested.every(d => !d.slope_change.includes("no ("))
-md`The "between-regime" column is nearly zero for all but one series. The
-largest level shift anywhere is life expectancy at 2015
-(**${life.jumps[0].jump.toFixed(2)}** years), and even there the bulk of the
-change is within-regime (${life.decomposition.within_regime_change.toFixed(2)}
-of ${life.decomposition.observed_change.toFixed(2)}). For the survey series
+md`The "between-regime" column is small for most series. The largest
+level shift in the published jumps is in perceived poor mental health at
+2021 (**${pmh.jumps[0].jump.toFixed(2)}** points), with life expectancy
+showing a smaller jump at 2015 (**${life.jumps[0].jump.toFixed(2)}**
+years) and even there most of the change is within-regime
+(${life.decomposition.within_regime_change.toFixed(2)} of
+${life.decomposition.observed_change.toFixed(2)}). For the survey series
 the jumps are fractions of a point. The **within-regime rate** column makes
 the point directly, and the **slope-change F-test** confirms it: at every
 dated break the two regimes' slopes differ significantly
@@ -287,9 +290,9 @@ agreement about *whether* there was a break comes with disagreement about
 
 ## Beyond mortality: wellbeing down, distress up
 
-The survey family widens the report past death. Over 2015–2024, the
+The survey family widens the report past death. Over 2015–2025, the
 wellbeing series fall and the self-reported distress series rise, and
-several breaks land on 2020.
+several breaks land on 2021.
 
 ```{ojs}
 //| echo: false
@@ -321,7 +324,7 @@ Plot.plot({
   color: {legend: false},
   facet: {data: flat, y: "series", label: null},
   marks: [
-    Plot.rectX([{x1: 2020, x2: 2024}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
+    Plot.rectX([{x1: 2020, x2: 2025}], {x1: "x1", x2: "x2", fill: "grey", fillOpacity: 0.12}),
     Plot.lineY(flat, {x: "year", y: "value", stroke: "series", tip: true}),
     Plot.dot(flat, {x: "year", y: "value", stroke: "series", tip: true})
   ]
@@ -342,19 +345,18 @@ of belonging **${sb.overall.slope_per_decade.toFixed(1)}**; both break at
 **${ls.change_point}**. In the same window, perceived *poor* mental health
 rose **${pmh.overall.slope_per_decade.toFixed(1)}**, anxiety disorder
 **${anx.overall.slope_per_decade.toFixed(1)}**, and mood disorder
-**${moodTrend.overall.slope_per_decade.toFixed(1)}** points per decade (mood
-disorder also breaks at **${moodTrend.change_point}**). Daily smoking *fell*
-**${smk.overall.slope_per_decade.toFixed(1)}**, but its regimes split at
-2020 too: **${smk.segments[0].slope_per_decade.toFixed(1)}**/decade before,
+**${moodTrend.overall.slope_per_decade.toFixed(1)}** points per decade.
+Daily smoking *fell* **${smk.overall.slope_per_decade.toFixed(1)}**, but its
+regimes split at **${smk.change_point}**: **${smk.segments[0].slope_per_decade.toFixed(1)}**/decade before,
 **${smk.segments[1].slope_per_decade.toFixed(1)}**/decade after. All are
 survey estimates: the 2020 coincidence is dated, not attributed, and part
 of any step may be measurement (see the
 [indicator family page](indicator-wellbeing-cchs-bc.qmd)).`
 ```
 
-The survey window is short (ten annual points), so the stationarity test
-has limited power and two series come back **undetermined** rather than
-stationary. The family is read side by side on the
+The survey window is short (eleven annual points), so the stationarity test
+has limited power and some series come back **undetermined** or
+**stationary** rather than nonstationary. The family is read side by side on the
 [indicator family page](indicator-wellbeing-cchs-bc.qmd).
 
 ## Sex differences

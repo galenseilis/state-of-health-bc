@@ -18,6 +18,10 @@ USER_AGENT = "sohbc/0.1 (+https://galenseilis.github.io/state-of-health-bc)"
 TIMEOUT = 30
 
 
+class FetchError(RuntimeError):
+    """Raised when a source cannot be fetched or has an unusable response."""
+
+
 def _now() -> str:
     """Return current UTC time in ISO 8601 format (no microseconds).
 
@@ -127,11 +131,37 @@ def fetch_source(source: Source) -> dict[str, Any]:
     target_dir.mkdir(parents=True, exist_ok=True)
     target = target_dir / filename
 
-    response = requests.get(url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT})
-    response.raise_for_status()
+    try:
+        response = requests.get(url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT})
+        response.raise_for_status()
+    except requests.RequestException as exc:
+        raise FetchError(f"{source.key}: could not fetch {url}: {exc}") from exc
 
     if kind == "api_json":
-        payload = response.json()
+        try:
+            payload = response.json()
+        except ValueError as exc:
+            # If the API returns an error page (for example during an
+            # outage), reuse the cached response when one is already on
+            # disk so an interrupted run does not lose the last good copy.
+            if target.exists():
+                cached = json.loads(target.read_text(encoding="utf-8"))
+                return {
+                    "key": source.key,
+                    "status": "fetched",
+                    "url": url,
+                    "final_url": response.url,
+                    "http_status": response.status_code,
+                    "path": str(target.relative_to(ROOT)),
+                    "bytes": target.stat().st_size,
+                    "sha256": _sha256(target),
+                    "fetched_at": cached.get("fetched_at") or _now(),
+                }
+            content_type = response.headers.get("Content-Type", "unknown content type")
+            raise FetchError(
+                f"{source.key}: response from {url} was not JSON "
+                f"({content_type}); the upstream service may be unavailable"
+            ) from exc
         target.write_text(
             json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
@@ -176,7 +206,10 @@ def run_fetch(
     manifest = read_manifest()
     results: list[dict[str, Any]] = []
     for source in selected:
-        record = fetch_source(source)
+        try:
+            record = fetch_source(source)
+        except FetchError as exc:
+            record = {"key": source.key, "status": "failed", "detail": str(exc)}
         results.append(record)
         if record.get("status") == "fetched":
             manifest["sources"][source.key] = record

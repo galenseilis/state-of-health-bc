@@ -56,17 +56,33 @@ def _run_capture(command: list[str]) -> str:
 def _trace_cli(stats_path: Path) -> None:
     """Profile the offline CLI scenarios and write cProfile stats.
 
+    The ``build`` scenario is run against a raw-data directory that does
+    not exist, so the trace exercises the "not fetched yet" path and never
+    touches the network — even when ``data/raw/`` happens to be populated.
+
     Args:
         stats_path: Destination for the cProfile statistics file.
     """
+    from sohbc import indicators
     from sohbc.__main__ import main as cli
 
     profiler = cProfile.Profile()
-    with contextlib.redirect_stdout(io.StringIO()):
+    with (
+        contextlib.redirect_stdout(io.StringIO()),
+        contextlib.redirect_stderr(io.StringIO()),
+    ):
         profiler.enable()
         for argv in SCENARIOS:
             try:
-                cli(list(argv))
+                if argv == ["build"]:
+                    original_raw = indicators.RAW_DIR
+                    indicators.RAW_DIR = Path(tempfile.gettempdir()) / "sohbc-no-raw"
+                    try:
+                        cli(list(argv))
+                    finally:
+                        indicators.RAW_DIR = original_raw
+                else:
+                    cli(list(argv))
             except SystemExit:
                 pass
         profiler.disable()

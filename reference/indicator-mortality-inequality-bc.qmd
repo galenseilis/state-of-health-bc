@@ -22,7 +22,7 @@ year-by-year trajectory.
 | **Source** | Statistics Canada, table 13-10-0931-01, *Premature and potentially avoidable mortality, three-year period, Canada, provinces, territories, health regions and peer groups* [@statcan_health_regions] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published summary statistics) |
-| **Geography** | British Columbia: 5 health authorities and 17 health service delivery areas (2023 boundaries) |
+| **Geography** | British Columbia: 5 health authorities and 16 health service delivery areas (2023 boundaries) |
 | **Coverage** | 2020/2022 and 2021/2023 (three-year periods) |
 | **Frequency / refresh** | annual |
 | **Licence** | Statistics Canada Open Licence |

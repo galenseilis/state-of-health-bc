@@ -18,12 +18,12 @@ worked page.
 | Field | Value |
 |-------|-------|
 | **Domains** | [Physical morbidity, mental health, subjective wellbeing, social wellbeing](../reference/measurement-framework.qmd) |
-| **Definition** | Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2024 [@statcan_health_indicators] |
+| **Definition** | Share of British Columbians aged 18 and over reporting each measured characteristic, annual 2015–2025 [@statcan_health_indicators] |
 | **Source** | Statistics Canada, table 13-10-0905-01, *Health indicator statistics, annual estimates* (Canadian Community Health Survey) [@statcan_health_indicators] |
 | **Access** | Statistics Canada Web Data Service (automated full-table download) |
 | **Form** | indicator table (published survey summary statistics) |
 | **Geography** | British Columbia (this table has no sub-provincial rows; the [regional view](#the-regional-view) uses table 13-10-0972-01) |
-| **Coverage** | 2015–2024 (annual); observation window shown on each figure |
+| **Coverage** | 2015–2025 (annual); observation window shown on each figure |
 | **Frequency / refresh** | annual |
 | **Licence** | Statistics Canada Open Licence |
 | **Proxy note** | Self-reported proxies, not the state of health itself ([why](../explanation/definition-of-health.qmd#proxies-are-not-the-state-of-health)) |
@@ -84,7 +84,7 @@ Inputs.table(family, {
 })
 ```
 
-Each slope is in percentage points per decade over 2015–2024, for both
+Each slope is in percentage points per decade over 2015–2025, for both
 sexes; a positive slope is not automatically good or bad — the *better
 if…* column states the direction that the measurement treats as
 favourable. `stationarity` is the pipeline's label from the formal tests
@@ -97,20 +97,22 @@ point, where one exists.
 The series are not all moving the same way, and the direction of movement
 follows the direction of the measurement:
 
-- **Wellbeing is falling.** Life satisfaction (`-11.5` pp/decade;
-  break at 2020) and sense of belonging (`-10.6` pp/decade; break at
-  2020) both fell sharply, and both are dated to 2020 by the pipeline.
+- **Wellbeing is falling.** Life satisfaction (`-11.4` pp/decade;
+  break at 2021) and sense of belonging (`-10.9` pp/decade; break at
+  2021) both fell sharply.
 - **Poor self-rated state is rising.** Perceived mental health fair or
-  poor rose `+13.9` pp/decade and perceived health fair or poor `+4.7`
-  pp/decade; both are nonstationary.
-- **Mental-health conditions are rising.** Anxiety (`+8.4` pp/decade) and
-  mood disorders (`+5.5` pp/decade, break at 2020) both increased.
+  poor rose `+12.7` pp/decade and perceived health fair or poor `+4.3`
+  pp/decade; both are nonstationary (perceived health has no dated break).
+- **Mental-health conditions are rising.** Anxiety (`+6.2` pp/decade) and
+  mood disorders (`+3.0` pp/decade) both increased; neither carries a
+  dated break in the current build.
 - **Some behaviours improve.** Daily smoking fell `-4.4` pp/decade, though
-  the regime split at 2020 shows the decline flattening after 2020
-  (`-7.3` before, `-1.0` after).
-- **Two series are flat.** Diabetes (`+0.8`) and having a regular
-  healthcare provider (`-2.1`) are labelled **stationary** over the
-  window — no evidence of a trend beyond year-to-year noise.
+  the regime split at 2021 shows the decline flattening after 2021
+  (`-7.8` before, `-4.4` after).
+- **Three series are flat.** Diabetes (`+0.9`), high blood pressure
+  (`+2.6`), and having a regular healthcare provider (`-2.1`) are labelled
+  **stationary** over their short windows — no evidence of a trend beyond
+  year-to-year noise.
 
 Read together, the family is a picture of rising self-reported distress
 and falling life evaluation over a decade, with the clearest breaks
@@ -151,12 +153,11 @@ Inputs.table(regRows, {
 ```
 
 The regional gap is wide and it does not simply mirror the provincial
-level: daily smoking varies about **3×** across areas (from 3.7% in
-North Shore/Coast Garibaldi to 11.5% in Thompson/Cariboo, 2023/2024),
-diabetes **2.5×**, and mood disorder **2.2×**, while life satisfaction —
-the flattest regional distribution — still spans 9 percentage points.
-Areas do not rank the same way on every series: Vancouver-metro areas sit
-lowest on smoking and diabetes but also lowest on sense of belonging.
+level: daily smoking varies about **3×** across areas, diabetes **2.5×**,
+and mood disorder **2.2×**, while life satisfaction — the flattest
+regional distribution — still spans 9 percentage points. Areas do not
+rank the same way on every series: Vancouver-metro areas sit lowest on
+smoking and diabetes but also lowest on sense of belonging.
 
 Each area's slope over the five pooled periods is published in the
 summary file, but with five points the stationarity verdict is
@@ -174,8 +175,8 @@ the summaries.
   some cells are suppressed or flagged. Plotted values are published point
   estimates.
 - **Measurement, not only change.** The CCHS collection frame changed over
-  2015–2024 and 2020–2021 collection was disrupted by the pandemic. A
-  step in a series may be a step in the measurement. Direction of the
+  the series and 2020–2021 collection was disrupted by the pandemic [@statcan_health_indicators].
+  A step in a series may be a step in the measurement. Direction of the
   breaks is dated, not attributed.
 - **Short window.** Ten annual points is a short series; the
   stationarity test has limited power, which is why some series are

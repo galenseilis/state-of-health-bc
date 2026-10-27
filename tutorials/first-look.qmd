@@ -2,9 +2,10 @@
 title: "Tutorial: Your first look at BC health data"
 ---
 
-*Status: available for the two published indicators (mortality rates and
-life expectancy). The regional-comparison step awaits sub-provincial
-ingestion (milestone M3 in the [roadmap](../ROADMAP.md)).*
+*Status: available for mortality rates, life expectancy, and the survey
+family. Regional views are now published (mortality inequality, regional
+life expectancy, and regional survey indicators); consult the
+[reference pages](../reference/index.qmd) for their windows and limits.*
 
 In this tutorial you will fetch a headline health indicator for British
 Columbia, build it from source into a tidy dataset, and look at its
@@ -121,6 +122,6 @@ indicator and analysis reuses it.
 
 - [Add an indicator](../how-to/add-indicator.qmd) of your own.
 - [Ingest a data source](../how-to/ingest-data.qmd) into the catalogue.
-- **Regional comparison** — the roadmap's M3 outstanding work —
-  is where this tutorial's target structure originally pointed; it needs
-  sub-provincial ingestion first.
+- Explore [sub-provincial indicators](../reference/index.qmd) (mortality
+  inequality, regional life expectancy, and regional survey indicators) to
+  see where provincial averages hide regional differences.

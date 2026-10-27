@@ -30,8 +30,8 @@ catalogued sources.
 ### [State of health in BC: a descriptive report](state-of-health-report.qmd)
 
 The first edition of the project's descriptive report (milestone M3):
-trends, sex breakdowns, and stated observation windows across the
-published indicators.
+trends, sex breakdowns, regional views, and stated observation windows
+across the published indicators.
 
 ### [Indicator: Mortality rates, British Columbia](indicator-mortality-rates-bc.qmd)
 
@@ -51,14 +51,15 @@ health service delivery areas (2021/2023).
 
 ### [Indicator: Life satisfaction, British Columbia](indicator-life-satisfaction-bc.qmd)
 
-Life satisfaction among BC adults (2015–2024) from the Canadian Community
-Health Survey, the first published indicator outside the mortality domain.
+Life satisfaction among BC adults (2015–2025) from the Canadian Community
+Health Survey, a published indicator outside the mortality domain.
 
 ### [Indicator family: Health survey indicators, British Columbia](indicator-wellbeing-cchs-bc.qmd)
 
 Ten BC survey series (physical morbidity, mental health, subjective and
 social wellbeing, access to care) drawn from one Statistics Canada table,
-with their trend and regime summaries side by side.
+with their trend and regime summaries side by side (2015–2025), plus a
+regional view across health service delivery areas.
 
 ### [Project structure](project-structure.qmd)
 

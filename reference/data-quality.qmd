@@ -75,11 +75,11 @@ F means the *pace* of movement changed at the break, not merely the level.
 
 | Break | Affected sources | Implication |
 |-------|------------------|-------------|
-| Cause-of-death coding revisions (ICD revisions) | Vital Statistics; national mortality | Cause-specific mortality series are not directly comparable across the revision boundary |
-| Declared public-health emergency (2016) | BCCDC substance-use dashboard; overdose response | Surveillance expanded at the emergency; counts before and after reflect different detection intensity |
-| COVID-19 pandemic (2020–) | mortality, morbidity, mental health | Both a real shock and a measurement shock (care disruption, coding changes) |
-| Survey redesigns (e.g. Canadian Community Health Survey) | Statistics Canada health series | Break in trend; pre- and post-redesign estimates differ |
-| Indicator-definition updates | CIHI indicators | Rebased or redefined indicators reset their own series |
+| Cause-of-death coding revisions (ICD revisions) | Vital Statistics; national mortality | Cause-specific mortality series are not directly comparable across the revision boundary [@whoIcd] |
+| Declared public-health emergency (2016) | BCCDC substance-use dashboard; overdose response | Surveillance expanded at the emergency; counts before and after reflect different detection intensity [@bcOverdoseEmergency2016] |
+| COVID-19 pandemic (2020–) | mortality, morbidity, mental health | Both a real shock and a measurement shock (care disruption, coding changes) [@bcCovidEmergency; @whocovid] |
+| Survey redesigns (e.g. Canadian Community Health Survey) | Statistics Canada health series | Break in trend; pre- and post-redesign estimates differ [@statcan_health_indicators] |
+| Indicator-definition updates | CIHI indicators | Rebased or redefined indicators reset their own series [@cihi] |
 
 ## URL verification
 
@@ -123,7 +123,7 @@ step in the measurement. These are recorded on the indicator pages.
 A fourth source takes the project below the province: Statistics Canada
 table 13-10-0931-01 supplies [age-standardised premature and potentially
 avoidable mortality](indicator-mortality-inequality-bc.qmd) for BC's five
-health authorities and 17 health service delivery areas. It adds two
+health authorities and 16 health service delivery areas. It adds two
 caveat classes of its own — health-region boundaries that change across
 table vintages, and rates published only as overlapping **three-year
 averages**, so the source supports a regional snapshot but not a regional

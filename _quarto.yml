@@ -74,6 +74,8 @@ website:
             text: "Indicator: Life satisfaction"
           - href: reference/indicator-wellbeing-cchs-bc.qmd
             text: "Indicator family: Health survey"
+          - href: reference/contributors.qmd
+            text: Contributors
           - href: reference/project-structure.qmd
             text: Project structure
       - text: "Explanation"

@@ -50,7 +50,7 @@ The relationship is re-estimated two ways:
 A pooled estimate is labelled **stable** only when there are at least two
 testable subperiods, every subperiod estimate agrees in sign with the
 pooled slope, and no subperiod slope strays beyond a stated tolerance
-(half the pooled magnitude) from it. Otherwise:
+(half the pooled magnitude, `STABILITY_TOLERANCE = 0.5`) from it. Otherwise:
 
 - **time-varying** — subperiod estimates disagree in sign or in
   magnitude; report the subperiod/rolling estimates instead;
@@ -84,8 +84,8 @@ stability verdict with its reasons.
   aggregates, not individuals. An association between two provincial
   series is not evidence about any person's risk.
 - The annual survey and life-expectancy series span only ten to eleven
-  points, so their stability verdict is `undetermined` — the method is
+  points, so their stability verdict is often `undetermined` — the method is
   built for longer determinant series (economic, environmental,
   health-system) as those join the catalogue.
 - Correlation is not causation; M4 states dependence, and M5 addresses
-  causal structure.
+  causal structure (see [@pearl2009]).

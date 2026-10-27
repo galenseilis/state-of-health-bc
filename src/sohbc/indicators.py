@@ -9,7 +9,7 @@ import itertools
 import json
 import re
 import zipfile
-from collections.abc import Sequence
+from collections.abc import Iterable, Iterator, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -285,7 +285,7 @@ INDICATORS["mortality_inequality_bc"] = {
     "definition": (
         "Age-standardised premature and potentially avoidable mortality "
         "rates (per 100,000 population) for the five BC health authorities "
-        "and 17 health service delivery areas, both sexes (and by sex), from "
+        "and 16 health service delivery areas, both sexes (and by sex), from "
         "Statistics Canada table 13-10-0931-01. The published view reports "
         "the cross-regional spread in the most recent three-year period."
     ),
@@ -492,13 +492,44 @@ def wds_zip_url(manifest_path: Path) -> str:
 
 
 def fetch_wds_zip(url: str) -> bytes:
-    response = requests.get(url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT})
-    response.raise_for_status()
-    return response.content
+    """Download a WDS full-table zip and return its bytes.
+
+    Raises:
+        IndicatorError: If the download fails or the response is not a zip
+            archive (for example an HTML error page during an outage).
+    """
+    try:
+        response = requests.get(url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT})
+        response.raise_for_status()
+    except requests.RequestException as exc:
+        raise IndicatorError(f"could not download {url}: {exc}") from exc
+    content = response.content
+    if not content.startswith(b"PK"):
+        content_type = response.headers.get("Content-Type", "unknown content type")
+        raise IndicatorError(
+            f"download from {url} is not a zip archive ({content_type}); "
+            "the upstream service may be unavailable"
+        )
+    return content
 
 
-def table_rows(zip_bytes: bytes, table_id: str) -> list[dict[str, str]]:
-    """Return rows from the data CSV inside a WDS full-table zip."""
+def iter_table_rows(zip_bytes: bytes, table_id: str) -> Iterator[dict[str, str]]:
+    """Yield rows from the data CSV inside a WDS full-table zip.
+
+    Rows are streamed out of the archive rather than read into a list, so a
+    full-table archive of more than a million rows can be filtered without
+    holding every parsed row in memory.
+
+    Args:
+        zip_bytes: Contents of a WDS full-table zip archive.
+        table_id: Table id, used only in error messages.
+
+    Yields:
+        dict[str, str]: One row per CSV record.
+
+    Raises:
+        IndicatorError: If the archive has no data CSV.
+    """
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as archive:
         member = next(
             (
@@ -510,12 +541,18 @@ def table_rows(zip_bytes: bytes, table_id: str) -> list[dict[str, str]]:
         )
         if member is None:
             raise IndicatorError(f"no data CSV in WDS archive for table {table_id}")
-        raw = archive.read(member).decode("utf-8-sig")
-    return list(csv.DictReader(io.StringIO(raw)))
+        with archive.open(member) as handle:
+            text = io.TextIOWrapper(handle, encoding="utf-8-sig", newline="")
+            yield from csv.DictReader(text)
+
+
+def table_rows(zip_bytes: bytes, table_id: str) -> list[dict[str, str]]:
+    """Return rows from the data CSV inside a WDS full-table zip."""
+    return list(iter_table_rows(zip_bytes, table_id))
 
 
 def select_rows(
-    rows: list[dict[str, str]],
+    rows: Iterable[dict[str, str]],
     geo: str,
     age_group: str | None,
     sex: str | None,
@@ -547,7 +584,7 @@ def select_rows(
 
 
 def tidy(
-    rows: list[dict[str, str]],
+    rows: Iterable[dict[str, str]],
     dimensions: dict[str, str] | None = None,
     measure: str | None = None,
 ) -> list[dict[str, Any]]:
@@ -888,7 +925,7 @@ def region_level(geo: str) -> str:
 
 
 def tidy_regions(
-    rows: list[dict[str, str]],
+    rows: Iterable[dict[str, str]],
     province: str,
     sexes: Sequence[str],
     indicators: Sequence[str] | None = None,
@@ -997,7 +1034,7 @@ REGIONAL_TIMESERIES_FIELDS = [
 
 
 def tidy_regional_timeseries(
-    rows: list[dict[str, str]],
+    rows: Iterable[dict[str, str]],
     province: str,
     sexes: Sequence[str],
     indicators: Sequence[str] | None = None,
@@ -1186,7 +1223,7 @@ def build_regional_timeseries(spec: dict[str, Any]) -> dict[str, Any]:
     """
     table_id = spec["source_table"]
     zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
-    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    rows = iter_table_rows(fetch_wds_zip(zip_url), table_id)
     sexes: list[str] = list(spec.get("sexes") or ["Both sexes"])
     tidy_rows = tidy_regional_timeseries(
         rows,
@@ -1271,7 +1308,7 @@ def build_cross_section(spec: dict[str, Any]) -> dict[str, Any]:
     """
     table_id = spec["source_table"]
     zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
-    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    rows = iter_table_rows(fetch_wds_zip(zip_url), table_id)
     sexes: list[str] = list(spec.get("sexes") or ["Both sexes"])
     tidy_rows = tidy_regions(
         rows, spec["province"], sexes, indicators=spec.get("indicators")
@@ -1328,7 +1365,7 @@ def build_age_specific(spec: dict[str, Any]) -> dict[str, Any]:
     table_id = spec["source_table"]
     dimensions = spec.get("dimensions")
     zip_url = wds_zip_url(wds_download_json(spec["source_key"], table_id=table_id))
-    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    rows = iter_table_rows(fetch_wds_zip(zip_url), table_id)
     chosen = select_rows(
         rows,
         spec["geo"],
@@ -1377,7 +1414,7 @@ def build(key: str) -> dict[str, Any]:
     zip_url = wds_zip_url(
         wds_download_json(spec["source_key"], table_id=table_id)
     )
-    rows = table_rows(fetch_wds_zip(zip_url), table_id)
+    rows = iter_table_rows(fetch_wds_zip(zip_url), table_id)
     chosen = select_rows(
         rows,
         spec["geo"],

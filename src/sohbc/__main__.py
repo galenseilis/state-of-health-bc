@@ -12,7 +12,7 @@ from .associations import (
     build_association,
 )
 from .catalogue import ROOT, CatalogueError, load
-from .fetch import check_source, run_fetch
+from .fetch import FetchError, check_source, run_fetch
 from .indicators import INDICATORS, IndicatorError, build
 
 
@@ -75,14 +75,18 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
         print("no sources selected; pass keys or --all")
         return 1
     results = run_fetch(keys=keys, everything=args.all)
+    failed = 0
     for record in results:
         if record["status"] == "fetched":
             print(
                 f"fetched {record['key']:<22} {record['bytes']} bytes -> {record['path']}"
             )
+        elif record["status"] == "failed":
+            failed += 1
+            print(f"failed  {record['key']:<22} {record.get('detail', '')}")
         else:
             print(f"manual  {record['key']:<22} {record.get('detail', '')}")
-    return 0
+    return 1 if failed else 0
 
 
 def _cmd_indicators(_args: argparse.Namespace) -> int:
@@ -206,7 +210,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
-    except (CatalogueError, IndicatorError, AssociationError) as exc:
+    except (CatalogueError, FetchError, IndicatorError, AssociationError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
